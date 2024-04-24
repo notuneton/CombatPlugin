@@ -42,7 +42,7 @@ public class Trap implements CommandExecutor {
     public static void spawnTrap(Player player){
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(-2, -2, -2); // Muutettu -1:stä -2:ksi, koska haluamme 4x4 kuution
-        // PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 72000, 3);
+
 
         for (int x = 0; x < 4; x++) { // Muutettu 3:sta 4:ksi
             for (int y = 0; y < 4; y++) { // Tässä on jo 4, joten ei muutosta tarvittu
