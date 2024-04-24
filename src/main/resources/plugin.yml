@@ -1,0 +1,78 @@
+name: CombatV2
+version: '${version}'
+main: org.main.uneton.Combat
+api-version: '1.19'
+commands:
+  crash:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Spawns a white ball around you.
+    usage: /crash <player>
+  heal:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Heals the player's hearts.
+    usage: /heal <player>
+  invsee:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: See and/or edit the inventory of other players.
+    usage: /invsee <player>
+  repair:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Repairs the durability of one or all items.
+    usage: /repair <all>
+  saveclear:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Save clears players inventory.
+    usage: /saveclear <player>
+  slippery:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Drops Items from the player.
+    usage: /slippery <player>
+  sudo:
+    description: Make another user perform a command.
+    usage: /sudo <text> <player>
+  trapcage:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Create a cube around the player that the player cannot break.
+    usage: /trapcage <player>
+  enderchest:
+    description: Opens your personal Enderchest.
+    usage: /enderchest
+  guide:
+    description: plugin commands.
+    usage: /guide <komennot>
+  playtime:
+    description: Time that you have played in total on the server.
+    usage: /playtime <player>
+  rules:
+    description: Rules of the Server.
+    usage: /rules
+  stuck:
+    description: Used if you are stuck.
+    usage: /stuck
+  gm:
+    permission: op
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: makes the player invulnerable to all faults.
+    usage: /gm <player>
+  ignorelist:
+    description: Checks all ignored players.
+    usage: /ignorelist
+  ignore:
+    description: Ignore a player.
+    usage: /ignore <player>
+  unignore:
+    description: un-ignores a player.
+    usage: /unignore <player>
+  suicide:
+    description: Causes you to perish.
+    usage: /suicide
+  disposal:
+    description: you can put here items that you want to deleted permanently!
+    usage: /disposal
