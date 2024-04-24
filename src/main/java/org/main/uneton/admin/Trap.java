@@ -39,29 +39,6 @@ public class Trap implements CommandExecutor {
         return true;
     }
 
-    public static void spawnBox(Player player){
-        Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(-1, -1, -1);
-        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 72000, 3);
-
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 4; y++) {
-                for (int z = 0; z < 3; z++) {
-                    if (((y == 1 || y == 2) && z == 1 & x == 1)) {  // empty space
-                        continue;
-                    }
-                    if (((y == 0 || y == 3) && z == 1 & x == 1)) {  // roof/bottom block
-                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.BARRIER);
-                        player.addPotionEffect(mining_fatigue);
-                    } else { // Walls
-                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.BARRIER);
-                        player.addPotionEffect(mining_fatigue);
-                    }
-                }
-            }
-        }
-    }
-
     public static void spawnTrap(Player player){
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(-2, -2, -2); // Muutettu -1:stä -2:ksi, koska haluamme 4x4 kuution

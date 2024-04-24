@@ -23,11 +23,6 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Repairs the durability of one or all items.
     usage: /repair <all>
-  saveclear:
-    permission: op
-    permission-message: Permission Denied, You do not have permission to do this task.
-    description: Save clears players inventory.
-    usage: /saveclear <player>
   slippery:
     permission: op
     permission-message: Permission Denied, You do not have permission to do this task.
