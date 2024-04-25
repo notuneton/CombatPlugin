@@ -46,6 +46,10 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
     private static Economy econ = null;
+    public static HashMap<UUID, Double> economy = new HashMap<>();
+    public static Combat getInstance;
+    public EcoImpl impl;
+    private VaultHook vaultHook;
 
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
     private HashMap<UUID, Integer> killsMap = new HashMap<>();
@@ -94,11 +98,6 @@ public class Combat extends JavaPlugin implements Listener {
         }
         saveConfig();
     }
-
-    public static HashMap<UUID, Double> economy = new HashMap<>();
-    public static Combat getInstance;
-    public EcoImpl impl;
-    private VaultHook vaultHook;
 
 
     @Override
