@@ -98,6 +98,7 @@ public class Combat extends JavaPlugin implements Listener {
         loadData();
 
 
+
         // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {

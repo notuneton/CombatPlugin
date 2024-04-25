@@ -19,7 +19,7 @@ public class PlayerDeaths implements Listener {
 
         if (attacker != null && attacker.getType() == EntityType.PLAYER) {
             Random random = new Random();
-            int chance = random.nextInt(100); // Generate a random number
+            int chance = random.nextInt(100);
 
             if (chance < 10) {
                 event.setDeathMessage(red + victim.getName() + " took the L to " + attacker.getName());
