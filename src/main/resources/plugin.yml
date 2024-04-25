@@ -37,11 +37,11 @@ commands:
     description: Create a cube around the player that the player cannot break.
     usage: /trapcage <player>
   enderChest:
-    description: Opens your personal Enderchest.
+    description: Opens your personal Ender chest.
     usage: /enderchest
   guide:
     description: plugin commands.
-    usage: /guide <komennot>
+    usage: /guide <info>
   playtime:
     description: Time that you have played in total on the server.
     usage: /playtime <player>

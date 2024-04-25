@@ -1,28 +1,31 @@
 package org.main.uneton;
 
-import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
+import org.main.uneton.economy.Config;
+import org.main.uneton.economy.EcoImpl;
+import org.main.uneton.economy.VaultHook;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
 import org.main.uneton.suicide.Suicide;
-import org.main.uneton.suicide.SuicideClickEvent;
-import org.main.uneton.trash.TrashClickEvent;
+import org.main.uneton.suicide.SuicideEvent;
+import org.main.uneton.trash.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.ignore.Unignore;
@@ -32,10 +35,10 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
 
-import static org.main.uneton.economy.NumberFormatter.format;
+import static org.main.uneton.economy.NumberFormatter.formatNumber;
+
 
 public class Combat extends JavaPlugin implements Listener {
-
 
     private static Combat instance;
     public static Combat getInstance(){
@@ -43,8 +46,6 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
     private static Economy econ = null;
-    private static Permission perms = null;
-    private static Chat chat = null;
 
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
     private HashMap<UUID, Integer> killsMap = new HashMap<>();
@@ -94,22 +95,31 @@ public class Combat extends JavaPlugin implements Listener {
         saveConfig();
     }
 
+    public static HashMap<UUID, Double> economy = new HashMap<>();
+    public static Combat getInstance;
+    public EcoImpl impl;
+    private VaultHook vaultHook;
+
 
     @Override
     public void onEnable() {
-        if (!setupEconomy()) {
-            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
-            getServer().getPluginManager().disablePlugin(this);
-        }
-        setupChat();
-
         instance = this;
-        Bukkit.getPluginManager().registerEvents(this, this);
         loadData();
+        this.run();
 
+        if (!setupEconomy()) {
+            getLogger().severe(String.format("Disabled due to no Vault dependency found", getDescription().getName()));
+        }
 
+        Config c = new Config(Combat.getInstance(), "data_config");
+        c.load();
+        c.getConfig().set("sd", "lol");
+        c.save();
+
+        /*
         double number = 1234567890123456789012345678901234567890.0;
-        System.out.println(format(number));
+        System.out.println(formatNumber(number));
+        */
 
         // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
@@ -152,17 +162,17 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
 
         getCommand("suicide").setExecutor(new Suicide());
-        Bukkit.getPluginManager().registerEvents(new SuicideClickEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new SuicideEvent(), this);
 
         getCommand("disposal").setExecutor(new Trash());
-        Bukkit.getPluginManager().registerEvents(new TrashClickEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 String dayName = printDay();
-                Bukkit.getLogger().info("[CombatV2] " + dayName);
+                Bukkit.getLogger().info("[CombatV3] " + dayName);
             }
         }.runTaskTimer(this, 0L, 576000L);
 
@@ -170,28 +180,33 @@ public class Combat extends JavaPlugin implements Listener {
 
     }
 
-    private boolean setupEconomy () {
+    private void instanceClasses() {
+        Combat.getInstance = this;
+        this.impl = new EcoImpl();
+        this.vaultHook = new VaultHook();
+    }
+
+    public void run() {
+        this.instanceClasses();
+        this.vaultHook.Hook();
+    }
+
+
+
+    private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp != null) {
-            return true;
+        if (rsp == null) {
+            return false;
         }
         econ = rsp.getProvider();
         return econ != null;
     }
 
-    private boolean setupChat () {
-        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-        chat = rsp.getProvider();
-        return chat != null;
-    }
     public static Economy getEconomy() {
         return econ;
-    }
-    public static Chat getChat() {
-        return chat;
     }
 
     private String printDay() {
@@ -199,6 +214,10 @@ public class Combat extends JavaPlugin implements Listener {
         LocalDate date = LocalDate.now();
         DayOfWeek dayname = date.getDayOfWeek();
         return "Today is " + dayname.name();
+    }
+
+    public void onDisable() {
+        getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
     }
 
 }

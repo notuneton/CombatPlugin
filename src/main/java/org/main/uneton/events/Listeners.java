@@ -21,8 +21,12 @@ import org.main.uneton.Combat;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static org.main.uneton.Combat.economy;
+
 
 public class Listeners implements Listener {
+
+    private Combat plugin = Combat.getInstance();
 
     @EventHandler
     public void onPing(PlayerMoveEvent event) {
@@ -40,15 +44,13 @@ public class Listeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        // e.setQuitMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_RED + " - " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
-        e.setQuitMessage(ChatColor.GRAY + player.getName() + " left");
+        e.setQuitMessage(ChatColor.GRAY + "[" + ChatColor.RED + "-" + ChatColor.GRAY + "] " + ChatColor.RED + player.getName());
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        // e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + " + " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
-        e.setJoinMessage(ChatColor.GRAY + player.getName() + " joined");
+        e.setJoinMessage(ChatColor.GRAY + "[" + ChatColor.GREEN + "+" + ChatColor.GRAY + "] " + ChatColor.GREEN + player.getName());
     }
 
     @EventHandler
@@ -105,15 +107,22 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onDeathByAPlayer(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        Player killer = victim.getKiller();
+        if (killer != null) {
+            plugin.impl.depositPlayer(killer, 300);
+            killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
+        }
+    }
+
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
         Location location = victim.getLocation();
 
         if (killer != null && !killer.equals(victim)) {
-            killer.giveExp(10);
-            killer.sendMessage(ChatColor.GREEN + "+10xp " + ChatColor.WHITE + " Kill.");
-
             ItemStack blood = new ItemStack(Material.RED_DYE, 2);
             Item droppedItem = location.getWorld().dropItemNaturally(location, blood);
             droppedItem.setPickupDelay(32767);
@@ -121,7 +130,7 @@ public class Listeners implements Listener {
                 if(droppedItem.isValid()){
                     droppedItem.remove();
                 }
-            }, 40L);
+            }, 200L);
         }
     }
 
@@ -170,7 +179,7 @@ public class Listeners implements Listener {
         player.sendMessage(green + "You picked up the " + lightpurple + "Pink Diamond.");
     }
 
-    @EventHandler
+    /*@EventHandler
     @Deprecated
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
@@ -191,4 +200,5 @@ public class Listeners implements Listener {
             }).runTask(JavaPlugin.getPlugin(Combat.class));
         }
     }
+     */
 }
