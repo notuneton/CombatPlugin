@@ -1,42 +1,42 @@
-name: CombatV2
+name: CombatV3
 version: '${version}'
 main: org.main.uneton.Combat
 api-version: '1.19'
 commands:
   crash:
-    permission: op
+    permission: combat.crash.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Spawns a white ball around you.
     usage: /crash <player>
   heal:
-    permission: op
+    permission: combat.heal.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Heals the player's hearts.
     usage: /heal <player>
-  invsee:
-    permission: op
+  invSee:
+    permission: combat.invsee.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: See and/or edit the inventory of other players.
     usage: /invsee <player>
   repair:
-    permission: op
+    permission: combat.repair.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Repairs the durability of one or all items.
     usage: /repair <all>
   slippery:
-    permission: op
+    permission: combat.slippery.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Drops Items from the player.
     usage: /slippery <player>
   sudo:
     description: Make another user perform a command.
     usage: /sudo <text> <player>
-  trapcage:
-    permission: op
+  trapCage:
+    permission: combat.trapcage.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Create a cube around the player that the player cannot break.
     usage: /trapcage <player>
-  enderchest:
+  enderChest:
     description: Opens your personal Enderchest.
     usage: /enderchest
   guide:
@@ -52,17 +52,17 @@ commands:
     description: Used if you are stuck.
     usage: /stuck
   gm:
-    permission: op
+    permission: combat.gm.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: makes the player invulnerable to all faults.
     usage: /gm <player>
-  ignorelist:
+  ignoreList:
     description: Checks all ignored players.
     usage: /ignorelist
   ignore:
     description: Ignore a player.
     usage: /ignore <player>
-  unignore:
+  unIgnore:
     description: un-ignores a player.
     usage: /unignore <player>
   suicide:

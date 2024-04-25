@@ -1,20 +1,17 @@
 package org.main.uneton;
 
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
-import org.bukkit.block.Barrel;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
@@ -35,6 +32,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
 
+import static org.main.uneton.economy.NumberFormatter.format;
+
 public class Combat extends JavaPlugin implements Listener {
 
 
@@ -42,6 +41,11 @@ public class Combat extends JavaPlugin implements Listener {
     public static Combat getInstance(){
         return instance;
     }
+
+    private static Economy econ = null;
+    private static Permission perms = null;
+    private static Chat chat = null;
+
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
     private HashMap<UUID, Integer> killsMap = new HashMap<>();
     private HashMap<UUID, Integer> deathsMap = new HashMap<>();
@@ -93,11 +97,19 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        if (!setupEconomy()) {
+            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+        }
+        setupChat();
+
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
         loadData();
 
 
+        double number = 1234567890123456789012345678901234567890.0;
+        System.out.println(format(number));
 
         // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
@@ -108,7 +120,6 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }, 0L, 20L); // 20 ticks = 1 second
 
-
         // admin
         getCommand("crash").setExecutor(new Crash());
         getCommand("gm").setExecutor(new Gm());
@@ -116,7 +127,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("repair").setExecutor(new Repair());
         getCommand("slippery").setExecutor(new Slippery());
-        getCommand("sudo").setExecutor(new Sudo());
         getCommand("trapcage").setExecutor(new Trap());
 
         // commands
@@ -125,11 +135,10 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
         getCommand("stuck").setExecutor(new Stuck());
+        getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
-        // Bukkit.getPluginManager().registerEvents(new Deaths(), this);
-        Bukkit.getPluginManager().registerEvents(new ForceOp(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
@@ -149,29 +158,47 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TrashClickEvent(), this);
 
 
-
         new BukkitRunnable() {
             @Override
             public void run() {
                 String dayName = printDay();
-                Bukkit.getLogger().info("[CombatV2] " +dayName);
+                Bukkit.getLogger().info("[CombatV2] " + dayName);
             }
         }.runTaskTimer(this, 0L, 576000L);
 
+
+
     }
 
+    private boolean setupEconomy () {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp != null) {
+            return true;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
 
+    private boolean setupChat () {
+        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        chat = rsp.getProvider();
+        return chat != null;
+    }
+    public static Economy getEconomy() {
+        return econ;
+    }
+    public static Chat getChat() {
+        return chat;
+    }
 
     private String printDay() {
         // Get the current day and return its name
         LocalDate date = LocalDate.now();
         DayOfWeek dayname = date.getDayOfWeek();
         return "Today is " + dayname.name();
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 
 }

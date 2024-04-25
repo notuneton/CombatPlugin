@@ -38,7 +38,7 @@ public class Combatlogger implements Listener {
                 Long endTime = combatCooldown.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
+                    player.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
                 }
                 if (combatCooldown.containsKey(player)) {
                     player.sendActionBar(ChatColor.GRAY + "Combat: " + ChatColor.DARK_AQUA + (endTime - System.currentTimeMillis()) / 1000);

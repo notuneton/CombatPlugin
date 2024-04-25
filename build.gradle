@@ -5,7 +5,9 @@ plugins {
 group = 'org.Main'
 version = '1.19'
 
+
 repositories {
+    maven { url 'https://jitpack.io' }
     mavenCentral()
     maven {
         name = "papermc-repo"
@@ -16,9 +18,11 @@ repositories {
         url = "https://oss.sonatype.org/content/groups/public/"
     }
 }
-
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT"
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7.3"
+}
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT"
 }
 
 def targetJavaVersion = 17

@@ -18,7 +18,7 @@ public class Crash implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("op")) {
+        if(!player.hasPermission("combat.crash.use")) {
             sender.sendMessage(ChatColor.RED + "You do not have access to this command!");
             return true;
         }

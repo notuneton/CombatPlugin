@@ -16,7 +16,7 @@ public class Trap implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("op")) {
+        if(!player.hasPermission("combat.trapcage.use")) {
             player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }

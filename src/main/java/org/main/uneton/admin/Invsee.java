@@ -19,7 +19,7 @@ public class Invsee implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("op")) {
+        if(!player.hasPermission("combat.invsee.use")) {
             player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }
