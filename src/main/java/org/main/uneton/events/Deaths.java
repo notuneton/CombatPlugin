@@ -1,5 +1,6 @@
 package org.main.uneton.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,6 +9,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.Random;
 
+import static java.awt.Color.red;
+
 public class Deaths implements Listener {
 
     // works fine
@@ -15,8 +18,9 @@ public class Deaths implements Listener {
     @EventHandler
     public void onPlayerSuffocate(PlayerDeathEvent event){
         Player victim = event.getPlayer();
+        ChatColor red = ChatColor.RED;
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUFFOCATION){
-            event.setDeathMessage(victim.getName() + " went into backrooms...");
+            event.setDeathMessage(red + victim.getName() + " went into backrooms...");
         }
     }
 
@@ -24,7 +28,7 @@ public class Deaths implements Listener {
     public void onPlayerFall(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FALL) {
-            event.setDeathMessage(victim.getName() + " believed they could fly... but couldn't");
+            event.setDeathMessage(red + victim.getName() + " believed they could fly... but couldn't");
         }
     }
 
@@ -32,7 +36,7 @@ public class Deaths implements Listener {
     public void onPlayerVoid(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID){
-            event.setDeathMessage(victim.getName() + " was caught escaping the map");
+            event.setDeathMessage(red + victim.getName() + " was caught escaping the map");
         }
     }
 
@@ -40,7 +44,7 @@ public class Deaths implements Listener {
     public void onPlayerDrown(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.DROWNING){
-            event.setDeathMessage(victim.getName() + " didn't make it to the surface fast enough");
+            event.setDeathMessage(red + victim.getName() + " didn't make it to the surface fast enough");
         }
     }
 
@@ -48,7 +52,7 @@ public class Deaths implements Listener {
     public void onPlayerFreeze(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FREEZE){
-            event.setDeathMessage(victim.getName() + " succumbed to the icy embrace of winter");
+            event.setDeathMessage(red + victim.getName() + " succumbed to the icy embrace of winter");
         }
     }
 
@@ -56,7 +60,7 @@ public class Deaths implements Listener {
     public void onPlayerLightning(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.LIGHTNING){
-            event.setDeathMessage("A bolt from the heavens strikes down into " + victim.getName());
+            event.setDeathMessage(red + "A bolt from the heavens strikes down into " + victim.getName());
         }
     }
 
@@ -64,7 +68,7 @@ public class Deaths implements Listener {
     public void onPlayerContact(PlayerDeathEvent event){
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.CONTACT){
-            event.setDeathMessage(victim.getName() + " hugged something spiky a little too tight");
+            event.setDeathMessage(red + victim.getName() + " hugged something spiky a little too tight");
         }
     }
 
@@ -72,10 +76,10 @@ public class Deaths implements Listener {
     public void onPlayerHitAWallFlying(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FLY_INTO_WALL) {
-            event.setDeathMessage(victim.getName() + " tried to 9/11 or something..");
+            event.setDeathMessage(red + victim.getName() + " tried to 9/11 or something..");
             Random chance = new Random();
             if (chance.nextDouble() < 0.40) {
-                event.setDeathMessage(victim.getName() + " was not aware of physics");
+                event.setDeathMessage(red + victim.getName() + " was not aware of physics");
             }
         }
     }
@@ -84,7 +88,7 @@ public class Deaths implements Listener {
     public void onPlayerMagmaBurn(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR) { // magma
-            event.setDeathMessage(victim.getName() + " melted his legs into a bones");
+            event.setDeathMessage(red + victim.getName() + " melted his legs into a bones");
         }
     }
 
@@ -92,7 +96,7 @@ public class Deaths implements Listener {
     public void onPlayerFire(PlayerDeathEvent event){
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE){ // normal fire
-            event.setDeathMessage(victim.getName() + " ended tried to be a human torch but ended up as ashes");
+            event.setDeathMessage(red + victim.getName() + " ended tried to be a human torch but ended up as ashes");
         }
     }
 
@@ -100,12 +104,12 @@ public class Deaths implements Listener {
     public void onPlayerBurn(PlayerDeathEvent event){
         Player victim = event.getPlayer();
         if(event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE_TICK){ // in flames
-            event.setDeathMessage(victim.getName() + " hallucinated and jumped into the flames");
+            event.setDeathMessage(red + victim.getName() + " hallucinated and jumped into the flames");
             Random chance = new Random();
             if (chance.nextDouble() < 0.40) {
-                event.setDeathMessage(victim.getName() + " obviously isn't fireproof");
+                event.setDeathMessage(red + victim.getName() + " obviously isn't fireproof");
             } else if (chance.nextDouble() < 0.30){
-                event.setDeathMessage(victim.getName() + " didn't get to water in time");
+                event.setDeathMessage(red + victim.getName() + " didn't get to water in time");
             }
         }
     }
@@ -120,7 +124,5 @@ public class Deaths implements Listener {
 
 
     // end
-
-    //TODO more become soon
 
 }

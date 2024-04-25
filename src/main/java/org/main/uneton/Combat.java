@@ -53,7 +53,6 @@ public class Combat extends JavaPlugin implements Listener {
         deathsMap.put(playerUUID, deathsMap.getOrDefault(playerUUID, 0) +1);
         saveData();
     }
-
     @EventHandler
     public void onEntityDeath(EntityDeathEvent e){
         if(e.getEntity().getKiller() != null){
@@ -131,7 +130,7 @@ public class Combat extends JavaPlugin implements Listener {
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
-        Bukkit.getPluginManager().registerEvents(new Deaths(), this);
+        // Bukkit.getPluginManager().registerEvents(new Deaths(), this);
         Bukkit.getPluginManager().registerEvents(new ForceOp(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
