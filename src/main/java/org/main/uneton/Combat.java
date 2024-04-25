@@ -98,17 +98,14 @@ public class Combat extends JavaPlugin implements Listener {
         loadData();
 
 
-
-
         // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (Player player1 : Bukkit.getOnlinePlayers()) {
-                UUID uuid = player1.getUniqueId();
+            for (Player user : Bukkit.getOnlinePlayers()) {
+                UUID uuid = user.getUniqueId();
                 int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlayTime + 1);
             }
         }, 0L, 20L); // 20 ticks = 1 second
-
 
 
         // admin
