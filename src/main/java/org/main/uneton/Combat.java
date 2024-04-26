@@ -117,10 +117,11 @@ public class Combat extends JavaPlugin implements Listener {
             getLogger().severe(String.format("Disabled due to no Vault dependency found", getDescription().getName()));
         }
         this.run();
-        Config c = new Config(Combat.getInstance(), "data_config");
+        /*Config c = new Config(Combat.getInstance(), "data_config");
         c.load();
         c.getConfig().set("sd", "lol");
         c.save();
+         */
 
         /*
         double number = 1234567890123456789012345678901234567890.0;

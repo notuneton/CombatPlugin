@@ -28,7 +28,7 @@ public class Crash implements CommandExecutor {
             return true;
         }
 
-        if (args.length > 0) {
+        if (args.length >= 0) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null) {
                 player.sendActionBar(ChatColor.RED + "That player does not exist.");
