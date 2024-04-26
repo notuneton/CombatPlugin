@@ -1,0 +1,69 @@
+package org.main.uneton.spawn;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
+
+public class SpawnTp implements CommandExecutor {
+
+    private final Plugin plugin;
+
+    public SpawnTp(Plugin plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
+            return true;
+        }
+
+        Location initialLocation = player.getLocation();
+        BukkitRunnable countdownTask = getBukkitRunnable(player, initialLocation);
+
+        countdownTask.runTaskTimer(plugin, 0L, 20L); // Start immediately, repeat every 20 ticks (1 second)
+
+        player.sendMessage(ChatColor.YELLOW + "Teleporting in 4 seconds...");
+
+        return true;
+    }
+
+    @NotNull
+    private BukkitRunnable getBukkitRunnable(Player player, Location initialLocation) {
+        int countdownSeconds = 4;
+
+        return new BukkitRunnable() {
+            private int secondsPassed = 0;
+            @Override
+            public void run() {
+                if (secondsPassed >= countdownSeconds) {
+                    this.cancel(); // Stop the countdown task
+                    teleportPlayer(player, initialLocation);
+                } else {
+                    player.sendMessage(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
+                    secondsPassed++;
+                }
+            }
+        };
+    }
+
+    private void teleportPlayer(Player player, Location initialLocation) {
+        // Check if the player has moved during the countdown
+        if (player.getLocation().distance(initialLocation) > 0) {
+            player.sendMessage(ChatColor.RED + "Teleport cancelled because you moved.");
+        } else {
+            Location spawnLocation = plugin.getConfig().getLocation("spawn");
+            if (spawnLocation != null) {
+                player.teleport(spawnLocation);
+                player.sendMessage(ChatColor.GREEN + "You have teleported to the spawn!");
+            }
+        }
+    }
+}

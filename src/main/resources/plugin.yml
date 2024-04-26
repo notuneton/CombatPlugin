@@ -71,3 +71,7 @@ commands:
   disposal:
     description: you can put here items that you want to deleted permanently!
     usage: /disposal
+
+  setspawn:
+    description: Sets the server spawn point!
+    usage: /setspawn

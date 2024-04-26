@@ -23,6 +23,8 @@ import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
+import org.main.uneton.spawn.SetSpawn;
+import org.main.uneton.spawn.SpawnTp;
 import org.main.uneton.suicide.Suicide;
 import org.main.uneton.suicide.SuicideEvent;
 import org.main.uneton.trash.TrashEvent;
@@ -104,12 +106,17 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         loadData();
-        this.run();
+
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
+
+
 
         if (!setupEconomy()) {
             getLogger().severe(String.format("Disabled due to no Vault dependency found", getDescription().getName()));
         }
-
+        this.run();
         Config c = new Config(Combat.getInstance(), "data_config");
         c.load();
         c.getConfig().set("sd", "lol");
@@ -119,15 +126,6 @@ public class Combat extends JavaPlugin implements Listener {
         double number = 1234567890123456789012345678901234567890.0;
         System.out.println(formatNumber(number));
         */
-
-        // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (Player user : Bukkit.getOnlinePlayers()) {
-                UUID uuid = user.getUniqueId();
-                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
-                playTimes.put(uuid, currentPlayTime + 1);
-            }
-        }, 0L, 20L); // 20 ticks = 1 second
 
         // admin
         getCommand("crash").setExecutor(new Crash());
@@ -160,6 +158,9 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("unignore").setExecutor(new Unignore());
         Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
 
+        getCommand("setspawn").setExecutor(new SetSpawn(this));
+        getCommand("spawn").setExecutor(new SpawnTp(this));
+
         getCommand("suicide").setExecutor(new Suicide());
         Bukkit.getPluginManager().registerEvents(new SuicideEvent(), this);
 
@@ -175,7 +176,14 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }.runTaskTimer(this, 0L, 576000L);
 
-
+        // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            for (Player user : Bukkit.getOnlinePlayers()) {
+                UUID uuid = user.getUniqueId();
+                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
+                playTimes.put(uuid, currentPlayTime + 1);
+            }
+        }, 0L, 20L); // 20 ticks = 1 second
 
     }
 
