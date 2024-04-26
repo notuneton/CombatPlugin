@@ -29,23 +29,21 @@ public class SpawnTp implements CommandExecutor {
         BukkitRunnable countdownTask = getBukkitRunnable(player, initialLocation);
 
         countdownTask.runTaskTimer(plugin, 0L, 20L); // Start immediately, repeat every 20 ticks (1 second)
-
-        player.sendMessage(ChatColor.YELLOW + "Teleporting in 4 seconds...");
-
         return true;
     }
 
     @NotNull
     private BukkitRunnable getBukkitRunnable(Player player, Location initialLocation) {
-        int countdownSeconds = 4;
-
+        int countdownSeconds = 3;
         return new BukkitRunnable() {
             private int secondsPassed = 0;
             @Override
             public void run() {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel(); // Stop the countdown task
-                    teleportPlayer(player, initialLocation);
+                    if (!teleportPlayer(player, initialLocation)) {
+                        player.sendMessage(ChatColor.RED + "Teleportation cancelled.");
+                    }
                 } else {
                     player.sendMessage(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
                     secondsPassed++;
@@ -54,16 +52,26 @@ public class SpawnTp implements CommandExecutor {
         };
     }
 
-    private void teleportPlayer(Player player, Location initialLocation) {
-        // Check if the player has moved during the countdown
+    private boolean teleportPlayer(Player player, Location initialLocation) {
+        if (org.main.uneton.events.Combatlogger.combatCooldown.containsKey(player)) {
+            player.sendActionBar(ChatColor.RED + "You cannot teleport while combatlog!");
+            return false; // Teleportation should not proceed
+        }
+
         if (player.getLocation().distance(initialLocation) > 0) {
             player.sendMessage(ChatColor.RED + "Teleport cancelled because you moved.");
+            return false; // Teleportation should not proceed
         } else {
             Location spawnLocation = plugin.getConfig().getLocation("spawn");
             if (spawnLocation != null) {
                 player.teleport(spawnLocation);
-                player.sendMessage(ChatColor.GREEN + "You have teleported to the spawn!");
+                player.sendMessage(ChatColor.GRAY + "You have teleported to the spawn!");
+                return true; // Teleportation proceeded successfully
+            } else {
+                player.sendMessage(ChatColor.RED + "Teleport failed: Spawn location not found.");
+                return false; // Teleportation should not proceed
             }
         }
     }
+
 }

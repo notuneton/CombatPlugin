@@ -71,7 +71,6 @@ commands:
   disposal:
     description: you can put here items that you want to deleted permanently!
     usage: /disposal
-
   setspawn:
     permission: combat.setspawn.use
     permission-message: Permission Denied, You do not have permission to do this task.

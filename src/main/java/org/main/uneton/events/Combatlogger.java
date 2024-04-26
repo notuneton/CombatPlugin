@@ -23,7 +23,7 @@ public class Combatlogger implements Listener {
 
     // Player 1 -> player,player2,3,4,5, ...
     private static final Map<Player, List<Player>> combat = new HashMap<>(); // Functio
-    private static final Map<Player, Long> combatCooldown = new HashMap<>(); // Animaatio
+    public static final Map<Player, Long> combatCooldown = new HashMap<>(); // Animaatio
 
     public Combatlogger(JavaPlugin plugin) {
         this.plugin = plugin;
