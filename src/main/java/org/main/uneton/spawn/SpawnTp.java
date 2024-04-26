@@ -54,7 +54,7 @@ public class SpawnTp implements CommandExecutor {
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
         if (org.main.uneton.events.Combatlogger.combatCooldown.containsKey(player)) {
-            player.sendActionBar(ChatColor.RED + "You cannot teleport while combatlog!");
+            player.sendMessage(ChatColor.RED + "You cannot teleport while combatlog!");
             return false; // Teleportation should not proceed
         }
 
@@ -73,5 +73,4 @@ public class SpawnTp implements CommandExecutor {
             }
         }
     }
-
 }
