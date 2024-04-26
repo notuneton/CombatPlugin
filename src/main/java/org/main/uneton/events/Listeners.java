@@ -134,7 +134,6 @@ public class Listeners implements Listener {
         }
     }
 
-
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
@@ -165,7 +164,7 @@ public class Listeners implements Listener {
         pinkMeta.setDisplayName(lightpurple + "Pink Diamond");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
-        lore.add(gray + "Probability: " + red + "1%");
+        lore.add(gray + "Probability: " + red + "0,1%");
         pinkMeta.setLore(lore);
         pinkDiamond.setItemMeta(pinkMeta);
 
