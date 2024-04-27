@@ -127,6 +127,7 @@ public class Combat extends JavaPlugin implements Listener {
         System.out.println(formatNumber(number));
         */
 
+
         // admin
         getCommand("crash").setExecutor(new Crash());
         getCommand("gm").setExecutor(new Gm());
@@ -167,13 +168,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("disposal").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                String dayName = printDay();
-                Bukkit.getLogger().info("[CombatV3] " + dayName);
-            }
-        }.runTaskTimer(this, 0L, 576000L);
+
 
         // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
@@ -228,12 +223,6 @@ public class Combat extends JavaPlugin implements Listener {
         return vault;
     }
 
-    private String printDay() {
-        // Get the current day and return its name
-        LocalDate date = LocalDate.now();
-        DayOfWeek dayname = date.getDayOfWeek();
-        return "Today is " + dayname.name();
-    }
 
     public void onDisable() {
         getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));

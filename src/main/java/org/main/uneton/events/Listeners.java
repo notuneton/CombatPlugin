@@ -142,7 +142,6 @@ public class Listeners implements Listener {
         }
     }
 
-
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
@@ -155,7 +154,7 @@ public class Listeners implements Listener {
         }
     }
 
-    private void dropPinkDiamond(Player player, BlockBreakEvent e){
+    private void dropPinkDiamond(Player player, BlockBreakEvent e) {
         ChatColor gray = ChatColor.GRAY;
         ChatColor red = ChatColor.RED;
         ChatColor green = ChatColor.GREEN;
