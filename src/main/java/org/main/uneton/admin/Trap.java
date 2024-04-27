@@ -24,7 +24,7 @@ public class Trap implements CommandExecutor {
         }
 
         if(args.length == 0){
-            player.sendMessage(ChatColor.RED + "usage: /box <player>");
+            player.sendMessage(ChatColor.RED + "usage: /trapcage <player>");
             return true;
         }
 
