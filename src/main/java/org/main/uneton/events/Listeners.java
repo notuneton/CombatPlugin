@@ -142,13 +142,6 @@ public class Listeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
-        Block block = event.getClickedBlock();
-        if (block.getType() != Material.OAK_SIGN) return;
-        event.getPlayer().openSign((Sign) block.getState());
-    }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
@@ -186,7 +179,8 @@ public class Listeners implements Listener {
         player.sendMessage(green + "You picked up the " + lightpurple + "Pink Diamond.");
     }
 
-    /*@EventHandler
+    /*
+    @EventHandler
     @Deprecated
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();

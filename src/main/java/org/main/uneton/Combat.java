@@ -186,8 +186,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     }
 
-
-
     private void loadEconomy() {
         if (fileConfig.isConfigurationSection("balances")) {
             for (String playerUuid : fileConfig.getConfigurationSection("balances").getKeys(false)) {
