@@ -1,5 +1,6 @@
 package org.main.uneton.economy;
 
+import net.milkbowl.vault.economy.AbstractEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
@@ -10,7 +11,7 @@ import org.main.uneton.Combat;
 import java.util.List;
 import java.util.UUID;
 
-public class EcoImpl implements Economy {
+public class EcoImpl extends AbstractEconomy {
 
     private Combat plugin = Combat.getInstance();
 

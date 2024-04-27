@@ -1,6 +1,7 @@
 package org.main.uneton.events;
 
 import net.kyori.adventure.text.Component;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
+import org.main.uneton.economy.EcoImpl;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,7 +28,13 @@ import static org.main.uneton.Combat.economy;
 
 public class Listeners implements Listener {
 
-    private Combat plugin = Combat.getInstance();
+    private Combat plugin;
+    private Economy vault;
+
+    public Listeners(Combat plugin) {
+        this.plugin = plugin;
+        this.vault = plugin.getVault();
+    }
 
     @EventHandler
     public void onPing(PlayerMoveEvent event) {

@@ -3,6 +3,7 @@ package org.main.uneton;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
@@ -145,7 +146,7 @@ public class Combat extends JavaPlugin implements Listener {
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
-        Bukkit.getPluginManager().registerEvents(new Listeners(), this);
+        Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
 
@@ -166,7 +167,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("disposal").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
-
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -184,6 +184,28 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }, 0L, 20L); // 20 ticks = 1 second
 
+    }
+
+
+
+    private void loadEconomy() {
+        if (fileConfig.isConfigurationSection("balances")) {
+            for (String playerUuid : fileConfig.getConfigurationSection("balances").getKeys(false)) {
+                double balance = fileConfig.getDouble("balances." + playerUuid);
+                UUID uuid = UUID.fromString(playerUuid);
+                economy.put(uuid, balance);
+            }
+        }
+    }
+
+    public void saveEconomy() {
+        for (Map.Entry<UUID, Double> entry : economy.entrySet()) {
+            UUID uuid = entry.getKey();
+            double balance = entry.getValue();
+            fileConfig.set("balances." + uuid, balance);
+        }
+        config.save();
+        config.reload();
     }
 
     public static Economy hook(Combat plugin) {
@@ -217,6 +239,7 @@ public class Combat extends JavaPlugin implements Listener {
 
     public void onDisable() {
         getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
+        saveEconomy();
     }
 
 }
