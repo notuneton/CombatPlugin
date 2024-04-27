@@ -56,7 +56,7 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: makes the player invulnerable to all faults.
     usage: /gm <player>
-  ignoreList:
+  ignorelist:
     description: Checks all ignored players.
     usage: /ignorelist
   ignore:
