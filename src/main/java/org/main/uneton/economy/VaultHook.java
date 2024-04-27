@@ -1,24 +1,34 @@
 package org.main.uneton.economy;
 
-import net.kyori.adventure.text.Component;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.main.uneton.Combat;
 
+import java.util.logging.Level;
+
 public class VaultHook {
 
-    private Combat plugin = Combat.getInstance();
-    private Economy provider;
-
-    public void Hook() {
-        this.provider = plugin.impl;
-        Bukkit.getServicesManager().register(Economy.class, this.provider, this.plugin, ServicePriority.Normal);
-        Bukkit.getConsoleSender().sendMessage(Component.text("Vault hooked into " + this.plugin.getName()));
-    }
-
-    public void unHook(){
-        Bukkit.getServicesManager().unregister(Economy.class, this.provider);
-        Bukkit.getConsoleSender().sendMessage(Component.text("Vault unhooked from " + this.plugin.getName()));
+    public static Economy hook(Combat plugin) {
+        plugin.getLogger().info("Hooking economy...");
+        if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+            plugin.getLogger().log(Level.WARNING, "Vault not found, Economy features disabled.");
+            return null;
+        } else {
+            Economy vault = plugin.getVault();
+            if (vault != null) {
+                plugin.getLogger().info("Economy is already hooked");
+                return vault;
+            } else {
+                plugin.getServer().getServicesManager().register(Economy.class, new EcoImpl(), plugin, ServicePriority.Highest);
+                RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
+                if (rsp != null) {
+                    vault = rsp.getProvider();
+                    plugin.getLogger().info("Economy hooked! (" + vault.getName() + ")");
+                    return vault;
+                }
+            }
+        }
+        return null;
     }
 }

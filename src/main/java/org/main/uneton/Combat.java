@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
@@ -36,6 +37,7 @@ import org.main.uneton.trash.Trash;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.Level;
 
 import static org.main.uneton.economy.NumberFormatter.formatNumber;
 
@@ -47,11 +49,13 @@ public class Combat extends JavaPlugin implements Listener {
         return instance;
     }
 
-    private static Economy econ = null;
+
     public static HashMap<UUID, Double> economy = new HashMap<>();
     public static Combat getInstance;
-    public EcoImpl impl;
-    private VaultHook vaultHook;
+
+    private Economy vault;
+    private Config config = new Config(this, "economy");
+    private FileConfiguration fileConfig = config.getConfig();
 
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
     private HashMap<UUID, Integer> killsMap = new HashMap<>();
@@ -105,6 +109,8 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
+        this.vault = VaultHook.hook(this);
+        loadEconomy(); // todo better error handling if vault cannot be hooked
         loadData();
 
         getConfig().options().copyDefaults();
@@ -112,18 +118,10 @@ public class Combat extends JavaPlugin implements Listener {
 
 
 
-
-        if (!setupEconomy()) {
-            getLogger().severe(String.format("Disabled due to no Vault dependency found", getDescription().getName()));
-        }
-        this.run();
         /*Config c = new Config(Combat.getInstance(), "data_config");
         c.load();
         c.getConfig().set("sd", "lol");
         c.save();
-         */
-
-        /*
         double number = 1234567890123456789012345678901234567890.0;
         System.out.println(formatNumber(number));
         */
@@ -188,33 +186,26 @@ public class Combat extends JavaPlugin implements Listener {
 
     }
 
-    private void instanceClasses() {
-        Combat.getInstance = this;
-        this.impl = new EcoImpl();
-        this.vaultHook = new VaultHook();
-    }
-
-    public void run() {
-        this.instanceClasses();
-        this.vaultHook.Hook();
-    }
-
-
-
-    private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
+    public static Economy hook(Combat plugin) {
+        plugin.getLogger().info("Hooking economy...");
+        if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+            plugin.getLogger().log(Level.WARNING, "Vault not found, Economy features disabled.");
+            return null;
+        } else {
+            plugin.getServer().getServicesManager().register(Economy.class, new EcoImpl(), plugin, ServicePriority.Highest);
+            RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
+            if (rsp != null) {
+                Economy vault;
+                vault = rsp.getProvider();
+                plugin.getLogger().info("Economy hooked! (" + vault.getName() + ")");
+                return vault;
+            }
         }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        econ = rsp.getProvider();
-        return econ != null;
+        return null;
     }
 
-    public static Economy getEconomy() {
-        return econ;
+    public Economy getVault() {
+        return vault;
     }
 
     private String printDay() {

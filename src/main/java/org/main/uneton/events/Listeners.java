@@ -111,7 +111,7 @@ public class Listeners implements Listener {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
         if (killer != null) {
-            plugin.impl.depositPlayer(killer, 300);
+            vault.depositPlayer(killer, 300);
             killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
         }
     }

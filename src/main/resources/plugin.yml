@@ -2,6 +2,9 @@ name: CombatV3
 version: '${version}'
 main: org.main.uneton.Combat
 api-version: '1.19'
+softdepend:
+  - Vault
+
 commands:
   crash:
     permission: combat.crash.use
@@ -79,3 +82,4 @@ commands:
   spawn:
     description: Teleports you to the spawn point!
     usage: /spawn
+

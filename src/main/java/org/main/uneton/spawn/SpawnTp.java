@@ -34,7 +34,7 @@ public class SpawnTp implements CommandExecutor {
 
     @NotNull
     private BukkitRunnable getBukkitRunnable(Player player, Location initialLocation) {
-        int countdownSeconds = 3;
+        int countdownSeconds = 5;
         return new BukkitRunnable() {
             private int secondsPassed = 0;
             @Override

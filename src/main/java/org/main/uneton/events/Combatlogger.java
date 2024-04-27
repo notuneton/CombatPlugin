@@ -22,7 +22,7 @@ public class Combatlogger implements Listener {
     private final JavaPlugin plugin;
 
     // Player 1 -> player,player2,3,4,5, ...
-    private static final Map<Player, List<Player>> combat = new HashMap<>(); // Functio
+    private static final Map<Player, List<Player>> combatlogged = new HashMap<>(); // Functio
     public static final Map<Player, Long> combatCooldown = new HashMap<>(); // Animaatio
 
     public Combatlogger(JavaPlugin plugin) {
@@ -101,23 +101,23 @@ public class Combatlogger implements Listener {
     }
 
     private void addToCombatList(Player player, Player target) {
-        List<Player> targets = combat.getOrDefault(player, new ArrayList<>());
+        List<Player> targets = combatlogged.getOrDefault(player, new ArrayList<>());
         if (!targets.contains(target)) {
             targets.add(target);
-            combat.put(player, targets);
+            combatlogged.put(player, targets);
         }
     }
 
     private void endCombat(Player player) {
         combatCooldown.remove(player);
-        combat.remove(player);
+        combatlogged.remove(player);
         removeFromTargetLists(player);
     }
 
     private void removeFromTargetLists(Player target) {
         // Poistetaan leavaaja jokaisen targetin target listasta
         // Jos leavaaja on targeting vika pelaaja sen cooldown resettaantuu
-        for (Map.Entry<Player, List<Player>> entry : combat.entrySet()) {
+        for (Map.Entry<Player, List<Player>> entry : combatlogged.entrySet()) {
             Player player = entry.getKey();
             List<Player> targets = entry.getValue();
             targets.remove(target);
@@ -125,7 +125,7 @@ public class Combatlogger implements Listener {
             if (targets.isEmpty()) {
                 combatCooldown.remove(player);
             }
-            combat.put(player, targets);
+            combatlogged.put(player, targets);
         }
 
         /*
