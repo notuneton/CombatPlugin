@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Gm implements CommandExecutor {
 
-    public static Set<Player> gmplayers = new HashSet<>();
+    public static Set<Player> gm_players = new HashSet<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -30,17 +30,15 @@ public class Gm implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target != null) {
-                if (gmplayers.contains(target)){
-                    gmplayers.remove(target);
+                if (gm_players.contains(target)){
+                    gm_players.remove(target);
                     target.sendMessage(ChatColor.GREEN + player.getName() + " is no longer in god mode.");
                 } else {
-                    gmplayers.add(target);
+                    gm_players.add(target);
                     target.sendMessage(ChatColor.GREEN + player.getName() + " is now in god mode.");
                 }
             }
         }
         return true;
     }
-
-
 }

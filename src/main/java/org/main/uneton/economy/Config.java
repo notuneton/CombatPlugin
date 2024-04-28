@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Config {
+/*
 
     private final String name;
     private File file;
@@ -38,6 +39,8 @@ public class Config {
     }
     public FileConfiguration getConfig() {
         return config;
+
     }
+*/
 
 }

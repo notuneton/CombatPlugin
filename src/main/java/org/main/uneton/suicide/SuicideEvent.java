@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class SuicideEvent implements Listener {
 
-
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();

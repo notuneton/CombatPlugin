@@ -30,9 +30,12 @@ public class Trap implements CommandExecutor {
 
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
-            if(target != null){
-                spawnTrap(player);
+            if (target == null || !target.isOnline()) {
+                player.sendActionBar(ChatColor.RED + "That player does not exist.");
+                return true;
             }
+
+            spawnTrap(player);
         }
         return true;
     }
@@ -40,7 +43,7 @@ public class Trap implements CommandExecutor {
     public static void spawnTrap(Player player){
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(-1, -1, -1);
-        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 72000, 3);
+        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 72000, 3); // 259,200 seconds
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 4; y++) {

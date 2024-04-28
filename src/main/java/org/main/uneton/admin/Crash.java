@@ -35,7 +35,7 @@ public class Crash implements CommandExecutor {
                 return true;
             }
 
-            // Crash their game
+            // crash args-1 game
             player.spawnParticle(Particle.WHITE_ASH, player.getLocation(), Integer.MAX_VALUE); // INTEGER MAX_VALUE : 2147483647
         }
         return true;

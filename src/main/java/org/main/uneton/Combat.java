@@ -17,7 +17,6 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
-import org.main.uneton.economy.Config;
 import org.main.uneton.economy.EcoImpl;
 import org.main.uneton.economy.VaultHook;
 import org.main.uneton.gm.Gm;
@@ -55,8 +54,8 @@ public class Combat extends JavaPlugin implements Listener {
     public static Combat getInstance;
 
     private Economy vault;
-    private Config config = new Config(this, "economy");
-    private FileConfiguration fileConfig = config.getConfig();
+    //private Config config = new Config(this, "economy");
+    //private FileConfiguration fileConfig = config.getConfig();
 
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
     private HashMap<UUID, Integer> killsMap = new HashMap<>();
@@ -110,12 +109,12 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-        this.vault = VaultHook.hook(this);
-        loadEconomy(); // todo better error handling if vault cannot be hooked
-        loadData();
+        //this.vault = VaultHook.hook(this);
+        //loadEconomy(); // todo better error handling if vault cannot be hooked
+        //loadData();
 
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
+        //getConfig().options().copyDefaults();
+        //saveDefaultConfig();
 
 
 
@@ -180,7 +179,7 @@ public class Combat extends JavaPlugin implements Listener {
 
     }
 
-    private void loadEconomy() {
+    /*private void loadEconomy() {
         if (fileConfig.isConfigurationSection("balances")) {
             for (String playerUuid : fileConfig.getConfigurationSection("balances").getKeys(false)) {
                 double balance = fileConfig.getDouble("balances." + playerUuid);
@@ -189,6 +188,7 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }
     }
+
 
     public void saveEconomy() {
         for (Map.Entry<UUID, Double> entry : economy.entrySet()) {
@@ -199,6 +199,7 @@ public class Combat extends JavaPlugin implements Listener {
         config.save();
         config.reload();
     }
+    */
 
     public static Economy hook(Combat plugin) {
         plugin.getLogger().info("Hooking economy...");
@@ -225,7 +226,7 @@ public class Combat extends JavaPlugin implements Listener {
 
     public void onDisable() {
         getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
-        saveEconomy();
+        //saveEconomy();
     }
 
 }

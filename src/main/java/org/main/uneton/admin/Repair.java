@@ -37,7 +37,6 @@ public class Repair implements CommandExecutor {
             player.sendActionBar(ChatColor.GREEN + "Your item has been repaired.");
             return true;
 
-
         }
 
         if(args.length == 1 && "all".equals(args[0])) {

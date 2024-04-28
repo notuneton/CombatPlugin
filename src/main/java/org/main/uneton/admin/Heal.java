@@ -1,5 +1,6 @@
 package org.main.uneton.admin;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,12 +23,21 @@ public class Heal implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.GREEN + "You healed yourself.");
-            player.setHealth(20);
-            return true;
+            Player target = Bukkit.getPlayerExact(args[0]);
+            if (target == null) {
+                player.sendMessage(ChatColor.GREEN + "You healed yourself.");
+                player.setHealth(20);
+                return true;
+            }
         }
 
-        if(args.length == 1) {
+        if (args.length == 1) {
+            Player target = Bukkit.getPlayerExact(args[0]);
+            if (target == null) {
+                player.sendActionBar(ChatColor.RED + "That player does not exist.");
+                return true;
+            }
+
             player.sendMessage(ChatColor.GREEN + "You have been healed by "+ ChatColor.GOLD + sender.getName());
             player.setHealth(20);
         }
