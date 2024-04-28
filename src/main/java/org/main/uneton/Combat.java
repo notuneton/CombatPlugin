@@ -49,7 +49,6 @@ public class Combat extends JavaPlugin implements Listener {
         return instance;
     }
 
-
     public static HashMap<UUID, Double> economy = new HashMap<>();
     public static Combat getInstance;
 
@@ -109,6 +108,8 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
 
         // admin
         getCommand("crash").setExecutor(new Crash());
@@ -165,9 +166,6 @@ public class Combat extends JavaPlugin implements Listener {
         //this.vault = VaultHook.hook(this);
         //loadEconomy(); // todo better error handling if vault cannot be hooked
         //loadData();
-
-        //getConfig().options().copyDefaults();
-        //saveDefaultConfig();
 
         /*Config c = new Config(Combat.getInstance(), "data_config");
         c.load();
