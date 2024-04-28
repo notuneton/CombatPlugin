@@ -16,7 +16,7 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Heals the player's hearts.
     usage: /heal <player>
-  invSee:
+  invsee:
     permission: combat.invsee.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: See and/or edit the inventory of other players.
@@ -31,15 +31,13 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Drops Items from the player.
     usage: /slippery <player>
-  sudo:
-    description: Make another user perform a command.
-    usage: /sudo <text> <player>
-  trapCage:
+  trapcage:
     permission: combat.trapcage.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Create a cube around the player that the player cannot break.
     usage: /trapcage <player>
-  enderChest:
+
+  enderchest:
     description: Opens your personal Ender chest.
     usage: /enderchest
   guide:
@@ -54,6 +52,10 @@ commands:
   stuck:
     description: Used if you are stuck.
     usage: /stuck
+  sudo:
+    description: Make another user perform a command.
+    usage: /sudo <text> <player>
+    
   gm:
     permission: combat.gm.use
     permission-message: Permission Denied, You do not have permission to do this task.
@@ -65,15 +67,9 @@ commands:
   ignore:
     description: Ignore a player.
     usage: /ignore <player>
-  unIgnore:
+  unignore:
     description: un-ignores a player.
     usage: /unignore <player>
-  suicide:
-    description: Causes you to perish.
-    usage: /suicide
-  disposal:
-    description: you can put here items that you want to deleted permanently!
-    usage: /disposal
   setspawn:
     permission: combat.setspawn.use
     permission-message: Permission Denied, You do not have permission to do this task.
@@ -82,4 +78,9 @@ commands:
   spawn:
     description: Teleports you to the spawn point!
     usage: /spawn
-
+  suicide:
+    description: Causes you to perish.
+    usage: /suicide
+  disposal:
+    description: you can put here items that you want to deleted permanently!
+    usage: /disposal

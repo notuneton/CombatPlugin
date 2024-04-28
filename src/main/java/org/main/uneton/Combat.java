@@ -109,23 +109,6 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-        //this.vault = VaultHook.hook(this);
-        //loadEconomy(); // todo better error handling if vault cannot be hooked
-        //loadData();
-
-        //getConfig().options().copyDefaults();
-        //saveDefaultConfig();
-
-
-
-        /*Config c = new Config(Combat.getInstance(), "data_config");
-        c.load();
-        c.getConfig().set("sd", "lol");
-        c.save();
-        double number = 1234567890123456789012345678901234567890.0;
-        System.out.println(formatNumber(number));
-        */
-
 
         // admin
         getCommand("crash").setExecutor(new Crash());
@@ -166,9 +149,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("disposal").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
-
-
-        // Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
+        //TODO Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {
                 UUID uuid = user.getUniqueId();
@@ -177,6 +158,24 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }, 0L, 20L); // 20 ticks = 1 second
 
+
+
+
+
+        //this.vault = VaultHook.hook(this);
+        //loadEconomy(); // todo better error handling if vault cannot be hooked
+        //loadData();
+
+        //getConfig().options().copyDefaults();
+        //saveDefaultConfig();
+
+        /*Config c = new Config(Combat.getInstance(), "data_config");
+        c.load();
+        c.getConfig().set("sd", "lol");
+        c.save();
+        double number = 1234567890123456789012345678901234567890.0;
+        System.out.println(formatNumber(number));
+        */
     }
 
     /*private void loadEconomy() {
@@ -189,7 +188,6 @@ public class Combat extends JavaPlugin implements Listener {
         }
     }
 
-
     public void saveEconomy() {
         for (Map.Entry<UUID, Double> entry : economy.entrySet()) {
             UUID uuid = entry.getKey();
@@ -200,7 +198,6 @@ public class Combat extends JavaPlugin implements Listener {
         config.reload();
     }
     */
-
     public static Economy hook(Combat plugin) {
         plugin.getLogger().info("Hooking economy...");
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -218,11 +215,9 @@ public class Combat extends JavaPlugin implements Listener {
         }
         return null;
     }
-
     public Economy getVault() {
         return vault;
     }
-
 
     public void onDisable() {
         getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
