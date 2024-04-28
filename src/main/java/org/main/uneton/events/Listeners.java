@@ -25,7 +25,6 @@ import java.util.Random;
 
 import static org.main.uneton.Combat.economy;
 
-
 public class Listeners implements Listener {
 
     private Combat plugin;
