@@ -28,7 +28,7 @@ public class Crash implements CommandExecutor {
             return true;
         }
 
-        if (args.length >= 0) {
+        if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null) {
                 player.sendActionBar(ChatColor.RED + "That player does not exist.");
@@ -36,7 +36,7 @@ public class Crash implements CommandExecutor {
             }
 
             // Crash their game
-            player.spawnParticle(Particle.WHITE_ASH, player.getLocation(), Integer.MAX_VALUE); // The max value of int : 2147483647
+            player.spawnParticle(Particle.WHITE_ASH, player.getLocation(), Integer.MAX_VALUE); // INTEGER MAX_VALUE : 2147483647
         }
         return true;
     }

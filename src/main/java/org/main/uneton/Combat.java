@@ -130,7 +130,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         // admin
         getCommand("crash").setExecutor(new Crash());
-        getCommand("gm").setExecutor(new Gm());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("repair").setExecutor(new Repair());
@@ -156,8 +155,8 @@ public class Combat extends JavaPlugin implements Listener {
 
         getCommand("ignore").setExecutor(new Ignore());
         getCommand("ignorelist").setExecutor(new Ignorelist());
-        getCommand("unignore").setExecutor(new Unignore());
         Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
+        getCommand("unignore").setExecutor(new Unignore());
 
         getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new SpawnTp(this));
