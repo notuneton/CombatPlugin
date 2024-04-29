@@ -2,10 +2,7 @@ package org.main.uneton;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,10 +12,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
 import org.main.uneton.economy.EcoImpl;
-import org.main.uneton.economy.VaultHook;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
@@ -34,12 +29,8 @@ import org.main.uneton.events.*;
 import org.main.uneton.ignore.Unignore;
 import org.main.uneton.trash.Trash;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Level;
-
-import static org.main.uneton.economy.NumberFormatter.formatNumber;
 
 
 public class Combat extends JavaPlugin implements Listener {
@@ -105,6 +96,7 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
 
+
     @Override
     public void onEnable() {
         instance = this;
@@ -150,7 +142,8 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("disposal").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
-        //TODO Schedule a repeating task that runs every second & FROM PLAYER TIME CLASS
+
+        //TODO Schedule a repeating task that runs every second
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {
                 UUID uuid = user.getUniqueId();

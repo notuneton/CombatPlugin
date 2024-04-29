@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class Suicide implements CommandExecutor {
 
-
     private String guimenu = ChatColor.GOLD + "Suicide?";
 
     @Override
@@ -25,13 +24,13 @@ public class Suicide implements CommandExecutor {
         }
 
         Inventory suicide = Bukkit.createInventory(player, 9*3, guimenu);
-        ItemStack pane = new ItemStack(Material.GREEN_CONCRETE);
-        setItemStackName(pane, ChatColor.GREEN.toString() + ChatColor.BOLD+ "Confirm");
-        suicide.setItem(15, pane);
+        ItemStack yesButton = new ItemStack(Material.GREEN_CONCRETE);
+        setItemStackName(yesButton, ChatColor.GREEN.toString() + ChatColor.BOLD+ "Confirm");
+        suicide.setItem(15, yesButton);
 
-        ItemStack nevenrmind = new ItemStack(Material.RED_CONCRETE);
-        setItemStackName(nevenrmind, ChatColor.RED.toString() + ChatColor.BOLD+ "Deny");
-        suicide.setItem(11, nevenrmind);
+        ItemStack noButton = new ItemStack(Material.RED_CONCRETE);
+        setItemStackName(noButton, ChatColor.RED.toString() + ChatColor.BOLD+ "Deny");
+        suicide.setItem(11, noButton);
 
         player.openInventory(suicide);
         return true;
