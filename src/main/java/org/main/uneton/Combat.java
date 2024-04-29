@@ -101,7 +101,9 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         getConfig().options().copyDefaults();
-        saveDefaultConfig();
+        // saveDefaultConfig();
+        saveConfig();
+
 
         // admin
         getCommand("crash").setExecutor(new Crash());

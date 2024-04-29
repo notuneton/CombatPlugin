@@ -17,8 +17,7 @@ import java.util.Set;
 
 public class Gm implements CommandExecutor {
 
-    public static Set<Player> godmodePlayers = new HashSet<>();
-    public static String guiName = ChatColor.GOLD + "God mode >";
+    public static Set<Player> gmPlayerList = new HashSet<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -27,24 +26,23 @@ public class Gm implements CommandExecutor {
             return true;
         }
 
-        Inventory gui = Bukkit.createInventory(player, 9*3, guiName);
-        ItemStack onButton = new ItemStack(Material.GREEN_CONCRETE);
-        setItemStackName(onButton, "Enable Godmode");
-        gui.setItem(15, onButton);
+        if (args.length == 0) {
+            player.sendMessage(ChatColor.RED + "usage: /gm <player>");
+            return true;
+        }
 
-        ItemStack offButton = new ItemStack(Material.RED_CONCRETE);
-        setItemStackName(offButton, "Disable Godmode");
-        gui.setItem(11, offButton);
-
-        player.openInventory(gui);
-
+        if (args.length == 1) {
+            Player target = Bukkit.getPlayerExact(args[0]);
+            if (target != null) {
+                if (gmPlayerList.contains(target)){
+                    gmPlayerList.remove(target);
+                    target.sendMessage(ChatColor.GREEN + player.getName() + " is no longer in god mode.");
+                } else {
+                    gmPlayerList.add(target);
+                    target.sendMessage(ChatColor.GREEN + player.getName() + " is now in god mode.");
+                }
+            }
+        }
         return true;
     }
-
-    public static void setItemStackName(ItemStack item, String customName) {
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(customName);
-        item.setItemMeta(meta);
-    }
-
 }

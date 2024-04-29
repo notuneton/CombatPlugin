@@ -24,14 +24,14 @@ public class Guide implements CommandExecutor {
 
         if(args.length == 1 && "admin".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-            player.sendMessage(b + " /crash <player>: " + f + " | Spawns a white ball around you.");
-            player.sendMessage(b + " /gm: " + f + " | Toggles god mode for a specified player, making them immune to all forms of damage.");
+            player.sendMessage(b + " /crash <player>: " + f + " | Crashes the specified player's game");
+            player.sendMessage(b + " /gm <player>: " + f + " | Makes the player invulnerable to all faults.");
             player.sendMessage(b + " /heal <player>: " + f + " | Heals the player's hearts.");
             player.sendMessage(b + " /invsee <player>: " + f + " | See and/or edit the inventory of other players.");
             player.sendMessage(b + " /repair <all>: " + f + " | Repairs the durability of one or all items.");
             player.sendMessage(b + " /slippery <player>: " + f + " | Drops Items from the player.");
             player.sendMessage(b + " /sudo <text> <player>: " + f + " | Make another user perform a command.");
-            player.sendMessage(b + " /trapCage <player>: " + f + " | Create a cube around the player that the player cannot break.");
+            player.sendMessage(b + " /trapcage <player>: " + f + " | Create a cube around the player that the player cannot break.");
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
 
