@@ -11,11 +11,13 @@ public class Guide implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player player)) {
+        /*if (!(sender instanceof Player)) {
             sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
             return true;
         }
+         */
 
+        Player player = (Player) sender;
         ChatColor b = ChatColor.AQUA;
         ChatColor f = ChatColor.WHITE;
         if(args.length == 0) {
@@ -38,7 +40,7 @@ public class Guide implements CommandExecutor {
         if(args.length == 1 && "info".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
             player.sendMessage(b + " /enderchest: " + f + " | Opens your personal Enderchest.");
-            player.sendMessage(b + " /guide: " + f + " | Plugin commands.");
+            player.sendMessage(b + " /guide: " + f + " | Show this list");
             player.sendMessage(b + " /ignore <player>: " + f + " | Ignore a player.");
             player.sendMessage(b + " /ignorelist <player>: " + f + " | Checks all ignored players.");
             player.sendMessage(b + " /unignore <player>: " + f + " | unignores a player.");
