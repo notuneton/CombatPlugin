@@ -37,7 +37,7 @@ public class Gm implements CommandExecutor {
             if (target != null) {
                 if (gmPlayerlist.contains(target)){
                     gmPlayerlist.remove(target);
-                    sendUnGod(player);
+                    player.sendMessage(ChatColor.GREEN + player.getName() + " is no longer in god mode.");
                 } else {
                     gmPlayerlist.add(target);
                     sendGod(player);
@@ -50,13 +50,6 @@ public class Gm implements CommandExecutor {
     private void sendGod(Player player){
         Bukkit.getScheduler().runTaskTimer(Combat.getInstance, () -> {
             player.sendActionBar(ChatColor.GREEN + player.getName() + " is now in god mode.");
-        }, 0, 1);
-
-    }
-
-    private void sendUnGod(Player player){
-        Bukkit.getScheduler().runTaskTimer(Combat.getInstance, () -> {
-            player.sendMessage(ChatColor.GREEN + player.getName() + " is no longer in god mode.");
         }, 0, 1);
 
     }
