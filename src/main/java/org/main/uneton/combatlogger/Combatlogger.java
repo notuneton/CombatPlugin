@@ -1,6 +1,5 @@
 package org.main.uneton.combatlogger;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
@@ -22,7 +21,7 @@ public class Combatlogger implements Listener {
     private final JavaPlugin plugin;
 
     // Player 1 -> player,player2,3,4,5, ...
-    private static final Map<Player, List<Player>> combatlogged = new HashMap<>(); // Functio
+    private static final Map<Player, List<Player>> isInCombat = new HashMap<>(); // Functio
     public static final Map<Player, Long> combatCooldown = new HashMap<>(); // Animaatio
 
     public Combatlogger(JavaPlugin plugin) {
@@ -102,23 +101,23 @@ public class Combatlogger implements Listener {
     }
 
     private void addToCombatList(Player player, Player target) {
-        List<Player> targets = combatlogged.getOrDefault(player, new ArrayList<>());
+        List<Player> targets = isInCombat.getOrDefault(player, new ArrayList<>());
         if (!targets.contains(target)) {
             targets.add(target);
-            combatlogged.put(player, targets);
+            isInCombat.put(player, targets);
         }
     }
 
     private void endCombat(Player player) {
         combatCooldown.remove(player);
-        combatlogged.remove(player);
+        isInCombat.remove(player);
         removeFromTargetLists(player);
     }
 
     private void removeFromTargetLists(Player target) {
         // Poistetaan leavaaja jokaisen targetin target listasta
         // Jos leavaaja on targeting vika pelaaja sen cooldown resettaantuu
-        for (Map.Entry<Player, List<Player>> entry : combatlogged.entrySet()) {
+        for (Map.Entry<Player, List<Player>> entry : isInCombat.entrySet()) {
             Player player = entry.getKey();
             List<Player> targets = entry.getValue();
             targets.remove(target);
@@ -126,7 +125,7 @@ public class Combatlogger implements Listener {
             if (targets.isEmpty()) {
                 combatCooldown.remove(player);
             }
-            combatlogged.put(player, targets);
+            isInCombat.put(player, targets);
         }
 
         /*

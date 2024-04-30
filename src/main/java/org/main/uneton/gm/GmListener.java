@@ -8,14 +8,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import static org.main.uneton.gm.Gm.gmPlayerList;
+import static org.main.uneton.gm.Gm.gmPlayerlist;
+
 
 public class GmListener implements Listener {
 
     @EventHandler
     public void onEntityDamaged(EntityDamageEvent event) {
         Entity player = event.getEntity();
-        if (gmPlayerList.contains(player)) {
+        if (gmPlayerlist.contains(player)) {
             event.setCancelled(true);
         }
     }
@@ -23,8 +24,8 @@ public class GmListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event){
         Player player = event.getPlayer();
-        if (gmPlayerList.contains(player)){
-            gmPlayerList.remove(player);
+        if (gmPlayerlist.contains(player)){
+            gmPlayerlist.remove(player);
             Bukkit.getLogger().info("[CombatV3] 'gm_players' HashMap was cleared");
         }
     }
