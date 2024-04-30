@@ -21,7 +21,7 @@ import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
 import org.main.uneton.commands.SetSpawn;
-import org.main.uneton.combatlogger.SpawnTp;
+import org.main.uneton.combatlogger.Spawn;
 import org.main.uneton.suicide.Suicide;
 import org.main.uneton.suicide.SuicideEvent;
 import org.main.uneton.trash.TrashEvent;
@@ -116,7 +116,7 @@ public class Combat extends JavaPlugin implements Listener {
 
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
-        getCommand("spawn").setExecutor(new SpawnTp(this));
+        getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
         getCommand("enderchest").setExecutor(new Enderchest());
