@@ -130,8 +130,8 @@ public class Listeners implements Listener {
         Location location = victim.getLocation();
 
         if (killer != null && !killer.equals(victim)) {
-            ItemStack blood = new ItemStack(Material.RED_DYE, 2);
-            Item droppedItem = location.getWorld().dropItemNaturally(location, blood);
+            ItemStack bone = new ItemStack(Material.RED_DYE, 2);
+            Item droppedItem = location.getWorld().dropItemNaturally(location, bone);
             droppedItem.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
                 if(droppedItem.isValid()){

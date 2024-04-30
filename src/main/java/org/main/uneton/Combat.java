@@ -112,7 +112,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("repair").setExecutor(new Repair());
         getCommand("slippery").setExecutor(new Slippery());
-        getCommand("trapcage").setExecutor(new Trap());
+        getCommand("trap").setExecutor(new Trap());
 
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
@@ -124,6 +124,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
         getCommand("setspawn").setExecutor(new SetSpawn(this));
+        getCommand("sign").setExecutor(new Sign());
         getCommand("stuck").setExecutor(new Stuck());
         getCommand("sudo").setExecutor(new Sudo());
 

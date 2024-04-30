@@ -18,13 +18,13 @@ public class Trap implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("combat.trapcage.use")) {
+        if(!player.hasPermission("combat.trap.use")) {
             player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }
 
         if(args.length == 0){
-            player.sendMessage(ChatColor.RED + "usage: /trapcage <player>");
+            player.sendMessage(ChatColor.RED + "usage: /trap <player>");
             return true;
         }
 

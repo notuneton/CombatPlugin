@@ -31,11 +31,15 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Drops Items from the player.
     usage: /slippery <player>
-  trapcage:
-    permission: combat.trapcage.use
+  trap:
+    permission: combat.trap.use
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Create a cube around the player that the player cannot break.
-    usage: /trapcage <player>
+    usage: /trap <player>
+
+  spawn:
+    description: Teleports you to the spawn.
+    usage: /spawn
 
   enderchest:
     description: Opens your personal Ender chest.
@@ -49,13 +53,23 @@ commands:
   rules:
     description: Rules of the Server.
     usage: /rules
+  setspawn:
+    permission: combat.setspawn.use
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Sets the server spawn point!
+    usage: /setspawn
+  sign:
+    permission: combat.sign.use
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Spawns you a sign.
+    usage: /sign
   stuck:
     description: Used if you are stuck.
     usage: /stuck
   sudo:
-    description: Make another user perform a command.
+    description: Make another user perform a task.
     usage: /sudo <text> <player>
-    
+
   gm:
     permission: combat.gm.use
     permission-message: Permission Denied, You do not have permission to do this task.
@@ -70,14 +84,6 @@ commands:
   unignore:
     description: un-ignores a player.
     usage: /unignore <player>
-  setspawn:
-    permission: combat.setspawn.use
-    permission-message: Permission Denied, You do not have permission to do this task.
-    description: Sets the server spawn point!
-    usage: /setspawn
-  spawn:
-    description: Teleports you to the spawn point!
-    usage: /spawn
   suicide:
     description: Causes you to perish.
     usage: /suicide
