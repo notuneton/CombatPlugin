@@ -1,4 +1,4 @@
-package org.main.uneton.spawn;
+package org.main.uneton.combatlogger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -53,7 +53,7 @@ public class SpawnTp implements CommandExecutor {
     }
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
-        if (org.main.uneton.events.Combatlogger.combatCooldown.containsKey(player)) {
+        if (Combatlogger.combatCooldown.containsKey(player)) {
             player.sendMessage(ChatColor.RED + "You cannot teleport to spawn during combat.");
             return false; // Teleportation should not proceed
         }

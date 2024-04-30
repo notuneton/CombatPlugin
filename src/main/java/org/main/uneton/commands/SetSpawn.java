@@ -1,4 +1,4 @@
-package org.main.uneton.spawn;
+package org.main.uneton.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

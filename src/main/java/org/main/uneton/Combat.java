@@ -13,14 +13,15 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.admin.*;
+import org.main.uneton.combatlogger.Combatlogger;
 import org.main.uneton.economy.EcoImpl;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
-import org.main.uneton.spawn.SetSpawn;
-import org.main.uneton.spawn.SpawnTp;
+import org.main.uneton.commands.SetSpawn;
+import org.main.uneton.combatlogger.SpawnTp;
 import org.main.uneton.suicide.Suicide;
 import org.main.uneton.suicide.SuicideEvent;
 import org.main.uneton.trash.TrashEvent;
@@ -113,16 +114,20 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("slippery").setExecutor(new Slippery());
         getCommand("trapcage").setExecutor(new Trap());
 
+        // combatlogger
+        Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
+        getCommand("spawn").setExecutor(new SpawnTp(this));
+
         // commands
         getCommand("enderchest").setExecutor(new Enderchest());
         getCommand("guide").setExecutor(new Guide());
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
+        getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("stuck").setExecutor(new Stuck());
         getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
-        Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
@@ -134,9 +139,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("ignorelist").setExecutor(new Ignorelist());
         Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
         getCommand("unignore").setExecutor(new Unignore());
-
-        getCommand("setspawn").setExecutor(new SetSpawn(this));
-        getCommand("spawn").setExecutor(new SpawnTp(this));
 
         getCommand("suicide").setExecutor(new Suicide());
         Bukkit.getPluginManager().registerEvents(new SuicideEvent(), this);

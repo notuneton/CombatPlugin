@@ -1,4 +1,4 @@
-package org.main.uneton.events;
+package org.main.uneton.combatlogger;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
