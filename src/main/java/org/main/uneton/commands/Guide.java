@@ -11,13 +11,11 @@ public class Guide implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        /*if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
             return true;
         }
-         */
 
-        Player player = (Player) sender;
         ChatColor b = ChatColor.AQUA;
         ChatColor f = ChatColor.WHITE;
         if(args.length == 0) {
