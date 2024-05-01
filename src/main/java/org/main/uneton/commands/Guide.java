@@ -28,6 +28,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + " /heal <player>: " + f + " | Heals the player's hearts.");
             player.sendMessage(b + " /invsee <player>: " + f + " | See and/or edit the inventory of other players.");
             player.sendMessage(b + " /repair <all>: " + f + " | Repairs the durability of one or all items.");
+            player.sendMessage(b + " /setspawn: " + f + " | Sets the server spawn point!");
             player.sendMessage(b + " /slippery <player>: " + f + " | Drops Items from the player.");
             player.sendMessage(b + " /trap <player>: " + f + " | Create a cube around the player that the player cannot break.");
             player.sendMessage(b + " /sudo <text> <player>: " + f + " | Make another user perform a task.");
@@ -41,7 +42,6 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + " /guide: " + f + " | Show this list");
             player.sendMessage(b + " /playtime <player>: " + f + " | Time that you have played in total on the server.");
             player.sendMessage(b + " /rules: " + f + " | Rules of the Server.");
-            player.sendMessage(b + " /setspawn: " + f + " | Sets the server spawn point!");
             player.sendMessage(b + " /sign: " + f + " | Spawns you a sign.");
             player.sendMessage(b + " /stuck: " + f + " | Used if you are stuck.");
             player.sendMessage(b + " /ignore <player>: " + f + " | Ignore a player.");

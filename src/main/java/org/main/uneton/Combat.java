@@ -20,7 +20,7 @@ import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
-import org.main.uneton.commands.SetSpawn;
+import org.main.uneton.admin.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
 import org.main.uneton.suicide.Suicide;
 import org.main.uneton.suicide.SuicideEvent;
@@ -111,6 +111,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("repair").setExecutor(new Repair());
+        getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("slippery").setExecutor(new Slippery());
         getCommand("trap").setExecutor(new Trap());
 
@@ -123,7 +124,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("guide").setExecutor(new Guide());
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
-        getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("sign").setExecutor(new Sign());
         getCommand("stuck").setExecutor(new Stuck());
         getCommand("sudo").setExecutor(new Sudo());

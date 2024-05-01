@@ -26,6 +26,11 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Repairs the durability of one or all items.
     usage: /repair <all>
+  setspawn:
+    permission: combat.setspawn.use
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Sets the server spawn point!
+    usage: /setspawn
   slippery:
     permission: combat.slippery.use
     permission-message: Permission Denied, You do not have permission to do this task.
@@ -53,11 +58,6 @@ commands:
   rules:
     description: Rules of the Server.
     usage: /rules
-  setspawn:
-    permission: combat.setspawn.use
-    permission-message: Permission Denied, You do not have permission to do this task.
-    description: Sets the server spawn point!
-    usage: /setspawn
   sign:
     permission: combat.sign.use
     permission-message: Permission Denied, You do not have permission to do this task.
