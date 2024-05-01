@@ -22,7 +22,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "usage: /guide <info>");
         }
 
-        if(args.length == 1 && "admin".equals(args[0])) {
+        if (args.length == 1 && "admin".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
             player.sendMessage(b + " /crash <player>: " + f + " | Crashes the specified player's game");
             player.sendMessage(b + " /heal <player>: " + f + " | Heals the player's hearts.");
@@ -35,7 +35,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
 
-        if(args.length == 1 && "info".equals(args[0])) {
+        if (args.length == 1 && "info".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
             player.sendMessage(b + " /enderchest: " + f + " | Opens your personal Enderchest.");
             player.sendMessage(b + " /guide: " + f + " | Show this list");
