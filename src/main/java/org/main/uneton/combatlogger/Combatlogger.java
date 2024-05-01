@@ -37,7 +37,6 @@ public class Combatlogger implements Listener {
                 Long endTime = combatCooldown.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
                     player.sendActionBar(ChatColor.GREEN + "You are no longer in combat.");
                 }
                 if (combatCooldown.containsKey(player)) {
@@ -62,7 +61,6 @@ public class Combatlogger implements Listener {
             Player quitter = (Player) projectile.getShooter();
             if (combatCooldown.containsKey(quitter)) {
                 event.setCancelled(true);
-                quitter.sendActionBar(ChatColor.RED + "You can't do that when you're combat tagged.");
             }
         }
     }
@@ -72,7 +70,6 @@ public class Combatlogger implements Listener {
         Player player = event.getPlayer();
         if (combatCooldown.containsKey(player)) {
             event.setCancelled(true);
-            player.sendActionBar(ChatColor.RED + "You can't do that when you're combat tagged.");
         }
     }
 
