@@ -92,10 +92,7 @@ public class Listeners implements Listener {
         if (block.getType() == Material.SUGAR_CANE) {
             Random chance = new Random();
             if (chance.nextDouble() < 0.006) {
-                ItemStack cocaine = new ItemStack(Material.PAPER, 20);
-                ItemMeta cocaine_meta = cocaine.getItemMeta();
-                cocaine_meta.setDisplayName(ChatColor.WHITE + "Cocaine x20");
-                cocaine.setItemMeta(cocaine_meta);
+                dropCocaine(player);
             }
         }
     }
@@ -103,8 +100,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
         Player player = e.getPlayer();
-        if(e.getBlock().getType() == Material.STONE ||
-                e.getBlock().getType() == Material.GRANITE ||
+        if(e.getBlock().getType() == Material.COBBLESTONE ||
                 e.getBlock().getType() == Material.NETHERRACK){
             Random chance = new Random();
             if(chance.nextDouble() < 0.001) {
@@ -114,7 +110,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onDeathByAPlayer(PlayerDeathEvent event) {
+    public void onDeathByPlayer(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
         if (killer != null) {
@@ -151,6 +147,13 @@ public class Listeners implements Listener {
                 player.setHealth(0);
             }
         }
+    }
+
+    private void dropCocaine(Player player) {
+        ItemStack cocaine = new ItemStack(Material.SUGAR, 20);
+        ItemMeta cocaine_meta = cocaine.getItemMeta();
+        cocaine_meta.setDisplayName(ChatColor.WHITE + "Cocaine x20");
+        cocaine.setItemMeta(cocaine_meta);
     }
 
     private void dropPinkDiamond(Player player, BlockBreakEvent e) {
