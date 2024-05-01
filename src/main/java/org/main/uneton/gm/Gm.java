@@ -25,6 +25,11 @@ public class Gm implements CommandExecutor {
             return true;
         }
 
+        if (!player.hasPermission("combat.gm.use")) {
+            player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
+            return true;
+        }
+
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "usage: /gm <player>");
             return true;
@@ -35,7 +40,7 @@ public class Gm implements CommandExecutor {
             if (target != null) {
                 if (gm_list.contains(target)) {
                     gm_list.remove(target);
-                    player.sendMessage(ChatColor.GREEN + " You are not longer in god mode.");
+                    player.sendMessage(ChatColor.GREEN + " You are not longer in" + ChatColor.GOLD + " Godmode.");
                     cancelTask();
                 } else {
                     gm_list.add(target);
