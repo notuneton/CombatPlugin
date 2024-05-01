@@ -167,12 +167,7 @@ public class Listeners implements Listener {
         pinkMeta.setLore(lore);
         pinkDiamond.setItemMeta(pinkMeta);
 
-        Sound sound = Sound.ITEM_ARMOR_EQUIP_NETHERITE;
-        Location location = e.getBlock().getLocation(); // Changed player into e.getBlock() method
-        float volume = 2.2f;
-        float pitch = 1.0f;
-        player.playSound(location, sound, volume, pitch);
-
+        Location location = e.getPlayer().getLocation();
         e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
         player.sendMessage(green + "You picked up the " + lightpurple + "Pink Diamond.");
     }
