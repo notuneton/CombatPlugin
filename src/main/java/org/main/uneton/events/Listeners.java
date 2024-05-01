@@ -157,10 +157,10 @@ public class Listeners implements Listener {
         ChatColor gray = ChatColor.GRAY;
         ChatColor red = ChatColor.RED;
         ChatColor green = ChatColor.GREEN;
-        ChatColor lightpurple = ChatColor.LIGHT_PURPLE;
+        ChatColor light_purple = ChatColor.LIGHT_PURPLE;
         ItemStack pinkDiamond = new ItemStack(Material.DIAMOND);
         ItemMeta pinkMeta = pinkDiamond.getItemMeta();
-        pinkMeta.setDisplayName(lightpurple + "Pink Diamond");
+        pinkMeta.setDisplayName(light_purple + "Pink Diamond");
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
         lore.add(gray + "Probability: " + red + "0,1%");
@@ -169,7 +169,7 @@ public class Listeners implements Listener {
 
         Location location = e.getPlayer().getLocation();
         e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
-        player.sendMessage(green + "You picked up the " + lightpurple + "Pink Diamond.");
+        player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
     }
 
     /*

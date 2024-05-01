@@ -34,7 +34,7 @@ public class Spawn implements CommandExecutor {
 
     @NotNull
     private BukkitRunnable getBukkitRunnable(Player player, Location initialLocation) {
-        int countdownSeconds = 4;
+        int countdownSeconds = 5;
         return new BukkitRunnable() {
             private int secondsPassed = 0;
             @Override
@@ -45,7 +45,7 @@ public class Spawn implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "Teleportation cancelled.");
                     }
                 } else {
-                    player.sendMessage(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
+                    player.sendActionBar(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
                     secondsPassed++;
                 }
             }
@@ -54,12 +54,12 @@ public class Spawn implements CommandExecutor {
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
         if (Combatlogger.combatCooldown.containsKey(player)) {
-            player.sendMessage(ChatColor.RED + "You cannot teleport to spawn during combat.");
+            player.sendActionBar(ChatColor.RED + "You cannot teleport to spawn during combat.");
             return false;
         }
 
         if (player.getLocation().distance(initialLocation) > 0) {
-            player.sendMessage(ChatColor.RED + "Teleport cancelled because you moved!");
+            player.sendActionBar(ChatColor.RED + "Teleport cancelled because you moved!");
             return false;
         } else {
             Location spawnLocation = plugin.getConfig().getLocation("spawn");
@@ -68,7 +68,7 @@ public class Spawn implements CommandExecutor {
                 player.sendMessage(ChatColor.GRAY + "You have teleported to the spawn.");
                 return true;
             } else {
-                player.sendMessage(ChatColor.RED + "Teleport failed: Spawn location not found.");
+                player.sendMessage(ChatColor.RED + "Teleport failed : Spawn location not found.");
                 return false;
             }
 
