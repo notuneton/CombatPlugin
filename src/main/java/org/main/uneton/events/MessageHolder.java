@@ -5,11 +5,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.main.uneton.Combat;
 
 import java.util.HashMap;
-
 
 public class MessageHolder implements Listener {
 
@@ -17,7 +17,7 @@ public class MessageHolder implements Listener {
     private final HashMap<Player, Boolean> antispam = new HashMap<>();
 
     @EventHandler
-    public void onChatEvent(PlayerChatEvent e) {
+    public void onChat(PlayerChatEvent e) {
         Player player = e.getPlayer();
         String message = e.getMessage();
         String blocked = ChatColor.GRAY + player.getName() + ChatColor.ITALIC + " " + message;
@@ -43,6 +43,21 @@ public class MessageHolder implements Listener {
             player.sendMessage(blocked);
 
         }
+
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        Player sender = e.getPlayer();
+        String message = e.getMessage();
+
+        String playerMsg = ChatColor.DARK_GRAY + "[] " + ChatColor.GRAY + sender.getName() + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + message;
+        Bukkit.broadcastMessage(playerMsg);
+
+        /*for (Player player : sender.getServer().getOnlinePlayers()) {
+            Bukkit.getServer().broadcast(Component.text("[] " + player.getName()) + "" + message);
+        }
+         */
 
     }
 }

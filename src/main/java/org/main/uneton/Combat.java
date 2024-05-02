@@ -107,6 +107,7 @@ public class Combat extends JavaPlugin implements Listener {
 
 
         // admin
+        getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());

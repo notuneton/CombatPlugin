@@ -6,6 +6,11 @@ softdepend:
   - Vault
 
 commands:
+  clearchat:
+    permission: combat.clearchat.use
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Clears the chat.
+    usage: /clearchat
   crash:
     permission: combat.crash.use
     permission-message: Permission Denied, You do not have permission to do this task.
