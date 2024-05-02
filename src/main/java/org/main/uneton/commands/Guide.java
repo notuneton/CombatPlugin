@@ -24,6 +24,7 @@ public class Guide implements CommandExecutor {
 
         if (args.length == 1 && "admin".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
+            player.sendMessage(b + " /clearchat: " + f + " | Clears the chat.");
             player.sendMessage(b + " /crash <player>: " + f + " | Crashes the specified player's game");
             player.sendMessage(b + " /heal <player>: " + f + " | Heals the player's hearts.");
             player.sendMessage(b + " /invsee <player>: " + f + " | See and/or edit the inventory of other players.");

@@ -48,16 +48,10 @@ public class MessageHolder implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e) {
+        e.setCancelled(true);
         Player sender = e.getPlayer();
         String message = e.getMessage();
-
         String playerMsg = ChatColor.DARK_GRAY + "[] " + ChatColor.GRAY + sender.getName() + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + message;
         Bukkit.broadcastMessage(playerMsg);
-
-        /*for (Player player : sender.getServer().getOnlinePlayers()) {
-            Bukkit.getServer().broadcast(Component.text("[] " + player.getName()) + "" + message);
-        }
-         */
-
     }
 }
