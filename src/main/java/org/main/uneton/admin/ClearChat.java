@@ -22,8 +22,10 @@ public class ClearChat implements CommandExecutor {
             return true;
         }
 
-        for (Player user : player.getServer().getOnlinePlayers()) {
-            user.getServer().broadcast(Component.text(""));
+        for (int i = 0; i<100; i++) {
+            for (Player user : player.getServer().getOnlinePlayers()) {
+                user.getServer().broadcast(Component.text(""));
+            }
         }
 
         return true;
