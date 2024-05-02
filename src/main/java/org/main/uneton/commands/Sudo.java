@@ -21,6 +21,12 @@ public class Sudo implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Usage: /sudo <player> <text>");
         }
 
+        Player target = Bukkit.getServer().getPlayer(args[0]);
+        if (target == null || !target.isOnline()) {
+            player.sendActionBar(ChatColor.RED + "That player does not exist.");
+            return true;
+        }
+
         if (args.length >= 2) {
             String user = args[0];
             Player cmd = Bukkit.getServer().getPlayer(user);
@@ -33,8 +39,6 @@ public class Sudo implements CommandExecutor {
 
                 cmd.chat(message.toString());
                 player.sendMessage(ChatColor.GREEN + "Made " + user + " execute " + message);
-            } else {
-                player.sendActionBar(ChatColor.RED + "That player does not exist.");
             }
         }
         return true;

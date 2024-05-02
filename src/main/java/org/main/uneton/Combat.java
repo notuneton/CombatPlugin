@@ -13,7 +13,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.admin.*;
-import org.main.uneton.combatlogger.Combatlogger;
+import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.economy.EcoImpl;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
@@ -97,7 +97,6 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
 
-
     @Override
     public void onEnable() {
         instance = this;
@@ -117,7 +116,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("trap").setExecutor(new Trap());
 
         // combatlogger
-        Bukkit.getPluginManager().registerEvents(new Combatlogger(this), this);
+        Bukkit.getPluginManager().registerEvents(new CombatLog(this), this);
         getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
@@ -126,7 +125,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
-        getCommand("stuck").setExecutor(new Stuck());
         getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
@@ -157,6 +155,8 @@ public class Combat extends JavaPlugin implements Listener {
                 playTimes.put(uuid, currentPlayTime + 1);
             }
         }, 0L, 20L); // 20 ticks = 1 second
+
+
 
 
 

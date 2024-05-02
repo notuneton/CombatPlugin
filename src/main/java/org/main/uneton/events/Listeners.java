@@ -61,6 +61,14 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
+        Block block = event.getClickedBlock();
+        if (block.getType() != Material.OAK_SIGN) return;
+        event.getPlayer().openSign((Sign) block.getState());
+    }
+
+    @EventHandler
     public void onDamageLava(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();

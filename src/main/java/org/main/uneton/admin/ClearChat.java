@@ -25,7 +25,6 @@ public class ClearChat implements CommandExecutor {
 
         for (int i = 0; i < 100; i++) {
             Bukkit.broadcast(Component.text(""));
-
         }
 
         return true;

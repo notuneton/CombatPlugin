@@ -66,11 +66,8 @@ commands:
   sign:
     permission: combat.sign.use
     permission-message: Permission Denied, You do not have permission to do this task.
-    description: Spawns you a sign.
+    description: Spawns you a sign. (Can be clicked!)
     usage: /sign
-  stuck:
-    description: Used if you are stuck.
-    usage: /stuck
   sudo:
     description: Make another user perform a task.
     usage: /sudo <text> <player>

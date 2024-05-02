@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 
-public class Combatlogger implements Listener {
+public class CombatLog implements Listener {
 
     private final JavaPlugin plugin;
 
@@ -24,7 +24,7 @@ public class Combatlogger implements Listener {
     private static final Map<Player, List<Player>> isInCombat = new HashMap<>(); // Functio
     public static final Map<Player, Long> combatCooldown = new HashMap<>(); // Animaatio
 
-    public Combatlogger(JavaPlugin plugin) {
+    public CombatLog(JavaPlugin plugin) {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
         combatTask();
@@ -38,9 +38,10 @@ public class Combatlogger implements Listener {
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
                     player.sendActionBar(ChatColor.GREEN + "You are no longer in combat.");
+                    player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
                 }
                 if (combatCooldown.containsKey(player)) {
-                    player.sendActionBar(ChatColor.GRAY + "Combat: " + ChatColor.DARK_AQUA + (endTime - System.currentTimeMillis()) / 1000);
+                    player.sendActionBar(ChatColor.WHITE + "Combat: " + ChatColor.DARK_RED + (endTime - System.currentTimeMillis()) / 1000);
                 }
             });
             toRemove.forEach(this::endCombat);

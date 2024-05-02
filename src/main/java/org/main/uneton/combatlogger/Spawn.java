@@ -53,7 +53,7 @@ public class Spawn implements CommandExecutor {
     }
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
-        if (Combatlogger.combatCooldown.containsKey(player)) {
+        if (CombatLog.combatCooldown.containsKey(player)) {
             player.sendActionBar(ChatColor.RED + "You cannot teleport to spawn during combat.");
             return false;
         }
