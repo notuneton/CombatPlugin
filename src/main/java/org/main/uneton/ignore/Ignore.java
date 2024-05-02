@@ -1,5 +1,6 @@
 package org.main.uneton.ignore;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,6 +24,12 @@ public class Ignore implements CommandExecutor {
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "Usage: /ignore <player>");
+            return true;
+        }
+
+        Player user = Bukkit.getServer().getPlayer(args[0]);
+        if (user == null || !user.isOnline()) {
+            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
             return true;
         }
 

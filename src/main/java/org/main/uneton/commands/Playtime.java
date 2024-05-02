@@ -34,7 +34,7 @@ public class Playtime implements CommandExecutor {
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
                 getPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
             } else {
-                player.sendActionBar(ChatColor.RED + "That player does not exist.");
+                player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
             }
         } else {
             Player user = (Player) sender;

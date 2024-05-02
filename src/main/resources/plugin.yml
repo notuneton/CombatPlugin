@@ -70,7 +70,7 @@ commands:
     usage: /sign
   sudo:
     description: Make another user perform a task.
-    usage: /sudo <text> <player>
+    usage: /sudo <player> <text>
 
   gm:
     permission: combat.gm.use

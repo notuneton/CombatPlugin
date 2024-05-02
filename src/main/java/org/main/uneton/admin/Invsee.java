@@ -31,7 +31,7 @@ public class Invsee implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendActionBar(ChatColor.RED + "That player does not exist.");
+            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
             return true;
         }
 

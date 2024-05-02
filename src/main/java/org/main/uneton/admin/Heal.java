@@ -33,8 +33,8 @@ public class Heal implements CommandExecutor {
 
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendActionBar(ChatColor.RED + "That player does not exist.");
+            if (target == null || !target.isOnline()) {
+                player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
                 return true;
             }
 

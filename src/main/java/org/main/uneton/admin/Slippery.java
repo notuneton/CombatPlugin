@@ -28,8 +28,13 @@ public class Slippery implements CommandExecutor {
             return true;
         }
 
+        Player target = Bukkit.getPlayerExact(args[0]);
+        if (target == null || !target.isOnline()) {
+            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
+            return true;
+        }
+
         if (args.length == 1) {
-            Player target = Bukkit.getPlayerExact(args[0]);
             for (ItemStack invitems : target.getInventory().getContents()) {
                 if (invitems != null) {
                     target.getWorld().dropItemNaturally(target.getLocation(), invitems);

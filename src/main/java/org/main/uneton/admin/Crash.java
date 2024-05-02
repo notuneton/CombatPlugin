@@ -3,6 +3,7 @@ package org.main.uneton.admin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,12 +31,11 @@ public class Crash implements CommandExecutor {
 
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendActionBar(ChatColor.RED + "That player does not exist.");
+            if (target == null || !target.isOnline()) {
+                player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
                 return true;
             }
 
-            // crash args-1 game
             player.spawnParticle(Particle.WHITE_ASH, player.getLocation(), Integer.MAX_VALUE); // INTEGER MAX_VALUE : 2147483647
         }
         return true;
