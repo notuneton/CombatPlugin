@@ -22,7 +22,7 @@ public class Ignore implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED +"usage: /ignore <player>");
+            player.sendMessage(ChatColor.RED + "Usage: /ignore <player>");
             return true;
         }
 

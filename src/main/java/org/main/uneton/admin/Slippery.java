@@ -24,7 +24,7 @@ public class Slippery implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "usage: /slippery <player>");
+            player.sendMessage(ChatColor.RED + "Usage: /slippery <player>");
             return true;
         }
 
