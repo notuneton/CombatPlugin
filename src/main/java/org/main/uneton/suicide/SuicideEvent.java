@@ -12,7 +12,7 @@ public class SuicideEvent implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getView().getTitle().equals(ChatColor.GOLD + "Suicide?")) {
+        if (event.getView().getTitle().equals(ChatColor.BOLD + "Kys menu :)")) {
             ItemStack clickedItem = event.getCurrentItem();
             if(clickedItem != null) {
 
@@ -21,6 +21,7 @@ public class SuicideEvent implements Listener {
                         player.setHealth(0);
                         event.setCancelled(true);
                         break;
+
                     case RED_CONCRETE:
                         player.closeInventory();
                         event.setCancelled(true);

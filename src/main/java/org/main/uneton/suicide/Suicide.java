@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Suicide implements CommandExecutor {
 
-    private String guimenu = ChatColor.GOLD + "Suicide?";
+    private String guimenu = ChatColor.BOLD + "Kys menu :)";
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
