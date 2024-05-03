@@ -41,17 +41,6 @@ public class MessageHolder implements Listener {
         } else {
             e.setCancelled(true);
             player.sendMessage(blocked_message);
-
         }
-
-    }
-
-    @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
-        e.setCancelled(true);
-        Player sender = e.getPlayer();
-        String message = e.getMessage();
-        String playerMsg = ChatColor.WHITE + " " + sender.getName() + ChatColor.GRAY + " [ALL] " + ChatColor.WHITE + message;
-        Bukkit.getServer().broadcastMessage(playerMsg);
     }
 }
