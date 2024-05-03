@@ -2,14 +2,11 @@ package org.main.uneton.combatlogger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,7 +17,7 @@ public class CombatLog implements Listener {
 
     private final JavaPlugin plugin;
 
-    // Player 1 -> player,player2,3,4,5, ...
+    // Player 1 -> player, player2 -> 3,4,5, ...
     private static final Map<Player, List<Player>> isInCombat = new HashMap<>(); // function
     public static final Map<Player, Long> combatCooldown = new HashMap<>(); // animation
 

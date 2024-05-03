@@ -20,14 +20,14 @@ public class MessageHolder implements Listener {
     public void onChat(PlayerChatEvent e) {
         Player player = e.getPlayer();
         String message = e.getMessage();
-        String blocked = ChatColor.GRAY + player.getName() + ChatColor.ITALIC + " " + message;
+        String blocked_message = ChatColor.GRAY + player.getName() + ChatColor.ITALIC + " " + message;
 
         if(!lastmsg.containsKey(player)) {
             lastmsg.put(player, message);
         } else {
             if(message.equalsIgnoreCase(lastmsg.get(player))) {
                 e.setCancelled(true);
-                player.sendMessage(blocked);
+                player.sendMessage(blocked_message);
                 return;
             }
         }
@@ -40,7 +40,7 @@ public class MessageHolder implements Listener {
 
         } else {
             e.setCancelled(true);
-            player.sendMessage(blocked);
+            player.sendMessage(blocked_message);
 
         }
 
@@ -51,7 +51,7 @@ public class MessageHolder implements Listener {
         e.setCancelled(true);
         Player sender = e.getPlayer();
         String message = e.getMessage();
-        String playerMsg = ChatColor.DARK_GRAY + "[] " + ChatColor.GRAY + sender.getName() + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + message;
-        Bukkit.broadcastMessage(playerMsg);
+        String playerMsg = ChatColor.WHITE + sender.getName() + ChatColor.GRAY + " [ALL] " + ChatColor.GRAY + message;
+        Bukkit.getServer().broadcastMessage(playerMsg);
     }
 }

