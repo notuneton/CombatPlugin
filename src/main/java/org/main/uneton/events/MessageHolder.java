@@ -51,7 +51,7 @@ public class MessageHolder implements Listener {
         e.setCancelled(true);
         Player sender = e.getPlayer();
         String message = e.getMessage();
-        String playerMsg = ChatColor.WHITE + sender.getName() + ChatColor.GRAY + " [ALL] " + ChatColor.GRAY + message;
+        String playerMsg = ChatColor.WHITE + sender.getName() + ChatColor.GRAY + " [ALL] " + ChatColor.WHITE + message;
         Bukkit.getServer().broadcastMessage(playerMsg);
     }
 }

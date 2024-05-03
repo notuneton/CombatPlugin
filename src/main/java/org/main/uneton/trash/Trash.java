@@ -31,8 +31,9 @@ public class Trash implements CommandExecutor {
             ItemStack barrier = new ItemStack(Material.BARRIER);
             setItemStackName(barrier, ChatColor.RED + "Close");
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(TextUtils.formatText("&"));
+            lore.add(TextUtils.formatText(""));
             lore.add(TextUtils.formatText("&eClick to close."));
+            barrier.lore();
             trashcan.setItem(40, barrier); // Set the barrier in the 40th slot
         }
     }

@@ -40,7 +40,7 @@ public class Gm implements CommandExecutor {
             if (target != null) {
                 if (gm_list.contains(target)) {
                     gm_list.remove(target);
-                    player.sendMessage(ChatColor.GREEN + " You are not longer in" + ChatColor.GOLD + " Godmode.");
+                    player.sendMessage(ChatColor.WHITE + "You are not longer in" + ChatColor.BLUE + " God.");
                     cancelTask();
                 } else {
                     gm_list.add(target);
@@ -53,7 +53,7 @@ public class Gm implements CommandExecutor {
 
     private void sendGod(Player player) {
         task = Bukkit.getScheduler().runTaskTimer(Combat.getInstance(), () -> {
-            player.sendActionBar(ChatColor.WHITE + "You are currently in " + ChatColor.BLUE + "Godmode.");
+            player.sendActionBar(ChatColor.WHITE + "You are currently in " + ChatColor.BLUE + "God.");
         }, 0, 1);
     }
 
