@@ -56,17 +56,6 @@ public class CombatLog implements Listener {
     }
 
     @EventHandler
-    public void onEnderPearl(ProjectileLaunchEvent event) {
-        Projectile projectile = event.getEntity();
-        if (projectile.getType() == EntityType.ENDER_PEARL) {
-            Player quitter = (Player) projectile.getShooter();
-            if (combatCooldown.containsKey(quitter)) {
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler
     public void onElytra(PlayerToggleFlightEvent event) {
         Player player = event.getPlayer();
         if (combatCooldown.containsKey(player)) {
