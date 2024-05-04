@@ -44,14 +44,4 @@ public class MessageHolder implements Listener {
             player.sendMessage(blocked_message);
         }
     }
-
-    @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
-        e.setCancelled(true);
-        Player player = e.getPlayer();
-        String message = e.getMessage();
-
-        String prefix = ChatColor.DARK_GRAY + "[] " + ChatColor.GRAY + player.getName() + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + message;
-        Bukkit.getServer().broadcast(Component.text(prefix));
-    }
 }

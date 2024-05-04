@@ -47,7 +47,7 @@ public class Listeners implements Listener {
             player.kickPlayer(kickMessage);
         }
     }
-
+    
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
