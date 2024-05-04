@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.main.uneton.utils.TextUtils;
+
 
 import java.util.ArrayList;
 
@@ -31,9 +31,8 @@ public class Trash implements CommandExecutor {
             ItemStack barrier = new ItemStack(Material.BARRIER);
             setItemStackName(barrier, ChatColor.RED + "Close");
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(TextUtils.formatText(""));
-            lore.add(TextUtils.formatText("&eClick to close."));
-            barrier.lore();
+            lore.add("");
+            lore.add(ChatColor.YELLOW + "Click to close!");
             trashcan.setItem(40, barrier); // Set the barrier in the 40th slot
         }
     }

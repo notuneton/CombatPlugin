@@ -1,5 +1,6 @@
 package org.main.uneton.events;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,7 +18,7 @@ public class MessageHolder implements Listener {
     private final HashMap<Player, Boolean> antispam = new HashMap<>();
 
     @EventHandler
-    public void onChat(PlayerChatEvent e) {
+    public void onChatSpam(PlayerChatEvent e) {
         Player player = e.getPlayer();
         String message = e.getMessage();
         String blocked_message = ChatColor.GRAY + player.getName() + ChatColor.ITALIC + " " + message;
@@ -42,5 +43,15 @@ public class MessageHolder implements Listener {
             e.setCancelled(true);
             player.sendMessage(blocked_message);
         }
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        e.setCancelled(true);
+        Player player = e.getPlayer();
+        String message = e.getMessage();
+
+        String prefix = ChatColor.DARK_GRAY + "[] " + ChatColor.GRAY + player.getName() + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + message;
+        Bukkit.getServer().broadcast(Component.text(prefix));
     }
 }
