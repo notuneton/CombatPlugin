@@ -69,30 +69,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onDamageLava(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
-            EntityDamageEvent.DamageCause cause = e.getCause();
-            if (cause.equals(EntityDamageEvent.DamageCause.LAVA)){
-                player.setHealth(0);
-                e.setCancelled(true); // Cancel the event to prevent further processing
-            }
-        }
-    }
-
-    @EventHandler
-    public void onDamageDrown(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
-            EntityDamageEvent.DamageCause cause = e.getCause();
-            if (cause.equals(EntityDamageEvent.DamageCause.DROWNING)){
-                player.setHealth(0);
-                e.setCancelled(true); // Cancel the event to prevent further processing
-            }
-        }
-    }
-
-    @EventHandler
     public void onRareDrop(BlockBreakEvent e) {
         Block block = e.getBlock();
         Location loc = e.getBlock().getLocation();
