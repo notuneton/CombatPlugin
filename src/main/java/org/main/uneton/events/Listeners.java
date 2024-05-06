@@ -128,7 +128,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
+    public void onCustomDroponDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
         Location location = victim.getLocation();
@@ -142,6 +142,14 @@ public class Listeners implements Listener {
                     droppedItem.remove();
                 }
             }, 200L);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        if (e.getEntity().getKiller() != null) {
+            e.setKeepInventory(true);
+            e.getDrops().clear();
         }
     }
 
