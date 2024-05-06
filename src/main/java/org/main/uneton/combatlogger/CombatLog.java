@@ -16,8 +16,6 @@ import java.util.*;
 public class CombatLog implements Listener {
 
     private final JavaPlugin plugin;
-
-    // Player 1 -> player, player2 -> 3,4,5, ...
     private static final Map<Player, List<Player>> isInCombat = new HashMap<>(); // function
     public static final Map<Player, Long> combatCooldown = new HashMap<>(); // animation
 

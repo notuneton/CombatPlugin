@@ -7,37 +7,37 @@ softdepend:
 
 commands:
   crash:
-    permission: combat.crash.use
+    permission: combat.crash.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Spawns a white ball around you.
     usage: /crash <player>
   heal:
-    permission: combat.heal.use
+    permission: combat.heal.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Heals the player's hearts.
     usage: /heal <player>
   invsee:
-    permission: combat.invsee.use
+    permission: combat.invsee.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: See the inventory of other players.
     usage: /invsee <player>
   repair:
-    permission: combat.repair.use
+    permission: combat.repair.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Repairs the durability of one or all items.
     usage: /repair <all>
   setspawn:
-    permission: combat.setspawn.use
+    permission: combat.setspawn.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Sets the server spawn point!
     usage: /setspawn
   slippery:
-    permission: combat.slippery.use
+    permission: combat.slippery.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Drops Items from the player.
     usage: /slippery <player>
   trap:
-    permission: combat.trap.use
+    permission: combat.trap.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Create a cube around the player that the player cannot break.
     usage: /trap <player>
@@ -59,8 +59,6 @@ commands:
     description: Rules of the Server.
     usage: /rules
   sign:
-    permission: combat.sign.use
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: Spawns you a sign. (Can be clicked!)
     usage: /sign
   sudo:
