@@ -17,11 +17,6 @@ public class Sudo implements CommandExecutor {
             return true;
         }
 
-        if (!player.hasPermission("combat.slippery.sv")) {
-            player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
-            return true;
-        }
-
         if(args.length == 0) {
             player.sendMessage(ChatColor.RED + "Usage: /sudo <player> <message>");
         }

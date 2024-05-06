@@ -19,7 +19,7 @@ public class Guide implements CommandExecutor {
         ChatColor b = ChatColor.AQUA;
         ChatColor f = ChatColor.WHITE;
         if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /guide <info>");
+            player.sendMessage(ChatColor.RED + "Usage: /guide <help>");
         }
 
         if (args.length == 1 && "admin".equals(args[0])) {
@@ -36,9 +36,9 @@ public class Guide implements CommandExecutor {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
 
-        if (args.length == 1 && "info".equals(args[0])) {
+        if (args.length == 1 && "help".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-            player.sendMessage(b + "> /enderchest " + f + " | Opens your personal Enderchest.");
+            player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");
             player.sendMessage(b + "> /guide <info> " + f + " | Show this list");
             player.sendMessage(b + "> /playtime <player> " + f + " | Time that you have played in total on the server.");
             player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");

@@ -46,9 +46,9 @@ commands:
     description: Teleports you to the spawn.
     usage: /spawn
 
-  enderchest:
+  ec:
     description: Opens your personal Ender chest.
-    usage: /enderchest
+    usage: /ec
   guide:
     description: plugin commands.
     usage: /guide <info>

@@ -44,14 +44,14 @@ public class Gm implements CommandExecutor {
                     cancelTask();
                 } else {
                     gm_list.add(target);
-                    sendGod(player);
+                    sendGodPacked(player);
                 }
             }
         }
         return true;
     }
 
-    private void sendGod(Player player) {
+    private void sendGodPacked(Player player) {
         task = Bukkit.getScheduler().runTaskTimer(Combat.getInstance(), () -> {
             player.sendActionBar(ChatColor.WHITE + "You are currently in " + ChatColor.BLUE + "God.");
         }, 0, 1);

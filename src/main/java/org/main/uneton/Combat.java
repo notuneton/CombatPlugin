@@ -13,7 +13,7 @@ import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
-import org.main.uneton.events.HeckListener;
+import org.main.uneton.events.HeckCommands;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
@@ -110,7 +110,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
-        getCommand("enderchest").setExecutor(new Enderchest());
+        getCommand("ec").setExecutor(new Ec());
         getCommand("guide").setExecutor(new Guide());
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
@@ -118,7 +118,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
-        Bukkit.getPluginManager().registerEvents(new HeckListener(), this);
+        Bukkit.getPluginManager().registerEvents(new HeckCommands(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
