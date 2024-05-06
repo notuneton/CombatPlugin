@@ -63,10 +63,10 @@ commands:
     usage: /sign
   sudo:
     description: Executes another player perform a task.
-    usage: /sudo <player> <text>
+    usage: /sudo <player> <message>
 
   gm:
-    permission: combat.gm.use
+    permission: combat.gm.sv
     permission-message: Permission Denied, You do not have permission to do this task.
     description: makes the player invulnerable to all faults.
     usage: /gm <player>
@@ -79,6 +79,6 @@ commands:
   unignore:
     description: un-ignores a player.
     usage: /unignore <player>
-  disposal:
-    description: you can put here items that you want to deleted permanently!
-    usage: /disposal
+  trashcan:
+    description: Items that you want to deleted permanently!
+    usage: /trashcan

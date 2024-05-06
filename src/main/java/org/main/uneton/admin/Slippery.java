@@ -18,7 +18,7 @@ public class Slippery implements CommandExecutor {
             return true;
         }
 
-        if (!player.hasPermission("combat.slippery.use")) {
+        if (!player.hasPermission("combat.slippery.sv")) {
             player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }

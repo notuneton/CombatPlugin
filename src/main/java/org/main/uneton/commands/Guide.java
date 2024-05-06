@@ -18,7 +18,6 @@ public class Guide implements CommandExecutor {
 
         ChatColor b = ChatColor.AQUA;
         ChatColor f = ChatColor.WHITE;
-        ChatColor red = ChatColor.RED;
         if(args.length == 0) {
             player.sendMessage(ChatColor.RED + "Usage: /guide <info>");
         }
@@ -32,7 +31,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + "> /setspawn " + f + " | Sets the server spawn point!");
             player.sendMessage(b + "> /slippery <player> " + f + " | Drops Items from the player.");
             player.sendMessage(b + "> /trap <player> " + f + " | Create a cube around the player that the player cannot break.");
-            player.sendMessage(b + "> /sudo <player> <message & command> " + f + " | Executes another player perform a task.");
+            player.sendMessage(b + "> /sudo <player> <message> " + f + " | Executes another player perform a task.");
             player.sendMessage(b + "> /gm <player> " + f + " | Makes the player invulnerable to all faults.");
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
@@ -48,7 +47,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + "> /ignore <player> " + f + " | Ignore a player.");
             player.sendMessage(b + "> /ignorelist <player> " + f + " | Checks all ignored players.");
             player.sendMessage(b + "> /unignore <player> " + f + " | Un ignores a player.");
-            player.sendMessage(b + "> /disposal " + f + " | You can put here items that you want to deleted permanently!");
+            player.sendMessage(b + "> /trashcan " + f + " | You can put here items that you want to deleted permanently!");
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
         return true;

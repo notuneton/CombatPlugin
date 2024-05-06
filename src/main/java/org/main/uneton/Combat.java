@@ -13,6 +13,8 @@ import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
+import org.main.uneton.heck.HeckCommand;
+import org.main.uneton.heck.HeckListener;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
@@ -34,13 +36,13 @@ public class Combat extends JavaPlugin implements Listener {
     }
     public static Combat getInstance;
 
+
     public static HashMap<UUID, Double> economy = new HashMap<>();
     // private Economy vault;
     // private Config config = new Config(this, "economy");
     // private FileConfiguration fileConfig = config.getConfig();
 
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
-
     public static HashMap<UUID, Integer> killsMap = new HashMap<>();
     public static HashMap<UUID, Integer> deathsMap = new HashMap<>();
 
@@ -64,7 +66,6 @@ public class Combat extends JavaPlugin implements Listener {
             saveData();
         }
     }
-
     private void loadData(){
         FileConfiguration config = getConfig();
         for(String uuid : config.getKeys(false)){
@@ -73,7 +74,6 @@ public class Combat extends JavaPlugin implements Listener {
         }
         saveConfig();
     }
-
     private void saveData() {
         FileConfiguration config = getConfig();
         config.getKeys(false).forEach(config::isSet);
@@ -116,7 +116,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
-        getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
@@ -126,12 +125,15 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("gm").setExecutor(new Gm());
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
 
+        getCommand("sudo").setExecutor(new HeckCommand());
+        Bukkit.getPluginManager().registerEvents(new HeckListener(), this);
+
         getCommand("ignore").setExecutor(new Ignore());
         getCommand("ignorelist").setExecutor(new Ignorelist());
         Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
         getCommand("unignore").setExecutor(new Unignore());
 
-        getCommand("disposal").setExecutor(new Trash());
+        getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
 

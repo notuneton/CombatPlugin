@@ -25,7 +25,7 @@ public class Gm implements CommandExecutor {
             return true;
         }
 
-        if (!player.hasPermission("combat.gm.use")) {
+        if (!player.hasPermission("combat.gm.sv")) {
             player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }

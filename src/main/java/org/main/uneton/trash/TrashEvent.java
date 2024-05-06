@@ -12,7 +12,7 @@ public class TrashEvent implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getView().getTitle().equals(ChatColor.GOLD + "Disposal menu :-)")) {
+        if (event.getView().getTitle().equals(ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + "Trashcan menu :-)")) {
             ItemStack clickedItem = event.getCurrentItem();
             if(clickedItem != null) {
 
