@@ -1,6 +1,5 @@
 package org.main.uneton;
 
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
@@ -9,12 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
-import org.main.uneton.economy.EcoImpl;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
@@ -29,8 +25,6 @@ import org.main.uneton.ignore.Unignore;
 import org.main.uneton.trash.Trash;
 
 import java.util.*;
-import java.util.logging.Level;
-
 
 public class Combat extends JavaPlugin implements Listener {
 
@@ -38,17 +32,17 @@ public class Combat extends JavaPlugin implements Listener {
     public static Combat getInstance(){
         return instance;
     }
-
-    public static HashMap<UUID, Double> economy = new HashMap<>();
     public static Combat getInstance;
 
-    private Economy vault;
-    //private Config config = new Config(this, "economy");
-    //private FileConfiguration fileConfig = config.getConfig();
+    public static HashMap<UUID, Double> economy = new HashMap<>();
+    // private Economy vault;
+    // private Config config = new Config(this, "economy");
+    // private FileConfiguration fileConfig = config.getConfig();
 
     public HashMap<UUID, Integer> playTimes = new HashMap<>();
-    private HashMap<UUID, Integer> killsMap = new HashMap<>();
-    private HashMap<UUID, Integer> deathsMap = new HashMap<>();
+
+    public static HashMap<UUID, Integer> killsMap = new HashMap<>();
+    public static HashMap<UUID, Integer> deathsMap = new HashMap<>();
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e){
@@ -70,6 +64,7 @@ public class Combat extends JavaPlugin implements Listener {
             saveData();
         }
     }
+
     private void loadData(){
         FileConfiguration config = getConfig();
         for(String uuid : config.getKeys(false)){
@@ -93,7 +88,6 @@ public class Combat extends JavaPlugin implements Listener {
         }
         saveConfig();
     }
-
 
     @Override
     public void onEnable() {
@@ -156,9 +150,7 @@ public class Combat extends JavaPlugin implements Listener {
 
 
 
-
         /*
-
         this.vault = VaultHook.hook(this);
         loadEconomy(); // todo better error handling if vault cannot be hooked
         loadData();
@@ -169,10 +161,10 @@ public class Combat extends JavaPlugin implements Listener {
         c.save();
         double number = 1234567890123456789012345678901234567890.0;
         System.out.println(formatNumber(number));
-        */
+
     }
 
-    /*
+
     private void loadEconomy() {
         if (fileConfig.isConfigurationSection("balances")) {
             for (String playerUuid : fileConfig.getConfigurationSection("balances").getKeys(false)) {
@@ -192,7 +184,7 @@ public class Combat extends JavaPlugin implements Listener {
         config.save();
         config.reload();
     }
-    */
+
 
     public static Economy hook(Combat plugin) {
         plugin.getLogger().info("Hooking economy...");
@@ -214,10 +206,14 @@ public class Combat extends JavaPlugin implements Listener {
     public Economy getVault() {
         return vault;
     }
+         */
 
-    public void onDisable() {
-        getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
-        //saveEconomy();
+
+
     }
 
+    public void onDisable() {
+        // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
+        // saveEconomy();
+    }
 }

@@ -8,8 +8,10 @@ import org.main.uneton.Combat;
 import java.util.logging.Level;
 
 public class VaultHook {
-
+    
+    /*
     public static Economy hook(Combat plugin) {
+
         plugin.getLogger().info("Hooking economy...");
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
             plugin.getLogger().log(Level.WARNING, "Vault not found, Economy features disabled.");
@@ -31,4 +33,6 @@ public class VaultHook {
         }
         return null;
     }
+
+     */
 }
