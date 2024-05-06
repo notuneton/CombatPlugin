@@ -47,7 +47,7 @@ commands:
     usage: /spawn
 
   ec:
-    description: Opens your personal Ender chest.
+    description: Opens your personal enderchest.
     usage: /ec
   guide:
     description: plugin commands.
