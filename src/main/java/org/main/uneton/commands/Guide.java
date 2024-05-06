@@ -44,7 +44,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
             player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
 
-            player.sendMessage(b + "> /freezes <player>" + f + " | Cancels the player's movement.");
+            player.sendMessage(b + "> /freeze <player>" + f + " | Cancels the player's movement.");
             player.sendMessage(b + "> /ignore <player> " + f + " | Ignore a player.");
             player.sendMessage(b + "> /ignorelist <player> " + f + " | Checks all ignored players.");
             player.sendMessage(b + "> /unignore <player> " + f + " | Un ignores a player.");
