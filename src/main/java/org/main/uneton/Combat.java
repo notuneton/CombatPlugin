@@ -162,11 +162,14 @@ public class Combat extends JavaPlugin implements Listener {
 
 
 
-        //this.vault = VaultHook.hook(this);
-        //loadEconomy(); // todo better error handling if vault cannot be hooked
-        //loadData();
 
-        /*Config c = new Config(Combat.getInstance(), "data_config");
+        /*
+
+        this.vault = VaultHook.hook(this);
+        loadEconomy(); // todo better error handling if vault cannot be hooked
+        loadData();
+
+        Config c = new Config(Combat.getInstance(), "data_config");
         c.load();
         c.getConfig().set("sd", "lol");
         c.save();
@@ -175,7 +178,8 @@ public class Combat extends JavaPlugin implements Listener {
         */
     }
 
-    /*private void loadEconomy() {
+    /*
+    private void loadEconomy() {
         if (fileConfig.isConfigurationSection("balances")) {
             for (String playerUuid : fileConfig.getConfigurationSection("balances").getKeys(false)) {
                 double balance = fileConfig.getDouble("balances." + playerUuid);
@@ -195,6 +199,7 @@ public class Combat extends JavaPlugin implements Listener {
         config.reload();
     }
     */
+
     public static Economy hook(Combat plugin) {
         plugin.getLogger().info("Hooking economy...");
         if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {

@@ -24,7 +24,7 @@ commands:
   invsee:
     permission: combat.invsee.use
     permission-message: Permission Denied, You do not have permission to do this task.
-    description: See and/or edit the inventory of other players.
+    description: See the inventory of other players.
     usage: /invsee <player>
   repair:
     permission: combat.repair.use
@@ -69,7 +69,7 @@ commands:
     description: Spawns you a sign. (Can be clicked!)
     usage: /sign
   sudo:
-    description: Make another user perform a task.
+    description: Executes another player perform a task.
     usage: /sudo <player> <text>
 
   gm:

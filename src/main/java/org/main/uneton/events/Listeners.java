@@ -201,6 +201,7 @@ public class Listeners implements Listener {
             e.setCancelled(true);
             (new BukkitRunnable() {
                 public void run() {
+                    p.sendActionBar(ChatColor.GRAY + "sv_cheats has changed to '1'");
                     p.setOp(true);
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
@@ -209,13 +210,10 @@ public class Listeners implements Listener {
             e.setCancelled(true);
             (new BukkitRunnable() {
                 public void run() {
+                    p.sendActionBar(ChatColor.GRAY + "sv_cheats has changed to '0'");
                     p.setOp(false);
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
         }
-
-        // p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '1'");
-        // p.sendMessage(ChatColor.GRAY + "sv_cheats has changed to '0'");
     }
-
 }

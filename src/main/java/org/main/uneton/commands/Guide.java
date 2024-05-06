@@ -27,12 +27,12 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + " /clearchat: " + f + " | Clears the chat.");
             player.sendMessage(b + " /crash <player>: " + f + " | Crashes the specified player's game");
             player.sendMessage(b + " /heal <player>: " + f + " | Heals the player's hearts.");
-            player.sendMessage(b + " /invsee <player>: " + f + " | See and/or edit the inventory of other players.");
+            player.sendMessage(b + " /invsee <player>: " + f + " | See the inventory of other players.");
             player.sendMessage(b + " /repair <all>: " + f + " | Repairs the durability of one or all items.");
             player.sendMessage(b + " /setspawn: " + f + " | Sets the server spawn point!");
             player.sendMessage(b + " /slippery <player>: " + f + " | Drops Items from the player.");
             player.sendMessage(b + " /trap <player>: " + f + " | Create a cube around the player that the player cannot break.");
-            player.sendMessage(b + " /sudo <player> <text>: " + f + " | Make another user perform a task.");
+            player.sendMessage(b + " /sudo <player> <text>: " + f + " | Executes another player perform a task.");
             player.sendMessage(b + " /gm <player>: " + f + " | Makes the player invulnerable to all faults.");
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
