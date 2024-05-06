@@ -1,4 +1,4 @@
-package org.main.uneton.heck;
+package org.main.uneton.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class HeckCommand implements CommandExecutor {
+public class Sudo implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {

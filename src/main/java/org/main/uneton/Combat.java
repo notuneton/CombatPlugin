@@ -13,8 +13,7 @@ import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
-import org.main.uneton.heck.HeckCommand;
-import org.main.uneton.heck.HeckListener;
+import org.main.uneton.events.HeckListener;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
@@ -116,17 +115,16 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
+        getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
+        Bukkit.getPluginManager().registerEvents(new HeckListener(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
 
         getCommand("gm").setExecutor(new Gm());
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
-
-        getCommand("sudo").setExecutor(new HeckCommand());
-        Bukkit.getPluginManager().registerEvents(new HeckListener(), this);
 
         getCommand("ignore").setExecutor(new Ignore());
         getCommand("ignorelist").setExecutor(new Ignorelist());

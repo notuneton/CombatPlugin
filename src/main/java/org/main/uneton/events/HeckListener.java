@@ -1,4 +1,4 @@
-package org.main.uneton.heck;
+package org.main.uneton.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
