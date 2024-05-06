@@ -65,6 +65,11 @@ commands:
     description: Executes another player perform a task.
     usage: /sudo <player> <message>
 
+  freeze:
+    permission: combat.freeze.sv
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Cancels the player's movement.
+    usage: /freeze <player>
   gm:
     permission: combat.gm.sv
     permission-message: Permission Denied, You do not have permission to do this task.

@@ -11,6 +11,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
+import org.main.uneton.freeze.Freeze;
+import org.main.uneton.freeze.FreezeListener;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
 import org.main.uneton.events.HeckCommands;
@@ -122,6 +124,9 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
+
+        getCommand("freeze").setExecutor(new Freeze());
+        Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
 
         getCommand("gm").setExecutor(new Gm());
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
