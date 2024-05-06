@@ -24,7 +24,6 @@ public class Guide implements CommandExecutor {
 
         if (args.length == 1 && "admin".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-            player.sendMessage(b + " /clearchat: " + f + " | Clears the chat.");
             player.sendMessage(b + " /crash <player>: " + f + " | Crashes the specified player's game");
             player.sendMessage(b + " /heal <player>: " + f + " | Heals the player's hearts.");
             player.sendMessage(b + " /invsee <player>: " + f + " | See the inventory of other players.");
@@ -48,7 +47,6 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + " /ignore <player>: " + f + " | Ignore a player.");
             player.sendMessage(b + " /ignorelist <player>: " + f + " | Checks all ignored players.");
             player.sendMessage(b + " /unignore <player>: " + f + " | Un ignores a player.");
-            player.sendMessage(b + " /suicide: " + f + " | Causes you to perish.");
             player.sendMessage(b + " /disposal: " + f + " | You can put here items that you want to deleted permanently!");
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }

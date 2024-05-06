@@ -6,11 +6,6 @@ softdepend:
   - Vault
 
 commands:
-  clearchat:
-    permission: combat.clearchat.use
-    permission-message: Permission Denied, You do not have permission to do this task.
-    description: Clears the chat.
-    usage: /clearchat
   crash:
     permission: combat.crash.use
     permission-message: Permission Denied, You do not have permission to do this task.
@@ -86,9 +81,6 @@ commands:
   unignore:
     description: un-ignores a player.
     usage: /unignore <player>
-  suicide:
-    description: Causes you to perish.
-    usage: /suicide
   disposal:
     description: you can put here items that you want to deleted permanently!
     usage: /disposal

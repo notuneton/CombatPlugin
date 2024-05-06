@@ -22,8 +22,6 @@ import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
 import org.main.uneton.admin.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
-import org.main.uneton.suicide.Suicide;
-import org.main.uneton.suicide.SuicideEvent;
 import org.main.uneton.trash.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
@@ -101,12 +99,11 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         getConfig().options().copyDefaults();
-        // saveDefaultConfig();
+        saveDefaultConfig();
         saveConfig();
 
 
         // admin
-        getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
@@ -139,9 +136,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("ignorelist").setExecutor(new Ignorelist());
         Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
         getCommand("unignore").setExecutor(new Unignore());
-
-        getCommand("suicide").setExecutor(new Suicide());
-        Bukkit.getPluginManager().registerEvents(new SuicideEvent(), this);
 
         getCommand("disposal").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
