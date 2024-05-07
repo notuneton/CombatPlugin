@@ -32,6 +32,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(b + "> /slippery <player> " + f + " | Drops Items from the player.");
             player.sendMessage(b + "> /trap <player> " + f + " | Create a cube around the player that the player cannot break.");
             player.sendMessage(b + "> /sudo <player> <message> " + f + " | Executes another player perform a task.");
+            player.sendMessage(b + "> /freeze <player>" + f + " | Cancels the player's movement.");
             player.sendMessage(b + "> /gm <player> " + f + " | Makes the player invulnerable to all faults.");
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
         }
@@ -39,12 +40,11 @@ public class Guide implements CommandExecutor {
         if (args.length == 1 && "help".equals(args[0])) {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
             player.sendMessage(b + "> /ec " + f + " | Opens your personal enderchest.");
-            player.sendMessage(b + "> /guide <info> " + f + " | Show this list");
+            player.sendMessage(b + "> /guide <help> " + f + " | Show this list");
             player.sendMessage(b + "> /playtime <player> " + f + " | Time that you have played in total on the server.");
             player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
             player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
 
-            player.sendMessage(b + "> /freeze <player>" + f + " | Cancels the player's movement.");
             player.sendMessage(b + "> /ignore <player> " + f + " | Ignore a player.");
             player.sendMessage(b + "> /ignorelist <player> " + f + " | Checks all ignored players.");
             player.sendMessage(b + "> /unignore <player> " + f + " | Un ignores a player.");
