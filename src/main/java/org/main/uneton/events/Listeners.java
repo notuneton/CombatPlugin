@@ -95,7 +95,7 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onDeathByPlayer(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
+        Player victim = event.getPlayer();
         Player killer = victim.getKiller();
         if (killer != null) {
             vault.depositPlayer(killer, 300);
