@@ -32,6 +32,7 @@ public class Listeners implements Listener {
 
     public Listeners(Combat plugin) {
         this.plugin = plugin;
+
         // this.vault = plugin.getVault();
     }
 
@@ -93,7 +94,8 @@ public class Listeners implements Listener {
         }
     }
 
-    @EventHandler
+
+    /*@EventHandler
     public void onDeathByPlayer(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         Player killer = victim.getKiller();
@@ -102,6 +104,7 @@ public class Listeners implements Listener {
             killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
         }
     }
+     */
 
     @EventHandler
     public void onCustomDroponDeath(PlayerDeathEvent event) {

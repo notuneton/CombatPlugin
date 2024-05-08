@@ -29,7 +29,7 @@ public class MessageHolder implements Listener {
         } else {
             if(message.equalsIgnoreCase(lastmsg.get(player))) {
                 e.setCancelled(true);
-                getBlockedMessage(toString(), player, message);
+                getBlockedMessage(player, message);
                 return;
             }
         }
@@ -42,12 +42,12 @@ public class MessageHolder implements Listener {
 
         } else {
             e.setCancelled(true);
-            getBlockedMessage(toString(), player, message);
+            getBlockedMessage(player, message);
         }
     }
 
-    private void getBlockedMessage(String str, Player player, String message) {
-        String blocked_message = ChatColor.translateAlternateColorCodes('&', "&" + ChatColor.GRAY + ChatColor.ITALIC + player.getName() + " " + message);
-        player.sendMessage(blocked_message, str);
+    private void getBlockedMessage(Player player, String message) {
+        String blocked_message = ChatColor.translateAlternateColorCodes('&', "" + ChatColor.GRAY + ChatColor.ITALIC + player.getName() + " " + message);
+        player.sendMessage(blocked_message);
     }
 }
