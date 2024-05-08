@@ -32,7 +32,6 @@ public class Listeners implements Listener {
 
     public Listeners(Combat plugin) {
         this.plugin = plugin;
-
         // this.vault = plugin.getVault();
     }
 
