@@ -25,7 +25,7 @@ public class Playtime implements CommandExecutor {
         if (args.length > 0) {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[0]);
             if (offlinePlayer.hasPlayedBefore()) {
-                getPlaytime(sender, plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
+                getPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
                 player.sendActionBar(ChatColor.DARK_RED + "That user hasn't played at all yet.");
                 return true;
             } else {
@@ -33,19 +33,18 @@ public class Playtime implements CommandExecutor {
                 return true;
             }
         } else {
-            getPlaytime(sender, plugin.playTimes.getOrDefault(player.getUniqueId(), 0));
+            getPlaytime(sender, player.getName(), plugin.playTimes.getOrDefault(player.getUniqueId(), 0));
             return true;
         }
     }
 
-    private void getPlaytime(CommandSender player, int playTime) {
+    private void getPlaytime(CommandSender player, String user, int playTime) {
         ChatColor gray = ChatColor.GRAY;
-        ChatColor aqua = ChatColor.AQUA;
 
         if (playTime >= 60 && playTime <= 3600) {
-            player.sendMessage(String.format(gray +"%s's| Time played : %d minute%s"+ aqua, playTime / 60, playTime / 60 == 1? "" : "s"));
+            player.sendMessage(gray +String.format("%s's | played time : %d minute%s", user, playTime / 60, playTime / 60 == 1? "" : "s"));
         } else if (playTime <= 86400) {
-            player.sendMessage(String.format(gray +"%s's| Time played : %.2f hour%s"+ aqua, playTime / 3600.0, playTime / 3600.0 == 1? "" : "s"));
+            player.sendMessage(gray +String.format("%s's | played time : %.2f hour%s", user, playTime / 3600.0, playTime / 3600.0 == 1? "" : "s"));
         }
         // Additional conditions can be added here for days, weeks, etc., if needed
     }
