@@ -3,7 +3,6 @@ package org.main.uneton.admin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -36,7 +35,7 @@ public class Crash implements CommandExecutor {
                 return true;
             }
 
-            player.spawnParticle(Particle.WHITE_ASH, player.getLocation(), Integer.MAX_VALUE); // INTEGER MAX_VALUE : 2147483647
+            player.spawnParticle(Particle.EXPLOSION_LARGE, player.getLocation(), Integer.MAX_VALUE); // INTEGER MAX_VALUE : 2147483647
         }
         return true;
     }
