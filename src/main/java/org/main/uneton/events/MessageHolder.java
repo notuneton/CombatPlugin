@@ -23,14 +23,13 @@ public class MessageHolder implements Listener {
     public void onChatSpam(PlayerChatEvent e) {
         Player player = e.getPlayer();
         String message = e.getMessage();
-        String blocked_message = ChatColor.GRAY + player.getName() + ChatColor.ITALIC + " " + message;
 
         if(!lastmsg.containsKey(player)) {
             lastmsg.put(player, message);
         } else {
             if(message.equalsIgnoreCase(lastmsg.get(player))) {
                 e.setCancelled(true);
-                player.sendMessage(blocked_message);
+                getBlockedMessage(toString(), player, message);
                 return;
             }
         }
@@ -43,7 +42,12 @@ public class MessageHolder implements Listener {
 
         } else {
             e.setCancelled(true);
-            player.sendMessage(blocked_message);
+            getBlockedMessage(toString(), player, message);
         }
+    }
+
+    private void getBlockedMessage(String str, Player player, String message) {
+        String blocked_message = ChatColor.translateAlternateColorCodes('&', "&" + ChatColor.GRAY + ChatColor.ITALIC + player.getName() + " " + message);
+        player.sendMessage(blocked_message, str);
     }
 }
