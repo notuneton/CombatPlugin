@@ -13,13 +13,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Trap implements CommandExecutor {
 
-    private static final long TRAP_DURATION = 24*60*60*1000;
-    private static final Map<Player, Long> trapTimer = new HashMap<>();
     private static Combat plugin;
 
     @Override
@@ -46,7 +41,6 @@ public class Trap implements CommandExecutor {
                 return true;
             }
             spawnTrap(player);
-            trapTimer.put(player, System.currentTimeMillis()); // Record the time the trap was spawned
         }
         return true;
     }
@@ -54,7 +48,7 @@ public class Trap implements CommandExecutor {
     public static void spawnTrap(Player player) {
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(-1, -1, -1);
-        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 1000000, 3);
+        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 216000, 3);
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 4; y++) {
@@ -73,11 +67,6 @@ public class Trap implements CommandExecutor {
                 }
             }
         }
-
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            removeTrap(player);
-            trapTimer.remove(player);
-        }, TRAP_DURATION);
 
         new BukkitRunnable() {
             int count = 0;
@@ -101,25 +90,5 @@ public class Trap implements CommandExecutor {
                 }
             }
         }.runTaskTimer(plugin, 20, 20);
-    }
-
-    private static void removeTrap(Player player) {
-        Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(-1, -1, -1);
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 4; y++) {
-                for (int z = 0; z < 3; z++) {
-                    if (((y == 1 || y == 2) && z == 1 & x == 1)) {
-                        continue;
-                    }
-
-                    if ((y == 0 || y == 3) && z == 1 & x == 1) {
-                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.AIR);
-                    } else { // Walls
-                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.AIR);
-                    }
-                }
-            }
-        }
     }
 }
