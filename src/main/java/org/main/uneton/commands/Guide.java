@@ -41,7 +41,7 @@ public class Guide implements CommandExecutor {
             player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
             player.sendMessage(b + "> /ec " + f + " | Opens your personal enderchest.");
             player.sendMessage(b + "> /guide <help> " + f + " | Show this list");
-            player.sendMessage(b + "> /playtime <player> " + f + " | Time that you have played in total on the server.");
+            player.sendMessage(b + "> /playtime " + f + " | Time that you have played in total on the server.");
             player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
             player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
 

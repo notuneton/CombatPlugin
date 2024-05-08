@@ -12,7 +12,6 @@ import org.main.uneton.Combat;
 
 public class Playtime implements CommandExecutor {
 
-
     private Combat plugin;
     public Playtime(Combat plugin) {
         this.plugin = plugin;
@@ -20,38 +19,39 @@ public class Playtime implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
-            return true;
-        }
-
-        if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /playtime <player>");
-        }
-
-        if (args.length > 0) {
+        Player player = (Player) sender;
+        if (args.length == 1) {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
                 getPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
+                player.sendActionBar(ChatColor.DARK_RED + "That user hasn't played at all yet.");
+
             } else {
                 player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
             }
+
         } else {
             Player user = (Player) sender;
             getPlaytime(sender, user.getName(), plugin.playTimes.getOrDefault(user.getUniqueId(), 0));
+
         }
         return true;
     }
 
-    private void getPlaytime(CommandSender sender, String user, int playTime) {
+
+    private void getPlaytime(CommandSender player, String user, int playTime) {
         ChatColor gray = ChatColor.GRAY;
-        ChatColor white = ChatColor.WHITE;
+        ChatColor aqua = ChatColor.AQUA;
+
         if (playTime >= 60 && playTime <= 3600) {
-            sender.sendMessage(String.format(white + "%s's You have played : %d" + gray + " minutes", user, playTime / 60));
+            player.sendMessage(String.format(gray + "%s's  | Time played : %d" + aqua , playTime / 60 + " minutes"));
+
         } else if (playTime <= 86400) {
-            sender.sendMessage(String.format(white + "%s's You have played : %.2f" + gray + " hours", user, playTime / 3600.0));
-        // } else if (playTime <= 31536000) {
-        //    sender.sendMessage(String.format(white + "%s's playtime: %.2f" + gray + " days", playerName, playTime / 86400.0));
+            player.sendMessage(String.format(gray + "%s's  | Time played : %.2f" + aqua, user, playTime / 3600.0 + " hours"));
+
+
+            // } else if (playTime <= 31536000) {
+            // sender.sendMessage(String.format(white + "%s's playtime: %.2f" + gray + " days", playerName, playTime / 86400.0));
         }
     }
 }

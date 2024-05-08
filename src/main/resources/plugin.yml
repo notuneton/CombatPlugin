@@ -54,7 +54,7 @@ commands:
     usage: /guide <info>
   playtime:
     description: Time that you have played in total on the server.
-    usage: /playtime <player>
+    usage: /playtime
   rules:
     description: Rules of the Server.
     usage: /rules
