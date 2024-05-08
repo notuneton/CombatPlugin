@@ -114,7 +114,7 @@ public class Listeners implements Listener {
             Item dropped = location.getWorld().dropItemNaturally(location, blood);
             dropped.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
-                if(dropped.isValid()){
+                if (dropped.isValid()) {
                     dropped.remove();
                 }
             }, 200L);
