@@ -94,8 +94,7 @@ public class Listeners implements Listener {
         }
     }
 
-
-    /*@EventHandler
+    @EventHandler
     public void onDeathByPlayer(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         Player killer = victim.getKiller();
@@ -104,7 +103,6 @@ public class Listeners implements Listener {
             killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
         }
     }
-     */
 
     @EventHandler
     public void onCustomDroponDeath(PlayerDeathEvent event) {
@@ -113,12 +111,12 @@ public class Listeners implements Listener {
         Location location = victim.getLocation();
 
         if (killer != null && !killer.equals(victim)) {
-            ItemStack bone = new ItemStack(Material.RED_DYE, 2);
-            Item droppedItem = location.getWorld().dropItemNaturally(location, bone);
-            droppedItem.setPickupDelay(32767);
+            ItemStack blood = new ItemStack(Material.RED_DYE, 2);
+            Item dropped = location.getWorld().dropItemNaturally(location, blood);
+            dropped.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
-                if(droppedItem.isValid()){
-                    droppedItem.remove();
+                if(dropped.isValid()){
+                    dropped.remove();
                 }
             }, 200L);
         }
