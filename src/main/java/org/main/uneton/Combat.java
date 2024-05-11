@@ -37,58 +37,11 @@ public class Combat extends JavaPlugin implements Listener {
     }
     public static Combat getInstance;
 
-
+    public HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static HashMap<UUID, Double> economy = new HashMap<>();
     // private Economy vault;
     // private Config config = new Config(this, "economy");
     // private FileConfiguration fileConfig = config.getConfig();
-
-    public HashMap<UUID, Integer> playTimes = new HashMap<>();
-    public static HashMap<UUID, Integer> killsMap = new HashMap<>();
-    public static HashMap<UUID, Integer> deathsMap = new HashMap<>();
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e){
-        Player player = e.getEntity();
-        UUID playerUUID = player.getUniqueId();
-        deathsMap.put(playerUUID, deathsMap.getOrDefault(playerUUID, 0) +1);
-        saveData();
-    }
-    @EventHandler
-    public void onEntityDeath(EntityDeathEvent e){
-        if(e.getEntity().getKiller() != null){
-            if (!(e.getEntity() instanceof Player)) {
-                return;
-            }
-            Entity victim = e.getEntity();
-            Player killer = e.getEntity().getKiller();
-            UUID killerUUID = killer.getUniqueId();
-            killsMap.put(killerUUID, killsMap.getOrDefault(killerUUID, 0)+ 1);
-            saveData();
-        }
-    }
-    private void loadData(){
-        FileConfiguration config = getConfig();
-        for(String uuid : config.getKeys(false)){
-            killsMap.put(UUID.fromString(uuid), config.getInt(uuid + ".kills"));
-            deathsMap.put(UUID.fromString(uuid), config.getInt(uuid + ".deaths"));
-        }
-        saveConfig();
-    }
-    private void saveData() {
-        FileConfiguration config = getConfig();
-        config.getKeys(false).forEach(config::isSet);
-        for (UUID uuid : killsMap.keySet()) {
-            // Get the player's name from the UUID
-            OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-            String user = offlinePlayer.getName();
-            if (user != null) {
-                config.set(user + ".kills", killsMap.get(uuid));
-                config.set(user + ".deaths", deathsMap.get(uuid));
-            }
-        }
-        saveConfig();
-    }
 
     @Override
     public void onEnable() {
@@ -115,7 +68,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("ec").setExecutor(new Ec());
         getCommand("guide").setExecutor(new Guide());
         getCommand("kys").setExecutor(new Kys());
-        getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
         getCommand("sudo").setExecutor(new Sudo());
