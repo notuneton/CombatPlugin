@@ -10,6 +10,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
+import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
+
+
 public class Spawn implements CommandExecutor {
 
     private final Plugin plugin;
@@ -53,7 +56,7 @@ public class Spawn implements CommandExecutor {
     }
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
-        if (CombatLog.combatCooldown.containsKey(player)) {
+        if (combat_tagged.containsKey(player)) {
             player.sendActionBar(ChatColor.RED + "You cannot teleport to spawn during combat.");
             return false;
         }
