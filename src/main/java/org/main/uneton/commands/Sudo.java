@@ -17,6 +17,10 @@ public class Sudo implements CommandExecutor {
             return true;
         }
 
+        ChatColor gray = ChatColor.GRAY;
+        ChatColor green = ChatColor.GREEN;
+        ChatColor dark_green = ChatColor.DARK_GREEN;
+
         if(args.length == 0) {
             player.sendMessage(ChatColor.RED + "Usage: /sudo <player> <message>");
         }
@@ -38,7 +42,7 @@ public class Sudo implements CommandExecutor {
                 }
 
                 cmd.chat(message.toString());
-                player.sendMessage(ChatColor.GREEN + "Made " + user + " execute " + message);
+                player.sendMessage(gray + "[ " + dark_green + "Sudo " + " ]" + gray + "Successfully said [ " + green + message + gray + " ] as [ " + green + player.getName() + gray + " ]");
             }
         }
         return true;
