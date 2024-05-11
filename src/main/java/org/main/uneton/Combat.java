@@ -92,7 +92,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
         instance = this;
         getConfig().options().copyDefaults();
         saveDefaultConfig();
