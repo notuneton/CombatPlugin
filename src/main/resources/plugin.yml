@@ -47,11 +47,14 @@ commands:
     usage: /spawn
 
   ec:
-    description: Opens your personal enderchest.
+    description: Opens your personal Enderchest.
     usage: /ec
   guide:
     description: plugin commands.
     usage: /guide <info>
+  kys:
+    description: Kill Yourself.
+    usage: /kys
   playtime:
     description: Time that you have played in total on the server.
     usage: /playtime

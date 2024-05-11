@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class Ec implements CommandExecutor {
+public class Kys implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -16,7 +16,8 @@ public class Ec implements CommandExecutor {
             return true;
         }
 
-        player.openInventory(player.getEnderChest());
+        player.setHealth(0.0);
+        player.sendMessage(ChatColor.DARK_RED + "You took the easy way out");
         return true;
     }
 }
