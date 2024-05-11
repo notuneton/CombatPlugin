@@ -22,7 +22,7 @@ public class Sudo implements CommandExecutor {
         ChatColor dark_green = ChatColor.DARK_GREEN;
 
         if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /sudo <player> <message>");
+            player.sendMessage(ChatColor.RED + "Usage: /sudo <target> <message>");
         }
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
@@ -42,7 +42,9 @@ public class Sudo implements CommandExecutor {
                 }
 
                 cmd.chat(message.toString());
-                player.sendMessage(gray + "[ " + dark_green + "Sudo " + " ]" + gray + "Successfully said [ " + green + message + gray + " ] as [ " + green + player.getName() + gray + " ]");
+                player.sendMessage(gray + "[ " + dark_green + "Sudo " + " ]" + gray + "Successfully said [ "
+                        + green + message + gray + " ] as [ "
+                        + green + player.getName() + gray + " ]");
             }
         }
         return true;
