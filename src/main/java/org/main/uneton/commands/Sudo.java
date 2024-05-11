@@ -12,14 +12,10 @@ public class Sudo implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
-            return true;
-        }
-
-        ChatColor gray = ChatColor.GRAY;
-        ChatColor green = ChatColor.GREEN;
-        ChatColor dark_green = ChatColor.DARK_GREEN;
+        ChatColor h = ChatColor.GRAY;
+        ChatColor v = ChatColor.GREEN;
+        ChatColor vv = ChatColor.DARK_GREEN;
+        Player player = (Player) sender;
 
         if(args.length == 0) {
             player.sendMessage(ChatColor.RED + "Usage: /sudo <target> <message>");
@@ -42,9 +38,7 @@ public class Sudo implements CommandExecutor {
                 }
 
                 cmd.chat(message.toString());
-                player.sendMessage(gray + "[ " + dark_green + "Sudo " + " ]" + gray + "Successfully said [ "
-                        + green + message + gray + " ] as [ "
-                        + green + player.getName() + gray + " ]");
+                //TODO message
             }
         }
         return true;
