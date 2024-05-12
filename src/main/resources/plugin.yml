@@ -21,11 +21,6 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: See the inventory of other players.
     usage: /invsee <player>
-  repair:
-    permission: combat.repair.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
-    description: Repairs the durability of one or all items.
-    usage: /repair <all>
   setspawn:
     permission: combat.setspawn.sv
     permission-message: Permission Denied, You do not have permission to do this task.
@@ -55,6 +50,9 @@ commands:
   kys:
     description: Kill Yourself.
     usage: /kys
+  repair:
+    description: Repairs the durability of your armor.
+    usage: /repair
   rules:
     description: Rules of the Server.
     usage: /rules

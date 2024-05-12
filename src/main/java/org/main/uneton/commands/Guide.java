@@ -29,7 +29,6 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /crash <player> " + f + " | Crashes the specified player's game");
                     player.sendMessage(b + "> /heal <player> " + f + " | Heals the player's hearts.");
                     player.sendMessage(b + "> /invsee <player> " + f + " | See the inventory of other players.");
-                    player.sendMessage(b + "> /repair <all> " + f + " | Repairs the durability of one or all items.");
                     player.sendMessage(b + "> /setspawn " + f + " | Sets the server spawn point!");
                     player.sendMessage(b + "> /slippery <player> " + f + " | Drops Items from the player.");
                     player.sendMessage(b + "> /trap <player> " + f + " | Create a cube around the player that the player cannot break.");
@@ -46,6 +45,7 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");
                     player.sendMessage(b + "> /guide <help> " + f + " | Show this list");
                     player.sendMessage(b + "> /kys " + f + " | Kill Yourself.");
+                    player.sendMessage(b + "> /repair " + f + " | Repairs the durability of your armor.");
                     player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
                     player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
 

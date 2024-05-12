@@ -1,4 +1,4 @@
-package org.main.uneton.admin;
+package org.main.uneton.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,11 +14,6 @@ public class Repair implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
-            return true;
-        }
-
-        if(!player.hasPermission("combat.repair.sv")) {
-            player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }
 
