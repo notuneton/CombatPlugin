@@ -51,13 +51,15 @@ public class Listeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        e.setQuitMessage(ChatColor.DARK_GRAY + " [" + ChatColor.RED.toString() + ChatColor.BOLD + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        e.setQuitMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_RED + " - " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
+
+    // &8[ &2+ &8] &7%player%
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.GREEN.toString() + ChatColor.BOLD + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + " + " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler

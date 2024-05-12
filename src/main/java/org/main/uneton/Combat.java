@@ -1,7 +1,6 @@
 package org.main.uneton;
 
 import org.bukkit.*;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.admin.*;
@@ -69,7 +68,7 @@ public class Combat extends JavaPlugin implements Listener {
         // listeners
         Bukkit.getPluginManager().registerEvents(new HeckCommands(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
+        Bukkit.getPluginManager().registerEvents(new Logged(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
 
         getCommand("freeze").setExecutor(new Freeze());

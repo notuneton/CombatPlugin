@@ -1,6 +1,5 @@
 package org.main.uneton.events;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -8,17 +7,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
 
 import java.util.HashMap;
 
-public class MessageHolder implements Listener {
+public class Logged implements Listener {
 
     private final HashMap<Player, String> lastmsg = new HashMap<>(); // blocker repeat messages
     private final HashMap<Player, Boolean> antispam = new HashMap<>();
 
+    @Deprecated
     @EventHandler
     public void onChatSpam(PlayerChatEvent e) {
         Player player = e.getPlayer();
