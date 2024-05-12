@@ -61,7 +61,7 @@ commands:
     usage: /sign
   sudo:
     description: Executes another player perform a task.
-    usage: /sudo <player> <message>
+    usage: /sudo <target> <message>
 
   freeze:
     permission: combat.freeze.sv
