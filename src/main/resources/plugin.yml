@@ -83,5 +83,5 @@ commands:
     description: un-ignores a player.
     usage: /unignore <player>
   trashcan:
-    description: Items that you want to deleted permanently!
+    description: Put your stuff in the menu and close it!
     usage: /trashcan

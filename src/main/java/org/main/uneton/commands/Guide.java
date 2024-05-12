@@ -52,7 +52,7 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /ignore <player> " + f + " | Ignore a player.");
                     player.sendMessage(b + "> /ignorelist <player> " + f + " | Checks all ignored players.");
                     player.sendMessage(b + "> /unignore <player> " + f + " | Un ignores a player.");
-                    player.sendMessage(b + "> /trashcan " + f + " | Items that you want to deleted permanently!");
+                    player.sendMessage(b + "> /trashcan " + f + " | Put your stuff in the menu and close it!");
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     break;
                 }
