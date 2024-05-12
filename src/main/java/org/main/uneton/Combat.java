@@ -31,8 +31,6 @@ public class Combat extends JavaPlugin implements Listener {
         return instance;
     }
     public static Combat getInstance;
-
-    public HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static HashMap<UUID, Double> economy = new HashMap<>();
     // private Economy vault;
     // private Config config = new Config(this, "economy");
@@ -86,19 +84,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
-
-
-        //TODO Schedule a repeating task that runs every second
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (Player user : Bukkit.getOnlinePlayers()) {
-                UUID uuid = user.getUniqueId();
-                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
-                playTimes.put(uuid, currentPlayTime + 1);
-            }
-        }, 0L, 20L); // 20 ticks = 1 second
-
-
-
 
 
 
