@@ -42,7 +42,7 @@ public class Spawn implements CommandExecutor {
             @Override
             public void run() {
                 if (secondsPassed >= countdownSeconds) {
-                    this.cancel(); // Stop the countdown task
+                    this.cancel();
                     if (!teleportPlayer(player, initialLocation)) {
                         player.sendMessage(ChatColor.RED + "Teleportation cancelled.");
                     }

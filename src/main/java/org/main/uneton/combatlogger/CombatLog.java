@@ -123,6 +123,7 @@ public class CombatLog implements Listener {
             isInCombat.put(player, targets);
         }
 
+
         /*
         combat.forEach((player, targets) -> {
             targets.remove(target);
