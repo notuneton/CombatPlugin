@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 
-
 public class Spawn implements CommandExecutor {
 
     private final Plugin plugin;
@@ -49,6 +48,7 @@ public class Spawn implements CommandExecutor {
                     }
                 } else {
                     player.sendActionBar(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
+                    player.sendMessage(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
                     secondsPassed++;
                 }
             }
@@ -57,7 +57,7 @@ public class Spawn implements CommandExecutor {
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
         if (combat_tagged.containsKey(player)) {
-            player.sendActionBar(ChatColor.RED + "You cannot teleport to spawn during combat.");
+            player.sendMessage(ChatColor.RED + "You cannot teleport to spawn during combat.");
             return false;
         }
 
@@ -68,7 +68,7 @@ public class Spawn implements CommandExecutor {
             Location spawnLocation = plugin.getConfig().getLocation("spawn");
             if (spawnLocation != null) {
                 player.teleport(spawnLocation);
-                player.sendMessage(ChatColor.GRAY + "You have teleported to the spawn.");
+                player.sendMessage(ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn.");
                 return true;
             } else {
                 player.sendMessage(ChatColor.RED + "Teleport failed : Spawn location not found.");
