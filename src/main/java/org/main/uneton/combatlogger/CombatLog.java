@@ -16,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CombatLog implements Listener {
 
@@ -29,7 +28,6 @@ public class CombatLog implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
         combatTask();
     }
-
 
     private void combatTask() {
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
