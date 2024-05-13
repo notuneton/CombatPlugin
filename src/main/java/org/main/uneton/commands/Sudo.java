@@ -12,9 +12,6 @@ public class Sudo implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        ChatColor h = ChatColor.GRAY;
-        ChatColor v = ChatColor.GREEN;
-        ChatColor vv = ChatColor.DARK_GREEN;
         Player player = (Player) sender;
 
         if(args.length == 0) {
@@ -38,7 +35,7 @@ public class Sudo implements CommandExecutor {
                 }
 
                 cmd.chat(message.toString());
-                //TODO message
+                player.sendMessage(ChatColor.GREEN + "Made " + user + " execute " + message);
             }
         }
         return true;

@@ -20,8 +20,8 @@ import java.util.*;
 public class CombatLog implements Listener {
 
     private final JavaPlugin plugin;
-    private static final Map<Player, List<Player>> isInCombat = new HashMap<>(); // function
-    public static final Map<Player, Long> combat_tagged = new HashMap<>(); // animation
+    private static final Map<Player, List<Player>> isInCombat = new HashMap<>();
+    public static final Map<Player, Long> combat_tagged = new HashMap<>();
 
     public CombatLog(JavaPlugin plugin) {
         this.plugin = plugin;

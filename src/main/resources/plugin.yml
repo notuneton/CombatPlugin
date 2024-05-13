@@ -40,6 +40,8 @@ commands:
   spawn:
     description: Teleports you to the spawn.
     usage: /spawn
+  warp:
+    usage: /warp <set/tp> <text>
 
   ec:
     description: Opens your personal Enderchest.
