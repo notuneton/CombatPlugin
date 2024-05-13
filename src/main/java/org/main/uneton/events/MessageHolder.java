@@ -5,13 +5,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.main.uneton.Combat;
 
 import java.util.HashMap;
 
-public class Logged implements Listener {
+public class MessageHolder implements Listener {
 
     private final HashMap<Player, String> lastmsg = new HashMap<>(); // blocker repeat messages
     private final HashMap<Player, Boolean> antispam = new HashMap<>();
