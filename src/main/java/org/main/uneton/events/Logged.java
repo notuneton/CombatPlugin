@@ -48,4 +48,6 @@ public class Logged implements Listener {
         String blocked_message = ChatColor.translateAlternateColorCodes('&', "" + ChatColor.GRAY + ChatColor.ITALIC + player.getName() + " " + message);
         player.sendMessage(blocked_message);
     }
+
+    // &8[] &7%player% &8: &7%message%
 }
