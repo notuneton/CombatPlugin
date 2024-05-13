@@ -55,6 +55,22 @@ public class CombatLog implements Listener {
     }
 
     @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player quitter = event.getPlayer();
+        if (combat_tagged.containsKey(quitter)) {
+            quitter.setHealth(0);
+            endCombat(quitter);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        player.sendActionBar(ChatColor.GREEN + "You are no longer in combat.");
+        endCombat(player);
+    }
+
+    @EventHandler
     public void onElytra(PlayerToggleFlightEvent event) {
         Player player = event.getPlayer();
         if (combat_tagged.containsKey(player)) {
@@ -74,22 +90,6 @@ public class CombatLog implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player quitter = event.getPlayer();
-        if (combat_tagged.containsKey(quitter)) {
-            quitter.setHealth(0);
-            endCombat(quitter);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        endCombat(player);
-    }
-
 
     private void startCombat(Player player, Player player2) {
         combat_tagged.put(player, System.currentTimeMillis() + 21000);
