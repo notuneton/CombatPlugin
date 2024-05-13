@@ -30,30 +30,8 @@ public class CombatLog implements Listener {
         combatTask();
     }
 
+
     private void combatTask() {
-        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-            List<Player> toRemove = combat_tagged.entrySet().stream()
-                    .filter(entry -> entry.getValue() < System.currentTimeMillis())
-                    .map(Map.Entry::getKey)
-                    .toList();
-
-            toRemove.forEach(player -> {
-                player.sendActionBar(ChatColor.GREEN + "You are no longer in combat.");
-                player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
-                endCombat(player);
-            });
-
-            combat_tagged.forEach((player, endTime) -> {
-                if (endTime > System.currentTimeMillis()) {
-                    int timeLeft = (int) ((endTime - System.currentTimeMillis()) / 1000);
-                    player.sendActionBar(ChatColor.WHITE + "Combat: " + ChatColor.DARK_RED + timeLeft);
-                }
-            });
-        }, 0, 20L);
-    }
-
-
-    private void TestCombat() {
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             List<Player> toRemove = new ArrayList<>();
             combat_tagged.keySet().forEach(player -> {
