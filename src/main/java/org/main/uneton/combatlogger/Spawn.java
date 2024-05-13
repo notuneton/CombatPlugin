@@ -30,7 +30,7 @@ public class Spawn implements CommandExecutor {
         Location initialLocation = player.getLocation();
         BukkitRunnable countdownTask = getBukkitRunnable(player, initialLocation);
 
-        countdownTask.runTaskTimer(plugin, 0L, 20L); // Start immediately, repeat every 20 ticks (1 second)
+        countdownTask.runTaskTimer(plugin, 0L, 20L);
         return true;
     }
 
