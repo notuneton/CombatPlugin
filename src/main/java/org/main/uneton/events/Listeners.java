@@ -55,8 +55,6 @@ public class Listeners implements Listener {
         e.setQuitMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_RED + " - " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
-    // &8[ &2+ &8] &7%player%
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
