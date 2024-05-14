@@ -53,7 +53,7 @@ public class CombatLog implements Listener {
             startCombat(attacker, victim);
         }
     }
-
+    
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player quitter = event.getPlayer();

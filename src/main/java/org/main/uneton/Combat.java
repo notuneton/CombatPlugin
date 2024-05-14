@@ -32,6 +32,8 @@ public class Combat extends JavaPlugin implements Listener {
 
     public static Combat getInstance;
     public static HashMap<UUID, Double> economy = new HashMap<>();
+
+
     // private Economy vault;
     // private Config config = new Config(this, "economy");
     // private FileConfiguration fileConfig = config.getConfig();
