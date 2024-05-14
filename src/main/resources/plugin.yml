@@ -49,6 +49,9 @@ commands:
   guide:
     description: plugin commands.
     usage: /guide <info>
+  jumissa:
+    description: Teleports the player to spawn location.
+    usage: /jumissa
   kys:
     description: Kill Yourself.
     usage: /kys
