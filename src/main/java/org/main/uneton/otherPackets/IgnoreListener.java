@@ -1,11 +1,11 @@
-package org.main.uneton.ignore;
+package org.main.uneton.otherPackets;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import static org.main.uneton.ignore.Ignore.ignoredPlayers;
+import static org.main.uneton.otherPackets.Ignore.ignoredPlayers;
 
 public class IgnoreListener implements Listener {
 

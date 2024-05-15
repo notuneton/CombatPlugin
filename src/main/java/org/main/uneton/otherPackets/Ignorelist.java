@@ -1,4 +1,4 @@
-package org.main.uneton.ignore;
+package org.main.uneton.otherPackets;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static org.main.uneton.ignore.Ignore.ignoredPlayers;
+import static org.main.uneton.otherPackets.Ignore.ignoredPlayers;
 
 public class Ignorelist implements CommandExecutor {
 
