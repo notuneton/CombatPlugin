@@ -4,18 +4,12 @@ import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import org.main.uneton.Combat;
 
 public class Trap implements CommandExecutor {
-
-    private static Combat plugin;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -67,28 +61,5 @@ public class Trap implements CommandExecutor {
                 }
             }
         }
-
-        new BukkitRunnable() {
-            int count = 0;
-
-            @Override
-            public void run() {
-                if (count < 5) { // spawn 5 cash pickup(s)
-                    Location randomLoc = bottomCorner.clone().add(
-                            Math.random() * 3,
-                            Math.random() * 4,
-                            Math.random() * 3
-                    );
-                    Item cash = player.getWorld().dropItem(randomLoc, new ItemStack(Material.EMERALD));
-                    cash.setCustomName(ChatColor.GREEN + "$1000");
-                    cash.setCustomNameVisible(true);
-                    cash.setVelocity(randomLoc.getDirection().multiply(0.1));
-                    cash.setPickupDelay(20);
-                    count++;
-                } else {
-                    cancel();
-                }
-            }
-        }.runTaskTimer(plugin, 20, 20);
     }
 }
