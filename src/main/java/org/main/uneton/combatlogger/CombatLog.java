@@ -66,7 +66,6 @@ public class CombatLog implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        player.sendActionBar(ChatColor.GREEN + "You are no longer in combat.");
         endCombat(player);
     }
 
