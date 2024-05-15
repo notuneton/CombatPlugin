@@ -1,4 +1,4 @@
-package org.main.uneton.otherPackets;
+package org.main.uneton.packets;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
