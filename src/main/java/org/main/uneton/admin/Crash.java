@@ -24,7 +24,7 @@ public class Crash implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /crash <player>");
+            player.sendMessage(ChatColor.RED + "> /crash <player>");
             return true;
         }
 

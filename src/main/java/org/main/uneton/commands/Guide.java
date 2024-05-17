@@ -19,7 +19,7 @@ public class Guide implements CommandExecutor {
         ChatColor b = ChatColor.AQUA;
         ChatColor f = ChatColor.WHITE;
         if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /guide <help>");
+            player.sendMessage(ChatColor.RED + "> /guide <help>");
         }
 
         switch (args.length) {

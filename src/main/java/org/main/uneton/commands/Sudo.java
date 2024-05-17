@@ -14,7 +14,7 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /sudo <target> <message>");
+            player.sendMessage(ChatColor.RED + "> /sudo <target> <command>");
             return true;
         }
 
@@ -35,7 +35,7 @@ public class Sudo implements CommandExecutor {
                 }
 
                 cmd.chat(message.toString());
-                player.sendMessage(ChatColor.GREEN + "Made " + user + " execute " + message);
+                player.sendMessage(ChatColor.GREEN + "Executed " + user + " send " + message);
             }
         }
         return true;

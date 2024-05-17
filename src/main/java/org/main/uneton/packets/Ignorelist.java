@@ -21,7 +21,7 @@ public class Ignorelist implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /ignorelist <player>");
+            player.sendMessage(ChatColor.RED + "> /ignorelist <player>");
             return true;
         }
 

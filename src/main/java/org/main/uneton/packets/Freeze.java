@@ -28,7 +28,7 @@ public class Freeze implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /freeze <player>");
+            player.sendMessage(ChatColor.RED + "> /freeze <player>");
             return true;
         }
 

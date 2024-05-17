@@ -20,7 +20,7 @@ public class Unignore implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /Unignore <player>");
+            player.sendMessage(ChatColor.RED + "> /Unignore <player>");
             return true;
         }
 

@@ -40,8 +40,6 @@ commands:
   spawn:
     description: Teleports you to the spawn.
     usage: /spawn
-  warp:
-    usage: /warp <set/tp> <text>
 
   ec:
     description: Opens your personal Enderchest.
@@ -66,7 +64,7 @@ commands:
     usage: /sign
   sudo:
     description: Executes another player perform a task.
-    usage: /sudo <target> <message>
+    usage: /sudo <target> <command>
 
   freeze:
     permission: combat.freeze.sv

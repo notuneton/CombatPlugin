@@ -24,7 +24,7 @@ public class Invsee implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /invsee <player>");
+            player.sendMessage(ChatColor.RED + "> /invsee <player>");
             return true;
         }
 

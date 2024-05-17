@@ -31,7 +31,7 @@ public class Gm implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /gm <player>");
+            player.sendMessage(ChatColor.RED + "> /gm <player>");
             return true;
         }
 
