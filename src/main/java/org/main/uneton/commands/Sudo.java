@@ -35,7 +35,7 @@ public class Sudo implements CommandExecutor {
                 }
 
                 cmd.chat(message.toString());
-                player.sendMessage(ChatColor.GREEN + "Executed " + user + " send " + message);
+                player.sendMessage(ChatColor.GREEN + "executed " + user + " send " + message);
             }
         }
         return true;

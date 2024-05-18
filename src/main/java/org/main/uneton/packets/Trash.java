@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-
 import java.util.ArrayList;
 
 public class Trash implements CommandExecutor {
@@ -21,8 +20,9 @@ public class Trash implements CommandExecutor {
     private String guimenu = ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + "Trashcan menu :-)";
 
     Inventory trashcan;
+
     public void createAndAddFiller(){
-        for(int slot : fillerStats) {
+        for (int slot : fillerStats) {
 
             ItemStack pane = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
             setItemStackName(pane, " ");
@@ -33,7 +33,7 @@ public class Trash implements CommandExecutor {
             ArrayList<String> lore = new ArrayList<>();
             lore.add("");
             lore.add(ChatColor.YELLOW + "Click to close!");
-            trashcan.setItem(40, barrier); // Set the barrier in the 40th slot
+            trashcan.setItem(40, barrier);
         }
     }
 
