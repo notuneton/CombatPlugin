@@ -78,13 +78,13 @@ public class CombatLog implements Listener {
     }
 
     @EventHandler
-    public void onShield(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
+    public void onShield(PlayerInteractEvent e) {
+        Player player = e.getPlayer();
         if (combat_tagged.containsKey(player)) {
-            if (event.getHand() == EquipmentSlot.OFF_HAND) {
+            if (e.getHand() == EquipmentSlot.OFF_HAND) {
                 ItemStack item = player.getInventory().getItemInOffHand();
                 if (item.getType() == Material.SHIELD) {
-                    event.setCancelled(true);
+                    e.setCancelled(true);
                 }
             }
         }
@@ -121,15 +121,5 @@ public class CombatLog implements Listener {
             }
             isInCombat.put(player, targets);
         }
-
-
-        /*
-        combat.forEach((player, targets) -> {
-            targets.remove(target);
-            if (targets.isEmpty()) {
-                combat_tagged.remove(player);
-            }
-            combat.put(target, targets);
-        });*/
     }
 }
