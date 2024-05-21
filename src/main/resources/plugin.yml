@@ -46,7 +46,7 @@ commands:
     usage: /ec
   guide:
     description: plugin commands.
-    usage: /guide <info>
+    usage: /guide <text>
   kys:
     description: Kill Yourself.
     usage: /kys

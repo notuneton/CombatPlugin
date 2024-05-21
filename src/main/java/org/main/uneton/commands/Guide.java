@@ -43,7 +43,7 @@ public class Guide implements CommandExecutor {
                 if ("help".equals(args[0])) {
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");
-                    player.sendMessage(b + "> /guide <help> " + f + " | Show this list");
+                    player.sendMessage(b + "> /guide <text> " + f + " | Show this list");
                     player.sendMessage(b + "> /kys " + f + " | Kill Yourself.");
                     player.sendMessage(b + "> /repair " + f + " | Repairs the durability of your armor.");
                     player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");

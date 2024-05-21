@@ -43,9 +43,7 @@ public class Listeners implements Listener {
         int ping = player.getPing();
         if (ping >= 300) {
             String user = player.getName();
-            String broadcastMessage = ChatColor.GOLD + user + " was kicked out from the server for too high ping.";
             String kickMessage = ChatColor.GOLD + "You have been kicked out from the server for too high ping!";
-            Bukkit.getServer().broadcastMessage(broadcastMessage);
             player.kickPlayer(kickMessage);
         }
     }
