@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Gamemodes implements CommandExecutor {
 
-    private String inv = ChatColor.DARK_GRAY.toString() + ChatColor.BOLD +"Gamemodes";
+    private String inv = ChatColor.DARK_GRAY + "Gamemodes";
     Inventory gamemodeSwitcher;
 
     @Override

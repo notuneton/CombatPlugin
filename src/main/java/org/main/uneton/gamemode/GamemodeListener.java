@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class GamemodeListener implements Listener {
 
-    private String inv = ChatColor.DARK_GRAY.toString() + ChatColor.BOLD +"Gamemodes";
+    private String inv = ChatColor.DARK_GRAY + "Gamemodes";
 
     @EventHandler
     public void onInvClick(InventoryClickEvent e) {
