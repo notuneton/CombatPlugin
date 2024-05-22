@@ -38,7 +38,7 @@ commands:
     usage: /trap <player>
 
   spawn:
-    description: Teleports you to the spawn.
+    description: Teleport to the spawnpoint.
     usage: /spawn
 
   ec:

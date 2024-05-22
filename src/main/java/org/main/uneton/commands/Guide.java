@@ -42,6 +42,7 @@ public class Guide implements CommandExecutor {
             case 2:
                 if ("help".equals(args[0])) {
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
+                    player.sendMessage(b + "> /spawn " + f + " | Teleport to the spawnpoint.");
                     player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");
                     player.sendMessage(b + "> /guide <text> " + f + " | Show this list");
                     player.sendMessage(b + "> /kys " + f + " | Kill Yourself.");
