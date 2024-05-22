@@ -9,7 +9,6 @@ import org.main.uneton.frez.Freeze;
 import org.main.uneton.frez.FreezeListener;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
-import org.main.uneton.events.HeckCommands;
 import org.main.uneton.ignore.Ignore;
 import org.main.uneton.ignore.IgnoreListener;
 import org.main.uneton.ignore.Ignorelist;
@@ -68,7 +67,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
-        Bukkit.getPluginManager().registerEvents(new HeckCommands(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
 
