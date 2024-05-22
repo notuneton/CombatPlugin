@@ -1,4 +1,4 @@
-package org.main.uneton.packets;
+package org.main.uneton.frez;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import static org.main.uneton.packets.Freeze.freeze_list;
+import static org.main.uneton.frez.Freeze.freeze_list;
 
 public class FreezeListener implements Listener {
 

@@ -1,4 +1,4 @@
-package org.main.uneton.packets;
+package org.main.uneton.ignore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,9 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static org.main.uneton.packets.Ignore.ignoredPlayers;
+import static org.main.uneton.ignore.Ignore.ignoredPlayers;
 
-public class Unignore implements CommandExecutor {
+public class Ignorelist implements CommandExecutor {
+
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -20,7 +21,7 @@ public class Unignore implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /Unignore <player>");
+            player.sendMessage(ChatColor.RED + "> /ignorelist <player>");
             return true;
         }
 
@@ -30,10 +31,13 @@ public class Unignore implements CommandExecutor {
             return true;
         }
 
-        if (ignoredPlayers.remove(target)) {
-            target.sendMessage(ChatColor.YELLOW + "Successfully un-ignored player");
+        if(ignoredPlayers.isEmpty()){
+            player.sendMessage(ChatColor.YELLOW + "You don't have any ignored player");
         } else {
-            target.sendMessage(ChatColor.RED + "Player is not ignored");
+            player.sendMessage(ChatColor.YELLOW + "You are ignoring: ");
+            for (String user : ignoredPlayers){
+                player.sendMessage(ChatColor.YELLOW + "- " + user);
+            }
         }
 
         return true;

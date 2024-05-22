@@ -1,4 +1,4 @@
-package org.main.uneton.packets;
+package org.main.uneton.trash;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
