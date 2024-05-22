@@ -16,7 +16,7 @@ public class Rules implements CommandExecutor {
             return true;
         }
 
-        String message = ChatColor.GOLD + "\\nThere are no rules. Are you some kind of retard?\\n";
+        String message = ChatColor.GOLD + "\n\nThere are no rules. Are you some kind of retard?\n\n";
         player.kickPlayer(message);
         return true;
     }
