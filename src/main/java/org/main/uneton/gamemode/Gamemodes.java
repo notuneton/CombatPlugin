@@ -26,18 +26,23 @@ public class Gamemodes implements CommandExecutor {
             return true;
         }
 
+        if(!player.hasPermission("combat.gamemode.sv")) {
+            player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
+            return true;
+        }
+
         // create virtual chest inventory with size 3*9
         gamemodeSwitcher = Bukkit.createInventory(player, 9*3, inv);
 
         // format slotting
         ItemStack creative = new ItemStack(Material.STONE);
-        setItemFormatSlot(creative, ChatColor.GOLD + "Gamemode Creative.");
+        setItemFormatSlot(creative, ChatColor.GOLD + "Creative.");
 
         ItemStack survival = new ItemStack(Material.GRASS_BLOCK);
-        setItemFormatSlot(survival, ChatColor.GOLD + "Gamemode Survival.");
+        setItemFormatSlot(survival, ChatColor.GOLD + "Survival.");
 
         ItemStack spectator = new ItemStack(Material.STRING);
-        setItemFormatSlot(spectator, ChatColor.GOLD + "Gamemode Spectator.");
+        setItemFormatSlot(spectator, ChatColor.GOLD + "Spectator.");
 
         // set items to item index
         gamemodeSwitcher.setItem(11, creative);
@@ -55,8 +60,7 @@ public class Gamemodes implements CommandExecutor {
         // lore
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
-        lore.add(ChatColor.YELLOW + "Click to switch your own " + ChatColor.GREEN + "Gamemode.");
-        lore.add(" ");
+        lore.add(ChatColor.YELLOW + "Click to switch your " + ChatColor.GREEN + "Gamemode.");
         item.setLore(lore);
     }
 }
