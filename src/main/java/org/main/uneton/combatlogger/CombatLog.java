@@ -2,17 +2,13 @@ package org.main.uneton.combatlogger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -36,11 +32,10 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    player.sendActionBar(ChatColor.GREEN + "You are no longer in combat.");
                     player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
                 }
                 if (combat_tagged.containsKey(player)) {
-                    player.sendActionBar(ChatColor.WHITE + "Combat: " + ChatColor.DARK_RED + (endTime - System.currentTimeMillis()) / 1000);
+                    player.sendActionBar(ChatColor.GRAY + "Combat: " + ChatColor.DARK_AQUA + (endTime - System.currentTimeMillis()) / 1000);
                 }
             });
             toRemove.forEach(this::endCombat);
@@ -77,25 +72,11 @@ public class CombatLog implements Listener {
         }
     }
 
-    @EventHandler
-    public void onShield(PlayerInteractEvent e) {
-        Player player = e.getPlayer();
-        if (combat_tagged.containsKey(player)) {
-            if (e.getHand() == EquipmentSlot.OFF_HAND) {
-                ItemStack item = player.getInventory().getItemInOffHand();
-                if (item.getType() == Material.SHIELD) {
-                    e.setCancelled(true);
-                    player.sendMessage(ChatColor.RED + "The weapon is not allowed in combat!");
-                }
-            }
-        }
-    }
-
-    private void startCombat(Player player, Player player2) {
+    private void startCombat(Player player, Player target) {
         combat_tagged.put(player, System.currentTimeMillis() + 21000);
-        combat_tagged.put(player2, System.currentTimeMillis() + 21000);
-        addToCombatList(player, player2);
-        addToCombatList(player2, player);
+        combat_tagged.put(target, System.currentTimeMillis() + 21000);
+        addToCombatList(player, target);
+        addToCombatList(target, player);
     }
 
     private void endCombat(Player player) {
