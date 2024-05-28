@@ -56,17 +56,17 @@ public class CombatLog implements Listener {
     
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        Player quitter = event.getPlayer();
-        if (combat_tagged.containsKey(quitter)) {
-            quitter.setHealth(0);
-            endCombat(quitter);
+        Player exited = event.getPlayer();
+        if (combat_tagged.containsKey(exited)) {
+            exited.setHealth(0);
+            endCombat(exited);
         }
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        endCombat(player);
+        Player deceased = event.getEntity();
+        endCombat(deceased);
     }
 
     @EventHandler
@@ -85,6 +85,7 @@ public class CombatLog implements Listener {
                 ItemStack item = player.getInventory().getItemInOffHand();
                 if (item.getType() == Material.SHIELD) {
                     e.setCancelled(true);
+                    player.sendMessage(ChatColor.RED + "The weapon is not allowed in combat!");
                 }
             }
         }
