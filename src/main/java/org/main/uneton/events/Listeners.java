@@ -114,16 +114,13 @@ public class Listeners implements Listener {
     @EventHandler
     public void onLootBox(BlockBreakEvent e){
         Player player = e.getPlayer();
-        Location loc = player.getLocation();
         Block block = e.getBlock();
+        Location loc = e.getBlock().getLocation();
+
         if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
 
-            if (Math.random() < 0.40) {
-                int index = chance.nextInt(blocks.length);
-                ItemStack droppedItem = blocks[index];
-                block.getWorld().dropItemNaturally(loc, droppedItem);
-            } else if (Math.random() < 0.50) {
+            if (Math.random() < 0.50) {
                 int index = chance.nextInt(blocks.length);
                 ItemStack droppedItem = blocks[index];
                 block.getWorld().dropItemNaturally(loc, droppedItem);
