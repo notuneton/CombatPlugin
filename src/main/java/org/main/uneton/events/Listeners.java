@@ -120,7 +120,7 @@ public class Listeners implements Listener {
         if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
 
-            if (Math.random() < 0.50) {
+            if (Math.random() < 0.70) {
                 int index = chance.nextInt(blocks.length);
                 ItemStack droppedItem = blocks[index];
                 block.getWorld().dropItemNaturally(loc, droppedItem);
