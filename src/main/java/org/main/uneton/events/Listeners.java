@@ -87,15 +87,6 @@ public class Listeners implements Listener {
         }
     }
 
-    private final ItemStack[] blocks = new ItemStack[]{
-            new ItemStack(Material.EMERALD),
-            new ItemStack(Material.AMETHYST_SHARD),
-            new ItemStack(Material.IRON_NUGGET),
-            new ItemStack(Material.GOLD_NUGGET),
-            new ItemStack(Material.COPPER_INGOT),
-            new ItemStack(Material.STRING)
-    };
-
     @EventHandler
     public void onLootBox(BlockBreakEvent e){
         Player player = e.getPlayer();
@@ -104,12 +95,13 @@ public class Listeners implements Listener {
 
         if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
-            if (Math.random() < 0.35) {
-                // Handle rare case
-            } else if (Math.random() < 0.65) {
+            if (Math.random() < 0.3) {
                 int index = chance.nextInt(blocks.length);
-                ItemStack droppedItem = blocks[index];
-                block.getWorld().dropItemNaturally(loc, droppedItem);
+                ItemStack dropped_item = blocks[index];
+                block.getWorld().dropItemNaturally(loc, dropped_item);
+
+            } else if (Math.random() < 0.8) {
+
             }
         }
     }
@@ -121,6 +113,18 @@ public class Listeners implements Listener {
         if (killer != null) {
             // vault.depositPlayer(killer, 300);
             killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        World world = player.getWorld();
+        int loc = 5;
+        if (world.getEnvironment() == World.Environment.THE_END) {
+            if (player.getLocation().getY() <= loc) {
+                player.setHealth(0);
+            }
         }
     }
 
@@ -142,18 +146,14 @@ public class Listeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        int loc = 5;
-        if (world.getEnvironment() == World.Environment.THE_END) {
-            if (player.getLocation().getY() <= loc) {
-                player.setHealth(0);
-            }
-        }
-    }
-
+    private final ItemStack[] blocks = new ItemStack[]{
+            new ItemStack(Material.EMERALD),
+            new ItemStack(Material.AMETHYST_SHARD),
+            new ItemStack(Material.IRON_NUGGET),
+            new ItemStack(Material.GOLD_NUGGET),
+            new ItemStack(Material.COPPER_INGOT),
+            new ItemStack(Material.STRING)
+    };
 
     private void dropCocaine(Player player) {
         ItemStack cocaine = new ItemStack(Material.SUGAR);
