@@ -116,7 +116,6 @@ public class Listeners implements Listener {
     public ItemStack getCustomName(ItemStack item) {
         return itemNames.get(item);
     }
-
     @EventHandler
     public void onLootBox(BlockBreakEvent e){
         Player player = e.getPlayer();
@@ -125,8 +124,9 @@ public class Listeners implements Listener {
 
         if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
-
-            if (Math.random() < 0.70) {
+            if (Math.random() < 0.35) {
+                // so the duplicate glitches
+            } else if (Math.random() < 0.65) {
                 int index = chance.nextInt(blocks.length);
                 ItemStack droppedItem = blocks[index];
                 block.getWorld().dropItemNaturally(loc, droppedItem);
