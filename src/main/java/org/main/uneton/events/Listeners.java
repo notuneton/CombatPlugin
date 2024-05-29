@@ -93,24 +93,62 @@ public class Listeners implements Listener {
         }
     }
 
+    private final ItemStack[] blocks = new ItemStack[]{
+            new ItemStack(Material.EMERALD),
+            new ItemStack(Material.DIAMOND),
+            new ItemStack(Material.AMETHYST_SHARD),
+            new ItemStack(Material.IRON_NUGGET),
+            new ItemStack(Material.GOLD_NUGGET)
+    };
+
+    /*public static boolean chanceEquals(Random random) {
+        int randomNumber = random.nextInt(100) + 1;
+        return randomNumber <= 40;
+        -
+        Random random = new Random();
+        boolean eventHappened = checkChance(random);
+        System.out.println("Event happened: " + eventHappened);
+    }
+     */
+
+    @EventHandler
+    public void onLootBox(BlockBreakEvent e){
+        Player player = e.getPlayer();
+        Location loc = player.getLocation();
+        Block block = e.getBlock();
+        if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
+            Random chance = new Random();
+
+            if (Math.random() < 0.40) {
+                int index = chance.nextInt(blocks.length);
+                ItemStack droppedItem = blocks[index];
+                block.getWorld().dropItemNaturally(loc, droppedItem);
+            } else if (Math.random() < 0.50) {
+                int index = chance.nextInt(blocks.length);
+                ItemStack droppedItem = blocks[index];
+                block.getWorld().dropItemNaturally(loc, droppedItem);
+            }
+        }
+    }
+
     @EventHandler
     public void onDeathByPlayer(PlayerDeathEvent event) {
         Player victim = event.getPlayer();
         Player killer = victim.getKiller();
         if (killer != null) {
-            vault.depositPlayer(killer, 300);
+            // vault.depositPlayer(killer, 300);
             killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
         }
     }
 
     @EventHandler
-    public void onCustomDroponDeath(PlayerDeathEvent event) {
+    public void onDropOnDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
         Location location = victim.getLocation();
 
         if (killer != null && !killer.equals(victim)) {
-            ItemStack blood = new ItemStack(Material.RED_DYE, 2);
+            ItemStack blood = new ItemStack(Material.RED_DYE, 3);
             Item dropped = location.getWorld().dropItemNaturally(location, blood);
             dropped.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
