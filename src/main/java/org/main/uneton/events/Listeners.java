@@ -87,7 +87,6 @@ public class Listeners implements Listener {
         }
     }
 
-    private final Map<String, ItemStack> itemNames = new HashMap<>();
     private final ItemStack[] blocks = new ItemStack[]{
             new ItemStack(Material.EMERALD),
             new ItemStack(Material.AMETHYST_SHARD),
@@ -97,25 +96,6 @@ public class Listeners implements Listener {
             new ItemStack(Material.STRING)
     };
 
-    public void CustomNamedItems() {
-        for (int index = 0; index < blocks.length; index++) {
-            if (index == 5) {
-                ItemStack stringItem = blocks[index];
-                ItemStack str_item = new ItemStack(Material.STRING);
-                ItemMeta meta = str_item.getItemMeta();
-                if (meta != null) {
-                    meta.setDisplayName(ChatColor.RED +"Str");
-                    str_item.setItemMeta(meta);
-                    itemNames.put(ChatColor.RED +"Str", stringItem);
-                }
-            } else {
-                itemNames.put("", blocks[index]);
-            }
-        }
-    }
-    public ItemStack getCustomName(ItemStack item) {
-        return itemNames.get(item);
-    }
     @EventHandler
     public void onLootBox(BlockBreakEvent e){
         Player player = e.getPlayer();
@@ -125,7 +105,7 @@ public class Listeners implements Listener {
         if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
             if (Math.random() < 0.35) {
-                // so the duplicate glitches
+                // Handle rare case
             } else if (Math.random() < 0.65) {
                 int index = chance.nextInt(blocks.length);
                 ItemStack droppedItem = blocks[index];
