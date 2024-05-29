@@ -1,6 +1,5 @@
 package org.main.uneton.events;
 
-import net.kyori.adventure.text.Component;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -12,19 +11,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
-import org.main.uneton.economy.EcoImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-
-import static org.main.uneton.Combat.economy;
 
 public class Listeners implements Listener {
 
@@ -93,23 +87,35 @@ public class Listeners implements Listener {
         }
     }
 
+    private final Map<String, ItemStack> itemNames = new HashMap<>();
     private final ItemStack[] blocks = new ItemStack[]{
             new ItemStack(Material.EMERALD),
-            new ItemStack(Material.DIAMOND),
             new ItemStack(Material.AMETHYST_SHARD),
             new ItemStack(Material.IRON_NUGGET),
-            new ItemStack(Material.GOLD_NUGGET)
+            new ItemStack(Material.GOLD_NUGGET),
+            new ItemStack(Material.COPPER_INGOT),
+            new ItemStack(Material.STRING)
     };
 
-    /*public static boolean chanceEquals(Random random) {
-        int randomNumber = random.nextInt(100) + 1;
-        return randomNumber <= 40;
-        -
-        Random random = new Random();
-        boolean eventHappened = checkChance(random);
-        System.out.println("Event happened: " + eventHappened);
+    public void CustomNamedItems() {
+        for (int index = 0; index < blocks.length; index++) {
+            if (index == 5) {
+                ItemStack stringItem = blocks[index];
+                ItemStack str_item = new ItemStack(Material.STRING);
+                ItemMeta meta = str_item.getItemMeta();
+                if (meta != null) {
+                    meta.setDisplayName(ChatColor.RED +"Str");
+                    str_item.setItemMeta(meta);
+                    itemNames.put(ChatColor.RED +"Str", stringItem);
+                }
+            } else {
+                itemNames.put("", blocks[index]);
+            }
+        }
     }
-     */
+    public ItemStack getCustomName(ItemStack item) {
+        return itemNames.get(item);
+    }
 
     @EventHandler
     public void onLootBox(BlockBreakEvent e){
