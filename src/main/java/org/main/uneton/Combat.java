@@ -67,7 +67,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
         getCommand("sudo").setExecutor(new Sudo());
-        getCommand("thunderbolt").setExecutor(new Thunderbolt());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
