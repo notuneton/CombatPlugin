@@ -49,6 +49,7 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /repair " + f + " | Repairs the durability of your armor.");
                     player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
                     player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
+                    player.sendMessage(b + "> /thunderbolt " + f + " | Create a lot of Lightnings with incredible probability");
 
                     player.sendMessage(b + "> /ignore <player> " + f + " | Ignore a player.");
                     player.sendMessage(b + "> /ignorelist <player> " + f + " | Checks all ignored players.");
