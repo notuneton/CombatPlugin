@@ -62,6 +62,8 @@ commands:
   sudo:
     description: Executes another player perform a task.
     usage: /sudo <target> <command>
+  thunderbolt:
+    usage: /thunderbolt
 
   freeze:
     permission: combat.freeze.sv

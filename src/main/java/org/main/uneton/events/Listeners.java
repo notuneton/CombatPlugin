@@ -13,6 +13,8 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 
@@ -82,7 +84,8 @@ public class Listeners implements Listener {
     public void onBlockBreak(BlockBreakEvent e){
         Player player = e.getPlayer();
         if(e.getBlock().getType() == Material.COBBLESTONE ||
-                e.getBlock().getType() == Material.NETHERRACK){
+                //e.getBlock().getType() == Material. ||
+                e.getBlock().getType() == Material.NETHERRACK) {
             Random chance = new Random();
             if(chance.nextDouble() < 0.001) {
                 dropPinkDiamond(player, e);
