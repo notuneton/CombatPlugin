@@ -34,6 +34,7 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /trap <player> " + f + " | Create a cube around the player that the player cannot break.");
                     player.sendMessage(b + "> /sudo <target> <message> " + f + " | Executes another player perform a task.");
                     player.sendMessage(b + "> /freeze <player>" + f + " | Cancels the player's movement.");
+                    player.sendMessage(b + "> /gamemodes <player>" + f + " | Choose a gamemode");
                     player.sendMessage(b + "> /gm <player> " + f + " | Makes the player invulnerable to all faults.");
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     break;
