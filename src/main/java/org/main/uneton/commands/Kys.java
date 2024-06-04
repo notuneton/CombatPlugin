@@ -17,7 +17,7 @@ public class Kys implements CommandExecutor {
         }
 
         player.setHealth(0.0);
-        player.sendMessage(ChatColor.DARK_RED + "You took the easy way out");
+        player.sendMessage("You took the easy way out");
         return true;
     }
 }
