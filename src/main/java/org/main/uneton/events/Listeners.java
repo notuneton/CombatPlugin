@@ -55,7 +55,11 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        e.setJoinMessage(null);
+        if (!player.hasPlayedBefore()) {
+            player.sendMessage("You wake up in an unfamiliar place.");
+        } else {
+            e.setJoinMessage(null);
+        }
         // e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + " + " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
