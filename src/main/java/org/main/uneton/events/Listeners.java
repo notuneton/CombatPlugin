@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
@@ -32,7 +33,6 @@ public class Listeners implements Listener {
         this.plugin = plugin;
         // this.vault = plugin.getVault();
     }
-
 
     @EventHandler
     public void onPing(PlayerMoveEvent event) {
@@ -61,6 +61,23 @@ public class Listeners implements Listener {
             e.setJoinMessage(null);
         }
         // e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + " + " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e) {
+        Material placed_material = e.getBlockPlaced().getType();
+        Location loc = e.getPlayer().getLocation();
+
+        if (placed_material.equals(Material.RESPAWN_ANCHOR)) {
+
+            World world = loc.getWorld();
+            double x = loc.getX();
+            double y = loc.getY();
+            double z = loc.getZ();
+            double radius = 0.5;
+
+            world.createExplosion(x, y, z, 5, true, true);
+        }
     }
 
     @EventHandler
@@ -105,7 +122,7 @@ public class Listeners implements Listener {
 
         if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
-            if (Math.random() < 0.3) {
+            if (Math.random() < 0.2) {
                 int index = chance.nextInt(blocks.length);
                 ItemStack dropped_item = blocks[index];
                 block.getWorld().dropItemNaturally(loc, dropped_item);
