@@ -47,6 +47,7 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");
                     player.sendMessage(b + "> /guide <text> " + f + " | Show this list");
                     player.sendMessage(b + "> /kys " + f + " | Kill Yourself.");
+                    player.sendMessage(b + "> /ping <player>" + f + " | Check player ping.");
                     player.sendMessage(b + "> /repair " + f + " | Repairs the durability of your armor.");
                     player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
                     player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");

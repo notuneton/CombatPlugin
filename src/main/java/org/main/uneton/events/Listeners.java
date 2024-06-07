@@ -34,6 +34,7 @@ public class Listeners implements Listener {
         // this.vault = plugin.getVault();
     }
 
+
     @EventHandler
     public void onPing(PlayerJoinEvent event) {
         Player player = event.getPlayer();
