@@ -36,7 +36,7 @@ public class Listeners implements Listener {
 
 
     @EventHandler
-    public void onPing(PlayerJoinEvent event) {
+    public void onPing(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
         if (ping >= 300) {
