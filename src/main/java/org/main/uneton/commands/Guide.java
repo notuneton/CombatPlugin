@@ -61,7 +61,9 @@ public class Guide implements CommandExecutor {
                 }
 
             default:
+                player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                 player.sendMessage(ChatColor.RED + "Error: " + ChatColor.DARK_RED + "No valid argument found!");
+                player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                 break;
         }
         return true;
