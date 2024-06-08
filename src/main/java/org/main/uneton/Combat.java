@@ -72,6 +72,7 @@ public class Combat extends JavaPlugin implements Listener {
         // listeners
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
+        Bukkit.getPluginManager().registerEvents(new Deaths(), this);
 
         getCommand("freeze").setExecutor(new Freeze());
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
