@@ -59,7 +59,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         // commands
         getCommand("ec").setExecutor(new Ec());
-        getCommand("gamemode").setExecutor(new Gamemode());
         getCommand("guide").setExecutor(new Guide());
         getCommand("kys").setExecutor(new Kys());
         getCommand("ping").setExecutor(new Ping());
