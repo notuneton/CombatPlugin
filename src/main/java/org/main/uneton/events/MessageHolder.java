@@ -8,7 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.main.uneton.Combat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MessageHolder implements Listener {
 
@@ -21,10 +23,10 @@ public class MessageHolder implements Listener {
         Player player = e.getPlayer();
         String message = e.getMessage();
 
-        if(!lastmsg.containsKey(player)) {
+        if (!lastmsg.containsKey(player)) {
             lastmsg.put(player, message);
         } else {
-            if(message.equalsIgnoreCase(lastmsg.get(player))) {
+            if (message.equalsIgnoreCase(lastmsg.get(player))) {
                 e.setCancelled(true);
                 getBlockedMessage(player, message);
                 return;
@@ -47,6 +49,7 @@ public class MessageHolder implements Listener {
         String blocked_message = ChatColor.translateAlternateColorCodes('&', "" + ChatColor.GRAY + ChatColor.ITALIC + player.getName() + " " + message);
         player.sendMessage(blocked_message);
     }
+
 
     // &8[] &7%player% &8: &7%message%
 }
