@@ -17,28 +17,44 @@ public class Gamemode implements CommandExecutor {
             return true;
         }
 
-        if (args.length != 2) {
+        if (args.length!= 2) {
             player.sendMessage(ChatColor.RED + "> /gamemode requires exactly 2 arguments: <gamemode> <player>");
             return true;
         }
 
-        String target = args[0];
         String mode = args[1].toUpperCase();
-        if (!target.equals(player.getName())) {
-            player.sendMessage(ChatColor.RED + "You cannot change another player's gamemode.");
-            return true;
+
+        switch (mode) {
+            case "SURVIVAL":
+                player.setGameMode(GameMode.SURVIVAL);
+                break;
+            case "CREATIVE":
+                player.setGameMode(GameMode.CREATIVE);
+                break;
+            case "ADVENTURE":
+                player.setGameMode(GameMode.ADVENTURE);
+                break;
+            case "SPECTATOR":
+                player.setGameMode(GameMode.SPECTATOR);
+                break;
+            default:
+                player.sendMessage(ChatColor.RED + "Error: Invalid gamemode. Valid options are: SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR");
+                return true;
         }
 
-        try {
-            GameMode gameMode = GameMode.valueOf(mode);
-            player.setGameMode(gameMode);
+        if (player.getGameMode() == GameMode.valueOf(mode)) {
             player.sendMessage(ChatColor.BOLD.toString() +
-                    ChatColor.AQUA + ">" + ChatColor.GRAY + "Gamemode was set to " + ChatColor.WHITE + gameMode +
+                    ChatColor.DARK_AQUA + ">" +
+                    ChatColor.AQUA + "> " + ChatColor.GRAY + "The selected player is already in the selected game mode" + ChatColor.DARK_GRAY + ".");
+        } else {
+            player.sendMessage(ChatColor.BOLD.toString() +
+                    ChatColor.DARK_AQUA + ">" +
+                    ChatColor.AQUA + "> " + ChatColor.GRAY + "Gamemode was set to " +
+                    ChatColor.WHITE + mode +
                     ChatColor.GRAY + " successfully" + ChatColor.DARK_GRAY + ".");
-        } catch (IllegalArgumentException e) {
-            player.sendMessage(ChatColor.RED + "Error: " + ChatColor.DARK_RED + "Invalid gamemode. Valid options are: SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR.");
         }
 
         return true;
     }
+
 }
