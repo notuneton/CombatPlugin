@@ -61,6 +61,7 @@ public class Listeners implements Listener {
         } else {
             e.setJoinMessage(null);
         }
+
         // e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + " + " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 

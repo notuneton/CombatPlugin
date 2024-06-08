@@ -8,9 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.main.uneton.Combat;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MessageHolder implements Listener {
 
