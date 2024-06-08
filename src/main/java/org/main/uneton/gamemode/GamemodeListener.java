@@ -23,14 +23,17 @@ public class GamemodeListener implements Listener {
                     case STONE:
                         e.setCancelled(true);
                         player.setGameMode(GameMode.CREATIVE);
+                        player.closeInventory();
                         break;
                     case GRASS_BLOCK:
                         e.setCancelled(true);
                         player.setGameMode(GameMode.SURVIVAL);
+                        player.closeInventory();
                         break;
                     case STRING:
                         e.setCancelled(true);
                         player.setGameMode(GameMode.SPECTATOR);
+                        player.closeInventory();
                         break;
                 }
             }

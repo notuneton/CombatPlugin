@@ -45,7 +45,7 @@ public class Listeners implements Listener {
             player.kickPlayer(kickMessage);
         }
     }
-    
+
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
@@ -57,7 +57,7 @@ public class Listeners implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         if (!player.hasPlayedBefore()) {
-            player.sendMessage("You wake up in an unfamiliar place.");
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
         } else {
             e.setJoinMessage(null);
         }
@@ -102,7 +102,7 @@ public class Listeners implements Listener {
             }
         }
     }
-    
+
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
         Player player = e.getPlayer();
