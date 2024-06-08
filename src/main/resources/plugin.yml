@@ -11,6 +11,11 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: Spawns a white ball around you.
     usage: /crash <player>
+  gamemode:
+    permission: combat.gamemode.sv
+    permission-message: Permission Denied, You do not have permission to do this task.
+    description: Specifies the game mode to switch.
+    usage: /gamemode <gamemode> <player>
   heal:
     permission: combat.heal.sv
     permission-message: Permission Denied, You do not have permission to do this task.

@@ -7,8 +7,6 @@ import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.frez.Freeze;
 import org.main.uneton.frez.FreezeListener;
-import org.main.uneton.gamemode.GamemodeListener;
-import org.main.uneton.gamemode.Gamemodes;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
 import org.main.uneton.ignore.Ignore;
@@ -61,6 +59,7 @@ public class Combat extends JavaPlugin implements Listener {
 
         // commands
         getCommand("ec").setExecutor(new Ec());
+        getCommand("gamemode").setExecutor(new Gamemode());
         getCommand("guide").setExecutor(new Guide());
         getCommand("kys").setExecutor(new Kys());
         getCommand("ping").setExecutor(new Ping());
@@ -76,9 +75,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         getCommand("freeze").setExecutor(new Freeze());
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
-
-        getCommand("gamemodes").setExecutor(new Gamemodes());
-        Bukkit.getPluginManager().registerEvents(new GamemodeListener(), this);
 
         getCommand("gm").setExecutor(new Gm());
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
