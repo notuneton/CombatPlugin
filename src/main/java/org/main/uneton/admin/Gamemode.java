@@ -18,7 +18,7 @@ public class Gamemode implements CommandExecutor {
         }
 
         if (args.length != 2) {
-            player.sendMessage(ChatColor.RED + "/gamemode requires exactly 2 arguments: <gamemode> <player>");
+            player.sendMessage(ChatColor.RED + "> /gamemode requires exactly 2 arguments: <gamemode> <player>");
             return true;
         }
 
