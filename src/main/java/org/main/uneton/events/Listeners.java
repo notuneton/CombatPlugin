@@ -146,6 +146,14 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlyaerDeath(PlayerDeathEvent e) {
+        if (e.getEntity().getKiller() != null) {
+            e.setKeepInventory(true);
+            e.getDrops().clear();
+        }
+    }
+
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         World world = player.getWorld();
