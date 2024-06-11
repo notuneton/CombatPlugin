@@ -123,7 +123,7 @@ public class Listeners implements Listener {
     public void onBlockBreak(BlockBreakEvent e){
         Player player = e.getPlayer();
         if(e.getBlock().getType() == Material.COBBLESTONE ||
-                //e.getBlock().getType() == Material. ||
+                // e.getBlock().getType() == Material. ||
                 e.getBlock().getType() == Material.NETHERRACK) {
             Random chance = new Random();
             if(chance.nextDouble() < 0.001) {
