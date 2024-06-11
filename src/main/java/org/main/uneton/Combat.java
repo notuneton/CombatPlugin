@@ -49,6 +49,7 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
+
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();
         customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
@@ -75,17 +76,17 @@ public class Combat extends JavaPlugin implements Listener {
 
         ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
         ItemMeta elytra_meta = elytra.getItemMeta();
-        elytra.setDurability((short) Double.MAX_VALUE);
         elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
         elytra.setItemMeta(elytra_meta);
 
         ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), elytra);
-        elytraRecipe.shape("SDS", "LFL", "P P");
+        elytraRecipe.shape("SDS", "PFP", "P P");
         elytraRecipe.setIngredient('S', Material.STRING);
         elytraRecipe.setIngredient('D', Material.DIAMOND);
         elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
         elytraRecipe.setIngredient('F', Material.FEATHER);
         Bukkit.addRecipe(elytraRecipe);
+
 
 
         instance = this;
@@ -197,31 +198,9 @@ public class Combat extends JavaPlugin implements Listener {
     }
          */
 
-
-        ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
-        coarseDirtRecipe.shape("DD", "DD");
-        coarseDirtRecipe.setIngredient('D', Material.DIRT);
-        Bukkit.addRecipe(coarseDirtRecipe);
     }
 
-    private ItemStack compDirt() {
-        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
-        ItemMeta compDirtMeta = compDirt.getItemMeta();
-        compDirtMeta.setDisplayName(ChatColor.RESET + "Compressed Dirt");
-        compDirt.setItemMeta(compDirtMeta);
-        return compDirt;
-    }
 
-    @EventHandler
-    public void onBlockBroken(BlockBreakEvent event) {
-        Block block = event.getBlock();
-        if (block.getType() == compDirt().getType()) {
-            event.setDropItems(false);
-            Location loc = block.getLocation();
-            ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
-            Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
-        }
-    }
 
     public void onDisable() {
         // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
