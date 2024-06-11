@@ -48,8 +48,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
-
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();
         customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
