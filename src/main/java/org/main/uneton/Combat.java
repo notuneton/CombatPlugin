@@ -46,9 +46,9 @@ public class Combat extends JavaPlugin implements Listener {
 
 
     private ItemStack compDirt() {
-        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 9);
+        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
         ItemMeta compDirtMeta = compDirt.getItemMeta();
-        compDirtMeta.setDisplayName("Comppressed Dirt");
+        compDirtMeta.setDisplayName("Compressed Dirt");
         compDirt.setItemMeta(compDirtMeta);
         return compDirt;
     }
@@ -57,13 +57,11 @@ public class Combat extends JavaPlugin implements Listener {
     public void onBlockBroken(BlockBreakEvent event) {
         Block block = event.getBlock();
         if (block.getType().equals(Material.COARSE_DIRT)) {
-            Location playerLoc = event.getPlayer().getLocation();
-            Location loc = event.getBlock().getLocation();
-            loc.getWorld().dropItemNaturally(playerLoc, compDirt());
-
+            Location loc = block.getLocation();
+            ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
+            loc.getWorld().dropItemNaturally(loc, dirt); // Drop the dirt items at the block's location
         }
     }
-
 
 
 
@@ -74,8 +72,6 @@ public class Combat extends JavaPlugin implements Listener {
         playerInvRecipe.shape("DD", "DD");
         playerInvRecipe.setIngredient('D', Material.DIRT);
         Bukkit.addRecipe(playerInvRecipe);
-
-
 
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
