@@ -70,6 +70,8 @@ public class Combat extends JavaPlugin implements Listener {
         saveDefaultConfig();
         saveConfig();
 
+        Bukkit.getPluginManager().registerEvents(this, this);
+
         // admin
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
@@ -190,13 +192,13 @@ public class Combat extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBroken(BlockBreakEvent event) {
         Block block = event.getBlock();
-        event.setDropItems(false);
-        if (block.getType() == Material.COARSE_DIRT) {
+
+        if (block.getType() == compDirt().getType()) {
+            event.setDropItems(false);
             Location loc = block.getLocation();
             ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
             // loc.getWorld().dropItemNaturally(loc, dirt);
             Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
-            System.out.println("test5");
         }
     }
 
