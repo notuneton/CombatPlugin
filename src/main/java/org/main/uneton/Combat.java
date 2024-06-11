@@ -48,11 +48,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
-
-
-
-
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
         notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
@@ -63,6 +58,20 @@ public class Combat extends JavaPlugin implements Listener {
         godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
         godAppleRecipe.setIngredient('A', Material.APPLE);
         Bukkit.addRecipe(godAppleRecipe);
+
+
+        ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
+        ItemMeta elytra_meta = elytra.getItemMeta();
+        elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "");
+        elytra.setItemMeta(elytra_meta);
+
+        ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), notch_apple);
+        elytraRecipe.shape("SDS", "LFL", "L L");
+        elytraRecipe.setIngredient('S', Material.STRING);
+        elytraRecipe.setIngredient('D', Material.DIAMOND);
+        elytraRecipe.setIngredient('L', Material.LEATHER);
+        elytraRecipe.setIngredient('F', Material.FEATHER);
+        Bukkit.addRecipe(elytraRecipe);
 
 
         instance = this;
@@ -197,7 +206,6 @@ public class Combat extends JavaPlugin implements Listener {
             event.setDropItems(false);
             Location loc = block.getLocation();
             ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
-            // loc.getWorld().dropItemNaturally(loc, dirt);
             Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
         }
     }
