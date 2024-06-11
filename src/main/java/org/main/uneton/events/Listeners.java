@@ -99,7 +99,7 @@ public class Listeners implements Listener {
             if (block.getType().equals(Material.CRAFTING_TABLE)) {
                 Random random = new Random();
                 int randomNumber = random.nextInt(100);
-                if (randomNumber < 10) {
+                if (randomNumber < 8) {
                     Bukkit.getServer().broadcast(Component.text(ChatColor.LIGHT_PURPLE + "Shh.. " + ChatColor.RED.toString() + ChatColor.BOLD + "crafting cable " + ChatColor.LIGHT_PURPLE + "contains some easter egg(s)!"));
                 }
             }
