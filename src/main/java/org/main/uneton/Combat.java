@@ -2,6 +2,7 @@ package org.main.uneton;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -47,7 +48,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
 
 
 
@@ -173,11 +173,10 @@ public class Combat extends JavaPlugin implements Listener {
          */
 
 
-        ShapedRecipe playerInvRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
-        playerInvRecipe.shape("DD", "DD");
-        playerInvRecipe.setIngredient('D', Material.DIRT);
-        Bukkit.addRecipe(playerInvRecipe);
-
+        ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
+        coarseDirtRecipe.shape("DD", "DD");
+        coarseDirtRecipe.setIngredient('D', Material.DIRT);
+        Bukkit.addRecipe(coarseDirtRecipe);
     }
 
     private ItemStack compDirt() {
@@ -191,11 +190,13 @@ public class Combat extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBroken(BlockBreakEvent event) {
         Block block = event.getBlock();
+        event.setDropItems(false);
         if (block.getType() == Material.COARSE_DIRT) {
-            event.setDropItems(false); // Prevent default drop
             Location loc = block.getLocation();
             ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
-            loc.getWorld().dropItemNaturally(loc, dirt); // Drop the dirt items at the block's location
+            // loc.getWorld().dropItemNaturally(loc, dirt);
+            Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
+            System.out.println("test5");
         }
     }
 
