@@ -48,6 +48,19 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+
+        ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
+        ItemMeta customTotem_meta = customTotem.getItemMeta();
+        customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
+        customTotem.setItemMeta(customTotem_meta);
+
+        ShapedRecipe totemOfUndying = new ShapedRecipe(new NamespacedKey(this, "totemOfUndying"), customTotem);
+        totemOfUndying.shape("HR");
+        totemOfUndying.setIngredient('H', Material.HEART_OF_THE_SEA);
+        totemOfUndying.setIngredient('R', Material.GOLD_INGOT);
+        Bukkit.addRecipe(totemOfUndying);
+
+
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
         notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
@@ -62,14 +75,15 @@ public class Combat extends JavaPlugin implements Listener {
 
         ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
         ItemMeta elytra_meta = elytra.getItemMeta();
+        elytra.setDurability((short) Double.MAX_VALUE);
         elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
         elytra.setItemMeta(elytra_meta);
 
         ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), elytra);
-        elytraRecipe.shape("SDS", "LFL", "L L");
+        elytraRecipe.shape("SDS", "LFL", "P P");
         elytraRecipe.setIngredient('S', Material.STRING);
         elytraRecipe.setIngredient('D', Material.DIAMOND);
-        elytraRecipe.setIngredient('L', Material.LEATHER);
+        elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
         elytraRecipe.setIngredient('F', Material.FEATHER);
         Bukkit.addRecipe(elytraRecipe);
 
