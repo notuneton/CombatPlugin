@@ -1,5 +1,6 @@
 package org.main.uneton.events;
 
+import net.kyori.adventure.text.Component;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 
@@ -88,6 +90,20 @@ public class Listeners implements Listener {
         Block block = event.getClickedBlock();
         if (block.getType() != Material.OAK_SIGN) return;
         event.getPlayer().openSign((Sign) block.getState());
+    }
+
+    @EventHandler
+    public void onInteractCraftingTable(PlayerInteractEvent e) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            Block block = e.getClickedBlock();
+            if (block.getType().equals(Material.CRAFTING_TABLE)) {
+                Random random = new Random();
+                int randomNumber = random.nextInt(100);
+                if (randomNumber < 10) {
+                    Bukkit.getServer().broadcast(Component.text(ChatColor.LIGHT_PURPLE + "shh.. " + ChatColor.RED + "Crafting Table " + ChatColor.LIGHT_PURPLE + "contains some easter egg(s)!"));
+                }
+            }
+        }
     }
 
     @EventHandler

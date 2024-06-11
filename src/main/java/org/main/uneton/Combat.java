@@ -1,8 +1,13 @@
 package org.main.uneton;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.frez.Freeze;
@@ -43,6 +48,24 @@ public class Combat extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         saveConfig();
+
+
+
+        ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
+        ItemMeta notch_apple_meta = notch_apple.getItemMeta();
+        notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
+        notch_apple.setItemMeta(notch_apple_meta);
+
+        // Create a shaped recipe for the enchanted golden apple
+        ShapedRecipe godAppleRecipe = new ShapedRecipe(new NamespacedKey(this, "god_apple_recipe"), notch_apple);
+        godAppleRecipe.shape(" G ", " A ", " G "); // Use 'A' for the normal apple
+
+        // Set the ingredient for 'G'
+        godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
+        godAppleRecipe.setIngredient('A', Material.APPLE);
+
+        // Add the recipe to the server
+        Bukkit.addRecipe(godAppleRecipe);
 
 
         // admin
