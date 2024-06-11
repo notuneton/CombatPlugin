@@ -100,7 +100,7 @@ public class Listeners implements Listener {
                 Random random = new Random();
                 int randomNumber = random.nextInt(100);
                 if (randomNumber < 10) {
-                    Bukkit.getServer().broadcast(Component.text(ChatColor.LIGHT_PURPLE + "shh.. " + ChatColor.RED + "Crafting Table " + ChatColor.LIGHT_PURPLE + "contains some easter egg(s)!"));
+                    Bukkit.getServer().broadcast(Component.text(ChatColor.LIGHT_PURPLE + "Shh.. " + ChatColor.RED.toString() + ChatColor.BOLD + "crafting cable " + ChatColor.LIGHT_PURPLE + "contains some easter egg(s)!"));
                 }
             }
         }
