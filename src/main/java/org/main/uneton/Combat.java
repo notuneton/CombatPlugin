@@ -45,33 +45,13 @@ public class Combat extends JavaPlugin implements Listener {
     // private FileConfiguration fileConfig = config.getConfig();
 
 
-    private ItemStack compDirt() {
-        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
-        ItemMeta compDirtMeta = compDirt.getItemMeta();
-        compDirtMeta.setDisplayName("Compressed Dirt");
-        compDirt.setItemMeta(compDirtMeta);
-        return compDirt;
-    }
-
-    @EventHandler
-    public void onBlockBroken(BlockBreakEvent event) {
-        Block block = event.getBlock();
-        if (block.getType().equals(Material.COARSE_DIRT)) {
-            Location loc = block.getLocation();
-            ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
-            loc.getWorld().dropItemNaturally(loc, dirt); // Drop the dirt items at the block's location
-        }
-    }
-
-
-
     @Override
     public void onEnable() {
 
-        ShapedRecipe playerInvRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
-        playerInvRecipe.shape("DD", "DD");
-        playerInvRecipe.setIngredient('D', Material.DIRT);
-        Bukkit.addRecipe(playerInvRecipe);
+
+
+
+
 
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
@@ -193,7 +173,30 @@ public class Combat extends JavaPlugin implements Listener {
          */
 
 
+        ShapedRecipe playerInvRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
+        playerInvRecipe.shape("DD", "DD");
+        playerInvRecipe.setIngredient('D', Material.DIRT);
+        Bukkit.addRecipe(playerInvRecipe);
 
+    }
+
+    private ItemStack compDirt() {
+        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
+        ItemMeta compDirtMeta = compDirt.getItemMeta();
+        compDirtMeta.setDisplayName(ChatColor.RESET + "Compressed Dirt");
+        compDirt.setItemMeta(compDirtMeta);
+        return compDirt;
+    }
+
+    @EventHandler
+    public void onBlockBroken(BlockBreakEvent event) {
+        Block block = event.getBlock();
+        if (block.getType() == Material.COARSE_DIRT) {
+            event.setDropItems(false); // Prevent default drop
+            Location loc = block.getLocation();
+            ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
+            loc.getWorld().dropItemNaturally(loc, dirt); // Drop the dirt items at the block's location
+        }
     }
 
     public void onDisable() {
