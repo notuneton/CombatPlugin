@@ -1,5 +1,6 @@
 package org.main.uneton.combatlogger;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -60,10 +61,8 @@ public class CombatLog implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Player deceased = event.getEntity();
-        Player player = event.getEntity();
-        player.sendMessage("<" +deceased.getName()+ "> ez");
-        endCombat(deceased);
+        Player victim = event.getEntity();
+        endCombat(victim);
     }
 
     @EventHandler

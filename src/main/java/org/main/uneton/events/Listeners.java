@@ -152,16 +152,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onDeathByPlayer(PlayerDeathEvent event) {
-        Player victim = event.getPlayer();
-        Player killer = victim.getKiller();
-        if (killer != null) {
-            // vault.depositPlayer(killer, 300);
-            killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
-        }
-    }
-
-    @EventHandler
     public void onPlyaerDeath(PlayerDeathEvent e) {
         if (e.getEntity().getKiller() != null) {
             e.setKeepInventory(true);
