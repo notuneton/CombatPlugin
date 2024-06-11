@@ -65,7 +65,7 @@ public class Combat extends JavaPlugin implements Listener {
         elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
         elytra.setItemMeta(elytra_meta);
 
-        ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), notch_apple);
+        ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), elytra);
         elytraRecipe.shape("SDS", "LFL", "L L");
         elytraRecipe.setIngredient('S', Material.STRING);
         elytraRecipe.setIngredient('D', Material.DIAMOND);
