@@ -201,7 +201,6 @@ public class Combat extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBroken(BlockBreakEvent event) {
         Block block = event.getBlock();
-
         if (block.getType() == compDirt().getType()) {
             event.setDropItems(false);
             Location loc = block.getLocation();
