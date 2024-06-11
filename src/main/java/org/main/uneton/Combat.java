@@ -44,11 +44,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        instance = this;
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
-        saveConfig();
-
 
 
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
@@ -64,6 +59,10 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.addRecipe(godAppleRecipe);
 
 
+        instance = this;
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+        saveConfig();
 
         // admin
         getCommand("crash").setExecutor(new Crash());
