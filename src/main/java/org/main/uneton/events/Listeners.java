@@ -68,23 +68,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) {
-        Material placed_material = e.getBlockPlaced().getType();
-        Location loc = e.getPlayer().getLocation();
-
-        if (placed_material.equals(Material.RESPAWN_ANCHOR)) {
-
-            World world = loc.getWorld();
-            double x = loc.getX();
-            double y = loc.getY();
-            double z = loc.getZ();
-            double radius = 0.5;
-
-            world.createExplosion(x, y, z, 5, true, true);
-        }
-    }
-
-    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
         Block block = event.getClickedBlock();
