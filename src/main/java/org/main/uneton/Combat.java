@@ -1,13 +1,15 @@
 package org.main.uneton;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.jetbrains.annotations.NotNull;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.frez.Freeze;
@@ -42,8 +44,37 @@ public class Combat extends JavaPlugin implements Listener {
     // private Config config = new Config(this, "economy");
     // private FileConfiguration fileConfig = config.getConfig();
 
+
+    private ItemStack compDirt() {
+        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 9);
+        ItemMeta compDirtMeta = compDirt.getItemMeta();
+        compDirtMeta.setDisplayName("Comppressed Dirt");
+        compDirt.setItemMeta(compDirtMeta);
+        return compDirt;
+    }
+
+    @EventHandler
+    public void onBlockBroken(BlockBreakEvent event) {
+        Block block = event.getBlock();
+        if (block.getType().equals(Material.COARSE_DIRT)) {
+            Location playerLoc = event.getPlayer().getLocation();
+            Location loc = event.getBlock().getLocation();
+            loc.getWorld().dropItemNaturally(playerLoc, compDirt());
+
+        }
+    }
+
+
+
+
     @Override
     public void onEnable() {
+
+        ShapedRecipe playerInvRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
+        playerInvRecipe.shape("DD", "DD");
+        playerInvRecipe.setIngredient('D', Material.DIRT);
+        Bukkit.addRecipe(playerInvRecipe);
+
 
 
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
@@ -51,7 +82,6 @@ public class Combat extends JavaPlugin implements Listener {
         notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
         notch_apple.setItemMeta(notch_apple_meta);
 
-        // Create a shaped recipe for the enchanted golden apple
         ShapedRecipe godAppleRecipe = new ShapedRecipe(new NamespacedKey(this, "god_apple_recipe"), notch_apple);
         godAppleRecipe.shape("GGG", "GAG", "GGG");
         godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
