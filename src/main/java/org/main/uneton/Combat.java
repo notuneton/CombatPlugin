@@ -58,14 +58,11 @@ public class Combat extends JavaPlugin implements Listener {
 
         // Create a shaped recipe for the enchanted golden apple
         ShapedRecipe godAppleRecipe = new ShapedRecipe(new NamespacedKey(this, "god_apple_recipe"), notch_apple);
-        godAppleRecipe.shape(" G ", " A ", " G "); // Use 'A' for the normal apple
-
-        // Set the ingredient for 'G'
+        godAppleRecipe.shape("GGG", "GAG", "GGG");
         godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
         godAppleRecipe.setIngredient('A', Material.APPLE);
-
-        // Add the recipe to the server
         Bukkit.addRecipe(godAppleRecipe);
+
 
 
         // admin

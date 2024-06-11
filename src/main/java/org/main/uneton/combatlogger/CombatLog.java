@@ -61,6 +61,8 @@ public class CombatLog implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player deceased = event.getEntity();
+        Player player = event.getEntity();
+        player.sendMessage("<" +deceased.getName()+ "> ez");
         endCombat(deceased);
     }
 
