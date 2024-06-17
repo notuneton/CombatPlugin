@@ -200,7 +200,7 @@ public class Listeners implements Listener {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
-        lore.add(gray + "Probability: " + red + "0,1%");
+        lore.add(gray + "Probability: " + red + "0.001%");
         pinkMeta.setLore(lore);
         pinkDiamond.setItemMeta(pinkMeta);
 
