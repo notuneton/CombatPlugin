@@ -107,7 +107,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
-        getCommand("ec").setExecutor(new Ec());
+        getCommand("ec").setExecutor(new Ec()); 
         getCommand("guide").setExecutor(new Guide());
         getCommand("kys").setExecutor(new Kys());
         getCommand("ping").setExecutor(new Ping());
@@ -119,7 +119,6 @@ public class Combat extends JavaPlugin implements Listener {
         // listeners
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
-        Bukkit.getPluginManager().registerEvents(new Deaths(), this);
 
         getCommand("freeze").setExecutor(new Freeze());
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
