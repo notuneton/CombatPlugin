@@ -41,13 +41,15 @@ public class Playtime implements CommandExecutor {
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
         // Convert playtime to minutes, hours, days, and send a message
-        if (playTime >= 60 && playTime <= 3600) {
-            sender.sendMessage(String.format(ChatColor.WHITE + "%s'You've Played %d" + ChatColor.GRAY + " m", playTime / 60));
+        if (playTime < 60) {
+            sender.sendMessage(ChatColor.WHITE + "'You've Played " + ChatColor.GRAY + "less than a minute");
+        } else if (playTime <= 3600) {
+            sender.sendMessage(String.format(ChatColor.WHITE + "%s'You've Played %d" + ChatColor.GRAY + " minutes", playTime / 60));
         } else if (playTime <= 86400) {
-            sender.sendMessage(String.format(ChatColor.WHITE + "%s'You've Played %.2f" + ChatColor.GRAY + " h", playTime / 3600.0));
+            // Correctly use floating-point format here since we know playTime is greater than 3600
+            sender.sendMessage(String.format(ChatColor.WHITE + "%s'You've Played %.2f" + ChatColor.GRAY + " hours", playTime / 3600.0));
         }
-
-        if (playTime <= 86400) {
+        if (!(playTime <= 86400)) {
             sender.sendMessage(ChatColor.RED + "Your playtime is not enough!");
         }
     }
