@@ -8,7 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static org.main.uneton.ignore.Ignore.ignoredPlayers;
+import java.util.Set;
+
+import static org.main.uneton.ignore.Ignore.getIgnoredPlayers;
 
 public class Ignorelist implements CommandExecutor {
 
@@ -20,23 +22,14 @@ public class Ignorelist implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /ignorelist <player>");
-            return true;
-        }
+        Set<String> ignoredSet = getIgnoredPlayers(player.getName());
 
-        Player target = Bukkit.getPlayerExact(args[0]);
-        if (target == null || !target.isOnline()) {
-            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
-            return true;
-        }
-
-        if(ignoredPlayers.isEmpty()){
-            player.sendMessage(ChatColor.YELLOW + "You don't have any ignored player");
+        if (ignoredSet.isEmpty()) {
+            player.sendMessage(ChatColor.YELLOW + "You don't have any ignored players.");
         } else {
-            player.sendMessage(ChatColor.YELLOW + "You are ignoring: ");
-            for (String user : ignoredPlayers){
-                player.sendMessage(ChatColor.YELLOW + "- " + user);
+            player.sendMessage(ChatColor.YELLOW + "You are ignoring:");
+            for (String ignored : ignoredSet) {
+                player.sendMessage(ChatColor.YELLOW + "- " + ignored);
             }
         }
 

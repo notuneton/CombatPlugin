@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import static org.main.uneton.ignore.Ignore.ignoredPlayers;
+import static org.main.uneton.ignore.Ignore.isPlayerIgnored;
 
 public class IgnoreListener implements Listener {
 
@@ -13,8 +13,7 @@ public class IgnoreListener implements Listener {
     public void onChatEvent(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String senderName = player.getName();
-        if (ignoredPlayers.contains(senderName)) {
-            event.setCancelled(true); // Prevent the ignored player from sending the message
-        }
+
+        event.getRecipients().removeIf(recipient -> isPlayerIgnored(recipient.getName(), senderName));
     }
 }
