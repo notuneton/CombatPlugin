@@ -58,12 +58,12 @@ public class Spawn implements CommandExecutor {
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
         if (combat_tagged.containsKey(player)) {
-            player.sendMessage(ChatColor.DARK_RED + "The arena is not allowed to enter in while combat!");
+            player.sendMessage(ChatColor.RED + "You cannot do this in combat.");
             return false;
         }
 
         if (player.getLocation().distance(initialLocation) > 0) {
-            player.sendActionBar(ChatColor.DARK_RED + "Teleport cancelled because you moved!");
+            player.sendActionBar(ChatColor.RED + "Teleport cancelled because you moved!");
             return false;
         } else {
             Location spawnLocation = plugin.getConfig().getLocation("spawn");
