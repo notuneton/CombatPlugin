@@ -3,6 +3,7 @@ package org.main.uneton;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -32,6 +33,7 @@ import java.util.*;
 
 public class Combat extends JavaPlugin implements Listener {
 
+    public HashMap<UUID, Integer> playTimes = new HashMap<>();
     private static Combat instance;
     public static Combat getInstance(){
         return instance;
@@ -111,6 +113,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("guide").setExecutor(new Guide());
         getCommand("kys").setExecutor(new Kys());
         getCommand("ping").setExecutor(new Ping());
+        getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("repair").setExecutor(new Repair());
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
@@ -135,7 +138,13 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
 
-
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            for (Player player1 : Bukkit.getOnlinePlayers()) {
+                UUID uuid = player1.getUniqueId();
+                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
+                playTimes.put(uuid, currentPlayTime + 1);
+            }
+        }, 0L, 20L); // 20 ticks = 1 second
 
         /*
         this.vault = VaultHook.hook(this);
