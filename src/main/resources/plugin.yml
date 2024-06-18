@@ -53,6 +53,9 @@ commands:
   ping:
     description: Check player ping.
     usage: /ping <player>
+  playtime:
+    description: Total playtime of a specified player in the game.
+    usage: /playtime <player>
   repair:
     description: Repairs the durability of your armor.
     usage: /repair

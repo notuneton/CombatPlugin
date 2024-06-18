@@ -13,7 +13,6 @@ import org.main.uneton.Combat;
 public class Playtime implements CommandExecutor {
 
     private Combat plugin;
-
     public Playtime(Combat plugin) {
         this.plugin = plugin;
     }
