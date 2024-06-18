@@ -58,6 +58,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        CustomTabList.updateTabList(player);
         if (!player.hasPlayedBefore()) {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
         } else {
