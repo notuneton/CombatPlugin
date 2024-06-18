@@ -12,20 +12,19 @@ import org.main.uneton.Combat;
 
 public class Playtime implements CommandExecutor {
 
-    private Combat plugin;
+    private final Combat plugin;
     public Playtime(Combat plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
             return true;
         }
 
         if (args.length > 0) {
-            Player player = (Player) sender;
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
                 sendPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
@@ -33,24 +32,21 @@ public class Playtime implements CommandExecutor {
                 player.sendActionBar(ChatColor.RED + "Player not found.");
             }
         } else {
-            Player player2 = (Player) sender;
-            sendPlaytime(sender, player2.getName(), plugin.playTimes.getOrDefault(player2.getUniqueId(), 0));
+            Player user = (Player) sender;
+            sendPlaytime(sender, user.getName(), plugin.playTimes.getOrDefault(user.getUniqueId(), 0));
         }
         return true;
     }
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
-        // Convert playtime to minutes, hours, days, and send a message
-        if (playTime < 60) {
-            sender.sendMessage(ChatColor.WHITE + "'You've Played " + ChatColor.GRAY + "less than a minute");
-        } else if (playTime <= 3600) {
-            sender.sendMessage(String.format(ChatColor.WHITE + "%s'You've Played %d" + ChatColor.GRAY + " minutes", playTime / 60));
+        String prefix = ChatColor.WHITE + "'"; // Combine prefix into one string
+        String suffix = ChatColor.YELLOW + " minutes";
+
+        if (playTime <= 3600) {
+            sender.sendMessage(String.format(prefix + "%s' have played %d" + suffix, playerName, playTime / 60));
         } else if (playTime <= 86400) {
-            // Correctly use floating-point format here since we know playTime is greater than 3600
-            sender.sendMessage(String.format(ChatColor.WHITE + "%s'You've Played %.2f" + ChatColor.GRAY + " hours", playTime / 3600.0));
-        }
-        if (!(playTime <= 86400)) {
-            sender.sendMessage(ChatColor.RED + "Your playtime is not enough!");
+            sender.sendMessage(String.format(prefix + "%s' have played %.2f" + suffix, playerName, playTime / 3600.0));
         }
     }
+
 }
