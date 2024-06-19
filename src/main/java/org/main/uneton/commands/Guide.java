@@ -52,7 +52,7 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
                     player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
 
-                    player.sendMessage(b + "> /ignore <player> " + f + " | Ignore a player.");
+                    player.sendMessage(b + "> /ignore <help/player> " + f + " | Ignore a player.");
                     player.sendMessage(b + "> /ignorelist <player> " + f + " | Checks all ignored players.");
                     player.sendMessage(b + "> /unignore <player> " + f + " | Un ignores a player.");
                     player.sendMessage(b + "> /trashcan " + f + " | Put your stuff in the menu and close it!");
