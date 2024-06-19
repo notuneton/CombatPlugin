@@ -49,9 +49,6 @@ public class Ignore implements CommandExecutor {
                 }
                 unignorePlayer(player, args[1]);
                 break;
-            case "removeall":
-                unignoreAllPlayers(player);
-                break;
             default:
                 player.sendMessage(ChatColor.RED + "> /ignore help");
                 break;
