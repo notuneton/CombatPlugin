@@ -24,26 +24,37 @@ public class Ignore implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /ignore <player>");
+        if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
+            sendHelpMessage(player);
             return true;
         }
 
-        String targetName = args[0];
-        Player target = Bukkit.getPlayer(targetName);
-        if (target == null || !target.isOnline()) {
-            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
-            return true;
-        }
+        String subCommand = args[0].toLowerCase();
 
-        String playerName = player.getName();
-        ignoredPlayers.putIfAbsent(playerName, new HashSet<>());
-        Set<String> ignoredSet = ignoredPlayers.get(playerName);
-
-        if (ignoredSet.add(targetName)) {
-            player.sendMessage(ChatColor.YELLOW + "Successfully ignored player " + targetName);
-        } else {
-            player.sendMessage(ChatColor.YELLOW + "Player " + targetName + " is already ignored");
+        switch (subCommand) {
+            case "list":
+                listIgnoredPlayers(player);
+                break;
+            case "add":
+                if (args.length < 2) {
+                    player.sendMessage(ChatColor.RED + "> /ignore add <player>");
+                    return true;
+                }
+                ignorePlayer(player, args[1]);
+                break;
+            case "remove":
+                if (args.length < 2) {
+                    player.sendMessage(ChatColor.RED + "> /ignore remove <player>");
+                    return true;
+                }
+                unignorePlayer(player, args[1]);
+                break;
+            case "removeall":
+                unignoreAllPlayers(player);
+                break;
+            default:
+                player.sendMessage(ChatColor.RED + "> /ignore help");
+                break;
         }
 
         return true;
@@ -55,6 +66,52 @@ public class Ignore implements CommandExecutor {
         player.sendMessage(ChatColor.GOLD + "/ignore list" + ChatColor.AQUA + " - List ignored players");
         player.sendMessage(ChatColor.GOLD + "/ignore add <player>" + ChatColor.AQUA + " - Ignore a player");
         player.sendMessage(ChatColor.GOLD + "/ignore remove <player>" + ChatColor.AQUA + " - Unignore a player");
+        player.sendMessage(ChatColor.GOLD + "/ignore removeall" + ChatColor.AQUA + " - Unignore all players");
+    }
+
+    private void listIgnoredPlayers(Player player) {
+        Set<String> ignoredSet = getIgnoredPlayers(player.getName());
+
+        if (ignoredSet.isEmpty()) {
+            player.sendMessage(ChatColor.YELLOW + "You don't have any ignored players.");
+        } else {
+            player.sendMessage(ChatColor.YELLOW + "You are ignoring:");
+            for (String ignored : ignoredSet) {
+                player.sendMessage(ChatColor.YELLOW + "- " + ignored);
+            }
+        }
+    }
+
+    private void ignorePlayer(Player player, String targetName) {
+        Player target = Bukkit.getPlayer(targetName);
+        if (target == null || !target.isOnline()) {
+            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
+            return;
+        }
+
+        String playerName = player.getName();
+        ignoredPlayers.putIfAbsent(playerName, new HashSet<>());
+        Set<String> ignoredSet = ignoredPlayers.get(playerName);
+
+        if (ignoredSet.add(targetName)) {
+            player.sendMessage(ChatColor.YELLOW + "Successfully ignored player " + targetName);
+        } else {
+            player.sendMessage(ChatColor.YELLOW + "Player " + targetName + " is already ignored");
+        }
+    }
+
+    private void unignorePlayer(Player player, String targetName) {
+        Set<String> ignoredSet = getIgnoredPlayers(player.getName());
+        if (ignoredSet.remove(targetName)) {
+            player.sendMessage(ChatColor.YELLOW + "Successfully unignored player " + targetName);
+        } else {
+            player.sendMessage(ChatColor.RED + "Player " + targetName + " is not ignored");
+        }
+    }
+
+    private void unignoreAllPlayers(Player player) {
+        ignoredPlayers.remove(player.getName());
+        player.sendMessage(ChatColor.YELLOW + "Successfully unignored all players.");
     }
 
     public static boolean isPlayerIgnored(String playerName, String ignoredName) {
