@@ -61,12 +61,11 @@ public class Ignore implements CommandExecutor {
     }
 
     private void sendHelpMessage(Player player) {
-        player.sendMessage(ChatColor.YELLOW + "Ignore Commands:");
-        player.sendMessage(ChatColor.GOLD + "/ignore help" + ChatColor.AQUA + " - Prints this help message");
-        player.sendMessage(ChatColor.GOLD + "/ignore list" + ChatColor.AQUA + " - List ignored players");
-        player.sendMessage(ChatColor.GOLD + "/ignore add <player>" + ChatColor.AQUA + " - Ignore a player");
-        player.sendMessage(ChatColor.GOLD + "/ignore remove <player>" + ChatColor.AQUA + " - Unignore a player");
-        player.sendMessage(ChatColor.GOLD + "/ignore removeall" + ChatColor.AQUA + " - Unignore all players");
+        player.sendMessage(ChatColor.GREEN + "Ignore Commands:");
+        player.sendMessage(ChatColor.YELLOW + "/ignore help" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Prints this help message");
+        player.sendMessage(ChatColor.YELLOW + "/ignore list" + ChatColor.GRAY + " - " + ChatColor.AQUA + "List ignored players");
+        player.sendMessage(ChatColor.YELLOW + "/ignore add <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Ignore a player");
+        player.sendMessage(ChatColor.YELLOW + "/ignore remove <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Unignore a player");
     }
 
     private void listIgnoredPlayers(Player player) {
@@ -77,7 +76,7 @@ public class Ignore implements CommandExecutor {
         } else {
             player.sendMessage(ChatColor.YELLOW + "You are ignoring:");
             for (String ignored : ignoredSet) {
-                player.sendMessage(ChatColor.YELLOW + "- " + ignored);
+                player.sendMessage(ChatColor.YELLOW + "- " + ChatColor.GRAY + ignored);
             }
         }
     }
