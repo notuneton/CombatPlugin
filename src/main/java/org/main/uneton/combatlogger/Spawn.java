@@ -46,7 +46,6 @@ public class Spawn implements CommandExecutor {
                     if (!teleportPlayer(player, initialLocation)) {
                         player.sendMessage(ChatColor.RED + "Teleportation cancelled.");
                     }
-
                 } else {
                     player.sendActionBar(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
                     player.sendMessage(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
