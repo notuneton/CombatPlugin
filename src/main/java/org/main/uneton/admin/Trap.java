@@ -38,51 +38,51 @@ public class Trap implements CommandExecutor {
 
             // if there is a player then spawn the box ->
             spawnTrap(player);
-
         }
         return true;
     }
 
-
     public static void spawnTrap(Player player) {
         Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(0, 0, 0); // Adjusted bottom corner for a 5x5x5 cube
+        Location bottomCorner = loc.clone().add(0, 0, 0);
         player.setGameMode(GameMode.ADVENTURE);
-
-        // Create the 5x5x5 outer shell with a hollow 3x3x3 inside
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 5; y++) {
                 for (int z = 0; z < 5; z++) {
-                    // Skip the inside space
                     if (x > 0 && x < 4 && y > 0 && y < 4 && z > 0 && z < 4) {
                         continue;
                     }
-
-                    // Set the block type to SPAWNER
                     bottomCorner.clone().add(x, y, z).getBlock().setType(Material.SPAWNER);
                 }
             }
         }
-
-
-        // Teleport the player to the middle of the box
         Location middleLocation = bottomCorner.clone().add(2, 2, 2);
         player.teleport(middleLocation);
-
-        // Send a title message to the player
         player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + "Trapped!",
                 ChatColor.RED + "You have been trapped in a box!", 10, 70, 20);
-
-        // Schedule a task to change player's game mode back to SURVIVAL after 1 hour (72,000 ticks)
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (player.isOnline() && !player.isDead()) {
                     player.setGameMode(GameMode.SURVIVAL);
                     player.sendMessage(ChatColor.GREEN + "You have been released from the trap!");
+                    removeTrapBox(bottomCorner);
                 }
             }
         }.runTaskLater(Combat.getInstance(), 200); // 72000 ticks = 1 hour
+    }
+
+    private static void removeTrapBox(Location bottomCorner) {
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 5; y++) {
+                for (int z = 0; z < 5; z++) {
+                    if (x > 0 && x < 4 && y > 0 && y < 4 && z > 0 && z < 4) {
+                        continue;
+                    }
+                    bottomCorner.clone().add(x, y, z).getBlock().setType(Material.AIR);
+                }
+            }
+        }
     }
 }
 
