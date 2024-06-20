@@ -56,6 +56,9 @@ commands:
   playtime:
     description: Total playtime of a specified player in the game.
     usage: /playtime <player>
+  puu:
+    description: Spawns an oak tree at the player's location.
+    usage: /puu
   repair:
     description: Repairs the durability of your armor.
     usage: /repair

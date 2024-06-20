@@ -44,6 +44,31 @@ public class Trap implements CommandExecutor {
         Location bottomCorner = loc.clone().add(-1, -1, -1);
         PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 216000, 3);
 
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 5; y++) {
+                for (int z = 0; z < 5; z++) {
+                    // Skip the inside space
+                    if (x > 0 && x < 4 && y > 0 && y < 4 && z > 0 && z < 4) {
+                        continue;
+                    }
+
+                    // Set the block type to SPAWNER
+                    bottomCorner.clone().add(x, y, z).getBlock().setType(Material.SPAWNER);
+                }
+            }
+        }
+
+        // Apply mining fatigue effect to the player
+        player.addPotionEffect(mining_fatigue);
+        player.sendMessage("Trap has been spawned around you!");
+    }
+
+
+    public static void spawnrap(Player player) {
+        Location loc = player.getLocation();
+        Location bottomCorner = loc.clone().add(-1, -1, -1);
+        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 216000, 3);
+
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 4; y++) {
                 for (int z = 0; z < 3; z++) {
