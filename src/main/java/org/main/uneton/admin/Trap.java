@@ -5,8 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
@@ -37,14 +35,18 @@ public class Trap implements CommandExecutor {
                 player.sendMessage(ChatColor.DARK_RED + "That user is offline.");
                 return true;
             }
+
+            // if there is a player then spawn the box ->
             spawnTrap(player);
+
         }
         return true;
     }
 
+
     public static void spawnTrap(Player player) {
         Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(-2, -2, -2); // Adjusted bottom corner for a 5x5x5 cube
+        Location bottomCorner = loc.clone().add(0, 0, 0); // Adjusted bottom corner for a 5x5x5 cube
         player.setGameMode(GameMode.ADVENTURE);
 
         // Create the 5x5x5 outer shell with a hollow 3x3x3 inside
@@ -61,6 +63,7 @@ public class Trap implements CommandExecutor {
                 }
             }
         }
+
 
         // Teleport the player to the middle of the box
         Location middleLocation = bottomCorner.clone().add(2, 2, 2);
@@ -79,7 +82,7 @@ public class Trap implements CommandExecutor {
                     player.sendMessage(ChatColor.GREEN + "You have been released from the trap!");
                 }
             }
-        }.runTaskLater(Combat.getInstance(), 72000);
+        }.runTaskLater(Combat.getInstance(), 200); // 72000 ticks = 1 hour
     }
 }
 
@@ -108,38 +111,3 @@ public class Trap implements CommandExecutor {
 
 
 
-
-
-
-
-
-
-
-
-
-
-    /*
-    public static void spawnrap(Player player) {
-        Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(-1, -1, -1);
-        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 216000, 3);
-
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 4; y++) {
-                for (int z = 0; z < 3; z++) {
-                    if (((y == 1 || y == 2) && z == 1 & x == 1)) {  // empty space
-                        continue;
-                    }
-
-                    if ((y == 0 || y == 3) && z == 1 & x == 1) {  // roof/bottom block(s)
-                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.SPAWNER);
-                        player.addPotionEffect(mining_fatigue);
-                    } else { // Walls
-                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.SPAWNER);
-                        player.addPotionEffect(mining_fatigue);
-                    }
-                }
-            }
-        }
-    }
-    */
