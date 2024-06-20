@@ -14,6 +14,8 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.Combat;
 
 import java.util.ArrayList;
@@ -49,9 +51,19 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onTablist(PlayerJoinEvent e) {
+        Player player = e.getPlayer();
+        BukkitScheduler scheduler = Bukkit.getScheduler();
+        Runnable runnable = () -> {
+            // update the tablist
+            CustomTabList.updateTabList();
+        };
+        scheduler.runTaskTimer(Combat.getInstance(), runnable, 0, 1200);
+    }
+
+    @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        CustomTabList.updateTabList();
         if (!player.hasPlayedBefore()) {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
         } else {
