@@ -7,7 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.main.uneton.Combat;
 
 public class Trap implements CommandExecutor {
 
@@ -18,7 +20,7 @@ public class Trap implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("combat.trap.sv")) {
+        if (!player.hasPermission("combat.trap.sv")) {
             player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return true;
         }
@@ -42,8 +44,8 @@ public class Trap implements CommandExecutor {
 
     public static void spawnTrap(Player player) {
         Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(-1, -1, -1);
-        PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 216000, 3);
+        Location bottomCorner = loc.clone().add(-2, -2, -2); // Adjusted bottom corner for a 5x5x5 cube
+        player.setGameMode(GameMode.ADVENTURE);
 
         // Create the 5x5x5 outer shell with a hollow 3x3x3 inside
         for (int x = 0; x < 5; x++) {
@@ -60,15 +62,63 @@ public class Trap implements CommandExecutor {
             }
         }
 
-        // Apply mining fatigue effect to the player
+        // Teleport the player to the middle of the box
         Location middleLocation = bottomCorner.clone().add(2, 2, 2);
         player.teleport(middleLocation);
 
-        player.addPotionEffect(mining_fatigue);
-        player.sendTitle(ChatColor.RED.toString()+ChatColor.BOLD+ "Trapped!", ChatColor.RED+"You have been trapped in a box!", 10, 70, 20);
+        // Send a title message to the player
+        player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + "Trapped!",
+                ChatColor.RED + "You have been trapped in a box!", 10, 70, 20);
+
+        // Schedule a task to change player's game mode back to SURVIVAL after 1 hour (72,000 ticks)
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (player.isOnline() && !player.isDead()) {
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.sendMessage(ChatColor.GREEN + "You have been released from the trap!");
+                }
+            }
+        }.runTaskLater(Combat.getInstance(), 72000);
     }
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public static void spawnrap(Player player) {
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(-1, -1, -1);
@@ -92,4 +142,4 @@ public class Trap implements CommandExecutor {
             }
         }
     }
-}
+    */
