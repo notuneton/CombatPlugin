@@ -18,10 +18,6 @@ public class Guide implements CommandExecutor {
 
         ChatColor b = ChatColor.AQUA;
         ChatColor f = ChatColor.WHITE;
-        if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /guide <help>");
-        }
-
         switch (args.length) {
             case 1:
                 if ("combat.*".equals(args[0])) {
@@ -63,7 +59,7 @@ public class Guide implements CommandExecutor {
 
             default:
                 player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-                player.sendMessage(ChatColor.RED + "Error: " + ChatColor.DARK_RED + "No valid argument found!");
+                player.sendMessage(ChatColor.RED + "Error: " + ChatColor.DARK_RED + "No valid argument found, > /guide <help>");
                 player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                 break;
         }

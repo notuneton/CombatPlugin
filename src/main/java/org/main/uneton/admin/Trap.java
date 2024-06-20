@@ -44,6 +44,7 @@ public class Trap implements CommandExecutor {
         Location bottomCorner = loc.clone().add(-1, -1, -1);
         PotionEffect mining_fatigue = new PotionEffect(PotionEffectType.SLOW_DIGGING, 216000, 3);
 
+        // Create the 5x5x5 outer shell with a hollow 3x3x3 inside
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 5; y++) {
                 for (int z = 0; z < 5; z++) {
@@ -59,8 +60,11 @@ public class Trap implements CommandExecutor {
         }
 
         // Apply mining fatigue effect to the player
+        Location middleLocation = bottomCorner.clone().add(2, 2, 2);
+        player.teleport(middleLocation);
+
         player.addPotionEffect(mining_fatigue);
-        player.sendMessage("Trap has been spawned around you!");
+        player.sendTitle(ChatColor.RED.toString()+ChatColor.BOLD+ "Trapped!", ChatColor.RED+"You have been trapped in a box!", 10, 70, 20);
     }
 
 
