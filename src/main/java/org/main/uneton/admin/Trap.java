@@ -74,7 +74,7 @@ public class Trap implements CommandExecutor {
                     removeTrapBox(bottomCorner);
                 }
             }
-        }.runTaskLater(Combat.getInstance(), 72000); // 72000 ticks = 1 hour
+        }.runTaskLater(Combat.getInstance(), 400); // 72000 ticks = 1 hour | 20 ticks = 1 second
     }
 
     private static void removeTrapBox(Location bottomCorner) {
