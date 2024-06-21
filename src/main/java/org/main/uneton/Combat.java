@@ -51,28 +51,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(this, this);
-        if (!getConfig().contains("words")) {
-            List<String> words = new ArrayList<>();
-            words.add("");
-            getConfig().set("words", words);
-        }
-        saveConfig();
-    }
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent e) {
-        String message = e.getMessage();
-        Player player = e.getPlayer();
-        List<String> words = getConfig().getStringList("words");
-        for (int index = 0; index < words.size(); index++) {
-            if (message.contains(words.get(index))) {
-                e.setCancelled(true);
-                Bukkit.broadcastMessage("<"+ player.getName()+"> "+ "***");
-            }
-        }
-
-
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();
         customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
