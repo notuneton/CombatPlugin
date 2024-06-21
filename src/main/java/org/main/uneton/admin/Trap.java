@@ -91,7 +91,6 @@ public class Trap implements CommandExecutor {
     }
 
     public void applyBlindness(Player player, int duration, int amplifier) {
-        // Create a new PotionEffect instance for blindness
         PotionEffect blindnessEffect = new PotionEffect(PotionEffectType.BLINDNESS, (int) (duration * 20L), amplifier);
 
         // Apply the effect to the player
