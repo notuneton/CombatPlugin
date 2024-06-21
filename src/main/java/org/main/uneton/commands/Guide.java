@@ -20,24 +20,7 @@ public class Guide implements CommandExecutor {
         ChatColor f = ChatColor.WHITE;
         switch (args.length) {
             case 1:
-                if ("combat.*".equals(args[0])) {
-                    player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-                    player.sendMessage(b + "> /crash <player> " + f + " | Crashes the specified player's game");
-                    player.sendMessage(b + "> /gamemode <gamemode> <player>" + f + " | Specifies the game mode to switch.");
-                    player.sendMessage(b + "> /heal <player> " + f + " | Heals the player's hearts.");
-                    player.sendMessage(b + "> /invsee <player> " + f + " | See the inventory of other players.");
-                    player.sendMessage(b + "> /setspawn " + f + " | Sets the server spawn point!");
-                    player.sendMessage(b + "> /slippery <player> " + f + " | Drops Items from the player.");
-                    player.sendMessage(b + "> /trap <player> " + f + " | Create a cube around the player that the player cannot break.");
-                    player.sendMessage(b + "> /sudo <target> <message> " + f + " | Executes another player perform a task.");
-                    player.sendMessage(b + "> /freeze <player>" + f + " | Cancels the player's movement.");
-                    player.sendMessage(b + "> /gm <player> " + f + " | Makes the player invulnerable to all faults.");
-                    player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-                    break;
-                }
-
-            case 2:
-                if ("help".equals(args[0])) {
+                if ("commands".equals(args[0])) {
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     player.sendMessage(b + "> /spawn " + f + " | Teleport to the spawnpoint.");
                     player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");
@@ -57,9 +40,26 @@ public class Guide implements CommandExecutor {
                     break;
                 }
 
+            case 2:
+                if ("combat.*".equals(args[0])) {
+                    player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
+                    player.sendMessage(b + "> /crash <player> " + f + " | Crashes the specified player's game");
+                    player.sendMessage(b + "> /gamemode <gamemode> <player>" + f + " | Specifies the game mode to switch.");
+                    player.sendMessage(b + "> /heal <player> " + f + " | Heals the player's hearts.");
+                    player.sendMessage(b + "> /invsee <player> " + f + " | See the inventory of other players.");
+                    player.sendMessage(b + "> /setspawn " + f + " | Sets the server spawn point!");
+                    player.sendMessage(b + "> /slippery <player> " + f + " | Drops Items from the player.");
+                    player.sendMessage(b + "> /trap <player> " + f + " | Create a cube around the player that the player cannot break.");
+                    player.sendMessage(b + "> /sudo <target> <message> " + f + " | Executes another player perform a task.");
+                    player.sendMessage(b + "> /freeze <player>" + f + " | Cancels the player's movement.");
+                    player.sendMessage(b + "> /gm <player> " + f + " | Makes the player invulnerable to all faults.");
+                    player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
+                    break;
+                }
+
             default:
                 player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
-                player.sendMessage(ChatColor.RED + "Error: " + ChatColor.DARK_RED + "No valid argument found, > /guide <help>");
+                player.sendMessage(ChatColor.RED + "Error: " + ChatColor.DARK_RED + "No valid argument found! Try /guide <commands>");
                 player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                 break;
         }
