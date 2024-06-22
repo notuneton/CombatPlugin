@@ -10,8 +10,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
-import org.main.uneton.Combat;
 
 import java.util.*;
 
@@ -20,7 +18,6 @@ public class CombatLog implements Listener {
     private final JavaPlugin plugin;
     private static final Map<Player, List<Player>> isInCombat = new HashMap<>();
     public static final Map<Player, Long> combat_tagged = new HashMap<>();
-    private BukkitTask task;
 
     public CombatLog(JavaPlugin plugin) {
         this.plugin = plugin;
