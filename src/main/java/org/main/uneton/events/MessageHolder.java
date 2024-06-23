@@ -38,18 +38,6 @@ public class MessageHolder implements Listener {
         } else {
             e.setCancelled(true);
             sendWarnMessage(player, message);
-            return;
-        }
-
-        String[] array = message.split(" ");
-        int actions = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i].equals(array[i].toUpperCase())) {
-                actions++;
-            }
-        }
-        if (actions >= 3) {
-            e.setCancelled(true);
         }
     }
 
