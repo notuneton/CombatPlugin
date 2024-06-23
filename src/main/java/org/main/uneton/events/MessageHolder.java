@@ -58,6 +58,18 @@ public class MessageHolder implements Listener {
         player.sendMessage(blocked_message);
     }
 
+    @EventHandler
+    public void onChat(PlayerChatEvent e) {
+        String message = e.getMessage();
+        if (message.contains(")")) {
+            // Replace ")" with "ツ"
+            String replacedMessage = message.replace(")", "ツ");
+
+            // Set the new message
+            e.setMessage(replacedMessage);
+        }
+    }
+
 
     // &8[] &7%player% &8: &7%message%
 }
