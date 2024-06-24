@@ -208,8 +208,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     }
 
-
-
     public void onDisable() {
         // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
         // saveEconomy();

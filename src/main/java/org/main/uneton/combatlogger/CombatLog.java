@@ -35,6 +35,7 @@ public class CombatLog implements Listener {
                     player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
                 }
                 if (combat_tagged.containsKey(player)) {
+                    player.sendMessage(ChatColor.RED + "You are now in combat.");
                     player.sendActionBar(ChatColor.GRAY + "Combat: " + ChatColor.DARK_AQUA + (endTime - System.currentTimeMillis()) / 1000);
                 }
             });
