@@ -74,7 +74,7 @@ public class Trap implements CommandExecutor {
                     removeTrapBox(bottomCorner);
                 }
             }
-        }.runTaskLater(Combat.getInstance(), 400); // 72000 ticks = 1 hour | 20 ticks = 1 second
+        }.runTaskLater(Combat.getInstance(), 6000); // 72000 ticks = 1 hour | 20 ticks = 1 second
     }
 
     private static void removeTrapBox(Location bottomCorner) {
@@ -91,7 +91,7 @@ public class Trap implements CommandExecutor {
     }
 
     public void applyBlindness(Player player, int duration, int amplifier) {
-        PotionEffect blindnessEffect = new PotionEffect(PotionEffectType.BLINDNESS, (int) (duration * 20L), amplifier);
+        PotionEffect blindnessEffect = new PotionEffect(PotionEffectType.BLINDNESS, (int) (duration * 6000L), amplifier);
 
         // Apply the effect to the player
         player.addPotionEffect(blindnessEffect);
