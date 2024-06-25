@@ -37,9 +37,11 @@ public class MessageHolder implements Listener {
 
         } else {
             e.setCancelled(true);
-            sendWarnMessage(player, message);
+            player.sendMessage(ChatColor.BOLD + player.getName() + " your message(s) were deleted because of spam.");
         }
     }
+
+    // This can't be posted because it contains content blocked by this server. This may also be viewed by server owners.
 
     private void sendWarnMessage(Player player, String message) {
         String blocked_message = ChatColor.translateAlternateColorCodes('&', "" + ChatColor.GRAY + ChatColor.ITALIC + player.getName() + " " + message);
