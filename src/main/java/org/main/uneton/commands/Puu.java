@@ -7,7 +7,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 public class Puu implements CommandExecutor {
@@ -19,15 +18,8 @@ public class Puu implements CommandExecutor {
             return true;
         }
 
-        spawnTreeAhead(player);
-        return true;
-    }
-
-    private void spawnTreeAhead(Player player) {
         Location location = player.getLocation();
-        Vector direction = location.getDirection(); // Get the direction the player is facing
-        Location treeLocation = location.add(direction); // Move the location one block in that direction
-
-        treeLocation.getWorld().generateTree(treeLocation, TreeType.TREE);
+        location.getWorld().generateTree(location, TreeType.TREE);
+        return true;
     }
 }

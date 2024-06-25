@@ -23,8 +23,7 @@ public class Freeze implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.freeze.sv")) {
-            player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
-            return true;
+            return false;
         }
 
         if (args.length == 0) {

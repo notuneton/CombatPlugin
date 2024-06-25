@@ -25,7 +25,6 @@ public class SetSpawn implements CommandExecutor {
         }
 
         if(!player.hasPermission("combat.setspawn.sv")) {
-            player.sendMessage(ChatColor.RED + "Permission Denied: You do not have permission to do this task.");
             return false;
         }
 
