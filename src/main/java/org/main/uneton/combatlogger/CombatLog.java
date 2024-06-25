@@ -58,6 +58,16 @@ public class CombatLog implements Listener {
         if (combat_tagged.containsKey(exited)) {
             exited.setHealth(0);
             endCombat(exited);
+
+            /*
+            List<String> commands = Arrays.asList(
+                    "tempban %player% 2 h combat logged out from the server"
+            );
+            int index = 0;
+            String cmd = commands.get(index);
+            cmd = cmd.replace("%player%", exited.getName());
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+             */
         }
     }
 
