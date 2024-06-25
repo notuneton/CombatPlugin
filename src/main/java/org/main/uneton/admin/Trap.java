@@ -61,8 +61,6 @@ public class Trap implements CommandExecutor {
         Location middleLocation = bottomCorner.clone().add(2, 2, 2);
         player.teleport(middleLocation);
         player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + "Trapped!", ChatColor.RED + "You have been trapped in a box!", 10, 70, 20);
-        applyBlindness(player, 10, 1); // Applies blindness for 10 seconds at level 1
-
 
         new BukkitRunnable() {
             @Override
@@ -88,13 +86,5 @@ public class Trap implements CommandExecutor {
             }
         }
     }
-
-    public void applyBlindness(Player player, int duration, int amplifier) {
-        PotionEffect blindnessEffect = new PotionEffect(PotionEffectType.BLINDNESS, (int) (duration * 6000L), amplifier);
-
-        // Apply the effect to the player
-        player.addPotionEffect(blindnessEffect);
-    }
-
 }
 
