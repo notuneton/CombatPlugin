@@ -5,8 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
@@ -58,10 +56,8 @@ public class Trap implements CommandExecutor {
             }
         }
 
-        Location middleLocation = bottomCorner.clone().add(2, 2, 2);
+        Location middleLocation = bottomCorner.clone().add(2, 3, 2);
         player.teleport(middleLocation);
-        player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + "Trapped!", ChatColor.RED + "You have been trapped in a box!", 10, 70, 20);
-
         new BukkitRunnable() {
             @Override
             public void run() {
