@@ -19,15 +19,11 @@ import org.main.uneton.frez.Freeze;
 import org.main.uneton.frez.FreezeListener;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
-import org.main.uneton.ignore.Ignore;
-import org.main.uneton.ignore.IgnoreListener;
-import org.main.uneton.ignore.Ignorelist;
 import org.main.uneton.admin.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
 import org.main.uneton.trash.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
-import org.main.uneton.ignore.Unignore;
 import org.main.uneton.trash.Trash;
 
 import java.util.*;
@@ -130,11 +126,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         getCommand("gm").setExecutor(new Gm());
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
-
-        getCommand("ignore").setExecutor(new Ignore());
-        getCommand("ignorelist").setExecutor(new Ignorelist());
-        Bukkit.getPluginManager().registerEvents(new IgnoreListener(), this);
-        getCommand("unignore").setExecutor(new Unignore());
 
         getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);

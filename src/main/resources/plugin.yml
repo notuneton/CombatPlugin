@@ -82,15 +82,6 @@ commands:
     permission-message: Permission Denied, You do not have permission to do this task.
     description: makes the player invulnerable to all faults.
     usage: /gm <player>
-  ignore:
-    description: Ignore a player.
-    usage: /ignore <help>
-  ignorelist:
-    description: List ignored players.
-    usage: /ignorelist
-  unignore:
-    description: Unignore a player.
-    usage: /unignore <player>
   trashcan:
     description: Put your stuff in the menu and close it!
     usage: /trashcan
