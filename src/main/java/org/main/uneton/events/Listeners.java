@@ -45,8 +45,8 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        e.setQuitMessage(null);
-        // e.setQuitMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_RED + " - " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        // e.setQuitMessage(null);
+        e.setQuitMessage(ChatColor.DARK_GRAY + "[" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
@@ -55,11 +55,11 @@ public class Listeners implements Listener {
         Tab.updateTab();
         if (!player.hasPlayedBefore()) {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
+
         } else {
-            e.setJoinMessage(null);
+            e.setJoinMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
         }
 
-        // e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + " + " + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
@@ -129,7 +129,7 @@ public class Listeners implements Listener {
         Player player = e.getPlayer();
         if (block.getType() == Material.SUGAR_CANE) {
             Random chance = new Random();
-            if (chance.nextDouble() < 0.006) {
+            if (chance.nextDouble() < 1) {
                 dropCocaine(player);
             }
         }
@@ -142,7 +142,7 @@ public class Listeners implements Listener {
                 // e.getBlock().getType() == Material. ||
                 e.getBlock().getType() == Material.NETHERRACK) {
             Random chance = new Random();
-            if(chance.nextDouble() < 0.001) {
+            if(chance.nextDouble() < 0.5) {
                 dropPinkDiamond(player, e);
             }
         }
@@ -195,7 +195,7 @@ public class Listeners implements Listener {
 
         ArrayList<String> lore = new ArrayList<>();
         lore.add(" ");
-        lore.add(gray + "Probability: " + red + "0.001%");
+        lore.add(gray + "Probability: " + red + "0.5%");
         pinkMeta.setLore(lore);
         pinkDiamond.setItemMeta(pinkMeta);
 
