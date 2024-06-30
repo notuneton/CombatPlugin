@@ -123,6 +123,25 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onLootBox(BlockBreakEvent e) {
+        Player player = e.getPlayer();
+        Block block = e.getBlock();
+        Location loc = e.getBlock().getLocation();
+
+        if (e.getBlock().getType() == Material.POLISHED_DIORITE) {
+            Random chance = new Random();
+            if (Math.random() < 0.2) {
+                int index = chance.nextInt(blocks.length);
+                ItemStack dropped_item = blocks[index];
+                block.getWorld().dropItemNaturally(loc, dropped_item);
+
+            } else if (Math.random() < 0.8) {
+
+            }
+        }
+    }
+
+    @EventHandler
     public void onRareDrop(BlockBreakEvent e) {
         Block block = e.getBlock();
         Location loc = e.getBlock().getLocation();
@@ -149,20 +168,15 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onLootBox(BlockBreakEvent e) {
-        Player player = e.getPlayer();
-        Block block = e.getBlock();
-        Location loc = e.getBlock().getLocation();
-
-        if (e.getBlock().getType() == Material.POLISHED_DIORITE) {
-            Random chance = new Random();
-            if (Math.random() < 0.2) {
-                int index = chance.nextInt(blocks.length);
-                ItemStack dropped_item = blocks[index];
-                block.getWorld().dropItemNaturally(loc, dropped_item);
-
-            } else if (Math.random() < 0.8) {
-
+    public void onShearSheep(PlayerInteractEntityEvent event) {
+        Player player = event.getPlayer();
+        Location loc = player.getLocation();
+        if (event.getRightClicked() instanceof Sheep) {
+            if (player.getInventory().getItemInMainHand().getType() == Material.SHEARS) {
+                Random chance = new Random();
+                if (chance.nextDouble() < 0.001) {
+                    woolDrops(player, loc);
+                }
             }
         }
     }
@@ -202,20 +216,6 @@ public class Listeners implements Listener {
         Location location = e.getPlayer().getLocation();
         e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
         player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
-    }
-
-    @EventHandler
-    public void onShearSheep(PlayerInteractEntityEvent event) {
-        Player player = event.getPlayer();
-        Location loc = player.getLocation();
-        if (event.getRightClicked() instanceof Sheep) {
-            if (player.getInventory().getItemInMainHand().getType() == Material.SHEARS) {
-                Random chance = new Random();
-                if (chance.nextDouble() < 0.001) {
-                    woolDrops(player, loc);
-                }
-            }
-        }
     }
 
     private void woolDrops(Player player, Location loc) {
