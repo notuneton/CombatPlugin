@@ -33,7 +33,7 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    String message = "&x&E&6&D&1&B&6Y&x&E&7&C&9&A&Fo&x&E&9&C&2&A&8u &x&E&A&B&A&A&2a&x&E&C&B&3&9&Br&x&E&D&A&B&9&4e &x&E&F&A&4&8&Dn&x&F&0&9&C&8&7o &x&F&1&9&5&8&0l&x&F&3&8&D&7&9o&x&F&4&8&6&7&2n&x&E&C&7&F&6&Eg&x&D&A&7&8&6&De&x&C&8&7&1&6&Cr &x&B&6&6&A&6&Bi&x&A&4&6&4&6&9n &x&9&3&5&D&6&8c&x&8&1&5&6&6&7o&x&6&F&4&F&6&6m&x&5&D&4&9&6&4b&x&4&B&4&2&6&3a&x&3&9&3&B&6&2t";
+                    String message = "\n&x&E&6&D&1&B&6Y&x&E&7&C&9&A&Fo&x&E&9&C&2&A&8u &x&E&A&B&A&A&2a&x&E&C&B&3&9&Br&x&E&D&A&B&9&4e &x&E&F&A&4&8&Dn&x&F&0&9&C&8&7o &x&F&1&9&5&8&0l&x&F&3&8&D&7&9o&x&F&4&8&6&7&2n&x&E&C&7&F&6&Eg&x&D&A&7&8&6&De&x&C&8&7&1&6&Cr &x&B&6&6&A&6&Bi&x&A&4&6&4&6&9n &x&9&3&5&D&6&8c&x&8&1&5&6&6&7o&x&6&F&4&F&6&6m&x&5&D&4&9&6&4b&x&4&B&4&2&6&3a&x&3&9&3&B&6&2t\n";
                     player.sendMessage(ColorUtils.colorize(message));
                 }
                 if (combat_tagged.containsKey(player)) {
