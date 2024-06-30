@@ -10,6 +10,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.main.uneton.events.ChatUtils;
 
 import java.util.*;
 
@@ -32,7 +33,9 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    player.sendMessage(ChatColor.GREEN + "You are no longer in combat.");
+                    String outOfCombatMsg = "&x&E&6&D&1&B&6Y&x&E&7&C&A&B&0o&x&E&9&C&3&A&9u &x&E&A&B&B&A&3a&x&E&B&B&4&9&Cr&x&E&D&A&D&9&6e &x&E&E&A&6&8&Fn&x&F&0&9&F&8&9o &x&F&1&9&8&8&2l&x&F&2&9&0&7&Co&x&F&4&8&9&7&5n&x&F&5&8&2&6&Fg&x&E&4&7&C&6&Ee&x&D&3&7&5&6&Dr &x&C&2&6&F&6&Bi&x&B&1&6&8&6&An &x&A&0&6&2&6&9c&x&8&E&5&B&6&8o&x&7&D&5&5&6&7m&x&6&C&4&E&6&6b&x&5&B&4&8&6&4a&x&4&A&4&1&6&3t&x&3&9&3&B&6&2.";
+                    String translateMessage = ChatUtils.translateHexColorCodes(outOfCombatMsg);
+                    player.sendMessage(translateMessage);
                 }
                 if (combat_tagged.containsKey(player)) {
                     player.sendActionBar(ChatColor.GRAY + "Combat: " + ChatColor.DARK_AQUA + (endTime - System.currentTimeMillis()) / 1000);
