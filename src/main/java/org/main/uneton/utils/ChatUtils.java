@@ -1,4 +1,4 @@
-package org.main.uneton.events;
+package org.main.uneton.utils;
 
 import org.bukkit.ChatColor;
 

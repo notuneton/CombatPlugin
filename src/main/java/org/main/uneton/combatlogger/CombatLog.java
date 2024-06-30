@@ -10,7 +10,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.main.uneton.events.ChatUtils;
+import org.main.uneton.utils.ChatUtils;
 
 import java.util.*;
 
