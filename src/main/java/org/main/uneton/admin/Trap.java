@@ -35,7 +35,6 @@ public class Trap implements CommandExecutor {
                 return true;
             }
 
-            // if there is a player then spawn ->
             spawnTrap(player);
         }
         return true;
