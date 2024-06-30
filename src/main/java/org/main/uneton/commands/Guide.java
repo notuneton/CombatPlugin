@@ -31,7 +31,6 @@ public class Guide implements CommandExecutor {
                     player.sendMessage(b + "> /repair " + f + " | Repairs the durability of your armor.");
                     player.sendMessage(b + "> /rules " + f + " | Rules of the Server.");
                     player.sendMessage(b + "> /sign " + f + " | Spawns you a sign. (Can be clicked!)");
-
                     player.sendMessage(b + "> /trashcan " + f + " | Put your stuff in the menu and close it!");
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     break;
