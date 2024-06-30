@@ -45,7 +45,6 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        // e.setQuitMessage(null);
         e.setQuitMessage(ChatColor.DARK_GRAY + "[" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
