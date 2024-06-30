@@ -63,6 +63,44 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlyaerDeath(PlayerDeathEvent e) {
+        if (e.getEntity().getKiller() != null) {
+            e.setKeepInventory(true);
+            e.getDrops().clear();
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        World world = player.getWorld();
+        int loc = 5;
+        if (world.getEnvironment() == World.Environment.THE_END) {
+            if (player.getLocation().getY() <= loc) {
+                player.setHealth(0);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDropOnDeath(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        Player killer = victim.getKiller();
+        Location location = victim.getLocation();
+
+        if (killer != null && !killer.equals(victim)) {
+            ItemStack blood = new ItemStack(Material.RED_DYE, 3);
+            Item dropped = location.getWorld().dropItemNaturally(location, blood);
+            dropped.setPickupDelay(32767);
+            Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
+                if (dropped.isValid()) {
+                    dropped.remove();
+                }
+            }, 200L);
+        }
+    }
+
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
         Block block = event.getClickedBlock();
@@ -111,12 +149,12 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onLootBox(BlockBreakEvent e){
+    public void onLootBox(BlockBreakEvent e) {
         Player player = e.getPlayer();
         Block block = e.getBlock();
         Location loc = e.getBlock().getLocation();
 
-        if(e.getBlock().getType() == Material.POLISHED_DIORITE) {
+        if (e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
             if (Math.random() < 0.2) {
                 int index = chance.nextInt(blocks.length);
@@ -126,44 +164,6 @@ public class Listeners implements Listener {
             } else if (Math.random() < 0.8) {
 
             }
-        }
-    }
-
-    @EventHandler
-    public void onPlyaerDeath(PlayerDeathEvent e) {
-        if (e.getEntity().getKiller() != null) {
-            e.setKeepInventory(true);
-            e.getDrops().clear();
-        }
-    }
-
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        int loc = 5;
-        if (world.getEnvironment() == World.Environment.THE_END) {
-            if (player.getLocation().getY() <= loc) {
-                player.setHealth(0);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onDropOnDeath(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        Player killer = victim.getKiller();
-        Location location = victim.getLocation();
-
-        if (killer != null && !killer.equals(victim)) {
-            ItemStack blood = new ItemStack(Material.RED_DYE, 3);
-            Item dropped = location.getWorld().dropItemNaturally(location, blood);
-            dropped.setPickupDelay(32767);
-            Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
-                if (dropped.isValid()) {
-                    dropped.remove();
-                }
-            }, 200L);
         }
     }
 
@@ -202,5 +202,32 @@ public class Listeners implements Listener {
         Location location = e.getPlayer().getLocation();
         e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
         player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
+    }
+
+    @EventHandler
+    public void onShearSheep(PlayerInteractEntityEvent event) {
+        Player player = event.getPlayer();
+        Location loc = player.getLocation();
+        if (event.getRightClicked() instanceof Sheep) {
+            if (player.getInventory().getItemInMainHand().getType() == Material.SHEARS) {
+                Random chance = new Random();
+                if (chance.nextDouble() < 0.001) {
+                    woolDrops(player, loc);
+                }
+            }
+        }
+    }
+
+    private void woolDrops(Player player, Location loc) {
+        ItemStack bluegem = new ItemStack(Material.LAPIS_LAZULI, 1);
+        ItemMeta bluegem_meta = bluegem.getItemMeta();
+        bluegem_meta.setDisplayName(ChatColor.BLUE + "Blue gem color");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(" ");
+        lore.add(ChatColor.GREEN + "Probability: " + ChatColor.YELLOW + "0.001%");
+        bluegem_meta.setLore(lore);
+        bluegem.setItemMeta(bluegem_meta);
+
+        player.getWorld().dropItemNaturally(loc, bluegem);
     }
 }
