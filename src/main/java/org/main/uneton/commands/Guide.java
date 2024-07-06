@@ -40,7 +40,6 @@ public class Guide implements CommandExecutor {
                 if ("combat.*".equals(args[0])) {
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     player.sendMessage(b + "> /crash <player> " + f + " | Crashes the specified player's game");
-                    player.sendMessage(b + "> /gamemode <gamemode> <player>" + f + " | Specifies the game mode to switch.");
                     player.sendMessage(b + "> /heal <player> " + f + " | Heals the player's hearts.");
                     player.sendMessage(b + "> /invsee <player> " + f + " | See the inventory of other players.");
                     player.sendMessage(b + "> /setspawn " + f + " | Sets the server spawn point!");
