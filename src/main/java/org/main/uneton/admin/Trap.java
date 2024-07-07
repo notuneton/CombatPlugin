@@ -44,6 +44,7 @@ public class Trap implements CommandExecutor {
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(0, 0, 0);
         player.setGameMode(GameMode.ADVENTURE);
+        player.sendMessage("Your game mode has been updated");
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 5; y++) {
                 for (int z = 0; z < 5; z++) {
@@ -54,7 +55,6 @@ public class Trap implements CommandExecutor {
                 }
             }
         }
-
         Location middleLocation = bottomCorner.clone().add(2, 3, 2);
         player.teleport(middleLocation);
         new BukkitRunnable() {
