@@ -15,7 +15,7 @@ public class Tab {
         String footer = footercolor.replace("&D", "&d").replace("&A", "&a").replace("&B", "&b")
                 .replace("&F", "&f").replace("&O", "&o").replace("&E", "&e");
 
-        // Update all players' tab lists
+        // Update all player's tab lists
         for (Player user : Bukkit.getOnlinePlayers()) {
             user.setPlayerListHeaderFooter(ChatColor.translateAlternateColorCodes('&', header), ChatColor.translateAlternateColorCodes('&', footer));
         }
