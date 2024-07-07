@@ -62,7 +62,7 @@ public class Trap implements CommandExecutor {
             public void run() {
                 if (player.isOnline() && !player.isDead()) {
                     player.setGameMode(GameMode.SURVIVAL);
-                    player.sendMessage(ChatColor.GREEN + "You have been released from the trap!");
+                    player.sendMessage("You have been released from the trap!");
                     removeTrapBox(bottomCorner);
                 }
             }
