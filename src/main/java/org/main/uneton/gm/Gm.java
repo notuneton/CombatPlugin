@@ -44,7 +44,7 @@ public class Gm implements CommandExecutor {
         if (args.length == 1) {
             if (gm_list.contains(target)) {
                 gm_list.remove(target);
-                player.sendMessage(ChatColor.WHITE + "You are not" +ChatColor.RED + "longer " + ChatColor.WHITE + "in" + ChatColor.BLUE + " Godmode.");
+                player.sendMessage(ChatColor.WHITE + "You are not" +ChatColor.RED + " longer " + ChatColor.WHITE + "in" + ChatColor.BLUE + " Godmode.");
                 cancelTask();
             } else {
                 gm_list.add(target);

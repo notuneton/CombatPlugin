@@ -54,7 +54,7 @@ public class Listeners implements Listener {
         Player player = e.getPlayer();
         Tab.updateTab();
         if (!player.hasPlayedBefore()) {
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
+            e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
 
         } else {
             e.setJoinMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());

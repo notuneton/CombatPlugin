@@ -26,4 +26,19 @@ public class GmListener implements Listener {
             gm_list.remove(player);
         }
     }
+
+    @EventHandler
+    public void onEntityAggro(EntityDamageEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Player && ((Player) entity).isOnline()) {
+            Player player = (Player) entity;
+            if (gm_list.contains(player)) {
+                // Instead of cancelling the event, let it proceed normally
+                // This allows mobs to still aggro towards the player
+                return;
+            }
+        }
+        // Handle other cases outside of God Mode players
+        event.setCancelled(false); // Ensure other damage checks are handled correctly
+    }
 }
