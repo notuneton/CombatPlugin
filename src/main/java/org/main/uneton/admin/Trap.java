@@ -35,7 +35,7 @@ public class Trap implements CommandExecutor {
                 return true;
             }
 
-            spawnTrap(player);
+            spawnTrap(target);
         }
         return true;
     }
@@ -66,7 +66,7 @@ public class Trap implements CommandExecutor {
                     removeTrapBox(bottomCorner);
                 }
             }
-        }.runTaskLater(Combat.getInstance(), 6000); // 72000 ticks = 1 hour | 20 ticks = 1 second
+        }.runTaskLater(Combat.getInstance(), 2000); // 72000 ticks = 1 hour | 20 ticks = 1 second
     }
 
     private static void removeTrapBox(Location bottomCorner) {
