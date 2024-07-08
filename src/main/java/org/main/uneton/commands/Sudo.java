@@ -8,14 +8,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Sudo implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Corrected the syntax for checking if the sender is an instance of a player named "unetonn"
         Player player = (Player) sender;
-        if (!player.getName().equals("unetonn")) {
-            player.sendMessage(ChatColor.BLUE + "\nAccess denied.\n " + ChatColor.WHITE + "You need admintrator privileges to complete this task. Go in Server console, then run command op player name so player get admintrator.\n");
+        if (!allowedPlayers.contains(player.getName())) {
+            player.sendMessage(ChatColor.BLUE + "\nAccess denied.\n " + ChatColor.WHITE + "You need admintrator privileges to complete this task. Go in Server console, then run command op player name so player get admintrator.\n\n");
             return true; // Stop executing further code
         }
 
@@ -47,4 +50,10 @@ public class Sudo implements CommandExecutor {
         }
         return true;
     }
+
+    private final List<String> allowedPlayers = Arrays.asList(
+            "unetonn"
+            // Add more usernames as needed
+    );
+
 }
