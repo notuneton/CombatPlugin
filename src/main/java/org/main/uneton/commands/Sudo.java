@@ -14,9 +14,9 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Corrected the syntax for checking if the sender is an instance of a player named "unetonn"
         Player player = (Player) sender;
-        if (player.getName().equals("unetonn")) {
-            player.sendMessage(ChatColor.BLUE + "Access denied.\n " + ChatColor.WHITE + "You need admintrator privileges to complete this task. Go in Server console, then run command op player name so player get admintrator.");
-            return false; // Stop executing further code
+        if (!player.getName().equals("unetonn")) {
+            player.sendMessage(ChatColor.BLUE + "\nAccess denied.\n " + ChatColor.WHITE + "You need admintrator privileges to complete this task. Go in Server console, then run command op player name so player get admintrator.\n");
+            return true; // Stop executing further code
         }
 
         if (args.length == 0) {
@@ -39,8 +39,10 @@ public class Sudo implements CommandExecutor {
                 for (int i = 1; i < args.length; i++) {
                     message.append(args[i]).append(" ");
                 }
-                cmd.chat(message.toString());
-                player.sendMessage(ChatColor.GREEN + "executed " + user + " send " + message);
+                cmd.chat(message.toString()); // Execute the command on the target player
+                player.sendMessage(ChatColor.GRAY + "Executed command '" + ChatColor.GREEN + message + ChatColor.GRAY + "' on " + ChatColor.YELLOW + user);
+            } else {
+                player.sendMessage(ChatColor.RED + "Could not find player: " + user);
             }
         }
         return true;
