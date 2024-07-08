@@ -20,7 +20,7 @@ public class Guide implements CommandExecutor {
         ChatColor f = ChatColor.WHITE;
         switch (args.length) {
             case 1:
-                if ("commands".equals(args[0])) {
+                if ("commands".equals(args[0]) || "cmds".equals(args[0])) {
                     player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
                     player.sendMessage(b + "> /spawn " + f + " | Teleport to the spawnpoint.");
                     player.sendMessage(b + "> /ec " + f + " | Opens your personal Enderchest.");

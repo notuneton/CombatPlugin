@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.PermissionUtils;
 
 public class Trap implements CommandExecutor {
 
@@ -19,6 +20,7 @@ public class Trap implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.trap.sv")) {
+            PermissionUtils.messageIfNotPermitted(sender, "combat.trap.sv");
             return false;
         }
 
