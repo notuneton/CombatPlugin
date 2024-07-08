@@ -37,7 +37,6 @@ public class MessageHolder implements Listener {
 
         } else {
             e.setCancelled(true);
-            player.sendMessage(ChatColor.BOLD + player.getName() + " your message(s) were deleted because of spam.");
         }
     }
 
