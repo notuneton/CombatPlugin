@@ -77,6 +77,7 @@ public class Spawn implements CommandExecutor {
 
             //TODO return false; == Teleportation should not proceed
             // return true; == Teleportation proceeded successfully
+            //
         }
     }
 }

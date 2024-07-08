@@ -12,7 +12,13 @@ public class Sudo implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        // Corrected the syntax for checking if the sender is an instance of a player named "unetonn"
         Player player = (Player) sender;
+        if (player.getName().equals("unetonn")) {
+            return false; // Stop executing further code
+            // stop executig code...
+        }
+
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "> /sudo <target> <command>");
             return true;
