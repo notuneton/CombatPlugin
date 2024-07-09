@@ -70,14 +70,15 @@ public class Combat extends JavaPlugin implements Listener {
         ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
         ItemMeta elytra_meta = elytra.getItemMeta();
         elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
+        elytra_meta.setUnbreakable(true);
         elytra.setItemMeta(elytra_meta);
 
         ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), elytra);
-        elytraRecipe.shape("SDS", "PFP", "P P");
-        elytraRecipe.setIngredient('S', Material.STRING);
-        elytraRecipe.setIngredient('D', Material.DIAMOND);
-        elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
+        elytraRecipe.shape("FSF", "PDP", "P P");
+        elytraRecipe.setIngredient('F', Material.STRING);
         elytraRecipe.setIngredient('F', Material.FEATHER);
+        elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
+        elytraRecipe.setIngredient('D', Material.DRAGON_BREATH);
         Bukkit.addRecipe(elytraRecipe);
 
 
