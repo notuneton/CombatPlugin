@@ -20,6 +20,7 @@ public class Puu implements CommandExecutor {
 
         Location location = player.getLocation();
         location.getWorld().generateTree(location, TreeType.TREE);
+        player.sendMessage(ChatColor.GREEN + "A tree has been generated at your location!");
         return true;
     }
 }
