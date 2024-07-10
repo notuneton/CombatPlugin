@@ -61,7 +61,16 @@ public class Listeners implements Listener {
         } else {
             e.setJoinMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
         }
+    }
 
+    @EventHandler
+    public void onPlayerPotionConsume(PlayerItemConsumeEvent e) {
+        ItemStack consumedItem = e.getItem();
+        Player player = e.getPlayer();
+        if (consumedItem.getType() == Material.POTION) {
+            player.getInventory().removeItem(consumedItem);
+
+        }
     }
 
     @EventHandler
