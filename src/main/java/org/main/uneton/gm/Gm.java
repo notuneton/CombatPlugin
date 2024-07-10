@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +32,8 @@ public class Gm implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /gm <player>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7Usage: \"&x&A&B&A&B&A&B/&x&A&B&A&B&A&Bi&x&A&B&A&B&A&Bn&x&A&B&A&B&A&Bv&x&A&B&A&B&A&Bs&x&A&B&A&B&A&Be&x&A&B&A&B&A&Be &x&A&B&A&B&A&B<&x&A&B&A&B&A&Bp&x&A&B&A&B&A&Bl&x&A&B&A&B&A&Ba&x&A&B&A&B&A&By&x&A&B&A&B&A&Be&x&A&B&A&B&A&Br&x&A&B&A&B&A&B> &7/gm <player>\"");
+            player.sendMessage(usage);
             return true;
         }
 
