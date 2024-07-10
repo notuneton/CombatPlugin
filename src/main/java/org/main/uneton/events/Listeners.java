@@ -140,7 +140,7 @@ public class Listeners implements Listener {
                 block.getWorld().dropItemNaturally(loc, dropped_item);
 
             } else if (Math.random() < 0.8) {
-
+                e.setDropItems(false);
             }
         }
     }

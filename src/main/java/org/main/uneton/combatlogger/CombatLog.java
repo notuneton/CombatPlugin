@@ -33,7 +33,7 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    String noLonger = "&8[i] &x&B&E&4&D&F&BY&x&B&B&5&4&F&Bo&x&B&8&5&C&F&Cu &x&B&5&6&3&F&Ca&x&B&3&6&B&F&Dr&x&B&0&7&2&F&De &x&A&D&7&A&F&Dn&x&A&A&8&1&F&Eo &x&A&7&8&8&F&El&x&A&4&9&0&F&Eo&x&A&1&9&7&F&Fn&x&9&F&9&6&F&Cg&x&9&C&8&B&F&6e&x&9&9&8&1&F&0r &x&9&6&7&6&E&Bi&x&9&3&6&B&E&5n &x&9&0&6&1&D&Fc&x&8&D&5&6&D&9o&x&8&A&4&C&D&3m&x&8&7&4&1&C&Eb&x&8&4&3&7&C&8a&x&8&1&2&C&C&2t";
+                    String noLonger = "&8&l[i] &x&5&7&B&3&2&5Y&x&5&8&B&3&2&5o&x&5&8&B&3&2&6u &x&5&9&B&3&2&6a&x&5&9&B&3&2&7r&x&5&A&B&3&2&7e &x&5&A&B&3&2&8n&x&5&B&B&3&2&8o &x&5&C&B&3&2&9l&x&5&C&B&3&2&9o&x&5&D&B&3&2&An&x&5&D&B&3&2&Ag&x&5&E&B&3&2&Be&x&5&E&B&3&2&Br &x&5&F&B&3&2&Ci&x&6&0&B&3&2&Cn &x&6&0&B&3&2&Cc&x&6&1&B&3&2&Do&x&6&1&B&3&2&Dm&x&6&2&B&3&2&Eb&x&6&2&B&3&2&Ea&x&6&3&B&3&2&Ft &x&6&4&B&3&2&Ft&x&6&4&B&3&3&0a&x&6&5&B&3&3&0g&x&6&5&B&3&3&1g&x&6&6&B&3&3&1e&x&6&6&B&3&3&2d&x&6&7&B&3&3&2!";
                     player.sendMessage(ColorUtils.colorize(noLonger));
                 }
                 if (combat_tagged.containsKey(player)) {
@@ -60,18 +60,19 @@ public class CombatLog implements Listener {
         if (combat_tagged.containsKey(exited)) {
             exited.setHealth(0);
             endCombat(exited);
-
-            /*
-            List<String> commands = Arrays.asList(
-                    "tempban %player% 2 h combat logged out from the server"
-            );
-            int index = 0;
-            String cmd = commands.get(index);
-            cmd = cmd.replace("%player%", exited.getName());
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
-             */
         }
     }
+
+
+     /*
+     List<String> commands = Arrays.asList(
+            "tempban %player% 2 h combat logged out from the server"
+     );
+     int index = 0;
+     String cmd = commands.get(index);
+     cmd = cmd.replace("%player%", exited.getName());
+     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+     */
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {

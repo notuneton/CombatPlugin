@@ -54,7 +54,6 @@ public class Combat extends JavaPlugin implements Listener {
         totemOfUndying.setIngredient('R', Material.GOLD_INGOT);
         Bukkit.addRecipe(totemOfUndying);
 
-
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
         notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
@@ -129,12 +128,19 @@ public class Combat extends JavaPlugin implements Listener {
 
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (Player player1 : Bukkit.getOnlinePlayers()) {
-                UUID uuid = player1.getUniqueId();
+            for (Player user : Bukkit.getOnlinePlayers()) {
+                UUID uuid = user.getUniqueId();
                 int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlayTime + 1);
             }
         }, 0L, 20L); // 20 ticks = 1 second
+
+
+
+
+
+
+
 
         /*
         this.vault = VaultHook.hook(this);
