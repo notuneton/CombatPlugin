@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.PermissionUtils;
 
 public class Trap implements CommandExecutor {
@@ -19,13 +20,10 @@ public class Trap implements CommandExecutor {
             return true;
         }
 
-        if (!player.hasPermission("combat.trap.sv")) {
-            PermissionUtils.messageIfNotPermitted(sender, "combat.trap.sv");
-            return false;
-        }
+        PermissionUtils.messageIfNotPermitted(sender, "combat.trap.sv");
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /trap <player>");
+            player.sendMessage(ColorUtils.colorize("> /trap <player>"));
             return true;
         }
 
