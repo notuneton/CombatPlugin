@@ -49,8 +49,8 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8[i] ");
-        e.setQuitMessage(ChatColor.DARK_GRAY + "&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8[i] [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+        e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
@@ -61,7 +61,7 @@ public class Listeners implements Listener {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
 
         } else {
-            String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8[i] ");
+            String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
             e.setJoinMessage(join + ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
         }
     }
