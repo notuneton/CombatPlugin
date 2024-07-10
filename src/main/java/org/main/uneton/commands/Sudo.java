@@ -14,12 +14,17 @@ import java.util.List;
 
 public class Sudo implements CommandExecutor {
 
+    private final List<String> allowedPlayers = Arrays.asList(
+            "unetonn"
+            // Add more usernames as needed
+    );
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if (!allowedPlayers.contains(player.getName())) {
-            player.sendMessage(ChatColor.BLUE + "Access denied.\n " + ChatColor.WHITE + "You need admintrator privileges to complete this task. Go in Server console, then run command op player name so player get admintrator.\n\n");
-            return true; // Stop executing further code
+            player.sendMessage(ChatColor.RED + "This command can only be executed as a specific person! Here is the list of players that can execute this command: " + allowedPlayers);
+            return true;
         }
 
         if (args.length == 0) {
@@ -44,17 +49,12 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString()); // Execute the command on the target player
-                player.sendMessage(ChatColor.GRAY + "Executed command '" + ChatColor.GREEN + message + ChatColor.GRAY + "' on " + ChatColor.YELLOW + user);
+                player.sendMessage(ChatColor.GRAY + "Executed command '" + ChatColor.GREEN + message + ChatColor.GRAY + "' on player " + ChatColor.YELLOW + target.getName());
             } else {
                 player.sendMessage(ChatColor.RED + "Could not find player: " + user);
             }
         }
         return true;
     }
-
-    private final List<String> allowedPlayers = Arrays.asList(
-            "unetonn"
-            // Add more usernames as needed
-    );
 
 }
