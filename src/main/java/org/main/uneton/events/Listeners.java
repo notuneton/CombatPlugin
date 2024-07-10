@@ -64,16 +64,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerPotionConsume(PlayerItemConsumeEvent e) {
-        ItemStack consumedItem = e.getItem();
-        Player player = e.getPlayer();
-        if (consumedItem.getType() == Material.POTION) {
-            player.getInventory().removeItem(consumedItem);
-
-        }
-    }
-
-    @EventHandler
     public void onPlyaerDeath(PlayerDeathEvent e) {
         if (e.getEntity().getKiller() != null) {
             e.setKeepInventory(true);
