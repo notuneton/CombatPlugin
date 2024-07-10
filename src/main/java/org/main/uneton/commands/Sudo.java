@@ -23,7 +23,7 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if (!allowedPlayers.contains(player.getName())) {
-            player.sendMessage(ChatColor.RED + "This command can only be executed as a specific person! Here is the list of players that can execute this command: " + allowedPlayers);
+            player.sendMessage(ChatColor.DARK_GRAY + "[i] " + ChatColor.RED + "This command can only be executed as a specific person! Here is the list of players that can execute this command: " + allowedPlayers);
             return true;
         }
 
