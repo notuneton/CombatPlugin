@@ -18,7 +18,6 @@ public class Sign implements CommandExecutor {
         }
 
         player.getWorld().getBlockAt(player.getLocation()).setType(Material.OAK_SIGN);
-        player.sendMessage(ChatColor.GREEN + "Sign placed at your location.");
         return true;
     }
 }

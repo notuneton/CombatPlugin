@@ -19,8 +19,9 @@ public class Crash implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("combat.crash.sv")) {
-            return false;
+        if (!player.hasPermission("combat.crash.sv")) {
+            player.sendMessage(ChatColor.RED + "You do not have permission to run " + command.getName() + ".");
+            return true;
         }
 
         if (args.length == 0) {

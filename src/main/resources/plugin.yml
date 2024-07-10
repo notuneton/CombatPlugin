@@ -7,33 +7,21 @@ softdepend:
 
 commands:
   crash:
-    permission: combat.crash.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: Spawns a white ball around you.
     usage: /crash <player>
   heal:
-    permission: combat.heal.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: Heals the player's hearts.
     usage: /heal <player>
   invsee:
-    permission: combat.invsee.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: See the inventory of other players.
     usage: /invsee <player>
   setspawn:
-    permission: combat.setspawn.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: Sets the server spawn point!
     usage: /setspawn
   slippery:
-    permission: combat.slippery.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: Drops Items from the player.
     usage: /slippery <player>
   trap:
-    permission: combat.trap.sv
-    permission-message: Permission Denied, You do not have permission to do this task.
     description: Create a cube around the player that the player cannot break.
     usage: /trap <player>
 

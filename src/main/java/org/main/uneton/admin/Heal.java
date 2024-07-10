@@ -17,8 +17,9 @@ public class Heal implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("combat.heal.sv")) {
-            return false;
+        if (!player.hasPermission("combat.heal.sv")) {
+            player.sendMessage(ChatColor.RED + "You do not have permission to run " + command.getName() + ".");
+            return true;
         }
 
         if (args.length == 0) {

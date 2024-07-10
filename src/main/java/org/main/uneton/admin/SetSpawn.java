@@ -24,8 +24,9 @@ public class SetSpawn implements CommandExecutor {
             return true;
         }
 
-        if(!player.hasPermission("combat.setspawn.sv")) {
-            return false;
+        if (!player.hasPermission("combat.setspawn.sv")) {
+            player.sendMessage(ChatColor.RED + "You do not have permission to run " + command.getName() + ".");
+            return true;
         }
 
         Location location = player.getLocation();
