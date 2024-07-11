@@ -72,8 +72,8 @@ public class Slippery implements CommandExecutor {
                 }
             }.runTaskTimer(plugin, 0L, 60L); // Schedule the task every 60 ticks (3 seconds)
             playerTasks.put(targetUUID, task);
-            String info = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-            player.sendMessage(info + ChatColor.GRAY + "Started dropping items from " + target.getName() + "'s inventory every 3 seconds.");
+            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+            player.sendMessage(success + ChatColor.GRAY + "Started dropping items from " + target.getName() + "'s inventory every 3 seconds.");
         }
         return true;
     }

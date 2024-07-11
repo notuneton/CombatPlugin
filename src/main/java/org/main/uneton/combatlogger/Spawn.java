@@ -35,7 +35,6 @@ public class Spawn implements CommandExecutor {
         return true;
     }
 
-    @NotNull
     private BukkitRunnable getBukkitRunnable(Player player, Location initialLocation) {
         int countdownSeconds = 5;
         return new BukkitRunnable() {
@@ -68,10 +67,11 @@ public class Spawn implements CommandExecutor {
             player.sendMessage(warn2 + ChatColor.RED + "Teleport cancelled because you moved!");
             return false;
         } else {
-            Location spawnLocation = plugin.getConfig().getLocation("spawn");
-            if (spawnLocation != null) {
-                player.teleport(spawnLocation);
-                player.sendMessage(ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +"!");
+            Location spawnLoc = plugin.getConfig().getLocation("spawn");
+            if (spawnLoc != null) {
+                player.teleport(spawnLoc);
+                String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+                player.sendMessage(success + ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +ChatColor.BOLD +"!");
                 return true;
             } else {
                 String warn3 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
