@@ -65,16 +65,17 @@ public class Spawn implements CommandExecutor {
 
         if (player.getLocation().distance(initialLocation) > 0) {
             String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendActionBar(warn2 + ChatColor.RED + "Teleport cancelled because you moved!");
+            player.sendMessage(warn2 + ChatColor.RED + "Teleport cancelled because you moved!");
             return false;
         } else {
             Location spawnLocation = plugin.getConfig().getLocation("spawn");
             if (spawnLocation != null) {
                 player.teleport(spawnLocation);
-                player.sendMessage(ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +".");
+                player.sendMessage(ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +"!");
                 return true;
             } else {
-                player.sendMessage(ChatColor.RED + "Teleport failed : Spawn location not found.");
+                String warn3 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+                player.sendMessage(warn3 +ChatColor.RED + "Teleport failed : Spawn location not found.");
                 return false;
             }
 

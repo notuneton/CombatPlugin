@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
 
 public class SetSpawn implements CommandExecutor {
 
@@ -32,7 +33,10 @@ public class SetSpawn implements CommandExecutor {
         Location location = player.getLocation();
         plugin.getConfig().set("spawn", location);
         plugin.saveConfig();
-        player.sendMessage(ChatColor.GREEN + "Successfully set the spawn to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ());
+        String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+        player.sendMessage(success + ChatColor.GREEN + "Successfully set the spawn to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ());
+        return true;
+
 
 
         /*
@@ -41,6 +45,5 @@ public class SetSpawn implements CommandExecutor {
         plugin.getConfig().set("spawn.z", location.getZ());
         plugin.getConfig().set("spawn.worldName", location.getWorld().getName());
          */
-        return true;
     }
 }

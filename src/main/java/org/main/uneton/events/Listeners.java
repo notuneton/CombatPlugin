@@ -259,7 +259,7 @@ public class Listeners implements Listener {
 
         if (block.getType() == Material.EMERALD_BLOCK) {
             Vector velocity = player.getVelocity();
-            velocity.setY(5);
+            velocity.setY(6);
             player.setVelocity(velocity);
         }
     }
