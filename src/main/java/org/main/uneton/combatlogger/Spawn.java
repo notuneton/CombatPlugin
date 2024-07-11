@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.main.uneton.utils.ColorUtils;
 
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 
@@ -44,7 +45,8 @@ public class Spawn implements CommandExecutor {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel();
                     if (!teleportPlayer(player, initialLocation)) {
-                        player.sendMessage(ChatColor.RED + "Teleportation cancelled.");
+                        String warn1 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+                        player.sendMessage(warn1 + ChatColor.RED + "Teleportation cancelled.");
                     }
                 } else {
                     player.sendActionBar(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
@@ -62,13 +64,14 @@ public class Spawn implements CommandExecutor {
         }
 
         if (player.getLocation().distance(initialLocation) > 0) {
-            player.sendActionBar(ChatColor.RED + "Teleport cancelled because you moved!");
+            String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            player.sendActionBar(warn2 + ChatColor.RED + "Teleport cancelled because you moved!");
             return false;
         } else {
             Location spawnLocation = plugin.getConfig().getLocation("spawn");
             if (spawnLocation != null) {
                 player.teleport(spawnLocation);
-                player.sendMessage(ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn.");
+                player.sendMessage(ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +".");
                 return true;
             } else {
                 player.sendMessage(ChatColor.RED + "Teleport failed : Spawn location not found.");
@@ -77,7 +80,7 @@ public class Spawn implements CommandExecutor {
 
             //TODO return false; == Teleportation should not proceed
             // return true; == Teleportation proceeded successfully
-            //
+            // return stops code
         }
     }
 }

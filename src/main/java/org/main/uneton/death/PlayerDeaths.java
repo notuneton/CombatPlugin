@@ -1,4 +1,4 @@
-package org.main.uneton.events;
+package org.main.uneton.death;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
