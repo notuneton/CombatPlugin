@@ -90,12 +90,12 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
 
         // admin
+        getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("slippery").setExecutor(new Slippery(this));
-        getCommand("trap").setExecutor(new Trap());
 
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new CombatLog(this), this);

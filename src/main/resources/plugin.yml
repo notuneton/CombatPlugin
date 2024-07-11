@@ -6,6 +6,9 @@ softdepend:
   - Vault
 
 commands:
+  cage:
+    description: Create a cube around the player that the player cannot break.
+    usage: /cage <player>
   crash:
     description: Spawns a white ball around you.
     usage: /crash <player>
@@ -21,9 +24,6 @@ commands:
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>
-  trap:
-    description: Create a cube around the player that the player cannot break.
-    usage: /trap <player>
 
   spawn:
     description: Teleport to the spawnpoint.
