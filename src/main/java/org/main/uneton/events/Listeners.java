@@ -250,22 +250,5 @@ public class Listeners implements Listener {
             }).runTask(JavaPlugin.getPlugin(Combat.class));
         }
     }
-
-
-
-
-
-
-    @EventHandler
-    public void onStepOnBlock(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        Block block = player.getLocation().getBlock().getRelative(0, -1, 0);
-
-        if (block.getType() == Material.EMERALD_BLOCK) {
-            Vector velocity = player.getVelocity();
-            velocity.setY(6);
-            player.setVelocity(velocity);
-        }
-    }
 }
 

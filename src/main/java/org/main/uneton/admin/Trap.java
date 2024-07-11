@@ -65,11 +65,12 @@ public class Trap implements CommandExecutor {
             public void run() {
                 if (player.isOnline() && !player.isDead()) {
                     player.setGameMode(GameMode.SURVIVAL);
-                    player.sendMessage("You have been released from the trap!");
+                    String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+                    player.sendMessage(success + ChatColor.GRAY + "You have been released from the trap!");
                     removeTrapBox(bottomCorner);
                 }
             }
-        }.runTaskLater(Combat.getInstance(), 1200); // 1200 ticks = 1 minute
+        }.runTaskLater(Combat.getInstance(), 60); // 1200 ticks = 1 minute
     }
 
     private static void removeTrapBox(Location bottomCorner) {
