@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.main.uneton.utils.ColorUtils;
 
 public class Repair implements CommandExecutor {
 
@@ -20,15 +21,18 @@ public class Repair implements CommandExecutor {
 
         ItemStack heldRepair = player.getInventory().getItemInMainHand();
         if (heldRepair.getType() == Material.AIR) {
-            player.sendMessage(ChatColor.RED + "You are not holding an item to repair!");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            player.sendMessage(warn + ChatColor.RED + "You are not holding an item to repair!");
             return true;
         }
-        if(heldRepair.getDurability() == 0) {
-            player.sendMessage(ChatColor.RED + "This item is already maxed!");
+        if (heldRepair.getDurability() == 0) {
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            player.sendMessage(warn +ChatColor.RED + "This item is already maxed!");
             return true;
         }
         heldRepair.setDurability((short) 0);
-        player.sendActionBar(ChatColor.GREEN + "Your item has been repaired.");
+        String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+        player.sendActionBar(success + ChatColor.GREEN + "Your item has been repaired.");
         return true;
     }
 }
