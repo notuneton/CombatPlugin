@@ -47,7 +47,6 @@ public class Trap implements CommandExecutor {
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(0, 0, 0);
         player.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage("Your game mode has been updated");
         String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
         player.sendMessage(success + ChatColor.GRAY + "You were trapped by " + ChatColor.UNDERLINE+ChatColor.WHITE+ player.getName() +ChatColor.GRAY +"!");
         for (int x = 0; x < 5; x++) {
