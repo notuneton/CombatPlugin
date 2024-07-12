@@ -7,16 +7,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.main.uneton.utils.ColorUtils;
 
 public class Heal implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
-            return true;
-        }
-
+        Player player = (Player) sender;
         if (!player.hasPermission("combat.heal.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
             return true;
@@ -39,7 +36,8 @@ public class Heal implements CommandExecutor {
                 return true;
             }
 
-            player.sendMessage(ChatColor.GREEN + "You have been healed by "+ ChatColor.GOLD + sender.getName());
+            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+            player.sendMessage(success + ChatColor.GREEN + "You have been healed by "+ ChatColor.GOLD + sender.getName());
             player.setHealth(20);
         }
 
