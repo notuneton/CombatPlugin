@@ -32,7 +32,7 @@ public class Repair implements CommandExecutor {
         }
         heldRepair.setDurability((short) 0);
         String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-        player.sendActionBar(success + ChatColor.GREEN + "Your item has been repaired.");
+        player.sendMessage(success + ChatColor.GREEN + "Your item has been repaired.");
         return true;
     }
 }
