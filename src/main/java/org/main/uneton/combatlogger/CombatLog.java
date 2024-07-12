@@ -33,8 +33,7 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    String noLonger = "&#9547EDY&#904DE8o&#8B53E3u &#8759DEa&#825FD9r&#7D65D3e &#786BCEn&#7370C9o &#6E76C4l&#6A7CBFo&#6582BAn&#6088B5g&#5B8EB0e&#5694ABr &#5694ABi&#5B8EB0n &#6088B5c&#6582BAo&#6A7CBFm&#6E76C4b&#7370C9a&#786BCEt &#7D65D3t&#825FD9a&#8759DEg&#8B53E3g&#904DE8e&#9547EDd";
-                    player.sendMessage(ColorUtils.colorize(noLonger));
+                    player.sendMessage(ColorUtils.colorize("&#9547EDY&#904DE8o&#8B53E3u &#8759DEa&#825FD9r&#7D65D3e &#786BCEn&#7370C9o &#6E76C4l&#6A7CBFo&#6582BAn&#6088B5g&#5B8EB0e&#5694ABr &#5694ABi&#5B8EB0n &#6088B5c&#6582BAo&#6A7CBFm&#6E76C4b&#7370C9a&#786BCEt &#7D65D3t&#825FD9a&#8759DEg&#8B53E3g&#904DE8e&#9547EDd"));
                 }
                 if (combat_tagged.containsKey(player)) {
                     player.sendActionBar(ChatColor.GRAY + "Combat: " + ChatColor.DARK_AQUA + (endTime - System.currentTimeMillis()) / 1000);
