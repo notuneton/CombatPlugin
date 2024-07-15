@@ -53,13 +53,13 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
 
         // Check if the command starts with "/checkplayer"
-        if (message.startsWith("/checkplayer ")) {
+        if (message.startsWith("/")) {
             String playerName = message.substring(11);
 
             // Check if the player exists
             if (Bukkit.getPlayer(playerName) == null) {
                 String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendMessage(warn +"That player does not exist.");
+                player.sendMessage(warn + ChatColor.GRAY + "That player does not exist.");
                 event.setCancelled(true); // Prevent the command from being executed
             }
         }

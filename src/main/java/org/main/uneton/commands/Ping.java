@@ -16,7 +16,7 @@ public class Ping implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
         int playerPing = player.getPing();
-        player.sendActionBar(ChatColor.WHITE +  "ping: " + ChatColor.AQUA + playerPing);
+        player.sendActionBar(ChatColor.WHITE +  "Ping: " + ChatColor.AQUA + String.format("%d ms", playerPing));
         if (args.length > 0) {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
