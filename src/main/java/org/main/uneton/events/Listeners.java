@@ -52,13 +52,13 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+    public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1); // Get the command without the '/'
         Player player = event.getPlayer();
         if (!plugin.doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn + ChatColor.GRAY + "That player does not exist.");
-            event.setCancelled(true); // Optionally cancel the event to prevent further processing
+            player.sendActionBar(warn + ChatColor.GRAY + "command not found.");
+            event.setCancelled(true);
         }
     }
 
@@ -66,7 +66,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTablist();
+        Tab.updateTab();
         String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
@@ -74,7 +74,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTablist();
+        Tab.updateTab();
         if (!player.hasPlayedBefore()) {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
 

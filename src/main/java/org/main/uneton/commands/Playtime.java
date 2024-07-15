@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
 
 public class Playtime implements CommandExecutor {
 
@@ -29,7 +30,7 @@ public class Playtime implements CommandExecutor {
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
                 sendPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
             } else {
-                player.sendActionBar(ChatColor.RED + "Player not found.");
+                player.sendActionBar(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> " + ChatColor.RED + "Player not found."));
             }
         } else {
             Player user = (Player) sender;
@@ -39,7 +40,7 @@ public class Playtime implements CommandExecutor {
     }
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
-        String prefix = ChatColor.WHITE + "'"; // Combine prefix into one string
+        String prefix = ChatColor.GREEN + "'";
         String suffix = ChatColor.YELLOW + " minutes";
 
         if (playTime <= 3600) {
