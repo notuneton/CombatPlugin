@@ -5,6 +5,8 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +26,8 @@ import org.main.uneton.utils.Tab;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import static org.bukkit.Bukkit.getCommandMap;
 
 public class Listeners implements Listener {
 
@@ -48,22 +52,16 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
-        String message = event.getMessage();
+    public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        String command = event.getMessage().split(" ")[0].substring(1); // Get the command without the '/'
         Player player = event.getPlayer();
-
-        // Check if the command starts with "/checkplayer"
-        if (message.startsWith("/")) {
-            String playerName = message.substring(11);
-
-            // Check if the player exists
-            if (Bukkit.getPlayer(playerName) == null) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendMessage(warn + ChatColor.GRAY + "That player does not exist.");
-                event.setCancelled(true); // Prevent the command from being executed
-            }
+        if (!plugin.doesCommandExist(command)) {
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            player.sendMessage(warn + ChatColor.GRAY + "That player does not exist.");
+            event.setCancelled(true); // Optionally cancel the event to prevent further processing
         }
     }
+
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {

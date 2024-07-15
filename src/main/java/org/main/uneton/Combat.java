@@ -1,6 +1,8 @@
 package org.main.uneton;
 
 import org.bukkit.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +24,8 @@ import org.main.uneton.events.*;
 import org.main.uneton.trash.Trash;
 
 import java.util.*;
+
+import static org.bukkit.Bukkit.getCommandMap;
 
 public class Combat extends JavaPlugin implements Listener {
 
@@ -205,5 +209,14 @@ public class Combat extends JavaPlugin implements Listener {
     public void onDisable() {
         // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
         // saveEconomy();
+    }
+
+    public static boolean doesCommandExist(String commandName) {
+        CommandMap commandMap = getCommandMap();
+        if (commandMap != null) {
+            Command command = commandMap.getCommand(commandName);
+            return command != null;
+        }
+        return false;
     }
 }
