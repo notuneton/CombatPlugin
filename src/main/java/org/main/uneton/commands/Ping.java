@@ -21,7 +21,7 @@ public class Ping implements CommandExecutor {
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
                 int ping = player.getPing();
-                player.sendActionBar(ChatColor.WHITE + player.getName() + "'s ping: " + ChatColor.AQUA + ping);
+                player.sendActionBar(ChatColor.WHITE + player.getName() + "'s ping: " + ChatColor.AQUA + String.format("%d ms", ping));
             } else {
                 String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
                 player.sendActionBar(warn +ChatColor.RED + "That player does not exist.");
