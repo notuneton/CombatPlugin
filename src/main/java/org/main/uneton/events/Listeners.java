@@ -73,7 +73,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
         if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
@@ -82,6 +82,8 @@ public class Listeners implements Listener {
             plugin.saveConfig();
         }
         ScoreboardUtils.updateScoreboard(player);
+        ScoreboardUtils.startUpdatingScoreboard(player);
+
         if (!player.hasPlayedBefore()) {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
         } else {

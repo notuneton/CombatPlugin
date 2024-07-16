@@ -19,36 +19,41 @@ public class ScoreboardUtils {
         if (plugin == null) {
             throw new IllegalStateException("ScoreboardUtils not initialized with plugin instance.");
         }
-
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
-
-        Objective objective = board.registerNewObjective("scoreboard", "dummy", ColorUtils.colorize("  &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l.&x&F&F&F&F&F&F&lc&x&F&F&F&F&F&F&lo  "));
+        Objective objective = board.registerNewObjective("scoreboard", "dummy", ColorUtils.colorize("  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l.&x&3&D&5&4&6&7&lc&x&3&C&4&D&5&F&lo  "));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
-        // set scoreboard lines
-        setScore(objective, ChatColor.GRAY+ player.getName(), 15);
-        if (combat_tagged.containsKey(player)) {
-            setScore(objective, " ", 14);
-        }
-        // Get player's playtime in hours and minutes
+        setScore(objective, " ", 15);
+        setScore(objective," &9&l INFO>", 14);
+        int onlinePlayers = Bukkit.getOnlinePlayers().size();
+        String online = ChatColor.WHITE + "  &fOnline &9"+ onlinePlayers;
+        setScore(objective, online, 13);
+
         int hours = plugin.getConfig().getInt("hour." + player.getUniqueId());
         int minutes = plugin.getConfig().getInt("minute." + player.getUniqueId());
+        String playtimeString = ChatColor.WHITE + "  &fPlaytime &9" + hours + "h " + minutes + "m";
+        setScore(objective, playtimeString, 12);
 
-        // Format playtime string
-        String playtimeString = ChatColor.WHITE + "  &fPlaytime &9" + hours + "h " + minutes + " minutes";
-        setScore(objective, playtimeString, 13);
-
-        // this.getConfig().getInt("hour." + player.getUniqueId()) + "h " + this.getConfig().getInt("minute." + player.getUniqueId()) + " minutes&f."
-
-        // Add blank line
-        setScore(objective," ", 12);
-
+        setScore(objective," ", 11);
         player.setScoreboard(board);
     }
+
+    // setScore(objective, ChatColor.GRAY+ player.getName(), 15);
+    // if (combat_tagged.containsKey(player)) {
+    //    setScore(objective, "", 14);
+    // }
 
     private static void setScore(Objective objective, String text, int score) {
         Score line = objective.getScore(ChatColor.translateAlternateColorCodes('&', text));
         line.setScore(score);
+    }
+
+    public static void startUpdatingScoreboard(Player player) {
+        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+            if (player.isOnline()) {
+                updateScoreboard(player);
+            }
+        }, 0, 20L);
     }
 }

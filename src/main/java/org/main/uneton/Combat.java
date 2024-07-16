@@ -48,8 +48,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
-        new ScoreboardUtils(this);
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -57,7 +55,7 @@ public class Combat extends JavaPlugin implements Listener {
                     ScoreboardUtils.updateScoreboard(player);
                 }
             }
-        }.runTaskTimer(this, 0, 20);
+        }.runTaskTimer(this, 0, 10); // 20 == 1 second
 
         instance = this;
         getConfig().options().copyDefaults();
