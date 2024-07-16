@@ -24,6 +24,7 @@ import org.main.uneton.trash.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.trash.Trash;
+import org.main.uneton.utils.RecipeManager;
 import org.main.uneton.utils.ScoreboardUtils;
 
 import java.util.*;
@@ -50,6 +51,7 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
 
         ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
+        RecipeManager.registerCustomRecipes();
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {
@@ -57,7 +59,7 @@ public class Combat extends JavaPlugin implements Listener {
                 int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlayTime++);
             }
-        }, 0L, 40L); // 20 ticks = 1 second
+        }, 0L, 20L); // 20 ticks = 1 second
 
         instance = this;
         getConfig().options().copyDefaults();
@@ -101,48 +103,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
-
-
-
-
-        Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
-
-        ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
-        ItemMeta customTotem_meta = customTotem.getItemMeta();
-        customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
-        customTotem.setItemMeta(customTotem_meta);
-
-        ShapedRecipe totemOfUndying = new ShapedRecipe(new NamespacedKey(this, "totemOfUndying"), customTotem);
-        totemOfUndying.shape("HR");
-        totemOfUndying.setIngredient('H', Material.HEART_OF_THE_SEA);
-        totemOfUndying.setIngredient('R', Material.GOLD_INGOT);
-        Bukkit.addRecipe(totemOfUndying);
-
-        ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
-        ItemMeta notch_apple_meta = notch_apple.getItemMeta();
-        notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
-        notch_apple.setItemMeta(notch_apple_meta);
-
-        ShapedRecipe godAppleRecipe = new ShapedRecipe(new NamespacedKey(this, "god_apple_recipe"), notch_apple);
-        godAppleRecipe.shape("GGG", "GAG", "GGG");
-        godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
-        godAppleRecipe.setIngredient('A', Material.APPLE);
-        Bukkit.addRecipe(godAppleRecipe);
-
-
-        ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
-        ItemMeta elytra_meta = elytra.getItemMeta();
-        elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
-        elytra_meta.setUnbreakable(true);
-        elytra.setItemMeta(elytra_meta);
-
-        ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(this, "elytra_recipe"), elytra);
-        elytraRecipe.shape("FSF", "PDP", "P P");
-        elytraRecipe.setIngredient('F', Material.STRING);
-        elytraRecipe.setIngredient('F', Material.FEATHER);
-        elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
-        elytraRecipe.setIngredient('D', Material.DRAGON_BREATH);
-        Bukkit.addRecipe(elytraRecipe);
 
         /*
         this.vault = VaultHook.hook(this);
