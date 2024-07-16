@@ -18,13 +18,13 @@ commands:
   invsee:
     description: See the inventory of other players.
     usage: /invsee <player>
-  setspawn:
-    description: Sets the server spawn point!
-    usage: /setspawn
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>
 
+  setspawn:
+    description: Sets the server spawn point!
+    usage: /setspawn
   spawn:
     description: Teleport to the spawnpoint.
     usage: /spawn

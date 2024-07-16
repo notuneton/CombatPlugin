@@ -45,7 +45,7 @@ public class Spawn implements CommandExecutor {
                     this.cancel();
                     if (!teleportPlayer(player, initialLocation)) {
                         String warn1 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                        player.sendMessage(warn1 + ChatColor.RED + "Teleportation cancelled.");
+                        player.sendMessage(warn1 + ChatColor.RED + "Cancelled!");
                     }
                 } else {
                     player.sendActionBar(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds.");
@@ -65,22 +65,22 @@ public class Spawn implements CommandExecutor {
 
         if (player.getLocation().distance(initialLocation) > 0) {
             String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn2 + ChatColor.RED + "Teleport cancelled because you moved!");
+            player.sendMessage(warn2 + ChatColor.RED + "Teleport failed : because you moved!");
             return false;
         } else {
             Location spawnLoc = plugin.getConfig().getLocation("spawn");
             if (spawnLoc != null) {
                 player.teleport(spawnLoc);
                 String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-                player.sendMessage(success + ChatColor.GRAY + "You teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +".");
+                player.sendMessage(success + ChatColor.GRAY + "You have been teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +"!");
                 return true;
             } else {
                 String warn3 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendMessage(warn3 +ChatColor.RED + "Teleport failed : Spawn location not found.");
+                player.sendMessage(warn3 +ChatColor.RED + "Teleport failed : location not found!");
                 return false;
             }
 
-            //TODO return false; == Teleportation should not proceed
+            //todo return false; == Teleportation should not proceed
             // return true; == Teleportation proceeded successfully
             // return stops code
         }

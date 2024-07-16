@@ -1,4 +1,4 @@
-package org.main.uneton.admin;
+package org.main.uneton.combatlogger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

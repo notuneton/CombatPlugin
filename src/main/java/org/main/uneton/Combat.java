@@ -16,7 +16,7 @@ import org.main.uneton.frez.Freeze;
 import org.main.uneton.frez.FreezeListener;
 import org.main.uneton.gm.Gm;
 import org.main.uneton.gm.GmListener;
-import org.main.uneton.admin.SetSpawn;
+import org.main.uneton.combatlogger.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
 import org.main.uneton.commands.Sudo;
 import org.main.uneton.trash.TrashEvent;
@@ -58,11 +58,11 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
-        getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("slippery").setExecutor(new Slippery(this));
 
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new CombatLog(this), this);
+        getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
