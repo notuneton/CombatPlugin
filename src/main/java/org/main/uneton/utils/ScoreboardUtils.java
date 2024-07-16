@@ -21,11 +21,15 @@ public class ScoreboardUtils {
         Scoreboard board = manager.getNewScoreboard();
         Objective objective = board.registerNewObjective("scoreboard", "dummy", ChatColor.translateAlternateColorCodes('&', "  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  "));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        String currentTime = "  &9Time: &7" + TimeUtils.getCurrentFormattedTime();
+
+        String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
         setScore(objective, currentTime, 12);
+
+        setScore(objective, "&8&l>  ", 11);
+
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
-        setScore(objective, online, 11);
+        setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
         int hours = plugin.getConfig().getInt("hour." + uuid);
@@ -33,9 +37,9 @@ public class ScoreboardUtils {
         int seconds = plugin.getConfig().getInt("seconds." + uuid);
 
         String playtimeString = getString(hours, minutes, seconds);
-        setScore(objective, playtimeString, 10);
+        setScore(objective, playtimeString, 9);
 
-        setScore(objective, "&8 ", 9);
+        setScore(objective, "&8&l>  ", 8);
         player.setScoreboard(board);
     }
 
