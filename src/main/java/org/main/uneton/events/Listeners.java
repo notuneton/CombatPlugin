@@ -72,7 +72,7 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
-        String command = event.getMessage().split(" ")[0].substring(1); // Get the command without the '/'
+        String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!plugin.doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
@@ -80,6 +80,20 @@ public class Listeners implements Listener {
             event.setCancelled(true);
         }
     }
+
+    @EventHandler
+    public void onCommandPreproces(PlayerCommandPreprocessEvent event) {
+        String command = event.getMessage();
+        Player player = event.getPlayer();
+        if (command.equalsIgnoreCase("pl")) {
+            if (!player.hasPermission("combat.pl.sv")) {
+                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+                player.sendActionBar(warn + ChatColor.GRAY + "command /" + command + " not found.");
+                event.setCancelled(true);
+            }
+        }
+    }
+
 
 
     @EventHandler

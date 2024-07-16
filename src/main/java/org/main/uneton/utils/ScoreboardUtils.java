@@ -20,7 +20,7 @@ public class ScoreboardUtils {
         }
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
-        Objective objective = board.registerNewObjective("scoreboard", "dummy", ChatColor.BLUE.toString()+ChatColor.BOLD+("  PROTOTYPE  "));
+        Objective objective = board.registerNewObjective("scoreboard", "dummy", ColorUtils.colorize("  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  "));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         setScore(objective, " ", 12);

@@ -62,6 +62,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
+        getCommand("sb").setExecutor(new Scoreboard(this));
         getCommand("slippery").setExecutor(new Slippery(this));
 
         // combatlogger

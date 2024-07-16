@@ -18,6 +18,9 @@ commands:
   invsee:
     description: See the inventory of other players.
     usage: /invsee <player>
+  sb:
+    description: Builds the custom scoreboard.
+    usage: /sb
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>

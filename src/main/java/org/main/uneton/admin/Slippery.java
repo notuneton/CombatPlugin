@@ -21,7 +21,6 @@ public class Slippery implements CommandExecutor {
 
     private final JavaPlugin plugin;
     private final Map<UUID, BukkitTask> playerTasks = new HashMap<>();
-
     public Slippery(JavaPlugin plugin) {
         this.plugin = plugin;
     }
