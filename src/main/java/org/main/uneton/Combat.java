@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
+import org.main.uneton.death.PlayerDeaths;
 import org.main.uneton.frez.Freeze;
 import org.main.uneton.frez.FreezeListener;
 import org.main.uneton.gm.Gm;
@@ -101,7 +102,7 @@ public class Combat extends JavaPlugin implements Listener {
 
 
 
-
+        Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
 
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();

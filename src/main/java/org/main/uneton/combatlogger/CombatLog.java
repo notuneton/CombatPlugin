@@ -51,7 +51,6 @@ public class CombatLog implements Listener {
         }
         if (event.getDamager() instanceof Player attacker && event.getEntity() instanceof Player victim) {
             startCombat(attacker, victim);
-            System.out.println("[CombatV3] startCombat method was started!");
         }
     }
     

@@ -37,6 +37,8 @@ public class PlayerDeaths implements Listener {
                 event.setDeathMessage(red + victim.getName() + " was destroyed by " + attacker.getName());
             } else if (chance < 80) {
                 event.setDeathMessage(red + victim.getName() + " was yeeted by " + attacker.getName());
+            } else if (chance < 90) {
+                event.setDeathMessage(red + victim.getName() + " got jumped by " + attacker.getName());
             } else {
                 event.setDeathMessage(red + attacker.getName() + " ruined brutally " + victim.getName());
             }
