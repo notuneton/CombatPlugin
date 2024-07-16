@@ -4,13 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
-
-import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 
 public class ScoreboardUtils {
 
     private static Combat plugin;
+
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
     }
@@ -25,7 +25,7 @@ public class ScoreboardUtils {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         setScore(objective, " ", 15);
-        setScore(objective," &9&l INFO>", 14);
+        setScore(objective," &9&lINFO>", 14);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &fOnline &9"+ onlinePlayers;
         setScore(objective, online, 13);
@@ -39,21 +39,22 @@ public class ScoreboardUtils {
         player.setScoreboard(board);
     }
 
-    // setScore(objective, ChatColor.GRAY+ player.getName(), 15);
-    // if (combat_tagged.containsKey(player)) {
-    //    setScore(objective, "", 14);
-    // }
-
     private static void setScore(Objective objective, String text, int score) {
         Score line = objective.getScore(ChatColor.translateAlternateColorCodes('&', text));
         line.setScore(score);
     }
 
     public static void startUpdatingScoreboard(Player player) {
-        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-            if (player.isOnline()) {
-                updateScoreboard(player);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (player.isOnline()) {
+                    updateScoreboard(player);
+                } else {
+                    this.cancel(); // Cancel the task if the player is offline
+                }
             }
-        }, 0, 20L);
+        }.runTaskTimer(plugin, 0L, 20L); // Run every second
     }
 }
+
