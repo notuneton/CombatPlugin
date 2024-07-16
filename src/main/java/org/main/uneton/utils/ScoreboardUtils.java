@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
-import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 
 import java.util.UUID;
@@ -20,11 +19,12 @@ public class ScoreboardUtils {
     public static void updateScoreboard(Player player) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
-        Objective objective = board.registerNewObjective("scoreboard", "dummy", ChatColor.translateAlternateColorCodes('&', "&x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l"));
+        Objective objective = board.registerNewObjective("scoreboard", "dummy", ChatColor.translateAlternateColorCodes('&', "  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  "));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        setScore(objective, "&8 -", 12);
+        String currentTime = "  &9Time: &7" + TimeUtils.getCurrentFormattedTime();
+        setScore(objective, currentTime, 12);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
-        String online = ChatColor.WHITE + "  &9Online &7" + onlinePlayers;
+        String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
         setScore(objective, online, 11);
 
         UUID uuid = player.getUniqueId();
@@ -46,7 +46,7 @@ public class ScoreboardUtils {
             minutes += seconds / 60;
             seconds %= 60;
         }
-        String playtimeString = ChatColor.WHITE + "  &9Playtime &7";
+        String playtimeString = ChatColor.WHITE + "  &9Playtime: &7";
         if (hoursExceed60) {
             playtimeString += hours + " h1 ";
         } else {
