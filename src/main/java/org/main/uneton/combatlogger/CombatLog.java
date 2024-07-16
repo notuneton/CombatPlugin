@@ -63,17 +63,6 @@ public class CombatLog implements Listener {
         }
     }
 
-
-     /*
-     List<String> commands = Arrays.asList(
-            "tempban %player% 2 h combat logged out from the server"
-     );
-     int index = 0;
-     String cmd = commands.get(index);
-     cmd = cmd.replace("%player%", exited.getName());
-     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
-     */
-
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();

@@ -40,6 +40,24 @@ public class Listeners implements Listener {
         // this.vault = plugin.getVault();
     }
 
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
+            plugin.getConfig().set("hour." + player.getUniqueId(), 0);
+            plugin.getConfig().set("minute." + player.getUniqueId(), 0);
+            plugin.saveConfig();
+        }
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    ScoreboardUtils.updateScoreboard(player);
+                    ScoreboardUtils.startUpdatingScoreboard(player);
+                }
+            }
+        }.runTaskTimer(Combat.getInstance(), 0, 20);
+    }
 
     @EventHandler
     public void onPing(PlayerMoveEvent event) {
@@ -76,21 +94,6 @@ public class Listeners implements Listener {
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
-            plugin.getConfig().set("hour." + player.getUniqueId(), 0);
-            plugin.getConfig().set("minute." + player.getUniqueId(), 0);
-            plugin.saveConfig();
-        }
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    ScoreboardUtils.updateScoreboard(player);
-                    ScoreboardUtils.startUpdatingScoreboard(player);
-                }
-            }
-        }.runTaskTimer(Combat.getInstance(), 0, 20);
-
         if (!player.hasPlayedBefore()) {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
         } else {

@@ -51,10 +51,10 @@ public class ScoreboardUtils {
                 if (player.isOnline()) {
                     updateScoreboard(player);
                 } else {
-                    this.cancel(); // Cancel the task if the player is offline
+                    this.cancel();
                 }
             }
-        }.runTaskTimer(plugin, 0L, 20L); // Run every second
+        }.runTaskTimer(plugin, 0L, 20L); // run every second
     }
 }
 
