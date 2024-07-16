@@ -50,15 +50,6 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
 
         new ScoreboardUtils(this);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    ScoreboardUtils.updateScoreboard(player);
-                    ScoreboardUtils.startUpdatingScoreboard(player);
-                }
-            }
-        }.runTaskTimer(this, 0, 10); // 20 == 1 second
 
         instance = this;
         getConfig().options().copyDefaults();

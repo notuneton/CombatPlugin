@@ -81,8 +81,15 @@ public class Listeners implements Listener {
             plugin.getConfig().set("minute." + player.getUniqueId(), 0);
             plugin.saveConfig();
         }
-        ScoreboardUtils.updateScoreboard(player);
-        ScoreboardUtils.startUpdatingScoreboard(player);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    ScoreboardUtils.updateScoreboard(player);
+                    ScoreboardUtils.startUpdatingScoreboard(player);
+                }
+            }
+        }.runTaskTimer(Combat.getInstance(), 0, 20);
 
         if (!player.hasPlayedBefore()) {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
