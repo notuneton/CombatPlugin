@@ -25,14 +25,14 @@ public class ScoreboardUtils {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         setScore(objective, " ", 15);
-        setScore(objective," &9&lINFO>", 14);
+        setScore(objective," ", 14);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
-        String online = ChatColor.WHITE + "  &fOnline &9"+ onlinePlayers;
+        String online = ChatColor.WHITE + "  &9Online &f"+ onlinePlayers;
         setScore(objective, online, 13);
 
         int hours = plugin.getConfig().getInt("hour." + player.getUniqueId());
         int minutes = plugin.getConfig().getInt("minute." + player.getUniqueId());
-        String playtimeString = ChatColor.WHITE + "  &fPlaytime &9" + hours + "h " + minutes + "m";
+        String playtimeString = ChatColor.WHITE + "  &9Playtime &7" + hours + "h " + minutes + "m";
         setScore(objective, playtimeString, 12);
 
         setScore(objective," ", 11);
