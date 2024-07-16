@@ -22,6 +22,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
+import org.main.uneton.utils.ScoreboardUtils;
 import org.main.uneton.utils.Tab;
 
 import java.util.ArrayList;
@@ -75,9 +76,9 @@ public class Listeners implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        ScoreboardUtils.updateScoreboard(player);
         if (!player.hasPlayedBefore()) {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
-
         } else {
             String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
             e.setJoinMessage(join + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());

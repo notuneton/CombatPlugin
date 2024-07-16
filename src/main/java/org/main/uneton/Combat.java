@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.death.PlayerDeaths;
@@ -23,6 +24,7 @@ import org.main.uneton.trash.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.trash.Trash;
+import org.main.uneton.utils.ScoreboardUtils;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
@@ -46,6 +48,15 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    ScoreboardUtils.updateScoreboard(player);
+                }
+            }
+        }.runTaskTimer(this, 0, 20);
 
         instance = this;
         getConfig().options().copyDefaults();
