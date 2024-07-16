@@ -49,7 +49,15 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
-        new ScoreboardUtils(this);
+        ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
+
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+            for (Player user : Bukkit.getOnlinePlayers()) {
+                UUID uuid = user.getUniqueId();
+                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
+                playTimes.put(uuid, currentPlayTime + 1);
+            }
+        }, 0L, 20L); // 20 ticks = 1 second
 
         instance = this;
         getConfig().options().copyDefaults();
@@ -62,7 +70,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
-        getCommand("sb").setExecutor(new Scoreboard(this));
         getCommand("slippery").setExecutor(new Slippery(this));
 
         // combatlogger
@@ -94,15 +101,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
-
-
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (Player user : Bukkit.getOnlinePlayers()) {
-                UUID uuid = user.getUniqueId();
-                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
-                playTimes.put(uuid, currentPlayTime + 1);
-            }
-        }, 0L, 20L); // 20 ticks = 1 second
 
 
 

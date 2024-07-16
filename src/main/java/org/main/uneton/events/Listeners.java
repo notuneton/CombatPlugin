@@ -52,7 +52,6 @@ public class Listeners implements Listener {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    ScoreboardUtils.updateScoreboard(player);
                     ScoreboardUtils.startUpdatingScoreboard(player);
                 }
             }
@@ -100,6 +99,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        ScoreboardUtils.updateScoreboard(player);
         String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
