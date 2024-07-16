@@ -27,8 +27,31 @@ public class ScoreboardUtils {
 
         UUID uuid = player.getUniqueId();
         int hours = plugin.getConfig().getInt("hour." + uuid);
-        int minutes = plugin.getConfig().getInt("minute." + uuid);
-        String playtimeString = ChatColor.WHITE + "  &9Playtime &7" + hours + "h " + minutes + "m";
+        int minutes = plugin.getConfig().getInt("minutes." + uuid);
+        int seconds = plugin.getConfig().getInt("seconds." + uuid);
+
+        // Determine if hours and minutes exceed 60
+        boolean hoursExceed60 = hours > 60;
+        boolean minutesExceed60 = minutes > 60;
+
+        String playtimeString = ChatColor.WHITE + "  &9Playtime &7";
+
+        // Append "1" after "h" if hours exceed 60
+        if (hoursExceed60) {
+            playtimeString += hours + " h1 ";
+        } else {
+            playtimeString += hours + " h ";
+        }
+
+        // Append "1" after "m" if minutes exceed 60
+        if (minutesExceed60) {
+            playtimeString += minutes + " m1 ";
+        } else {
+            playtimeString += minutes + " m ";
+        }
+
+        // Append seconds
+        playtimeString += seconds + " s";
         setScore(objective, playtimeString, 10);
 
         setScore(objective, " ", 9);

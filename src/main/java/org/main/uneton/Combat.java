@@ -29,7 +29,7 @@ import static org.bukkit.Bukkit.getCommandMap;
 
 public class Combat extends JavaPlugin implements Listener {
 
-    public HashMap<UUID, Integer> playTimes = new HashMap<>();
+    public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     private static Combat instance;
     public static Combat getInstance(){
         return instance;
@@ -55,6 +55,7 @@ public class Combat extends JavaPlugin implements Listener {
                 UUID uuid = user.getUniqueId();
                 int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlayTime + 1);
+                instance.getConfig().set("seconds."+ uuid, playTimes.get(uuid));
             }
         }, 0L, 20L); // 20 ticks = 1 second
 
