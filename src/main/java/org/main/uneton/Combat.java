@@ -49,7 +49,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-
         ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
         RecipeManager.registerCustomRecipes();
 
