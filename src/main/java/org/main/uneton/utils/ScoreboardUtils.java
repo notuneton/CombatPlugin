@@ -22,6 +22,7 @@ public class ScoreboardUtils {
         Scoreboard board = manager.getNewScoreboard();
         Objective objective = board.registerNewObjective("scoreboard", "dummy", ChatColor.translateAlternateColorCodes('&', "&x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l"));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        setScore(objective, "&8 ", 12);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online &7" + onlinePlayers;
         setScore(objective, online, 11);
@@ -34,37 +35,28 @@ public class ScoreboardUtils {
         String playtimeString = getString(hours, minutes, seconds);
         setScore(objective, playtimeString, 10);
 
-        setScore(objective, " ", 9);
+        setScore(objective, "&8 ", 9);
         player.setScoreboard(board);
     }
 
     private static String getString(int hours, int minutes, int seconds) {
         boolean hoursExceed60 = hours > 60;
         boolean minutesExceed60 = minutes > 60;
-
-        // Increment minutes if seconds exceed 60
         if (seconds > 60) {
             minutes += seconds / 60;
             seconds %= 60;
         }
-
         String playtimeString = ChatColor.WHITE + "  &9Playtime &7";
-
-        // Append "1" after "h" if hours exceed 60
         if (hoursExceed60) {
             playtimeString += hours + " h1 ";
         } else {
             playtimeString += hours + "h ";
         }
-
-        // Append "1" after "m" if minutes exceed 60
         if (minutesExceed60) {
             playtimeString += minutes + " m1 ";
         } else {
             playtimeString += minutes + "m ";
         }
-
-        // Append seconds
         playtimeString += seconds + "s";
         return playtimeString;
     }
