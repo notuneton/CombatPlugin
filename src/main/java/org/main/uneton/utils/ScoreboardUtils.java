@@ -23,13 +23,13 @@ public class ScoreboardUtils {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
-        setScore(objective, currentTime, 12);
+        setScore(objective, currentTime, 5);
 
-        setScore(objective, "&8&l>  ", 11);
+        setScore(objective, "&7------------", 4);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
-        setScore(objective, online, 10);
+        setScore(objective, online, 3);
 
         UUID uuid = player.getUniqueId();
         int hours = plugin.getConfig().getInt("hour." + uuid);
@@ -37,9 +37,9 @@ public class ScoreboardUtils {
         int seconds = plugin.getConfig().getInt("seconds." + uuid);
 
         String playtimeString = getString(hours, minutes, seconds);
-        setScore(objective, playtimeString, 9);
+        setScore(objective, playtimeString, 2);
 
-        setScore(objective, "&8&l>  ", 8);
+        setScore(objective, "&7------------", 1);
         player.setScoreboard(board);
     }
 
