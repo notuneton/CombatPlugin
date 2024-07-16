@@ -13,7 +13,7 @@ public class ScoreboardUtils {
 
     private static Combat plugin;
     public ScoreboardUtils(Combat plugin) {
-        ScoreboardUtils.plugin = plugin;
+        this.plugin = plugin;
     }
 
     public static void updateScoreboard(Player player) {
@@ -50,7 +50,7 @@ public class ScoreboardUtils {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(plugin, 0L, 1200L); // run every minute (20 ticks * 60 seconds = 1200 ticks)
+        }.runTaskTimer(plugin, 0L, 20L);
     }
 }
 
