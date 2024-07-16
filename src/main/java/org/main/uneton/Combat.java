@@ -49,6 +49,7 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
+        new ScoreboardUtils(this);
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -212,11 +213,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     }
 
-    public void onDisable() {
-        // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
-        // saveEconomy();
-    }
-
     public static boolean doesCommandExist(String commandName) {
         CommandMap commandMap = getCommandMap();
         if (commandMap != null) {
@@ -225,4 +221,11 @@ public class Combat extends JavaPlugin implements Listener {
         }
         return false;
     }
+
+    public void onDisable() {
+        // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
+        // saveEconomy();
+    }
+
+
 }

@@ -76,6 +76,11 @@ public class Listeners implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
+            plugin.getConfig().set("hour." + player.getUniqueId(), 0);
+            plugin.getConfig().set("minute." + player.getUniqueId(), 0);
+            plugin.saveConfig();
+        }
         ScoreboardUtils.updateScoreboard(player);
         if (!player.hasPlayedBefore()) {
             e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");

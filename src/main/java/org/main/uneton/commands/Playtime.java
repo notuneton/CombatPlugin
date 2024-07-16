@@ -49,5 +49,4 @@ public class Playtime implements CommandExecutor {
             sender.sendMessage(String.format(prefix + "%s' have played %.2f" + suffix, playerName, playTime / 3600.0));
         }
     }
-
 }
