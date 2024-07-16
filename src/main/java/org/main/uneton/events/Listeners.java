@@ -48,14 +48,11 @@ public class Listeners implements Listener {
             plugin.getConfig().set("minute." + player.getUniqueId(), 0);
             plugin.saveConfig();
         }
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    ScoreboardUtils.startUpdatingScoreboard(player);
-                }
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+            for (Player player1 : Bukkit.getOnlinePlayers()) {
+                ScoreboardUtils.updateScoreboard(player1);
             }
-        }.runTaskTimer(Combat.getInstance(), 0, 20);
+        }, 0L, 10L);
     }
 
     @EventHandler
@@ -92,8 +89,6 @@ public class Listeners implements Listener {
             }
         }
     }
-
-
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
