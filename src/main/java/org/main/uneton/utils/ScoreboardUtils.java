@@ -3,8 +3,8 @@ package org.main.uneton.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.*;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
 import java.util.UUID;
@@ -53,7 +53,7 @@ public class ScoreboardUtils {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(plugin, 0L, 20L); // run every second
+        }.runTaskTimer(plugin, 0L, 1200L); // run every minute (20 ticks * 60 seconds = 1200 ticks)
     }
 }
 

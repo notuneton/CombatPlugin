@@ -29,10 +29,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static org.bukkit.Bukkit.getCommandMap;
+import static org.main.uneton.utils.ScoreboardUtils.updateScoreboard;
 
 public class Listeners implements Listener {
 
-    private Combat plugin;
+    private static Combat plugin;
     private Economy vault;
 
     public Listeners(Combat plugin) {
@@ -48,11 +49,8 @@ public class Listeners implements Listener {
             plugin.getConfig().set("minute." + player.getUniqueId(), 0);
             plugin.saveConfig();
         }
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-            for (Player player1 : Bukkit.getOnlinePlayers()) {
-                ScoreboardUtils.updateScoreboard(player1);
-            }
-        }, 0L, 10L);
+
+        ScoreboardUtils.startUpdatingScoreboard(player);
     }
 
     @EventHandler
@@ -94,7 +92,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        ScoreboardUtils.updateScoreboard(player);
+        updateScoreboard(player);
         String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
