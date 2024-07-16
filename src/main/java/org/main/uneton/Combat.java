@@ -55,9 +55,9 @@ public class Combat extends JavaPlugin implements Listener {
             for (Player user : Bukkit.getOnlinePlayers()) {
                 UUID uuid = user.getUniqueId();
                 int currentPlayTime = playTimes.getOrDefault(uuid, 0);
-                playTimes.put(uuid, currentPlayTime + 1);
+                playTimes.put(uuid, currentPlayTime++);
             }
-        }, 0L, 20L); // 20 ticks = 1 second
+        }, 0L, 40L); // 20 ticks = 1 second
 
         instance = this;
         getConfig().options().copyDefaults();
