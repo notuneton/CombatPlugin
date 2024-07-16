@@ -51,7 +51,6 @@ public class Playtime implements CommandExecutor {
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
         ChatColor blue = ChatColor.BLUE;
-        ChatColor gray = ChatColor.GRAY;
         if (playTime <= 3600) {
             sender.sendMessage(String.format(blue + "%s have played %d" + blue+"m", playerName, playTime / 60));
         } else if (playTime <= 86400) {
