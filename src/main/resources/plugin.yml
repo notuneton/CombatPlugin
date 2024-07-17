@@ -18,6 +18,9 @@ commands:
   invsee:
     description: See the inventory of other players.
     usage: /invsee <player>
+  launch:
+    description: Throws the player high into the air
+    usage: /launch <player>
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>

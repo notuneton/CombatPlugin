@@ -48,8 +48,8 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
 
-        ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
 
+        ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {
                 UUID uuid = user.getUniqueId();
@@ -62,7 +62,6 @@ public class Combat extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         saveConfig();
-        Bukkit.getPluginManager().registerEvents(this, this);
 
         // admin
         getCommand("cage").setExecutor(new Cage());
@@ -101,6 +100,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
+        Bukkit.getPluginManager().registerEvents(this, this);
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();
         customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
