@@ -100,7 +100,10 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("trashcan").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
+
+
         Bukkit.getPluginManager().registerEvents(this, this);
+
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();
         customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
