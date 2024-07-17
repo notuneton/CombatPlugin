@@ -38,9 +38,6 @@ commands:
   guide:
     description: plugin commands.
     usage: /guide <text>
-  kys:
-    description: Kill Yourself.
-    usage: /kys
   ping:
     description: Check player ping.
     usage: /ping <player>

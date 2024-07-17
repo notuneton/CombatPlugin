@@ -46,7 +46,6 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawnpoint."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/ec | Opens your personal Enderchest."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/guide <text> | Show this list"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/kys | Kill Yourself."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/ping <player> | Check player ping."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/puu | Spawns an oak tree at the player's location."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/repair | Repairs the durability of your armor."));

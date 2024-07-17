@@ -68,6 +68,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("crash").setExecutor(new Crash());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
+        getCommand("launch").setExecutor(new Launch());
         getCommand("slippery").setExecutor(new Slippery(this));
 
         // combatlogger
@@ -78,7 +79,6 @@ public class Combat extends JavaPlugin implements Listener {
         // commands
         getCommand("ec").setExecutor(new Ec()); 
         getCommand("guide").setExecutor(new Guide());
-        getCommand("kys").setExecutor(new Kys());
         getCommand("ping").setExecutor(new Ping());
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("puu").setExecutor(new Puu());
