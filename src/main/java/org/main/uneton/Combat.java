@@ -97,7 +97,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("gm").setExecutor(new Gm());
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
 
-        getCommand("trashcan").setExecutor(new Trash());
+        getCommand("trash").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
 

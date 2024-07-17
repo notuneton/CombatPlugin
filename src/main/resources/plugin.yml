@@ -68,6 +68,6 @@ commands:
     description: makes the player invulnerable to all faults.
     usage: /gm <player>
 
-  trashcan:
+  trash:
     description: Put your stuff in the menu and close it!
-    usage: /trashcan
+    usage: /trash

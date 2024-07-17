@@ -51,7 +51,7 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/repair | Repairs the durability of your armor."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/rules | Rules of the Server."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sign | Spawns you a sign. (Can be clicked!)"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trashcan | Put your stuff in the menu and close it!"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trash | Put your stuff in the menu and close it!"));
         player.sendMessage(ChatColor.GRAY.toString() + ChatColor.BOLD + "-------------------------------------");
     }
 
