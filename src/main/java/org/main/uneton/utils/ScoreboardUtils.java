@@ -23,9 +23,9 @@ public class ScoreboardUtils {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
-        setScore(objective, currentTime, 5);
+        setScore(objective, currentTime, 6);
 
-        setScore(objective, "&7------------", 4);
+        setScore(objective, "&7------------", 5);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
