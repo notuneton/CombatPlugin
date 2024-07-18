@@ -31,7 +31,7 @@ public class Combat extends JavaPlugin implements Listener {
 
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     private static Combat instance;
-    public static Combat getInstance(){
+    public static Combat getInstance() {
         return instance;
     }
 
