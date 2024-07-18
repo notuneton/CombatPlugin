@@ -27,6 +27,7 @@ import org.main.uneton.utils.Tab;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 import static org.bukkit.Bukkit.getCommandMap;
 import static org.main.uneton.utils.ScoreboardUtils.updateScoreboard;
@@ -42,15 +43,23 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
-            plugin.getConfig().set("hour." + player.getUniqueId(), 0);
-            plugin.getConfig().set("minute." + player.getUniqueId(), 0);
+            plugin.getConfig().set("minutes." + player.getUniqueId(), 0);
+            plugin.getConfig().set("seconds." + player.getUniqueId(), 0);
             plugin.saveConfig();
         }
-
         ScoreboardUtils.startUpdatingScoreboard(player);
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player player = e.getPlayer();
+        Tab.updateTab();
+        updateScoreboard(player);
+        String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
+        e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
@@ -86,15 +95,6 @@ public class Listeners implements Listener {
                 event.setCancelled(true);
             }
         }
-    }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        Player player = e.getPlayer();
-        Tab.updateTab();
-        updateScoreboard(player);
-        String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-        e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler

@@ -12,30 +12,24 @@ import java.util.UUID;
 public class ScoreboardUtils {
 
     private static Combat plugin;
+
     public ScoreboardUtils(Combat plugin) {
-        this.plugin = plugin;
+        ScoreboardUtils.plugin = plugin;
     }
 
     public static void updateScoreboard(Player player) {
         Scoreboard scoreboard = player.getScoreboard();
-        Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
+        Objective objective = getOrCreateObjective(scoreboard);
 
-        if (objective == null) {
-            objective = scoreboard.registerNewObjective("scoreboard", "dummy", ColorUtils.colorize("  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  "));
-            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        }
+        clearExistingScores(scoreboard);
 
-        for (String entry : scoreboard.getEntries()) {
-            scoreboard.resetScores(entry);
-        }
-
-        String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
+        String currentTime = formatText("  &7" + TimeUtils.getCurrentFormattedTime());
         setScore(objective, currentTime, 12);
 
         setScore(objective, "&7 ", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
-        String online = ChatColor.WHITE + "  &9Online &7" + onlinePlayers;
+        String online = formatText("  &9Online &7" + onlinePlayers);
         setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
@@ -43,37 +37,52 @@ public class ScoreboardUtils {
         int minutes = plugin.getConfig().getInt("minutes." + uuid);
         int seconds = plugin.getConfig().getInt("seconds." + uuid);
 
-        String playtimeString = getString(hours, minutes, seconds);
+        String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
         setScore(objective, "&8 ", 8);
+
         player.setScoreboard(scoreboard);
     }
 
-    private static String getString(int hours, int minutes, int seconds) {
-        boolean hoursExceed60 = hours > 60;
-        boolean minutesExceed60 = minutes > 60;
-        if (seconds > 60) {
+    private static Objective getOrCreateObjective(Scoreboard scoreboard) {
+        Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
+
+        if (objective == null) {
+            String title = ColorUtils.colorize("  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  ");
+            objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        }
+
+        return objective;
+    }
+
+    private static void clearExistingScores(Scoreboard scoreboard) {
+        for (String entry : scoreboard.getEntries()) {
+            scoreboard.resetScores(entry);
+        }
+    }
+
+    private static String formatText(String text) {
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
+
+    private static String formatPlaytime(int hours, int minutes, int seconds) {
+        if (seconds >= 60) {
             minutes += seconds / 60;
             seconds %= 60;
         }
-        String playtimeString = ChatColor.WHITE + "  &9Playtime: &7";
-        if (hoursExceed60) {
-            playtimeString += hours + " h1 ";
-        } else {
-            playtimeString += hours + "h ";
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes %= 60;
         }
-        if (minutesExceed60) {
-            playtimeString += minutes + " m1 ";
-        } else {
-            playtimeString += minutes + "m ";
-        }
-        playtimeString += seconds + "s";
-        return playtimeString;
+
+        return String.format("%s  &9Playtime: &7%dh %dm %ds",
+                ChatColor.WHITE, hours, minutes, seconds);
     }
 
     private static void setScore(Objective objective, String text, int score) {
-        Score line = objective.getScore(ChatColor.translateAlternateColorCodes('&', text));
+        Score line = objective.getScore(formatText(text));
         line.setScore(score);
     }
 
@@ -105,11 +114,9 @@ public class ScoreboardUtils {
             minutes %= 60;
         }
 
-        plugin.getConfig().set(String.valueOf(uuid), minutes);
         plugin.getConfig().set("hour." + uuid, hours);
         plugin.getConfig().set("minutes." + uuid, minutes);
         plugin.getConfig().set("seconds." + uuid, seconds);
         plugin.saveConfig();
     }
 }
-
