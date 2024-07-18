@@ -12,7 +12,6 @@ import java.util.UUID;
 public class ScoreboardUtils {
 
     private static Combat plugin;
-
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
     }
