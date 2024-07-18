@@ -32,7 +32,7 @@ public class ScoreboardUtils {
         String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
         setScore(objective, currentTime, 6);
 
-        setScore(objective, " ", 5);
+        setScore(objective, "&7 ", 5);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
@@ -46,10 +46,9 @@ public class ScoreboardUtils {
         String playtimeString = getString(hours, minutes, seconds);
         setScore(objective, playtimeString, 2);
 
-        setScore(objective, "  ", 1);
+        setScore(objective, "&8 ", 1);
         player.setScoreboard(scoreboard);
     }
-
 
     private static String getString(int hours, int minutes, int seconds) {
         boolean hoursExceed60 = hours > 60;
