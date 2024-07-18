@@ -32,7 +32,7 @@ public class ScoreboardUtils {
         String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
         setScore(objective, currentTime, 6);
 
-        setScore(objective, "ei", 5);
+        setScore(objective, " ", 5);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
@@ -46,7 +46,7 @@ public class ScoreboardUtils {
         String playtimeString = getString(hours, minutes, seconds);
         setScore(objective, playtimeString, 2);
 
-        setScore(objective, "kyllä", 1);
+        setScore(objective, "  ", 1);
         player.setScoreboard(scoreboard);
     }
 
