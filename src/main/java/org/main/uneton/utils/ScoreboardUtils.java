@@ -35,7 +35,7 @@ public class ScoreboardUtils {
         setScore(objective, "&7 ", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
-        String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
+        String online = ChatColor.WHITE + "  &9Online &7" + onlinePlayers;
         setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
@@ -105,6 +105,7 @@ public class ScoreboardUtils {
             minutes %= 60;
         }
 
+        plugin.getConfig().set(String.valueOf(uuid), minutes);
         plugin.getConfig().set("hour." + uuid, hours);
         plugin.getConfig().set("minutes." + uuid, minutes);
         plugin.getConfig().set("seconds." + uuid, seconds);
