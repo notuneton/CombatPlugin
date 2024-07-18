@@ -17,15 +17,22 @@ public class ScoreboardUtils {
     }
 
     public static void updateScoreboard(Player player) {
-        ScoreboardManager manager = Bukkit.getScoreboardManager();
-        Scoreboard board = manager.getNewScoreboard();
-        Objective objective = board.registerNewObjective("scoreboard", "dummy", ChatColor.translateAlternateColorCodes('&', "  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  "));
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        Scoreboard scoreboard = player.getScoreboard();
+        Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
+
+        if (objective == null) {
+            objective = scoreboard.registerNewObjective("scoreboard", "dummy", ColorUtils.colorize("  &x&4&5&9&2&A&E&lQ&x&4&4&8&B&A&6&lu&x&4&3&8&4&9&E&lo&x&4&2&7&D&9&6&ll&x&4&1&7&6&8&E&ll&x&4&1&7&0&8&7&le&x&4&0&6&9&7&F&le&x&3&F&6&2&7&7&lt&x&3&E&5&B&6&F&l  "));
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        }
+
+        for (String entry : scoreboard.getEntries()) {
+            scoreboard.resetScores(entry);
+        }
 
         String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
         setScore(objective, currentTime, 6);
 
-        setScore(objective, "&7------------", 5);
+        setScore(objective, "ei", 5);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
@@ -39,9 +46,10 @@ public class ScoreboardUtils {
         String playtimeString = getString(hours, minutes, seconds);
         setScore(objective, playtimeString, 2);
 
-        setScore(objective, "&7------------", 1);
-        player.setScoreboard(board);
+        setScore(objective, "kyllä", 1);
+        player.setScoreboard(scoreboard);
     }
+
 
     private static String getString(int hours, int minutes, int seconds) {
         boolean hoursExceed60 = hours > 60;
