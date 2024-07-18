@@ -1,10 +1,14 @@
 package org.main.uneton;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -103,6 +107,33 @@ public class Combat extends JavaPlugin implements Listener {
 
 
         Bukkit.getPluginManager().registerEvents(this, this);
+
+
+        ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
+        coarseDirtRecipe.shape("DD", "DD");
+        coarseDirtRecipe.setIngredient('D', Material.DIRT);
+        Bukkit.addRecipe(coarseDirtRecipe);
+    }
+
+    private ItemStack compDirt() {
+        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
+        ItemMeta compDirtMeta = compDirt.getItemMeta();
+        compDirtMeta.setDisplayName(ChatColor.YELLOW + "Compressed Dirt");
+        compDirt.setItemMeta(compDirtMeta);
+        return compDirt;
+    }
+
+    @EventHandler
+    public void onBlockBroken(BlockBreakEvent event) {
+        Block block = event.getBlock();
+        if (block.getType() == compDirt().getType()) {
+            event.setDropItems(false);
+            Location loc = block.getLocation();
+            ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
+            Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
+        }
+
+
 
         ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
         ItemMeta customTotem_meta = customTotem.getItemMeta();
