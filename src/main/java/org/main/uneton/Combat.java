@@ -141,8 +141,50 @@ public class Combat extends JavaPlugin implements Listener {
         elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
         elytraRecipe.setIngredient('D', Material.DRAGON_BREATH);
         Bukkit.addRecipe(elytraRecipe);
+    }
 
-        /*
+    public static boolean doesCommandExist(String commandName) {
+        CommandMap commandMap = getCommandMap();
+        if (commandMap != null) {
+            Command command = commandMap.getCommand(commandName);
+            return command != null;
+        }
+        return false;
+    }
+
+    public void onDisable() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            ScoreboardUtils.savePlaytime(player);
+        }
+
+        saveConfig();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+        getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
+        saveEconomy();
+
+
+
         this.vault = VaultHook.hook(this);
         loadEconomy(); // todo better error handling if vault cannot be hooked
         loadData();
@@ -198,23 +240,4 @@ public class Combat extends JavaPlugin implements Listener {
     public Economy getVault() {
         return vault;
     }
-         */
-
-    }
-
-    public static boolean doesCommandExist(String commandName) {
-        CommandMap commandMap = getCommandMap();
-        if (commandMap != null) {
-            Command command = commandMap.getCommand(commandName);
-            return command != null;
-        }
-        return false;
-    }
-
-    public void onDisable() {
-        // getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
-        // saveEconomy();
-    }
-
-
-}
+*/

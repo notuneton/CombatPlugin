@@ -30,13 +30,13 @@ public class ScoreboardUtils {
         }
 
         String currentTime = "  &7" + TimeUtils.getCurrentFormattedTime();
-        setScore(objective, currentTime, 6);
+        setScore(objective, currentTime, 12);
 
-        setScore(objective, "&7 ", 5);
+        setScore(objective, "&7 ", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ChatColor.WHITE + "  &9Online: &7" + onlinePlayers;
-        setScore(objective, online, 3);
+        setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
         int hours = plugin.getConfig().getInt("hour." + uuid);
@@ -44,9 +44,9 @@ public class ScoreboardUtils {
         int seconds = plugin.getConfig().getInt("seconds." + uuid);
 
         String playtimeString = getString(hours, minutes, seconds);
-        setScore(objective, playtimeString, 2);
+        setScore(objective, playtimeString, 9);
 
-        setScore(objective, "&8 ", 1);
+        setScore(objective, "&8 ", 8);
         player.setScoreboard(scoreboard);
     }
 
@@ -88,6 +88,27 @@ public class ScoreboardUtils {
                 }
             }
         }.runTaskTimer(plugin, 0L, 20L);
+    }
+
+    public static void savePlaytime(Player player) {
+        UUID uuid = player.getUniqueId();
+        int hours = plugin.getConfig().getInt("hour." + uuid);
+        int minutes = plugin.getConfig().getInt("minutes." + uuid);
+        int seconds = plugin.getConfig().getInt("seconds." + uuid);
+
+        if (seconds >= 60) {
+            minutes += seconds / 60;
+            seconds %= 60;
+        }
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes %= 60;
+        }
+
+        plugin.getConfig().set("hour." + uuid, hours);
+        plugin.getConfig().set("minutes." + uuid, minutes);
+        plugin.getConfig().set("seconds." + uuid, seconds);
+        plugin.saveConfig();
     }
 }
 
