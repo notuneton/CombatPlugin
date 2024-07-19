@@ -49,7 +49,7 @@ public class ScoreboardUtils {
         double sprintedCm = player.getStatistic(Statistic.SPRINT_ONE_CM);
         double totalCm = walkedCm + sprintedCm;
         String formattedTotalDistance = NumberFormatter.formatDistance(totalCm);
-        setScore(objective, "  &9walked &8" + formattedTotalDistance, 8);
+        setScore(objective, "  &9Walked &7" + formattedTotalDistance, 8);
 
         setScore(objective, "&8 ", 7);
         player.setScoreboard(scoreboard);
