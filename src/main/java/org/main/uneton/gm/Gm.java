@@ -39,14 +39,15 @@ public class Gm implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendActionBar(ChatColor.DARK_RED + "That user is offline.");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            player.sendActionBar(warn + ColorUtils.colorize("&4That player does not exist."));
             return true;
         }
 
         if (args.length == 1) {
             if (gm_list.contains(target)) {
                 gm_list.remove(target);
-                player.sendMessage(ChatColor.WHITE + "You are not" +ChatColor.RED + " longer " + ChatColor.WHITE + "in" + ChatColor.BLUE + " Godmode.");
+                player.sendMessage(ColorUtils.colorize("You are not longer in Godmode."));
                 cancelTask();
             } else {
                 gm_list.add(target);
@@ -58,7 +59,7 @@ public class Gm implements CommandExecutor {
 
     private void sendGodPacked(Player player) {
         task = Bukkit.getScheduler().runTaskTimer(Combat.getInstance(), () -> {
-            player.sendActionBar(ChatColor.WHITE + "You are currently in " + ChatColor.BLUE + "Godmode.");
+            player.sendActionBar(ColorUtils.colorize("&fOlet tällä hetkellä &9kuolematon&f."));
         }, 0, 1);
     }
 

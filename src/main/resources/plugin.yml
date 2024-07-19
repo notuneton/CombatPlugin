@@ -2,6 +2,8 @@ name: CombatV3
 version: '${version}'
 main: org.main.uneton.Combat
 api-version: '1.19'
+author: unetonn
+
 softdepend:
   - Vault
 

@@ -101,12 +101,8 @@ public class Listeners implements Listener {
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        if (!player.hasPlayedBefore()) {
-            e.setJoinMessage(ChatColor.LIGHT_PURPLE + "You wake up in an unfamiliar place.");
-        } else {
-            String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-            e.setJoinMessage(join + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
-        }
+        String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
+        e.setJoinMessage(join + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
