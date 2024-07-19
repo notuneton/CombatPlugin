@@ -16,5 +16,15 @@ public class NumberFormatter {
         }
         return String.format("%.2f", n);
     }
+
+    public static String formatDistance(double cm) {
+        double meters = cm / 100.0;  // Convert centimeters to meters
+        if (meters >= 1000) {
+            double kilometers = meters / 1000.0;  // Convert meters to kilometers
+            return String.format("%.1f kilometers", kilometers);
+        } else {
+            return String.format("%.1f meters", meters);
+        }
+    }
 }
 
