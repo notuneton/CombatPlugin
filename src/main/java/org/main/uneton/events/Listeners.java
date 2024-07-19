@@ -30,7 +30,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import static org.bukkit.Bukkit.getCommandMap;
-import static org.main.uneton.utils.ScoreboardUtils.updateScoreboard;
+import static org.main.uneton.utils.ScoreboardUtils.*;
 
 public class Listeners implements Listener {
 
@@ -60,6 +60,20 @@ public class Listeners implements Listener {
         updateScoreboard(player);
         String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        // Get the player and their current yaw and pitch
+        Player player = event.getPlayer();
+        float yaw = player.getLocation().getYaw();
+        float pitch = player.getLocation().getPitch();
+
+        // Optional: Check if player moved by comparing their old and new location
+        if (hasPlayerMoved(event)) {
+            // Perform actions based on yaw and pitch
+            handleDirectionChange(player, yaw, pitch);
+        }
     }
 
     @EventHandler
@@ -114,7 +128,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
+    public void onMovePlayer(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         World world = player.getWorld();
         int loc = 5;
