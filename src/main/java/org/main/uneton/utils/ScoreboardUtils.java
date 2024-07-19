@@ -9,6 +9,8 @@ import org.main.uneton.Combat;
 
 import java.util.UUID;
 
+import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
+
 public class ScoreboardUtils {
 
     private static Combat plugin;
@@ -28,10 +30,21 @@ public class ScoreboardUtils {
 
         clearExistingScores(scoreboard);
 
-        String currentTime = ColorUtils.colorize("  &7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 12);
+        if (combat_tagged.containsKey(player)) {
+            setScore(objective, ColorUtils.colorize("&4COMBAT"), 15);
+        } else {
 
-        setScore(objective, "&7 ", 11);
+        }
+
+        String currentTime = ColorUtils.colorize("  &7" + TimeUtils.getCurrentFormattedTime());
+        setScore(objective, currentTime, 14);
+
+        setScore(objective, "", 13);
+        int playerPing = player.getPing();
+        String ping = ColorUtils.colorize("&fPing: " + "&b" + String.format("%dms", playerPing));
+        setScore(objective, ping, 12);
+
+        setScore(objective, "&7"+ player.getName(), 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ColorUtils.colorize("  &9Online &7" + onlinePlayers);
@@ -65,7 +78,7 @@ public class ScoreboardUtils {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("%s  &9Playtime: &7%dh %dm %ds",
+        return String.format("%s  &9Playtime &7%dh %dm %ds",
                 ChatColor.WHITE, hours, minutes, seconds);
     }
 
