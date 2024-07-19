@@ -63,19 +63,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerMove(PlayerMoveEvent event) {
-        // Get the player and their current yaw and pitch
-        Player player = event.getPlayer();
-        float yaw = player.getLocation().getYaw();
-        float pitch = player.getLocation().getPitch();
-
-        // Optional: Check if player moved by comparing their old and new location
-        if (hasPlayerMoved(event)) {
-            handleDirectionChange(player, yaw, pitch);
-        }
-    }
-
-    @EventHandler
     public void onPing(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
