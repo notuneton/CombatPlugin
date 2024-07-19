@@ -1,4 +1,4 @@
-package org.main.uneton.economy;
+package org.main.uneton.utils;
 
 public class NumberFormatter {
 
