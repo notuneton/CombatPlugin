@@ -2,6 +2,7 @@ package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
@@ -25,16 +26,12 @@ public class ScoreboardUtils {
             objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
-
         clearExistingScores(scoreboard);
 
         String currentTime = ColorUtils.colorize("  &7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 13);
+        setScore(objective, currentTime, 12);
 
-        setScore(objective, "", 12);
-        int playerPing = player.getPing();
-        String ping = ColorUtils.colorize("  &7Ping: " + "&b" + String.format("%dms", playerPing));
-        setScore(objective, ping, 11);
+        setScore(objective, "", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String online = ColorUtils.colorize("  &9Online &7" + onlinePlayers);
@@ -47,9 +44,9 @@ public class ScoreboardUtils {
 
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
+        setScore(objective, "  &9walked"+ (player.getStatistic(Statistic.WALK_ONE_CM)+ player.getStatistic(Statistic.SPRINT_ONE_CM) + "&8cm"), 8);
 
-        setScore(objective, "&8 ", 8);
-
+        setScore(objective, "&8 ", 7);
         player.setScoreboard(scoreboard);
     }
 
