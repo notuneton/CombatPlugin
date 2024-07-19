@@ -43,6 +43,16 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        float yaw = player.getLocation().getYaw();
+        float pitch = player.getLocation().getPitch();
+        if (hasPlayerMoved(event)) {
+            handleDirectionChange(player, yaw, pitch);
+        }
+    }
+
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
