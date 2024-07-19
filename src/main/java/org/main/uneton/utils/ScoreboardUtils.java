@@ -2,9 +2,7 @@ package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
@@ -46,11 +44,7 @@ public class ScoreboardUtils {
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
-        double walkedCm = player.getStatistic(Statistic.WALK_ONE_CM);
-        double sprintedCm = player.getStatistic(Statistic.SPRINT_ONE_CM);
-        double totalCm = walkedCm + sprintedCm;
-        String formattedTotalDistance = NumberFormatter.formatDistance(totalCm);
-        setScore(objective, "  &9Walked &7" + formattedTotalDistance, 8);
+        setScore(objective, "  &7", 8);
         player.setScoreboard(scoreboard);
     }
 
