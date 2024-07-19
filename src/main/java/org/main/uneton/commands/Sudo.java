@@ -36,7 +36,7 @@ public class Sudo implements CommandExecutor {
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
             String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendActionBar(warn + ColorUtils.colorize("&4That player does not exist."));
+            player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
             return true;
         }
 
