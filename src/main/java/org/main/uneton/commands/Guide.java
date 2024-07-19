@@ -81,7 +81,7 @@ public class Guide implements CommandExecutor {
 
     private void sendPermissions(Player player) {
         player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.view.commands &k| "));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.view.commands &k| \n "));
         player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
     }
 

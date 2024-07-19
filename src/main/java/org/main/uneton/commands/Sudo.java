@@ -49,9 +49,9 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString()); // Execute the command on the target player
-                player.sendMessage(ChatColor.GRAY + "Executed command '" + ChatColor.GREEN + message + ChatColor.GRAY + "' on player " + ChatColor.YELLOW + target.getName());
+                player.sendMessage(ColorUtils.colorize("&7Executed command '&a" + message + "&7' on player " + ChatColor.YELLOW + target.getName()));
             } else {
-                player.sendMessage(ChatColor.RED + "Could not find player: " + user);
+                player.sendMessage(ColorUtils.colorize("Could not find player: "+ user));
             }
         }
         return true;
