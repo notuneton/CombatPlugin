@@ -133,13 +133,20 @@ public class Listeners implements Listener {
 
         if (killer != null && !killer.equals(victim)) {
             ItemStack blood = new ItemStack(Material.RED_DYE, 3);
+
+            // Set the item name to the name of the deceased player
+            ItemMeta meta = blood.getItemMeta();
+            if (meta != null) {
+                meta.setDisplayName(victim.getName() + "'s Blood");
+                blood.setItemMeta(meta);
+            }
             Item dropped = location.getWorld().dropItemNaturally(location, blood);
             dropped.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
                 if (dropped.isValid()) {
                     dropped.remove();
                 }
-            }, 200L);
+            }, 220L);
         }
     }
 
