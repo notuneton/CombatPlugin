@@ -17,6 +17,26 @@ public class ScoreboardUtils {
         ScoreboardUtils.plugin = plugin;
     }
 
+    public static boolean hasPlayerMoved(PlayerMoveEvent event) {
+        return !(event.getFrom().getBlockX() == event.getTo().getBlockX()) &&
+                !(event.getFrom().getBlockY() == event.getTo().getBlockY()) &&
+                !(event.getFrom().getBlockZ() == event.getTo().getBlockZ());
+    }
+
+    public static void handleDirectionChange(Player player, float yaw, float pitch) {
+        String direction = getDirection(yaw);
+        String message = ChatColor.GREEN + "Your direction is " + direction + " with pitch " + pitch;
+        player.sendMessage(message);
+    }
+
+    private static String getDirection(float yaw) {
+        if (yaw >= -45 && yaw < 45) return "North";
+        if (yaw >= 45 && yaw < 135) return "East";
+        if (yaw >= 135 && yaw < 225) return "South";
+        if (yaw >= 225 && yaw < 315) return "West";
+        return "Unknown";
+    }
+
     public static void updateScoreboard(Player player) {
         Scoreboard scoreboard = player.getScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
@@ -45,32 +65,17 @@ public class ScoreboardUtils {
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
-        setScore(objective, "", 8);
+        float yaw = player.getLocation().getYaw();
+        float pitch = player.getLocation().getPitch();
+
+        String direction = getDirection(yaw);
+        String directionText = ChatColor.translateAlternateColorCodes('&', "  &6Direction: &7" + direction + " &6Pitch: &7" + pitch);
+
+        setScore(objective, directionText, 8);
         player.setScoreboard(scoreboard);
     }
 
-    public static boolean hasPlayerMoved(PlayerMoveEvent event) {
-        // Check if the player has moved (not just looking around)
-        return !(event.getFrom().getBlockX() == event.getTo().getBlockX()) &&
-                !(event.getFrom().getBlockY() == event.getTo().getBlockY()) &&
-                !(event.getFrom().getBlockZ() == event.getTo().getBlockZ());
-    }
 
-    public static void handleDirectionChange(Player player, float yaw, float pitch) {
-        // Example action: Send a message with player's direction
-        String direction = getDirection(yaw);
-        String message = ChatColor.GREEN + "Your direction is " + direction + " with pitch " + pitch;
-        player.sendMessage(message);
-    }
-
-    private static String getDirection(float yaw) {
-        // Determine the direction based on yaw
-        if (yaw >= -45 && yaw < 45) return "North";
-        if (yaw >= 45 && yaw < 135) return "East";
-        if (yaw >= 135 && yaw < 225) return "South";
-        if (yaw >= 225 && yaw < 315) return "West";
-        return "Unknown";
-    }
 
     private static void clearExistingScores(Scoreboard scoreboard) {
         for (String entry : scoreboard.getEntries()) {

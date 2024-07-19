@@ -71,7 +71,6 @@ public class Listeners implements Listener {
 
         // Optional: Check if player moved by comparing their old and new location
         if (hasPlayerMoved(event)) {
-            // Perform actions based on yaw and pitch
             handleDirectionChange(player, yaw, pitch);
         }
     }
