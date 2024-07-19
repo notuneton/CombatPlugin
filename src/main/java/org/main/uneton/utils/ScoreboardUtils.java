@@ -2,6 +2,7 @@ package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -15,26 +16,6 @@ public class ScoreboardUtils {
     private static Combat plugin;
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
-    }
-
-    public static boolean hasPlayerMoved(PlayerMoveEvent event) {
-        return !(event.getFrom().getBlockX() == event.getTo().getBlockX()) &&
-                !(event.getFrom().getBlockY() == event.getTo().getBlockY()) &&
-                !(event.getFrom().getBlockZ() == event.getTo().getBlockZ());
-    }
-
-    public static void handleDirectionChange(Player player, float yaw, float pitch) {
-        String direction = getDirection(yaw);
-        String message = ChatColor.GREEN + "Your direction is " + direction + " with pitch " + pitch;
-        player.sendMessage(message);
-    }
-
-    private static String getDirection(float yaw) {
-        if (yaw >= -45 && yaw < 45) return "North";
-        if (yaw >= 45 && yaw < 135) return "East";
-        if (yaw >= 135 && yaw < 225) return "South";
-        if (yaw >= 225 && yaw < 315) return "West";
-        return "West";
     }
 
     public static void updateScoreboard(Player player) {
@@ -65,11 +46,11 @@ public class ScoreboardUtils {
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
-        float yaw = player.getLocation().getYaw();
-        float pitch = player.getLocation().getPitch();
-        String direction = getDirection(yaw);
-        String directionText = ColorUtils.colorize("  &9Dir: &7" + direction + " &9Pitch: &7" + pitch);
-        setScore(objective, directionText, 8);
+        double walkedCm = player.getStatistic(Statistic.WALK_ONE_CM);
+        double sprintedCm = player.getStatistic(Statistic.SPRINT_ONE_CM);
+        double totalCm = walkedCm + sprintedCm;
+        String formattedTotalDistance = NumberFormatter.formatDistance(totalCm);
+        setScore(objective, "  &9Walked &7" + formattedTotalDistance, 8);
         player.setScoreboard(scoreboard);
     }
 
