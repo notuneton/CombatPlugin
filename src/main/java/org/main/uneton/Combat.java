@@ -133,19 +133,6 @@ public class Combat extends JavaPlugin implements Listener {
             Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
         }
 
-
-
-        ItemStack customTotem = new ItemStack(Material.TOTEM_OF_UNDYING, 1);
-        ItemMeta customTotem_meta = customTotem.getItemMeta();
-        customTotem_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Another Heart");
-        customTotem.setItemMeta(customTotem_meta);
-
-        ShapedRecipe totemOfUndying = new ShapedRecipe(new NamespacedKey(Combat.instance, "totemOfUndying"), customTotem);
-        totemOfUndying.shape("HR");
-        totemOfUndying.setIngredient('H', Material.HEART_OF_THE_SEA);
-        totemOfUndying.setIngredient('R', Material.GOLD_INGOT);
-        Bukkit.addRecipe(totemOfUndying);
-
         // Notch Apple recipe
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
