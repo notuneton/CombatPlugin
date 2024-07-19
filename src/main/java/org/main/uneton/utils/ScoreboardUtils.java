@@ -45,13 +45,7 @@ public class ScoreboardUtils {
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
-        double walkedCm = player.getStatistic(Statistic.WALK_ONE_CM);
-        double sprintedCm = player.getStatistic(Statistic.SPRINT_ONE_CM);
-        double totalCm = walkedCm + sprintedCm;
-        String formattedTotalDistance = NumberFormatter.formatDistance(totalCm);
-        setScore(objective, "  &9Walked &7" + formattedTotalDistance, 8);
-
-        setScore(objective, "&8 ", 7);
+        setScore(objective, "", 8);
         player.setScoreboard(scoreboard);
     }
 
