@@ -26,7 +26,7 @@ public class Playtime implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7Usage: &x&A&B&A&B&A&B/&x&A&B&A&B&A&Bp&x&A&B&A&B&A&Bl&x&A&B&A&B&A&Ba&x&A&B&A&B&A&By&x&A&B&A&B&A&Bt&x&A&B&A&B&A&Bi&x&A&B&A&B&A&Bm&x&A&B&A&B&A&Be &x&A&B&A&B&A&B<&x&A&B&A&B&A&Bp&x&A&B&A&B&A&Bl&x&A&B&A&B&A&Ba&x&A&B&A&B&A&By&x&A&B&A&B&A&Be&x&A&B&A&B&A&Br&x&A&B&A&B&A&B>");
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7Käytä komentoa näin: &f/playtime <player>");
             player.sendMessage(usage);
             return true;
         }
@@ -51,11 +51,10 @@ public class Playtime implements CommandExecutor {
     }
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
-        ChatColor blue = ChatColor.BLUE;
         if (playTime <= 3600) {
-            sender.sendMessage(String.format(blue + "%s have played %d" + blue+"m", playerName, playTime / 60));
+            sender.sendMessage(ColorUtils.colorize(String.format("&3%s &bolet pelannut &6%d &bminuuttia", playerName, playTime / 60)));
         } else if (playTime <= 86400) {
-            sender.sendMessage(String.format(blue + "%s have played %.2f" + blue +"h", playerName, playTime / 3600.0));
+            sender.sendMessage(ColorUtils.colorize(String.format("&3%s &bhave played &6%.2f &btuntia", playerName, playTime / 3600.0)));
         }
     }
 }

@@ -36,9 +36,10 @@ public class Guide implements CommandExecutor {
                         sendAdminCommands(player);
                         break;
                     } else {
-                        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+                        String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
+                        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
                         player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7You don't have permission to view that"));
-                        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+                        player.sendMessage(ColorUtils.colorize("&8------------------------------------------------"));
                         return true;
                     }
                 }
@@ -51,7 +52,8 @@ public class Guide implements CommandExecutor {
     }
 
     private void sendBasicCommands(Player player) {
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
+        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawnpoint."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/ec | Opens your personal Enderchest."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/guide <text> | Show this list"));
@@ -61,11 +63,12 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/rules | Rules of the Server."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sign | Spawns you a sign. (Can be clicked!)"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trash | Put your stuff in the menu and close it!"));
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        player.sendMessage(ColorUtils.colorize("&8------------------------------------------------"));
     }
 
     private void sendAdminCommands(Player player) {
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
+        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/crash <player> | Crashes the specified player's game"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/heal <player> | Heals the player's hearts."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/invsee <player> | See the inventory of other players."));
@@ -76,19 +79,20 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sudo <target> <command> | Executes another player perform a task."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/freeze <player> | Cancels the player's movement."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/gm <player> | Makes the player invulnerable to all faults."));
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
 
     private void sendPermissions(Player player) {
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
+        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.view.commands"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&l"));
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
 
     private void sendUsage(Player player) {
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
-        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7Usage: /guide <komennot | admin>"));
-        player.sendMessage(ColorUtils.colorize("&7&l--------------------------------------------"));
+        String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
+        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
+        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- /guide <komennot | oikeudet | admin>"));
+        player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
 }

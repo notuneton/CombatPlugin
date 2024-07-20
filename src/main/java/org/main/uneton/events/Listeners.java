@@ -101,7 +101,7 @@ public class Listeners implements Listener {
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        player.sendMessage("&3>&b> &8+ &7Siirryttiin palvelimelle &fmain&7.");
+        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &fmain&7."));
         String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setJoinMessage(join + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
