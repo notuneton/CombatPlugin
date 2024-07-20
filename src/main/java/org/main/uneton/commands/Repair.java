@@ -20,7 +20,7 @@ public class Repair implements CommandExecutor {
         }
 
         if (args.length == 1) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7komennon käyttö: &f/repair ");
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/repair ");
             player.sendMessage(usage);
             return true;
         }
