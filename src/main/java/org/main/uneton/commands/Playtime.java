@@ -51,10 +51,13 @@ public class Playtime implements CommandExecutor {
     }
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
+        if (playTime >= 3600) {
+            sender.sendMessage(ColorUtils.colorize("You don't have enough playtime to use this command, try again later!"));
+        }
         if (playTime <= 3600) {
-            sender.sendMessage(ColorUtils.colorize(String.format("\n\n&3&l%s &bolet pelannut &6%d &bminuuttia\n\n", playerName, playTime / 60)));
+            sender.sendMessage(ColorUtils.colorize(String.format("&3&l%s &bon pelannut &6%d &bminuuttia\n", playerName, playTime / 60)));
         } else if (playTime <= 86400) {
-            sender.sendMessage(ColorUtils.colorize(String.format("\n\n&3&l%s &bhave played &6%.2f &btuntia\n\n", playerName, playTime / 3600.0)));
+            sender.sendMessage(ColorUtils.colorize(String.format("&3&l%s &bon pelannut &6%.2f &btuntia\n", playerName, playTime / 3600.0)));
         }
     }
 }

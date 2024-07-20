@@ -12,6 +12,7 @@ import java.util.UUID;
 public class ScoreboardUtils {
 
     private static Combat plugin;
+
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
     }
@@ -33,14 +34,14 @@ public class ScoreboardUtils {
         setScore(objective, "  &9", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
-        String totalPlayers = String.valueOf(onlinePlayers); // Convert integer to string without any formatting issues
+        String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("  &fPlayers &a" + totalPlayers);
         setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
-        int hours = plugin.getConfig().getInt("hour." + uuid);
-        int minutes = plugin.getConfig().getInt("minutes." + uuid);
-        int seconds = plugin.getConfig().getInt("seconds." + uuid);
+        int hours = plugin.getConfig().getInt("playtime." + uuid + ".hours", 0);
+        int minutes = plugin.getConfig().getInt("playtime." + uuid + ".minutes", 0);
+        int seconds = plugin.getConfig().getInt("playtime." + uuid + ".seconds", 0);
 
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
@@ -48,7 +49,6 @@ public class ScoreboardUtils {
         setScore(objective, "  &7", 8);
         player.setScoreboard(scoreboard);
     }
-
 
     private static void clearExistingScores(Scoreboard scoreboard) {
         for (String entry : scoreboard.getEntries()) {
@@ -89,9 +89,9 @@ public class ScoreboardUtils {
 
     public static void savePlaytime(Player player) {
         UUID uuid = player.getUniqueId();
-        int hours = plugin.getConfig().getInt("hour." + uuid);
-        int minutes = plugin.getConfig().getInt("minutes." + uuid);
-        int seconds = plugin.getConfig().getInt("seconds." + uuid);
+        int hours = plugin.getConfig().getInt("playtime." + uuid + ".hours", 0);
+        int minutes = plugin.getConfig().getInt("playtime." + uuid + ".minutes", 0);
+        int seconds = plugin.getConfig().getInt("playtime." + uuid + ".seconds", 0);
 
         if (seconds >= 60) {
             minutes += seconds / 60;
@@ -102,9 +102,9 @@ public class ScoreboardUtils {
             minutes %= 60;
         }
 
-        plugin.getConfig().set("hour." + uuid, hours);
-        plugin.getConfig().set("minutes." + uuid, minutes);
-        plugin.getConfig().set("seconds." + uuid, seconds);
+        plugin.getConfig().set("playtime." + uuid + ".hours", hours);
+        plugin.getConfig().set("playtime." + uuid + ".minutes", minutes);
+        plugin.getConfig().set("playtime." + uuid + ".seconds", seconds);
         plugin.saveConfig();
     }
 }

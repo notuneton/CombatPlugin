@@ -14,6 +14,12 @@ commands:
   crash:
     description: Spawns a white ball around you.
     usage: /crash <player>
+  freeze:
+    description: Cancels the player's movement.
+    usage: /freeze <player>
+  gm:
+    description: makes the player invulnerable to all faults.
+    usage: /gm <player>
   heal:
     description: Heals the player's hearts.
     usage: /heal <player>
@@ -61,15 +67,6 @@ commands:
   sudo:
     description: Executes another player perform a task.
     usage: /sudo <target> <command>
-
-  freeze:
-    description: Cancels the player's movement.
-    usage: /freeze <player>
-
-  gm:
-    description: makes the player invulnerable to all faults.
-    usage: /gm <player>
-
   trash:
     description: Put your stuff in the menu and close it!
     usage: /trash
