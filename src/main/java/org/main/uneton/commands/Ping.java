@@ -14,6 +14,12 @@ public class Ping implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
+        if (args.length == 0) {
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/ping <player>");
+            player.sendMessage(usage);
+            return true;
+        }
+
         if (args.length == 1) {
             Player target = Bukkit.getServer().getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
