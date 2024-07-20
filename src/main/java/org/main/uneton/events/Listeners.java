@@ -101,6 +101,7 @@ public class Listeners implements Listener {
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        player.sendMessage("&3>&b> &8+ &7Siirryttiin palvelimelle &fmain&7.");
         String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setJoinMessage(join + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
@@ -184,31 +185,14 @@ public class Listeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void onRareDrop(BlockBreakEvent e) {
-        Block block = e.getBlock();
-        Location loc = e.getBlock().getLocation();
-        Player player = e.getPlayer();
-        if (block.getType() == Material.SUGAR_CANE) {
-            Random chance = new Random();
-            if (chance.nextDouble() < 1) {
-                dropCocaine(player);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent e) {
-        Player player = e.getPlayer();
-        if (e.getBlock().getType() == Material.COBBLESTONE ||
-                // e.getBlock().getType() == Material. ||
-                e.getBlock().getType() == Material.NETHERRACK) {
-            Random chance = new Random();
-            if (chance.nextDouble() < 0.5) {
-                dropPinkDiamond(player, e);
-            }
-        }
-    }
+    private final ItemStack[] blocks = new ItemStack[]{
+            new ItemStack(Material.EMERALD),
+            new ItemStack(Material.AMETHYST_SHARD),
+            new ItemStack(Material.IRON_NUGGET),
+            new ItemStack(Material.GOLD_NUGGET),
+            new ItemStack(Material.COPPER_INGOT),
+            new ItemStack(Material.STRING)
+    };
 
     @EventHandler
     public void onShearSheep(PlayerInteractEntityEvent event) {
@@ -222,43 +206,6 @@ public class Listeners implements Listener {
                 }
             }
         }
-    }
-
-    private final ItemStack[] blocks = new ItemStack[]{
-            new ItemStack(Material.EMERALD),
-            new ItemStack(Material.AMETHYST_SHARD),
-            new ItemStack(Material.IRON_NUGGET),
-            new ItemStack(Material.GOLD_NUGGET),
-            new ItemStack(Material.COPPER_INGOT),
-            new ItemStack(Material.STRING)
-    };
-
-    private void dropCocaine(Player player) {
-        ItemStack cocaine = new ItemStack(Material.SUGAR);
-        ItemMeta cocaine_meta = cocaine.getItemMeta();
-        cocaine_meta.setDisplayName(ChatColor.WHITE + "Cocaine");
-        cocaine.setItemMeta(cocaine_meta);
-    }
-
-    private void dropPinkDiamond(Player player, BlockBreakEvent e) {
-        ChatColor gray = ChatColor.GRAY;
-        ChatColor red = ChatColor.RED;
-        ChatColor green = ChatColor.GREEN;
-
-        ChatColor light_purple = ChatColor.LIGHT_PURPLE;
-        ItemStack pinkDiamond = new ItemStack(Material.DIAMOND);
-        ItemMeta pinkMeta = pinkDiamond.getItemMeta();
-        pinkMeta.setDisplayName(light_purple + "Pink Diamond");
-
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(" ");
-        lore.add(gray + "Probability: " + red + "0.5%");
-        pinkMeta.setLore(lore);
-        pinkDiamond.setItemMeta(pinkMeta);
-
-        Location location = e.getPlayer().getLocation();
-        e.getBlock().getWorld().dropItemNaturally(location, pinkDiamond);
-        player.sendMessage(green + "You picked up the " + light_purple + "Pink Diamond.");
     }
 
     private void woolDrops(Player player, Location loc) {
