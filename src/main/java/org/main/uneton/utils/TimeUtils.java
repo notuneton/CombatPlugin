@@ -5,9 +5,17 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeUtils {
     public static String getCurrentFormattedTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return now.format(formatter);
     }
 }
 
+
+    /*
+    public static String getCurrentFormattedTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        return now.format(formatter);
+    }
+     */
