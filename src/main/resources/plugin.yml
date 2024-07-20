@@ -40,6 +40,9 @@ commands:
     description: Teleport to the spawnpoint.
     usage: /spawn
 
+  bugreport:
+    description: Report a bug. reporting false bugs will be punished!
+    usage: /bugreport
   enderchest:
     description: Opens your personal Enderchest.
     usage: /enderchest
