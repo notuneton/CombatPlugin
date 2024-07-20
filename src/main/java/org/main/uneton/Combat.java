@@ -61,7 +61,7 @@ public class Combat extends JavaPlugin implements Listener {
                 playTimes.put(uuid, currentPlayTime + 1);
                 instance.getConfig().set("seconds."+ uuid, playTimes.get(uuid));
             }
-        }, 0L, 20L); // 20 ticks = 1 second
+        }, 0L, 20L);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -93,27 +93,16 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
         getCommand("sudo").setExecutor(new Sudo());
+        getCommand("trash").setExecutor(new Trash());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
-
-
-
-
-
-
-
-        getCommand("trash").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
-
-
         Bukkit.getPluginManager().registerEvents(this, this);
-
-
         ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
         coarseDirtRecipe.shape("DD", "DD");
         coarseDirtRecipe.setIngredient('D', Material.DIRT);
