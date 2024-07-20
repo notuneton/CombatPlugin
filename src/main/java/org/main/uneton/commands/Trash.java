@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Trash implements CommandExecutor {
 
     public static final int[] fillerStats = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 41, 42, 43, 44};
-    private final String guimenu = ColorUtils.colorize("&6Trashcan menu :-)");
+    private final String guimenu = ColorUtils.colorize("&lTrashcan menu :-)");
 
     Inventory trashcan;
 

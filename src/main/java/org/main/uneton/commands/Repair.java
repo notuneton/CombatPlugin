@@ -27,17 +27,17 @@ public class Repair implements CommandExecutor {
 
         ItemStack heldRepair = player.getInventory().getItemInMainHand();
         if (heldRepair.getType() == Material.AIR) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
             player.sendMessage(warn + ColorUtils.colorize("&7You are not holding an item to repair!"));
             return true;
         }
         if (heldRepair.getDurability() == 0) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
             player.sendMessage(warn + ColorUtils.colorize("&7This item is already maxed!"));
             return true;
         }
         heldRepair.setDurability((short) 0);
-        String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l- &7");
         player.sendMessage(success + ColorUtils.colorize("&7Your item has been repaired."));
         return true;
     }

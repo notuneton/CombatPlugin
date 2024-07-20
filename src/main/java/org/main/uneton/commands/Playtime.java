@@ -41,10 +41,10 @@ public class Playtime implements CommandExecutor {
 
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
-                sendPlaytime(sender, offlinePlayer.getName(), Combat.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
+                sendPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
             } else {
                 Player user = (Player) sender;
-                sendPlaytime(sender, user.getName(), Combat.playTimes.getOrDefault(user.getUniqueId(), 0));
+                sendPlaytime(sender, user.getName(), plugin.playTimes.getOrDefault(user.getUniqueId(), 0));
             }
         }
         return true;

@@ -13,7 +13,6 @@ import org.main.uneton.utils.ColorUtils;
 public class SetSpawn implements CommandExecutor {
 
     private final Combat plugin;
-
     public SetSpawn(Combat plugin) {
         this.plugin = plugin;
     }
@@ -30,11 +29,11 @@ public class SetSpawn implements CommandExecutor {
             return true;
         }
 
-        Location location = player.getLocation();
-        plugin.getConfig().set("spawn", location);
+        Location loc = player.getLocation();
+        plugin.getConfig().set("spawn", loc);
         plugin.saveConfig();
-        String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-        player.sendMessage(success + ChatColor.GREEN + "Successfully set the spawn to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ());
+        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l- &7");
+        player.sendMessage(success + ChatColor.GREEN + "Successfully set the spawn to : X " + loc.getBlockX() + ", Y: " + loc.getBlockY() + ", X: " + loc.getBlockZ());
         return true;
 
 
