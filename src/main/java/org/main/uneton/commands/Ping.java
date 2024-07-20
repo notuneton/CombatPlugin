@@ -15,7 +15,7 @@ public class Ping implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
         int playerPing = player.getPing();
-        player.sendActionBar(ColorUtils.colorize("&fPing: " ) + ChatColor.AQUA + String.format("%d ms", playerPing));
+        player.sendActionBar(ColorUtils.colorize("&fPing: " ) + "&b" + String.format("%d ms", playerPing));
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (args.length == 1) {

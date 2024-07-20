@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.main.uneton.utils.ColorUtils;
 
 public class Sign implements CommandExecutor {
 
@@ -14,6 +15,12 @@ public class Sign implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
             sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
+            return true;
+        }
+
+        if (args.length < 1) {
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7Usage: &f/sign ");
+            player.sendMessage(usage);
             return true;
         }
 

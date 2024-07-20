@@ -34,9 +34,9 @@ commands:
     description: Teleport to the spawnpoint.
     usage: /spawn
 
-  ec:
+  enderchest:
     description: Opens your personal Enderchest.
-    usage: /ec
+    usage: /enderchest
   guide:
     description: plugin commands.
     usage: /guide <text>
@@ -53,7 +53,7 @@ commands:
     description: Repairs the durability of your armor.
     usage: /repair
   rules:
-    description: Rules of the Server.
+    description: Original Rules Of The Server.
     usage: /rules
   sign:
     description: Spawns you a sign. (Can be clicked!)
