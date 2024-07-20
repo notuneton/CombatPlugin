@@ -40,7 +40,7 @@ public class Launch implements CommandExecutor {
         Vector velocity = player.getVelocity();
         velocity.setY(6);
         player.setVelocity(velocity);
-        target.sendMessage(ChatColor.GREEN +"You've launched by "+ ChatColor.GOLD +player.getName() +ChatColor.GREEN+"!");
+        target.sendMessage(ChatColor.GREEN +"You've launched by "+ "&6"+player.getName() +"&a"+"!");
         return true;
     }
 }
