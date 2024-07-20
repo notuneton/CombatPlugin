@@ -153,11 +153,7 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
     public void onDisable() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            ScoreboardUtils.savePlaytime(player);
-        }
 
-        saveConfig();
     }
 }
 

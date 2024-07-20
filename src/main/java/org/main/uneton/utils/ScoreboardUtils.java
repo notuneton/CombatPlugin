@@ -12,7 +12,6 @@ import java.util.UUID;
 public class ScoreboardUtils {
 
     private static Combat plugin;
-
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
     }
@@ -85,26 +84,5 @@ public class ScoreboardUtils {
                 }
             }
         }.runTaskTimer(plugin, 0L, 20L);
-    }
-
-    public static void savePlaytime(Player player) {
-        UUID uuid = player.getUniqueId();
-        int hours = plugin.getConfig().getInt("playtime." + uuid + ".hours", 0);
-        int minutes = plugin.getConfig().getInt("playtime." + uuid + ".minutes", 0);
-        int seconds = plugin.getConfig().getInt("playtime." + uuid + ".seconds", 0);
-
-        if (seconds >= 60) {
-            minutes += seconds / 60;
-            seconds %= 60;
-        }
-        if (minutes >= 60) {
-            hours += minutes / 60;
-            minutes %= 60;
-        }
-
-        plugin.getConfig().set("playtime." + uuid + ".hours", hours);
-        plugin.getConfig().set("playtime." + uuid + ".minutes", minutes);
-        plugin.getConfig().set("playtime." + uuid + ".seconds", seconds);
-        plugin.saveConfig();
     }
 }
