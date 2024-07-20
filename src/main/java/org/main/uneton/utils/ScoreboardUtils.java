@@ -30,10 +30,10 @@ public class ScoreboardUtils {
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
         setScore(objective, currentTime, 12);
 
-        setScore(objective, "", 11);
+        setScore(objective, "  &9", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
-        String totalPlayers = NumberFormatter.formatDistance(onlinePlayers);
+        String totalPlayers = String.valueOf(onlinePlayers); // Convert integer to string without any formatting issues
         String online = ColorUtils.colorize("  &fPlayers &a" + totalPlayers);
         setScore(objective, online, 10);
 
