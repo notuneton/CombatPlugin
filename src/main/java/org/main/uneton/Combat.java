@@ -70,6 +70,8 @@ public class Combat extends JavaPlugin implements Listener {
         // admin
         getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
+        getCommand("freeze").setExecutor(new Freeze());
+        getCommand("gm").setExecutor(new Gm());
         getCommand("heal").setExecutor(new Heal());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("launch").setExecutor(new Launch());
@@ -92,14 +94,16 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(new Sudo());
 
         // listeners
+        Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
+        Bukkit.getPluginManager().registerEvents(new GmListener(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
 
-        getCommand("freeze").setExecutor(new Freeze());
-        Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
 
-        getCommand("gm").setExecutor(new Gm());
-        Bukkit.getPluginManager().registerEvents(new GmListener(), this);
+
+
+
+
 
         getCommand("trash").setExecutor(new Trash());
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
@@ -132,18 +136,6 @@ public class Combat extends JavaPlugin implements Listener {
             ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
             Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
         }
-
-        // Notch Apple recipe
-        ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
-        ItemMeta notch_apple_meta = notch_apple.getItemMeta();
-        notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Notch Apple");
-        notch_apple.setItemMeta(notch_apple_meta);
-
-        ShapedRecipe godAppleRecipe = new ShapedRecipe(new NamespacedKey(Combat.instance, "god_apple_recipe"), notch_apple);
-        godAppleRecipe.shape("GGG", "GAG", "GGG");
-        godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
-        godAppleRecipe.setIngredient('A', Material.APPLE);
-        Bukkit.addRecipe(godAppleRecipe);
 
         // Elytra recipe
         ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
