@@ -27,7 +27,7 @@ public class ScoreboardUtils {
         }
         clearExistingScores(scoreboard);
 
-        String currentTime = ColorUtils.colorize("  &7" + TimeUtils.getCurrentFormattedTime());
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
         setScore(objective, currentTime, 12);
 
         setScore(objective, "", 11);
