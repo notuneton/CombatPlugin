@@ -133,18 +133,6 @@ public class Combat extends JavaPlugin implements Listener {
             Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
         }
 
-
-        ItemStack cocaine = new ItemStack(Material.SUGAR_CANE, 1);
-        ItemMeta cocaine_meta = cocaine.getItemMeta();
-        cocaine_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Cocaine");
-        cocaine.setItemMeta(cocaine_meta);
-
-        ShapedRecipe cocaineRecipe = new ShapedRecipe(new NamespacedKey(Combat.instance, "cocaine_recipe"), cocaine);
-        cocaineRecipe.shape("AB");
-        cocaineRecipe.setIngredient('A', Material.SUGAR_CANE);
-        cocaineRecipe.setIngredient('B', Material.APPLE);
-        Bukkit.addRecipe(cocaineRecipe);
-
         // Notch Apple recipe
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
