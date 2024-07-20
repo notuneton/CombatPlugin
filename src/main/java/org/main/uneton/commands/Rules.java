@@ -17,13 +17,13 @@ public class Rules implements CommandExecutor {
             return true;
         }
 
-        if (args.length > 1) {
+        if (args.length == 1) {
             String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/rules ");
             player.sendMessage(usage);
             return true;
         }
 
-        String message = ChatColor.GOLD + "\n\nThere are no rules. Are you some kind of retard?\n\n";
+        String message = ChatColor.GOLD + "\nThere are no rules. Are you some kind of retard?\n";
         player.kickPlayer(message);
         return true;
     }
