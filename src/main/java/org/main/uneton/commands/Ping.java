@@ -17,17 +17,16 @@ public class Ping implements CommandExecutor {
         int playerPing = player.getPing();
         player.sendActionBar(ColorUtils.colorize("&fPing: ") + "&b" + String.format("%d ms", playerPing));
 
-        Player target = Bukkit.getServer().getPlayer(args[0]);
-        if (target != null) {
+        if (args.length == 1) {
+            Player target = Bukkit.getServer().getPlayer(args[0]);
+            if (target == null || !target.isOnline()) {
+                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+                player.sendMessage(warn + ColorUtils.colorize("That player does not exist."));
+                return true;
+            }
             int ping = target.getPing();
             player.sendActionBar(ColorUtils.colorize("&f" + target.getName()) + "'s ping: " + ChatColor.AQUA + String.format("%d ms", ping));
-        } else {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + ColorUtils.colorize("That player does not exist."));
         }
-
-        String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-        player.sendMessage(warn + ColorUtils.colorize("That player does not exist."));
         return true;
     }
 }

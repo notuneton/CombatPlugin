@@ -79,7 +79,7 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!plugin.doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendActionBar(warn + ChatColor.GRAY + "command /"+command + " not found.");
+            player.sendMessage(warn + ChatColor.GRAY + ("command/ "+command + " does not exist."));
             event.setCancelled(true);
         }
     }
