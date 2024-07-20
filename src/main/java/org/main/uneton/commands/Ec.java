@@ -17,8 +17,8 @@ public class Ec implements CommandExecutor {
             return true;
         }
 
-        if (args.length < 1) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7Usage: &f/enderchest");
+        if (args.length > 1) {
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/enderchest");
             player.sendMessage(usage);
             return true;
         }

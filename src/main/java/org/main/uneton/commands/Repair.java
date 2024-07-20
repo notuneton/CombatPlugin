@@ -19,8 +19,8 @@ public class Repair implements CommandExecutor {
             return true;
         }
 
-        if (args.length < 1) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7Usage: &f/repair ");
+        if (args.length > 1) {
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/repair ");
             player.sendMessage(usage);
             return true;
         }
@@ -33,7 +33,7 @@ public class Repair implements CommandExecutor {
         }
         if (heldRepair.getDurability() == 0) {
             String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn +"&7This item is already maxed!");
+            player.sendMessage(warn + "&7This item is already maxed!");
             return true;
         }
         heldRepair.setDurability((short) 0);

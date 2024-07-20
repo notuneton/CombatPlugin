@@ -26,7 +26,7 @@ public class Playtime implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7Usage: &f/playtime <player>");
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/playtime <player>");
             player.sendMessage(usage);
             return true;
         }
@@ -52,9 +52,9 @@ public class Playtime implements CommandExecutor {
 
     private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
         if (playTime <= 3600) {
-            sender.sendMessage(ColorUtils.colorize(String.format("\n&3&l%s &bolet pelannut &6%d &bminuuttia\n", playerName, playTime / 60)));
+            sender.sendMessage(ColorUtils.colorize(String.format("\n\n&3&l%s &bolet pelannut &6%d &bminuuttia\n\n", playerName, playTime / 60)));
         } else if (playTime <= 86400) {
-            sender.sendMessage(ColorUtils.colorize(String.format("\n&3&l%s &bhave played &6%.2f &btuntia\n", playerName, playTime / 3600.0)));
+            sender.sendMessage(ColorUtils.colorize(String.format("\n\n&3&l%s &bhave played &6%.2f &btuntia\n\n", playerName, playTime / 3600.0)));
         }
     }
 }

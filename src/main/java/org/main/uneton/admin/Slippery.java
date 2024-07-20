@@ -61,7 +61,7 @@ public class Slippery implements CommandExecutor {
         } else {
             if (target.getInventory().isEmpty()) {
                 String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendMessage(warn + ChatColor.RED + "Target player has no items to drop.");
+                player.sendMessage(warn + ColorUtils.colorize("&cTarget player has no items to drop."));
                 return true;
             }
 
