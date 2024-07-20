@@ -9,6 +9,8 @@ import org.main.uneton.Combat;
 
 import java.util.UUID;
 
+import static org.main.uneton.Combat.playTimes;
+
 public class ScoreboardUtils {
 
     private static Combat plugin;
@@ -38,9 +40,12 @@ public class ScoreboardUtils {
         setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
-        int hours = plugin.getConfig().getInt("playtime." + uuid + ".hours", 0);
-        int minutes = plugin.getConfig().getInt("playtime." + uuid + ".minutes", 0);
-        int seconds = plugin.getConfig().getInt("playtime." + uuid + ".seconds", 0);
+        int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
+
+        // Convert total playtime in seconds to hours, minutes, and seconds
+        int hours = playtimeSeconds / 3600;
+        int minutes = (playtimeSeconds % 3600) / 60;
+        int seconds = playtimeSeconds % 60;
 
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);

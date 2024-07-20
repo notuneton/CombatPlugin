@@ -54,14 +54,23 @@ public class Combat extends JavaPlugin implements Listener {
 
 
         ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
+        // Load playtime from the configuration
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            UUID uuid = player.getUniqueId();
+            int playtimeSeconds = getConfig().getInt("playtime." + uuid, 0);
+            playTimes.put(uuid, playtimeSeconds);
+        }
+
+        // Schedule task to update playtime every second
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {
                 UUID uuid = user.getUniqueId();
                 int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlayTime + 1);
-                instance.getConfig().set("seconds."+ uuid, playTimes.get(uuid));
+                getConfig().set("playtime." + uuid, playTimes.get(uuid));
             }
-        }, 0L, 20L);
+            saveConfig();
+        }, 0L, 20L); // 20L represents 1 second (20 ticks)
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -127,20 +136,6 @@ public class Combat extends JavaPlugin implements Listener {
             Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
         }
 
-        // Elytra recipe
-        ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
-        ItemMeta elytra_meta = elytra.getItemMeta();
-        elytra_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
-        elytra_meta.setUnbreakable(true);
-        elytra.setItemMeta(elytra_meta);
-
-        ShapedRecipe elytraRecipe = new ShapedRecipe(new NamespacedKey(Combat.instance, "elytra_recipe"), elytra);
-        elytraRecipe.shape("FSF", "PDP", "P P");
-        elytraRecipe.setIngredient('F', Material.STRING);
-        elytraRecipe.setIngredient('S', Material.FEATHER);
-        elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
-        elytraRecipe.setIngredient('D', Material.DRAGON_BREATH);
-        Bukkit.addRecipe(elytraRecipe);
     }
 
     public static boolean doesCommandExist(String commandName) {
@@ -152,8 +147,13 @@ public class Combat extends JavaPlugin implements Listener {
         return false;
     }
 
+    @Override
     public void onDisable() {
-
+        // Save all playtimes to the configuration when the plugin is disabled
+        for (UUID uuid : playTimes.keySet()) {
+            getConfig().set("playtime." + uuid, playTimes.get(uuid));
+        }
+        saveConfig();
     }
 }
 
