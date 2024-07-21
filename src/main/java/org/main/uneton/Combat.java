@@ -54,14 +54,12 @@ public class Combat extends JavaPlugin implements Listener {
 
 
         ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
-        // Load playtime from the configuration
         for (Player player : Bukkit.getOnlinePlayers()) {
             UUID uuid = player.getUniqueId();
             int playtimeSeconds = getConfig().getInt("playtime." + uuid, 0);
             playTimes.put(uuid, playtimeSeconds);
         }
 
-        // Schedule task to update playtime every second
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player user : Bukkit.getOnlinePlayers()) {
                 UUID uuid = user.getUniqueId();
@@ -70,7 +68,7 @@ public class Combat extends JavaPlugin implements Listener {
                 getConfig().set("playtime." + uuid, playTimes.get(uuid));
             }
             saveConfig();
-        }, 0L, 20L); // 20L represents 1 second (20 ticks)
+        }, 0L, 20L);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
