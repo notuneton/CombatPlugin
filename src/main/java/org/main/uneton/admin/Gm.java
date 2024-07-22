@@ -59,7 +59,7 @@ public class Gm implements CommandExecutor {
 
     private void sendGodPacked(Player player) {
         task = Bukkit.getScheduler().runTaskTimer(Combat.getInstance(), () -> {
-            player.sendActionBar(ColorUtils.colorize("&fOlet tällä hetkellä &9kuolematon&f."));
+            player.sendActionBar(ColorUtils.colorize("You are currently in Godmode."));
         }, 0, 1);
     }
 
