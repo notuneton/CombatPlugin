@@ -43,26 +43,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        if (!plugin.getConfig().contains("hour." + player.getUniqueId())) {
-            plugin.getConfig().set("minutes." + player.getUniqueId(), 0);
-            plugin.getConfig().set("seconds." + player.getUniqueId(), 0);
-            plugin.saveConfig();
-        }
-        ScoreboardUtils.startUpdatingScoreboard(player);
-    }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        Player player = e.getPlayer();
-        Tab.updateTab();
-        updateScoreboard(player);
-        String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-        e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
-    }
-
-    @EventHandler
     public void onPing(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
@@ -104,6 +84,15 @@ public class Listeners implements Listener {
         player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &fmain&7."));
         String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setJoinMessage(join + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player player = e.getPlayer();
+        Tab.updateTab();
+        updateScoreboard(player);
+        String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
+        e.setQuitMessage(quit + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
