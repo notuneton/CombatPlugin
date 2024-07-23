@@ -83,12 +83,12 @@ public class MagicStickEvent implements Listener {
                     this.cancel();
                     return;
                 }
-                damageEntityes(player, loc1);
-                damageEntityes(player, loc2);
+                damageEntities(player, loc1);
+                damageEntities(player, loc2);
                 ticks++;
             }
 
-            private void damageEntityes(Player player, Location location) {
+            private void damageEntities(Player player, Location location) {
                 List<Entity> nearbyEntities = (List<Entity>) location.getWorld().getNearbyEntities(location, 0.5, 0.5, 0.5);
                 for (Entity entity : nearbyEntities) {
                     if (entity instanceof LivingEntity && entity != player) {
