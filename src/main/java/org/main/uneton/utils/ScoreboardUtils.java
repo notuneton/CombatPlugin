@@ -1,14 +1,12 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
 import java.util.UUID;
-
 import static org.main.uneton.Combat.playTimes;
 
 public class ScoreboardUtils {
@@ -16,6 +14,20 @@ public class ScoreboardUtils {
     private static Combat plugin;
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
+    }
+
+    public static void startUpdatingScoreboard(Player player, Combat instance) {
+        plugin = instance;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (player.isOnline()) {
+                    updateScoreboard(player);
+                } else {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
     }
 
     public static void updateScoreboard(Player player) {
@@ -42,7 +54,6 @@ public class ScoreboardUtils {
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
 
-        // Convert total playtime in seconds to hours, minutes, and seconds
         int hours = playtimeSeconds / 3600;
         int minutes = (playtimeSeconds % 3600) / 60;
         int seconds = playtimeSeconds % 60;
@@ -69,25 +80,11 @@ public class ScoreboardUtils {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("%s  &fPlaytime &e%dh %dm %ds",
-                ChatColor.WHITE, hours, minutes, seconds);
+        return String.format("  &fPlaytime &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     private static void setScore(Objective objective, String text, int score) {
         Score line = objective.getScore(ColorUtils.colorize(text));
         line.setScore(score);
-    }
-
-    public static void startUpdatingScoreboard(Player player) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (player.isOnline()) {
-                    updateScoreboard(player);
-                } else {
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(plugin, 0L, 20L);
     }
 }

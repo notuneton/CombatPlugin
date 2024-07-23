@@ -30,6 +30,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import static org.bukkit.Bukkit.getCommandMap;
+import static org.main.uneton.Combat.doesCommandExist;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 
 public class Listeners implements Listener {
@@ -57,9 +58,9 @@ public class Listeners implements Listener {
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
-        if (!plugin.doesCommandExist(command)) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn + ChatColor.GRAY + ("command/ "+command + " does not exist."));
+        if (!doesCommandExist(command)) {
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn + ("You dont have permission to run / "+command + " or command does not exist."));
             event.setCancelled(true);
         }
     }
@@ -70,8 +71,8 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (command.equalsIgnoreCase("pl")) {
             if (!player.hasPermission("combat.pl.sv")) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendActionBar(warn + ChatColor.GRAY + "command /" + command + " not found.");
+                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &x&2&E&2&E&2&E&l- ");
+                player.sendActionBar(warn + ChatColor.GRAY + "");
                 event.setCancelled(true);
             }
         }

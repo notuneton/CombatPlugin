@@ -59,5 +59,6 @@ public class Playtime implements CommandExecutor {
         } else if (playTime <= 86400) {
             sender.sendMessage(ColorUtils.colorize(String.format("&3&l%s &bon pelannut &6%.2f &btuntia\n", playerName, playTime / 3600.0)));
         }
+
     }
 }

@@ -9,10 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
@@ -30,11 +33,12 @@ import org.main.uneton.utils.ScoreboardUtils;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
+import static org.main.uneton.utils.ScoreboardUtils.startUpdatingScoreboard;
 
 public class Combat extends JavaPlugin implements Listener {
-
-    public static HashMap<UUID, Integer> playTimes = new HashMap<>();
+    
     private static Combat instance;
+    public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static Combat getInstance() {
         return instance;
     }
@@ -51,24 +55,19 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-
-
-        ScoreboardUtils scoreboardUtils = new ScoreboardUtils(this);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            UUID uuid = player.getUniqueId();
-            int playtimeSeconds = getConfig().getInt("playtime." + uuid, 0);
-            playTimes.put(uuid, playtimeSeconds);
-        }
-
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-            for (Player user : Bukkit.getOnlinePlayers()) {
-                UUID uuid = user.getUniqueId();
-                int currentPlayTime = playTimes.getOrDefault(uuid, 0);
-                playTimes.put(uuid, currentPlayTime + 1);
-                getConfig().set("playtime." + uuid, playTimes.get(uuid));
+        Bukkit.getPluginManager().registerEvents(this, this);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player user : Bukkit.getOnlinePlayers()) {
+                    UUID uuid = user.getUniqueId();
+                    int currentPlayTime = playTimes.getOrDefault(uuid, 0);
+                    playTimes.put(uuid, currentPlayTime + 1);
+                    instance.getConfig().set("seconds." + uuid, playTimes.get(uuid));
+                }
             }
-            saveConfig();
-        }, 0L, 20L);
+        }.runTaskTimer(this, 0L, 20L);
+
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -115,6 +114,22 @@ public class Combat extends JavaPlugin implements Listener {
         coarseDirtRecipe.setIngredient('D', Material.DIRT);
         Bukkit.addRecipe(coarseDirtRecipe);
     }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+
+        // Load playtime for the player
+        if (!playTimes.containsKey(uuid)) {
+            int playtimeSeconds = getConfig().getInt("playtime." + uuid, 0);
+            playTimes.put(uuid, playtimeSeconds);
+        }
+
+        // Ensure the scoreboard updates for the player
+        startUpdatingScoreboard(player, this);
+    }
+
 
     private ItemStack compDirt() {
         ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);

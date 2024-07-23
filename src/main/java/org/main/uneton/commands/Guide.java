@@ -88,6 +88,7 @@ public class Guide implements CommandExecutor {
         String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
         player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.view.commands"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.pl.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lplayers: unetonn"));
         player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
