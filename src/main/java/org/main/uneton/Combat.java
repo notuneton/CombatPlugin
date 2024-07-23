@@ -72,8 +72,6 @@ public class Combat extends JavaPlugin implements Listener {
         saveDefaultConfig();
         saveConfig();
 
-        getCommand("count").setExecutor(new Count());
-
         // admin
         getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
