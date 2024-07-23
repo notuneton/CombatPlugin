@@ -78,17 +78,17 @@ public class MagicStickEvent implements Listener {
                 double offset = ticks * spacing;
                 Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
                 player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
-
-                if (loc1.getBlock().getType() != Material.AIR || loc1.getBlock().getType() != Material.AIR) {
-                    loc1.getWorld().strikeLightning(loc1);
+                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
+                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
+                if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
                     this.cancel();
                     return;
                 }
-                List<Entity> nearbyEntities = (List<Entity>) player.getLocation().getWorld().getNearbyEntities(loc1, 0.5, 0.5, 0.5);
+                List<Entity> nearbyEntities = (List<Entity>) player.getLocation().getWorld().getNearbyEntities(loc2, 0.5, 0.5, 0.5);
                 for (Entity entity : nearbyEntities) {
                     if (entity instanceof LivingEntity && entity != player) {
                         ((LivingEntity) entity).damage(1000);
-                        entity.setVelocity(new Vector(0, 1, 0));
+                        loc1.getWorld().strikeLightning(loc1);
                     }
                 }
                 ticks++;
