@@ -49,10 +49,10 @@ public class MagicStickEvent implements Listener {
                     return;
                 }
                 double offset = ticks * spacing;
-                Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(lineDistance, 0, 0);
-                player.getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, 0);
-                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(-lineDistance, 0, 0);
-                player.getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, 0);
+                Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
+                player.getEyeLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, 0);
+                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
+                player.getEyeLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, 0);
                 ticks++;
             }
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
