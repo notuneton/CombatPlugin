@@ -28,8 +28,7 @@ import org.main.uneton.events.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.commands.Trash;
-import org.main.uneton.stick.MagicStick;
-import org.main.uneton.stick.MagicStickEvent;
+import org.main.uneton.events.MagicStickEvent;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
@@ -107,8 +106,6 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
-
-        getCommand("givemagicstick").setExecutor(new MagicStick());
         Bukkit.getPluginManager().registerEvents(new MagicStickEvent(), this);
 
         Bukkit.getPluginManager().registerEvents(this, this);

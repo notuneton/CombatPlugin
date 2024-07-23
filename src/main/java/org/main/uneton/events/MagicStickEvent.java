@@ -1,7 +1,9 @@
-package org.main.uneton.stick;
+package org.main.uneton.events;
 
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MagicStickEvent implements Listener {
 
@@ -21,15 +24,39 @@ public class MagicStickEvent implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
-
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
-            if (player.getInventory().contains(hasMagicToyStick())) {
+            ItemStack heldItem = player.getInventory().getItemInMainHand();
+            if (isMagicToyStick(heldItem)) {
                 double k = 1.0;
                 for (int i = 0; i < k; i++) {
                     summonLineParticle(player);
                 }
             }
         }
+    }
+
+    private boolean isMagicToyStick(ItemStack item) {
+        if (item == null || item.getType() != Material.STICK) {
+            return false;
+        }
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) {
+            return false;
+        }
+        if (!meta.hasDisplayName() || !meta.getDisplayName().equals("Magic Toy Stick")) {
+            return false;
+        }
+        if (!meta.hasLore() || meta.getLore().size() != 2) {
+            return false;
+        }
+        if (!meta.getLore().get(0).equals(ChatColor.GRAY + "Do not leave with an") ||
+                !meta.getLore().get(1).equals(ChatColor.GRAY + "unsupervised magician.")) {
+            return false;
+        }
+        if (!meta.hasEnchant(Enchantment.KNOCKBACK) || meta.getEnchantLevel(Enchantment.KNOCKBACK) != 3) {
+            return false;
+        }
+        return meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
     }
 
     public void summonLineParticle(final Player player) {
@@ -51,28 +78,21 @@ public class MagicStickEvent implements Listener {
                 double offset = ticks * spacing;
                 Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
                 player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
-                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
-                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
-                if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
+
+                if (loc1.getBlock().getType() != Material.AIR || loc1.getBlock().getType() != Material.AIR) {
+                    loc1.getWorld().strikeLightning(loc1);
                     this.cancel();
                     return;
+                }
+                List<Entity> nearbyEntities = (List<Entity>) player.getLocation().getWorld().getNearbyEntities(loc1, 0.5, 0.5, 0.5);
+                for (Entity entity : nearbyEntities) {
+                    if (entity instanceof LivingEntity && entity != player) {
+                        ((LivingEntity) entity).damage(1000);
+                        entity.setVelocity(new Vector(0, 1, 0));
+                    }
                 }
                 ticks++;
             }
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
-    }
-
-    private Material hasMagicToyStick() {
-        ItemStack stick = new ItemStack(Material.STICK);
-        ItemMeta meta = stick.getItemMeta();
-        meta.setDisplayName("Magic Toy Stick");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(ChatColor.GRAY+ "Do not leave with an");
-        lore.add(ChatColor.GRAY+ "unsupervised magician.");
-        meta.setLore(lore);
-        meta.addEnchant(Enchantment.KNOCKBACK, 3, true);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        stick.setItemMeta(meta);
-        return stick.getType();
     }
 }
