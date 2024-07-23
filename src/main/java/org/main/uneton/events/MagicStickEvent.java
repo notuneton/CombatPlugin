@@ -15,7 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MagicStickEvent implements Listener {
