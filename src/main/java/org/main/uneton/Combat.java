@@ -29,6 +29,7 @@ import org.main.uneton.events.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.commands.Trash;
+import org.main.uneton.magicStick.MagicStick;
 import org.main.uneton.utils.ScoreboardUtils;
 
 import java.util.*;
@@ -107,6 +108,8 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
+
+        getCommand("magicstick").setExecutor(new MagicStick());
 
         Bukkit.getPluginManager().registerEvents(this, this);
         ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
