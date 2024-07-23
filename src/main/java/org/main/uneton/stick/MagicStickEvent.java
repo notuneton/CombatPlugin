@@ -34,32 +34,25 @@ public class MagicStickEvent implements Listener {
     }
 
     public void startParticleTrails(final Player player) {
+        Location startLocation = player.getLocation();
+        Vector direction = startLocation.getDirection().normalize();
         new BukkitRunnable() {
             private int ticks = 0;
-            private final double trailLength = 20; // Pitkä matka, johon partikkelit ulottuvat
-            private final double spacing = 0.2; // Välimatka partikkelien välillä
-            private final double lineDistance = 0.5; // Välimatka kahden viivan välillä
+            private final double trailLength = 40;
+            private final double spacing = 0.2;
+            private final double lineDistance = 0.5;
 
             @Override
             public void run() {
-                if (ticks > trailLength / spacing) {  // Pysäyttää tehtävän, kun se on kulkenut määritellyn matkan
+                if (ticks > trailLength / spacing) {
                     this.cancel();
                     return;
                 }
-
-                Location startLocation = player.getLocation();
-                Vector direction = player.getLocation().getDirection().normalize(); // Pelaajan katseen suunta
-
                 double offset = ticks * spacing;
-
-                // Ensimmäinen partikkeliviiva, hieman vasemmalla
-                Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, 0.5, lineDistance); // 0.5 estää partikkelien syntymisen maan sisään
+                Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(lineDistance, 0, 0);
                 player.getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, 0);
-
-                // Toinen partikkeliviiva, hieman oikealla
-                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, 0.5, -lineDistance); // 0.5 estää partikkelien syntymisen maan sisään
+                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(-lineDistance, 0, 0);
                 player.getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, 0);
-
                 ticks++;
             }
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);

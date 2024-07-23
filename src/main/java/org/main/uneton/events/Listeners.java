@@ -59,8 +59,8 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + ("You dont have permission to run / "+command + " or command does not exist."));
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn + "You dont have permission to run /"+command + " or command does not exist.");
             event.setCancelled(true);
         }
     }
@@ -71,8 +71,8 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (command.equalsIgnoreCase("pl")) {
             if (!player.hasPermission("combat.pl.sv")) {
-                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &x&2&E&2&E&2&E&l- ");
-                player.sendActionBar(warn + ChatColor.GRAY + "");
+                player.sendMessage(ColorUtils.colorize("&fServer Plugins (1):"));
+                player.sendMessage(ColorUtils.colorize("&8&l- &aQuolleet"));
                 event.setCancelled(true);
             }
         }
