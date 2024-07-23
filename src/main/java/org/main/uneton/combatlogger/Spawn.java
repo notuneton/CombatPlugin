@@ -61,7 +61,7 @@ public class Spawn implements CommandExecutor {
             player.sendMessage(warn + ChatColor.RED + "Teleport failed : you are combat tagged!");
             return false;
         }
-        if (player.getLocation().distance(initialLocation) > 0) {
+        if (player.getLocation().distance(initialLocation) > 1) {
             String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
             player.sendMessage(warn2 + ChatColor.RED + "Teleport failed : you were moved!");
             return false;
@@ -77,10 +77,6 @@ public class Spawn implements CommandExecutor {
                 player.sendMessage(warn3 +ChatColor.RED + "Teleport failed : location not found!");
                 return false;
             }
-
-            //todo return false; == Teleportation should not proceed
-            // return true; == Teleportation proceeded successfully
-            // return stops code
         }
     }
 }

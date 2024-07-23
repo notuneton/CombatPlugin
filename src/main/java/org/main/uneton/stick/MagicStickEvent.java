@@ -25,22 +25,22 @@ public class MagicStickEvent implements Listener {
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
             if (player.getInventory().contains(hasMagicToyStick())) {
                 double k = 1.0;
-
                 for (int i = 0; i < k; i++) {
-                    startParticleTrails(player);
+                    summonLineParticle(player);
                 }
             }
         }
     }
 
-    public void startParticleTrails(final Player player) {
+    public void summonLineParticle(final Player player) {
         Location startLocation = player.getLocation();
         Vector direction = startLocation.getDirection().normalize();
         new BukkitRunnable() {
             private int ticks = 0;
-            private final double trailLength = 40;
-            private final double spacing = 0.2;
-            private final double lineDistance = 0.5;
+            private final double trailLength = 40; // Length of the particle trail
+            private final double spacing = 0.25; // Increase spacing to make particles move faster
+            private final double lineDistance = 0.5; // Distance between the upper and lower particle lines
+            private final float particleSize = 0.01f; // Size of the particles
 
             @Override
             public void run() {
@@ -50,9 +50,13 @@ public class MagicStickEvent implements Listener {
                 }
                 double offset = ticks * spacing;
                 Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
-                player.getEyeLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, 0);
+                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
                 Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
-                player.getEyeLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, 0);
+                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
+                if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
+                    this.cancel();
+                    return;
+                }
                 ticks++;
             }
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
