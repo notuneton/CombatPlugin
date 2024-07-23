@@ -13,7 +13,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +33,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import static org.bukkit.Bukkit.getCommandMap;
+import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.Combat.doesCommandExist;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 

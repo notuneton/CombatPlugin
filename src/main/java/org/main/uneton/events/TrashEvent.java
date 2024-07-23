@@ -15,7 +15,7 @@ public class TrashEvent implements Listener {
         Player player = (Player) event.getWhoClicked();
         if (event.getView().getTitle().equals(ColorUtils.colorize("&lTrashcan menu :-)"))) {
             ItemStack clickedItem = event.getCurrentItem();
-            if(clickedItem != null) {
+            if (clickedItem != null) {
 
                 switch (event.getCurrentItem().getType()) {
                     case BLACK_STAINED_GLASS_PANE:
