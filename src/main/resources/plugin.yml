@@ -73,5 +73,5 @@ commands:
   trash:
     description: Put your stuff in the menu and close it!
     usage: /trash
-  magicstick:
-    usage: /magicstick <player>
+  givemagicstick:
+    usage: /givemagicstick <player>
