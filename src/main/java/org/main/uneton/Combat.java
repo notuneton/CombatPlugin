@@ -68,7 +68,6 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }.runTaskTimer(this, 0L, 20L);
 
-        Bukkit.getPluginManager().registerEvents(new ChestBreak(), this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
