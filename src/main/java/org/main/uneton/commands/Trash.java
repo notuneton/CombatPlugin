@@ -21,7 +21,6 @@ public class Trash implements CommandExecutor {
     private final String guimenu = ColorUtils.colorize("&lTrashcan menu :-)");
 
     Inventory trashcan;
-
     public void createAndAddFiller(){
         for (int slot : fillerStats) {
 

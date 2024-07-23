@@ -1,7 +1,6 @@
 package org.main.uneton.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +22,7 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if (!allowedPlayers.contains(player.getName())) {
-            player.sendMessage(ChatColor.DARK_GRAY + "[i] " + ChatColor.RED + "This command can only be executed as a specific person! Here is the list of players that can execute this command: " + allowedPlayers);
+            player.sendMessage(ColorUtils.colorize("&8&l[i]") + ColorUtils.colorize(" &cThis command can only be executed as a specific person! Here is the list of players that can execute this command: "+ allowedPlayers));
             return true;
         }
 
