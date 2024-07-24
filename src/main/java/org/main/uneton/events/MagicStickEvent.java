@@ -2,9 +2,7 @@ package org.main.uneton.events;
 
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -12,6 +10,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
@@ -21,18 +21,17 @@ import java.util.List;
 
 public class MagicStickEvent implements Listener {
 
-    private int ticks = 0;
-    private final double trailLength = 40; // Hiukkaspolun pituus suhde
-    private final double spacing = 0.9; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin (normaali 0,25)
+    private final double trailLength = 50; // Hiukkaspolun pituus suhde
+    private final double spacing = 1.0; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin
     private final double lineDistance = 0.5; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
-    private final float particleSize = 0.01f; // Hiukkasten koko
+    private final float particleSize = 0.5f; // Hiukkasten koko
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
         if (!player.hasPermission("combat.magicstick.sv")) {
-            player.sendActionBar(ColorUtils.colorize("&cYou do not have permission to use that!"));
+            player.sendActionBar(ColorUtils.colorize("&cYou do not have permission to do that!"));
             return;
         }
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
@@ -71,35 +70,32 @@ public class MagicStickEvent implements Listener {
     }
 
     public void summonLineParticle(final Player player) {
-        Location startLocation = player.getLocation();
+        Location startLocation = player.getLocation().add(0, player.getEyeHeight(), 0); // Pelaajan pää
         Vector direction = startLocation.getDirection().normalize();
         new BukkitRunnable() {
+            private int localTicks = 0;
             @Override
             public void run() {
-                if (ticks > trailLength / spacing) {
+                if (localTicks > trailLength / spacing) {
                     this.cancel();
                     return;
                 }
-                double offset = ticks * spacing;
+                double offset = localTicks * spacing;
                 Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
-                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
                 Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
-                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
+                player.getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
+                player.getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
 
                 if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
+                    spawnCowsFly(loc1);
+                    spawnCowsFly(loc2);
 
-                    Location loc = loc1.getBlock().getLocation();
-                    Location loca = loc2.getBlock().getLocation();
-
-                    for (int index = 0; index < 100; index++) {
-                        loc.getWorld().strikeLightning(loca);
-                    }
                     this.cancel();
                     return;
                 }
                 damageEntities(player, loc1);
                 damageEntities(player, loc2);
-                ticks++;
+                localTicks++;
             }
 
             private void damageEntities(Player player, Location location) {
@@ -113,6 +109,15 @@ public class MagicStickEvent implements Listener {
                     }
                 }
             }
+
+            private void spawnCowsFly(Location location) {
+                for (int i = 0; i < 15; i++) {
+                    Cow cow = (Cow) location.getWorld().spawnEntity(location, EntityType.COW);
+                    cow.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1, false, false));
+                }
+            }
+
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
+
     }
 }
