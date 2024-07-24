@@ -15,7 +15,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
-import org.main.uneton.utils.ColorUtils;
 
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class MagicStickEvent implements Listener {
         Player player = event.getPlayer();
         Action action = event.getAction();
         if (!player.hasPermission("combat.magicstick.sv")) {
-            player.sendActionBar(ColorUtils.colorize("&cYou do not have permission to do that!"));
             return;
         }
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
@@ -87,9 +85,6 @@ public class MagicStickEvent implements Listener {
                 player.getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
 
                 if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
-                    spawnCowsFly(loc1);
-                    spawnCowsFly(loc2);
-
                     this.cancel();
                     return;
                 }
@@ -107,13 +102,6 @@ public class MagicStickEvent implements Listener {
                             location.getWorld().strikeLightning(location);
                         }
                     }
-                }
-            }
-
-            private void spawnCowsFly(Location location) {
-                for (int i = 0; i < 15; i++) {
-                    Cow cow = (Cow) location.getWorld().spawnEntity(location, EntityType.COW);
-                    cow.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1, false, false));
                 }
             }
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
