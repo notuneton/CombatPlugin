@@ -43,8 +43,8 @@ public class Spawn implements CommandExecutor {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel();
                     if (!teleportPlayer(player, initialLocation)) {
-                        String warn1 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                        player.sendMessage(warn1 + ColorUtils.colorize("&cCancelled!"));
+                        String warn1 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+                        player.sendMessage(warn1 + ("Cancelled!"));
                     }
                 } else {
                     player.sendActionBar(ChatColor.GRAY + "Teleporting in " + ChatColor.DARK_AQUA + (countdownSeconds - secondsPassed) + ChatColor.GRAY + " seconds...");
