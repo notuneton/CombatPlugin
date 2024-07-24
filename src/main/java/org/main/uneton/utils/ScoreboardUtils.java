@@ -62,7 +62,7 @@ public class ScoreboardUtils {
         setScore(objective, playtimeString, 9);
 
         int ping = player.getPing();
-        setScore(objective, "&8| &7("+String.format("&3"+ping+"ms") +"&7)", 7);
+        setScore(objective, "&8&l|  &7("+String.format("&3"+ping+"ms") +"&7)", 7);
         player.setScoreboard(scoreboard);
     }
 

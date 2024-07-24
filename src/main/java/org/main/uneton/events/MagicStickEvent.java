@@ -15,16 +15,25 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
+
 import java.util.List;
 
 public class MagicStickEvent implements Listener {
+
+    private int ticks = 0;
+    private final double trailLength = 40; // Hiukkaspolun pituus suhde
+    private final double spacing = 0.8; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin (normaali 0,25)
+    private final int countofParticles = 100;
+    private final double lineDistance = 0.5; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
+    private final float particleSize = 0.001f; // Hiukkasten koko
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
         if (!player.hasPermission("combat.magicstick.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to use that!");
+            player.sendActionBar(ColorUtils.colorize("&cYou do not have permission to use that!"));
             return;
         }
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
@@ -46,32 +55,20 @@ public class MagicStickEvent implements Listener {
         if (meta == null) {
             return false;
         }
-        if (!meta.hasDisplayName() || !meta.getDisplayName().equals("Magic Toy Stick")) {
-            return false;
-        }
-        if (!meta.hasLore() || meta.getLore().size() != 2) {
-            return false;
-        }
-        if (!meta.getLore().get(0).equals(ChatColor.GRAY + "Do not leave with an") ||
-                !meta.getLore().get(1).equals(ChatColor.GRAY + "unsupervised magician.")) {
-            return false;
-        }
-        if (!meta.hasEnchant(Enchantment.KNOCKBACK) || meta.getEnchantLevel(Enchantment.KNOCKBACK) != 3) {
-            return false;
-        }
-        return meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+        return meta.hasDisplayName() && meta.getDisplayName().equals("Magic Toy Stick") &&
+                meta.hasLore() && meta.getLore().size() == 2 &&
+                meta.getLore().get(0).equals(ChatColor.GRAY + "Do not leave with an") &&
+                meta.getLore().get(1).equals(ChatColor.GRAY + "unsupervised magician.") &&
+                meta.hasEnchant(Enchantment.KNOCKBACK) && meta.getEnchantLevel(Enchantment.KNOCKBACK) == 3 &&
+                meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
     }
+
+
 
     public void summonLineParticle(final Player player) {
         Location startLocation = player.getLocation();
         Vector direction = startLocation.getDirection().normalize();
         new BukkitRunnable() {
-            private int ticks = 0;
-            private final double trailLength = 40; // Hiukkaspolun pituus suhde
-            private final double spacing = 0.100; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin (normaali 0,25)
-            private final double lineDistance = 0.5; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
-            private final float particleSize = 0.01f; // Hiukkasten koko
-
             @Override
             public void run() {
                 if (ticks > trailLength / spacing) {
@@ -79,17 +76,35 @@ public class MagicStickEvent implements Listener {
                     return;
                 }
                 double offset = ticks * spacing;
-                Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
-                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
-                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
-                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
-                if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
+                Location upperLocation = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, particleSize);
+                Location lowerLocation = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, particleSize);
+
+                spawnParticle(player, upperLocation);
+                spawnParticle(player, lowerLocation);
+
+                if (upperLocation.getBlock().getType() != Material.AIR || lowerLocation.getBlock().getType() != Material.AIR) {
+
+                    strikeLightningAtLocations(upperLocation, lowerLocation);
+
                     this.cancel();
                     return;
                 }
-                damageEntities(player, loc1);
-                damageEntities(player, loc2);
+
+                damageEntities(player, upperLocation);
+                damageEntities(player, lowerLocation);
                 ticks++;
+            }
+
+            private void strikeLightningAtLocations(Location... locations) {
+                for (Location location : locations) {
+                    for (int i = 0; i < 100; i++) {
+                        location.getWorld().strikeLightning(location);
+                    }
+                }
+            }
+
+            private void spawnParticle(Player player, Location location) {
+                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, location, countofParticles, 0, 0, 0, particleSize);
             }
 
             private void damageEntities(Player player, Location location) {
