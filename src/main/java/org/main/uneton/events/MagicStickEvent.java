@@ -23,10 +23,9 @@ public class MagicStickEvent implements Listener {
 
     private int ticks = 0;
     private final double trailLength = 40; // Hiukkaspolun pituus suhde
-    private final double spacing = 0.8; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin (normaali 0,25)
-    private final int countofParticles = 100;
+    private final double spacing = 0.9; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin (normaali 0,25)
     private final double lineDistance = 0.5; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
-    private final float particleSize = 0.001f; // Hiukkasten koko
+    private final float particleSize = 0.01f; // Hiukkasten koko
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
@@ -55,15 +54,21 @@ public class MagicStickEvent implements Listener {
         if (meta == null) {
             return false;
         }
-        return meta.hasDisplayName() && meta.getDisplayName().equals("Magic Toy Stick") &&
-                meta.hasLore() && meta.getLore().size() == 2 &&
-                meta.getLore().get(0).equals(ChatColor.GRAY + "Do not leave with an") &&
-                meta.getLore().get(1).equals(ChatColor.GRAY + "unsupervised magician.") &&
-                meta.hasEnchant(Enchantment.KNOCKBACK) && meta.getEnchantLevel(Enchantment.KNOCKBACK) == 3 &&
-                meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
+        if (!meta.hasDisplayName() || !meta.getDisplayName().equals("Magic Toy Stick")) {
+            return false;
+        }
+        if (!meta.hasLore() || meta.getLore().size() != 2) {
+            return false;
+        }
+        if (!meta.getLore().get(0).equals(ChatColor.GRAY + "Do not leave with an") ||
+                !meta.getLore().get(1).equals(ChatColor.GRAY + "unsupervised magician.")) {
+            return false;
+        }
+        if (!meta.hasEnchant(Enchantment.KNOCKBACK) || meta.getEnchantLevel(Enchantment.KNOCKBACK) != 3) {
+            return false;
+        }
+        return meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
     }
-
-
 
     public void summonLineParticle(final Player player) {
         Location startLocation = player.getLocation();
@@ -76,35 +81,25 @@ public class MagicStickEvent implements Listener {
                     return;
                 }
                 double offset = ticks * spacing;
-                Location upperLocation = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, particleSize);
-                Location lowerLocation = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, particleSize);
+                Location loc1 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, lineDistance, 0);
+                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
+                Location loc2 = startLocation.clone().add(direction.clone().multiply(offset)).add(0, -lineDistance, 0);
+                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
 
-                spawnParticle(player, upperLocation);
-                spawnParticle(player, lowerLocation);
+                if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
 
-                if (upperLocation.getBlock().getType() != Material.AIR || lowerLocation.getBlock().getType() != Material.AIR) {
+                    Location loc = loc1.getBlock().getLocation();
+                    Location loca = loc2.getBlock().getLocation();
 
-                    strikeLightningAtLocations(upperLocation, lowerLocation);
-
+                    for (int index = 0; index < 100; index++) {
+                        loc.getWorld().strikeLightning(loca);
+                    }
                     this.cancel();
                     return;
                 }
-
-                damageEntities(player, upperLocation);
-                damageEntities(player, lowerLocation);
+                damageEntities(player, loc1);
+                damageEntities(player, loc2);
                 ticks++;
-            }
-
-            private void strikeLightningAtLocations(Location... locations) {
-                for (Location location : locations) {
-                    for (int i = 0; i < 100; i++) {
-                        location.getWorld().strikeLightning(location);
-                    }
-                }
-            }
-
-            private void spawnParticle(Player player, Location location) {
-                player.getLocation().getWorld().spawnParticle(Particle.CLOUD, location, countofParticles, 0, 0, 0, particleSize);
             }
 
             private void damageEntities(Player player, Location location) {
