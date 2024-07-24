@@ -49,7 +49,7 @@ public class ScoreboardUtils {
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
-        String online = ColorUtils.colorize("  &fPlayers &a" + totalPlayers);
+        String online = ColorUtils.colorize("  &7Players &3" + totalPlayers);
         setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
@@ -82,7 +82,7 @@ public class ScoreboardUtils {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &fPlaytime &e%dh %dm %ds", hours, minutes, seconds);
+        return String.format("  &7Playtime &3%dh %dm %ds", hours, minutes, seconds);
     }
 
     private static void setScore(Objective objective, String text, int score) {

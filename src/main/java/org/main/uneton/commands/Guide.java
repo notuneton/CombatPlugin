@@ -37,9 +37,9 @@ public class Guide implements CommandExecutor {
                         break;
                     } else {
                         String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
-                        player.sendMessage(ColorUtils.colorize("&8<st>                    </st>"+ title +"<st>                    </st>"));
+                        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
                         player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7You don't have permission to view that"));
-                        player.sendMessage(ColorUtils.colorize("&8<st>                                        </st>"));
+                        player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
                         return true;
                     }
                 }
@@ -81,6 +81,7 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sign | Spawns you a sign. (Can be clicked!)"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sudo <target> <command> | Executes another player perform a task."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trash | Put your stuff in the menu and close it!"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/tp <player> <target> | /tp <x> <y> <z> | Teleports to or from the player."));
         player.sendMessage(ColorUtils.colorize("&8------------------------------------------------"));
     }
 

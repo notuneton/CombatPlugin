@@ -73,3 +73,6 @@ commands:
   trash:
     description: Put your stuff in the menu and close it!
     usage: /trash
+  tp:
+    description: Teleports to or from the player.
+    usage: /tp <player> <target> | /tp <x> <y> <z>
