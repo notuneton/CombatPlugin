@@ -116,8 +116,6 @@ public class MagicStickEvent implements Listener {
                     cow.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 200, 1, false, false));
                 }
             }
-
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
-
     }
 }
