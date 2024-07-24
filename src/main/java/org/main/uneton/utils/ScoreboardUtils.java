@@ -45,7 +45,7 @@ public class ScoreboardUtils {
         }
         clearExistingScores(scoreboard);
 
-        setScore(objective, "  &9", 12);
+        setScore(objective, "&7", 12);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
@@ -66,7 +66,7 @@ public class ScoreboardUtils {
         int playerDeaths = deaths.getOrDefault(uuid, 0);
         setScore(objective, "  &7Deaths &6&l" + playerDeaths, 8);
         setScore(objective, "  &7Kills &c&l" + playerKills, 7);
-        setScore(objective, "  &9", 6);
+        setScore(objective, "&8", 6);
 
         int ping = player.getPing();
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
