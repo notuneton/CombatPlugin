@@ -83,6 +83,22 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        Player attacker = victim.getKiller();
+        if (attacker != null && attacker instanceof Player) {
+            UUID attackerUUID = attacker.getUniqueId();
+            UUID victimUUID = victim.getUniqueId();
+
+            ScoreboardUtils.addKill(attackerUUID);
+            ScoreboardUtils.addDeath(victimUUID);
+
+            ScoreboardUtils.updateScoreboard(attacker);
+            ScoreboardUtils.updateScoreboard(victim);
+        }
+    }
+
+    @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
