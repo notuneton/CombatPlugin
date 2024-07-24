@@ -63,10 +63,10 @@ public class MagicStickEvent implements Listener {
         Vector direction = startLocation.getDirection().normalize();
         new BukkitRunnable() {
             private int ticks = 0;
-            private final double trailLength = 40; // Length of the particle trail
-            private final double spacing = 0.25; // Increase spacing to make particles move faster
-            private final double lineDistance = 0.5; // Distance between the upper and lower particle lines
-            private final float particleSize = 0.01f; // Size of the particles
+            private final double trailLength = 40; // Hiukkaspolun pituus suhde
+            private final double spacing = 0.100; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin (normaali 0,25)
+            private final double lineDistance = 0.5; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
+            private final float particleSize = 0.01f; // Hiukkasten koko
 
             @Override
             public void run() {
@@ -93,7 +93,9 @@ public class MagicStickEvent implements Listener {
                 for (Entity entity : nearbyEntities) {
                     if (entity instanceof LivingEntity && entity != player) {
                         ((LivingEntity) entity).damage(1000);
-                        location.getWorld().strikeLightning(location);
+                        for (int index = 0; index < 100; index++) {
+                            location.getWorld().strikeLightning(location);
+                        }
                     }
                 }
             }

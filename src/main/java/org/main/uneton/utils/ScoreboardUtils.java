@@ -1,6 +1,7 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
@@ -61,7 +62,8 @@ public class ScoreboardUtils {
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
-        setScore(objective, "  &7", 8);
+        int ping = player.getPing();
+        setScore(objective, "  &7("+String.format("&3"+ping+"ms") +"&7)", 7);
         player.setScoreboard(scoreboard);
     }
 
