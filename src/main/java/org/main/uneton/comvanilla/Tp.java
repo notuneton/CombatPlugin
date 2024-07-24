@@ -38,7 +38,7 @@ public class Tp implements CommandExecutor {
                 return true;
             }
             player.teleport(target);
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&#196D15&l>&#33DD2A&l> &8+ &7Teleportataan. Wooosh..."));
+            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7Teleportataan. Wooosh..."));
 
         } else if (args.length == 3) {
             try {

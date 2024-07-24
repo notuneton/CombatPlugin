@@ -97,7 +97,7 @@ public class Guide implements CommandExecutor {
     private void sendUsage(Player player) {
         String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
         player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
-        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- /guide <komennot | oikeudet | admin>"));
+        player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &x&2&E&2&E&2&E&l- &7/guide <komennot | oikeudet | admin>"));
         player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
 }

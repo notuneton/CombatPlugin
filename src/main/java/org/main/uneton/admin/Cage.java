@@ -47,7 +47,7 @@ public class Cage implements CommandExecutor {
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(0, 0, 0);
         player.setGameMode(GameMode.ADVENTURE);
-        String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+        String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
         player.sendMessage(success + ChatColor.GRAY + "You were trapped by " + ChatColor.UNDERLINE+ChatColor.WHITE+ player.getName() +ChatColor.GRAY +"!");
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 5; y++) {
@@ -66,7 +66,7 @@ public class Cage implements CommandExecutor {
             public void run() {
                 if (player.isOnline() && !player.isDead()) {
                     player.setGameMode(GameMode.SURVIVAL);
-                    String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+                    String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
                     player.sendMessage(success + ChatColor.GRAY + "You have been released from the trap!");
                     removeTrapBox(bottomCorner);
                 }

@@ -61,7 +61,7 @@ public class Slippery implements CommandExecutor {
         } else {
             if (target.getInventory().isEmpty()) {
                 String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendMessage(warn + ColorUtils.colorize("&cTarget player has no items to drop."));
+                player.sendMessage(warn + ColorUtils.colorize("&7Target player has no items to drop."));
                 return true;
             }
 
@@ -84,8 +84,8 @@ public class Slippery implements CommandExecutor {
                 }
             }.runTaskTimer(plugin, 0L, 60L); // Schedule the task every 60 ticks (3 seconds)
             playerTasks.put(targetUUID, task);
-            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-            player.sendMessage(success + ChatColor.GRAY + "Started dropping items from " + target.getName() + "'s inventory every 3 seconds.");
+            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7");
+            player.sendMessage(success + "Started dropping items from " + target.getName() + "'s inventory every 3 seconds.");
         }
         return true;
     }

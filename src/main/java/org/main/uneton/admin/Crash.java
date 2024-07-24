@@ -39,7 +39,7 @@ public class Crash implements CommandExecutor {
             }
 
             player.spawnParticle(Particle.EXPLOSION_LARGE, player.getLocation(), Integer.MAX_VALUE); // : 2147483647
-            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
             player.sendMessage(success + ChatColor.GRAY + "You have crashed " + ChatColor.UNDERLINE+ChatColor.WHITE + target.getName() + ChatColor.GRAY + ".");
         }
         return true;

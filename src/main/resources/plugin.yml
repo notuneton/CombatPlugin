@@ -20,9 +20,9 @@ commands:
   gm:
     description: makes the player invulnerable to all faults.
     usage: /gm <player>
-  heal:
+  cure:
     description: Heals the player's hearts.
-    usage: /heal <player>
+    usage: /cure <player>
   invsee:
     description: See the inventory of other players.
     usage: /invsee <player>
