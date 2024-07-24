@@ -52,7 +52,7 @@ public class ScoreboardUtils {
         String online = ColorUtils.colorize("  &7Players &3" + totalPlayers);
         setScore(objective, online, 11);
         int ping = player.getPing();
-        setScore(objective, "  &7("+String.format("&3"+ping+"ms") +"&7)", 10);
+        setScore(objective, "  ", 10);
 
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
@@ -69,7 +69,7 @@ public class ScoreboardUtils {
         setScore(objective, "  &7Deaths &6&l" + playerDeaths, 8);
         setScore(objective, "  &7Kills &c&l" + playerKills, 7);
 
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " " + (String.format("&3"+ping+"ms")));
         setScore(objective, currentTime, 6);
         player.setScoreboard(scoreboard);
     }
