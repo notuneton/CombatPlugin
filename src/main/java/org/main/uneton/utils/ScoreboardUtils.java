@@ -45,15 +45,14 @@ public class ScoreboardUtils {
         }
         clearExistingScores(scoreboard);
 
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 12);
-
-        setScore(objective, "  &9", 11);
+        setScore(objective, "  &9", 12);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("  &7Players &3" + totalPlayers);
-        setScore(objective, online, 10);
+        setScore(objective, online, 11);
+        int ping = player.getPing();
+        setScore(objective, "  &7("+String.format("&3"+ping+"ms") +"&7)", 10);
 
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
@@ -67,12 +66,11 @@ public class ScoreboardUtils {
 
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &7Deaths &6&l" + playerDeaths, 7);
-        setScore(objective, "  &7Kills &c&l" + playerKills, 6);
+        setScore(objective, "  &7Deaths &6&l" + playerDeaths, 8);
+        setScore(objective, "  &7Kills &c&l" + playerKills, 7);
 
-        int ping = player.getPing();
-        setScore(objective, "&8&l|  &7("+String.format("&3"+ping+"ms") +"&7)", 4);
-
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
+        setScore(objective, currentTime, 6);
         player.setScoreboard(scoreboard);
     }
 

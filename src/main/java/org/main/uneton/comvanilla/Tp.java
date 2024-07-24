@@ -2,7 +2,6 @@ package org.main.uneton.comvanilla;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,18 +38,6 @@ public class Tp implements CommandExecutor {
             }
             player.teleport(target);
             player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7Teleportataan. Wooosh..."));
-
-        } else if (args.length == 3) {
-            try {
-                double x = Double.parseDouble(args[0]);
-                double y = Double.parseDouble(args[1]);
-                double z = Double.parseDouble(args[2]);
-                Location location = new Location(player.getWorld(), x, y, z);
-                player.teleport(location);
-                player.sendMessage("Teleported to coordinates: " + x + ", " + y + ", " + z);
-            } catch (NumberFormatException e) {
-                player.sendMessage("Invalid coordinates.");
-            }
         }
 
         return true;
