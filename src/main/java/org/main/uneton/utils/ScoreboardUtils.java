@@ -51,8 +51,6 @@ public class ScoreboardUtils {
         String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("  &7Players &3" + totalPlayers);
         setScore(objective, online, 11);
-        int ping = player.getPing();
-        setScore(objective, "  ", 10);
 
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
@@ -68,9 +66,11 @@ public class ScoreboardUtils {
         int playerDeaths = deaths.getOrDefault(uuid, 0);
         setScore(objective, "  &7Deaths &6&l" + playerDeaths, 8);
         setScore(objective, "  &7Kills &c&l" + playerKills, 7);
+        setScore(objective, "  &9", 6);
 
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " " + (String.format("&3"+ping+"ms")));
-        setScore(objective, currentTime, 6);
+        int ping = player.getPing();
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
+        setScore(objective, currentTime, 5);
         player.setScoreboard(scoreboard);
     }
 
