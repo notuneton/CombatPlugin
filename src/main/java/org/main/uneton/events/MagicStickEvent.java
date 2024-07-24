@@ -23,6 +23,10 @@ public class MagicStickEvent implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
+        if (!player.hasPermission("combat.magicstick.sv")) {
+            player.sendMessage(ChatColor.RED + "You do not have permission to use that!");
+            return;
+        }
         if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
             ItemStack heldItem = player.getInventory().getItemInMainHand();
             if (isMagicToyStick(heldItem)) {

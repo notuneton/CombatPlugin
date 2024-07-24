@@ -57,24 +57,24 @@ public class Spawn implements CommandExecutor {
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
         if (combat_tagged.containsKey(player)) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn + ChatColor.RED + "Teleport failed : you are combat tagged!");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn + "Teleport failed : you are combat tagged!");
             return false;
         }
         if (player.getLocation().distance(initialLocation) > 1) {
-            String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn2 + ChatColor.RED + "Teleport failed : you were moved!");
+            String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn2 + "Teleport failed : you were moved!");
             return false;
         } else {
             Location spawnLoc = plugin.getConfig().getLocation("spawn");
             if (spawnLoc != null) {
                 player.teleport(spawnLoc);
-                String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-                player.sendMessage(success + ChatColor.GRAY + "You have been teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +"!");
+                String success = ColorUtils.colorize("&3>&b> &8+ &7");
+                player.sendMessage(success + "You have been teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +"!");
                 return true;
             } else {
-                String warn3 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-                player.sendMessage(warn3 +ChatColor.RED + "Teleport failed : location not found!");
+                String warn3 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+                player.sendMessage(warn3 + "Teleport failed : location not found!");
                 return false;
             }
         }
