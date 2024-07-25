@@ -35,7 +35,8 @@ public class ScoreboardUtils {
     }
 
     public static void updateScoreboard(Player player) {
-        Scoreboard scoreboard = player.getScoreboard();
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 
         if (objective == null) {
@@ -64,8 +65,8 @@ public class ScoreboardUtils {
 
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &7Deaths &6&l" + playerDeaths, 8);
-        setScore(objective, "  &7Kills &c&l" + playerKills, 7);
+        setScore(objective, "  &7Deaths &6" + playerDeaths, 8);
+        setScore(objective, "  &7Kills &c" + playerKills, 7);
         setScore(objective, "&8", 6);
 
         int ping = player.getPing();

