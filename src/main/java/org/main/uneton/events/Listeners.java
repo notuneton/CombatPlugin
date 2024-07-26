@@ -61,20 +61,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onEmoji(AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
-        String message = event.getMessage();
-        if (message.contains("o/")) {
-            if (!player.hasPermission("chat.emojis.sv")) {
-                return;
-            }
-            message = message.replace("o/", "( ﾟ◡ﾟ)/");
-            event.setMessage(message);
-        }
-    }
-
-
-    @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
