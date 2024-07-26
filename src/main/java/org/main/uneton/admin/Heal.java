@@ -31,13 +31,13 @@ public class Heal implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
                 player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
                 return true;
             }
 
             String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-            player.sendMessage(success + ChatColor.GREEN + "You have been healed by "+ ChatColor.GOLD + sender.getName());
+            player.sendMessage(success + ChatColor.GREEN + "You have been healed by "+ ChatColor.GOLD + sender.getName()+ColorUtils.colorize("&a."));
             player.setHealth(20);
         }
 
