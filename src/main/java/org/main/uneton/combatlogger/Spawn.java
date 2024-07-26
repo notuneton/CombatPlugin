@@ -43,7 +43,7 @@ public class Spawn implements CommandExecutor {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel();
                     if (!teleportPlayer(player, initialLocation)) {
-                        String warn1 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+                        String warn1 = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
                         player.sendMessage(warn1 + ("Cancelled!"));
                     }
                 } else {
@@ -57,12 +57,12 @@ public class Spawn implements CommandExecutor {
 
     private boolean teleportPlayer(Player player, Location initialLocation) {
         if (combat_tagged.containsKey(player)) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
             player.sendMessage(warn + "Teleport failed : you are combat tagged!");
             return false;
         }
         if (player.getLocation().distance(initialLocation) > 1) {
-            String warn2 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+            String warn2 = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
             player.sendMessage(warn2 + "Teleport failed : you were moved!");
             return false;
         } else {
@@ -73,7 +73,7 @@ public class Spawn implements CommandExecutor {
                 player.sendMessage(success + "You have been teleported to " + ChatColor.DARK_AQUA + "spawn" + ChatColor.GRAY +"!");
                 return true;
             } else {
-                String warn3 = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7");
+                String warn3 = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
                 player.sendMessage(warn3 + "Teleport failed : location not found!");
                 return false;
             }

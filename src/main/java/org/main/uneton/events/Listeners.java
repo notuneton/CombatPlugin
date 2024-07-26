@@ -61,6 +61,21 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onEmoji(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        String message = event.getMessage();
+
+        // Replace the "o/" with the emoji
+        if (message.contains("o/")) {
+            message = message.replace("o/", ChatColor.LIGHT_PURPLE + "( ﾟ◡ﾟ)/");
+
+            // Set the modified message back to the event
+            event.setMessage(message);
+        }
+    }
+
+
+    @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
@@ -75,7 +90,7 @@ public class Listeners implements Listener {
     public void onCommandPreproces(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage();
         Player player = event.getPlayer();
-        if (command.equalsIgnoreCase("pl")) {
+        if (command.equalsIgnoreCase("plugins")) {
             if (!player.hasPermission("combat.pl.sv")) {
                 player.sendMessage(ColorUtils.colorize("&fServer Plugins (1):"));
                 player.sendMessage(ColorUtils.colorize("&8&l- &aQuolleet"));
