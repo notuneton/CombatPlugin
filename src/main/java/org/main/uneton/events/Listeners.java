@@ -64,12 +64,11 @@ public class Listeners implements Listener {
     public void onEmoji(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
-
-        // Replace the "o/" with the emoji
         if (message.contains("o/")) {
-            message = message.replace("o/", ChatColor.LIGHT_PURPLE + "( ﾟ◡ﾟ)/");
-
-            // Set the modified message back to the event
+            if (!player.hasPermission("chat.emojis.sv")) {
+                return;
+            }
+            message = message.replace("o/", "( ﾟ◡ﾟ)/");
             event.setMessage(message);
         }
     }
