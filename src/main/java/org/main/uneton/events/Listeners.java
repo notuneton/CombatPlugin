@@ -61,26 +61,33 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onEmoji123(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        String message = event.getMessage();
+        if (message.contains(":123:")) {
+            message = message.replace(":123:", ColorUtils.colorize("&a1&r&e2&r&c3"));
+            event.setMessage(message);
+        }
+    }
+
+    @EventHandler
+    public void onEmojioof(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        String message = event.getMessage();
+        if (message.contains(":oof:")) {
+            message = message.replace(":oof:", ColorUtils.colorize("&c&lOOF"));
+            event.setMessage(message);
+        }
+    }
+
+    @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + "You dont have permission to run /"+command + " or command does not exist.");
+            player.sendMessage(warn + "The command /"+command + " does not exist.");
             event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onCommandPreproces(PlayerCommandPreprocessEvent event) {
-        String command = event.getMessage();
-        Player player = event.getPlayer();
-        if (command.equalsIgnoreCase("plugins")) {
-            if (!player.hasPermission("combat.pl.sv")) {
-                player.sendMessage(ColorUtils.colorize("&fServer Plugins (1):"));
-                player.sendMessage(ColorUtils.colorize("&8&l- &aQuolleet"));
-                event.setCancelled(true);
-            }
         }
     }
 

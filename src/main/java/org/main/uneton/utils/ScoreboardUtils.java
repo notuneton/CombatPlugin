@@ -40,15 +40,9 @@ public class ScoreboardUtils {
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 
         if (objective == null) {
-            if (player.hasPermission("op")) {
-                String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8(&b&lDev&8) ");
-                objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
-                objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            } else {
-                String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B]  ");
-                objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
-                objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            }
+            String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B]  ");
+            objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
         clearExistingScores(scoreboard);
 
