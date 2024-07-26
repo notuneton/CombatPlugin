@@ -40,18 +40,28 @@ public class ScoreboardUtils {
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 
         if (objective == null) {
-            String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B]  ");
-            objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
-            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+            if (player.hasPermission("op")) {
+                String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8(&b&lDev&8) ");
+                objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
+                objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+            } else {
+                String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B]  ");
+                objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
+                objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+            }
         }
         clearExistingScores(scoreboard);
 
-        setScore(objective, "&7", 12);
+        int ping = player.getPing();
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
+        setScore(objective, currentTime, 12);
+
+        setScore(objective, "&7 ", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
-        String online = ColorUtils.colorize("  &7Players &3" + totalPlayers);
-        setScore(objective, online, 11);
+        String online = ColorUtils.colorize("  &fPlayers &a" + totalPlayers);
+        setScore(objective, online, 10);
 
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
@@ -65,13 +75,13 @@ public class ScoreboardUtils {
 
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &7Deaths &6" + playerDeaths, 8);
-        setScore(objective, "  &7Kills &c" + playerKills, 7);
-        setScore(objective, "&8", 6);
+        if (playerDeaths > 0) {
+            setScore(objective, "  &fDeaths &a" + playerDeaths, 8);
+        }
+        setScore(objective, "  &fKills &a" + playerKills, 7);
 
-        int ping = player.getPing();
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
-        setScore(objective, currentTime, 5);
+        setScore(objective, "&8 ", 6);
+
         player.setScoreboard(scoreboard);
     }
 
@@ -90,7 +100,7 @@ public class ScoreboardUtils {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &7Playtime &3%dh %dm %ds", hours, minutes, seconds);
+        return String.format("  &fPlaytime &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     private static void setScore(Objective objective, String text, int score) {
