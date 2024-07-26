@@ -90,7 +90,15 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.view.commands"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.pl.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lplayers: unetonn"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.cage.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.crash.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.freeze.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.gm.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.heal.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.invsee.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.launch.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.slippery.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.setspawn.sv"));
         player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
 
