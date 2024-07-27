@@ -1,11 +1,13 @@
 package org.main.uneton.events;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -14,9 +16,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MagicStickEvent implements Listener {
+
+    private static final Set<Block> explosionLocs = new HashSet<>();
 
     private final double trailLength = 60; // Hiukkaspolun pituus suhde
     private final double spacing = 0.9; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin
@@ -80,26 +85,60 @@ public class MagicStickEvent implements Listener {
                 player.getWorld().spawnParticle(Particle.CLOUD, loc1, 0, 0, 0, 0, particleSize);
                 player.getWorld().spawnParticle(Particle.CLOUD, loc2, 0, 0, 0, 0, particleSize);
 
-                if (loc1.getBlock().getType() != Material.AIR || loc2.getBlock().getType() != Material.AIR) {
+                if (loc2.getBlock().getType() != Material.AIR) {
+                    explode(loc2);
                     this.cancel();
                     return;
                 }
-                damageEntities(player, loc1);
-                damageEntities(player, loc2);
+                if (loc1.getBlock().getType() != Material.AIR) {
+                    explode(loc1);
+                    this.cancel();
+                    return;
+                }
                 localTicks++;
             }
-
-            private void damageEntities(Player player, Location location) {
-                List<Entity> nearbyEntities = (List<Entity>) location.getWorld().getNearbyEntities(location, 0.5, 0.5, 0.5);
-                for (Entity entity : nearbyEntities) {
-                    if (entity instanceof LivingEntity && entity != player) {
-                        ((LivingEntity) entity).damage(1000);
-                        for (int index = 0; index < 100; index++) {
-                            location.getWorld().strikeLightning(location);
-                        }
-                    }
-                }
-            }
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
+    }
+
+    public static void explode(Location location) {
+        World w = location.getWorld();
+        explosionLocs.add(location.getBlock());
+        w.createExplosion(location, 7, false, true);
+    }
+
+    @EventHandler
+    public void onExplode(BlockExplodeEvent e) {
+        Block explosionPoint = e.getBlock();
+        Location location = explosionPoint.getLocation();
+        World w = location.getWorld();
+        if (w == null) return;
+        if (explosionLocs.contains(explosionPoint)) {
+            explosionLocs.remove(explosionPoint);
+        } else {
+            return;
+        }
+
+        e.blockList().forEach(b -> {
+            for (int i = 0; i < 3; i++) {  // Lisää palikoiden määrää
+                Location bloc = b.getLocation();
+                Vector direction = bloc.toVector().subtract(location.toVector()).normalize();
+
+                double randomFactor = 1.2;
+                double force = 1.1; // Pienennetään voimaa, jotta palikat pysyvät lähempänä maata
+                Vector velocity = direction.multiply(force).add(new Vector(
+                        (Math.random() - 0.5) * randomFactor,
+                        Math.random() * 0.5, // Pienennetään pystysuuntainen satunnaisuus
+                        (Math.random() - 0.5) * randomFactor
+                ));
+
+                // Varmistetaan, että nopeuskomponentit ovat äärellisiä
+                if (!Double.isFinite(velocity.getX()) || !Double.isFinite(velocity.getY()) || !Double.isFinite(velocity.getZ())) {
+                    velocity = new Vector(0, 0, 0);
+                }
+
+                FallingBlock fallingBlock = w.spawn(b.getLocation(), FallingBlock.class);
+                fallingBlock.setVelocity(velocity);
+            }
+        });
     }
 }
