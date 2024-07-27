@@ -38,9 +38,40 @@ public class Tp implements CommandExecutor {
             }
             player.teleport(target);
             player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7Teleportataan. Wooosh..."));
-            target.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7"+ target.getName() + " Teleported to you"));
+            target.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7'"+ target.getName() + "' Teleported to you!"));
         }
 
+
+        if (args.length == 2) {
+            Player fromPlayer = Bukkit.getPlayer(args[0]);
+            Player toPlayer = Bukkit.getPlayer(args[1]);
+
+            if (fromPlayer == null || !fromPlayer.isOnline()) {
+                player.sendMessage(ChatColor.RED + "Player " + args[0] + " not found or not online.");
+                return true;
+            }
+
+            if (toPlayer == null || !toPlayer.isOnline()) {
+                player.sendMessage(ChatColor.RED + "Player " + args[1] + " not found or not online.");
+                return true;
+            }
+
+            fromPlayer.teleport(toPlayer);
+            fromPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7You have been teleported to " + toPlayer.getName() + "."));
+            toPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7'" + fromPlayer.getName() + "' has been teleported to you!"));
+            return true;
+        }
+
+        if (args.length > 2) {
+            Player fromPlayer = Bukkit.getPlayer(args[0]);
+            Player toPlayer = Bukkit.getPlayer(args[1]);
+
+            assert toPlayer != null;
+            assert fromPlayer != null;
+            fromPlayer.teleport(toPlayer);
+            fromPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7You have been teleported to " + toPlayer.getName() + "."));
+            toPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7'" + fromPlayer.getName() + "' has been teleported to you!"));
+        }
         return true;
     }
 }

@@ -115,7 +115,7 @@ public class Listeners implements Listener {
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();
-        e.setJoinMessage(ColorUtils.colorize("&0"+ now.format(formatter)) + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        e.setJoinMessage(now.format(formatter) + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
@@ -124,7 +124,9 @@ public class Listeners implements Listener {
         Tab.updateTab();
         updateScoreboard(player);
         // String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-        e.setQuitMessage(ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        e.setQuitMessage(now.format(formatter) + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
     }
 
     @EventHandler
