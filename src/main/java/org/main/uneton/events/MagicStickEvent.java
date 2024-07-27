@@ -120,19 +120,19 @@ public class MagicStickEvent implements Listener {
         }
 
         e.blockList().forEach(b -> {
-            for (int i = 0; i < 3; i++) {  // Lisää palikoiden määrää
+            for (int i = 0; i < 3; i++) {
                 Location bloc = b.getLocation();
                 Vector direction = bloc.toVector().subtract(location.toVector()).normalize();
 
                 double randomFactor = 1.2;
-                double force = 1.1; // Pienennetään voimaa, jotta palikat pysyvät lähempänä maata
+                double force = 1.1;
                 Vector velocity = direction.multiply(force).add(new Vector(
                         (Math.random() - 0.5) * randomFactor,
-                        Math.random() * 0.5, // Pienennetään pystysuuntainen satunnaisuus
+                        Math.random() * 0.5,
                         (Math.random() - 0.5) * randomFactor
                 ));
 
-                // Varmistetaan, että nopeuskomponentit ovat äärellisiä
+                //todo Varmistetaan, että nopeuskomponentit ovat äärellisiä
                 if (!Double.isFinite(velocity.getX()) || !Double.isFinite(velocity.getY()) || !Double.isFinite(velocity.getZ())) {
                     velocity = new Vector(0, 0, 0);
                 }
