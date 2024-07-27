@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-public class Heal implements CommandExecutor {
+public class Cure implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -20,12 +20,9 @@ public class Heal implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            Player target = Bukkit.getPlayerExact(args[0]);
-            if (target == null) {
-                player.sendMessage(ChatColor.GREEN + "You healed yourself.");
-                player.setHealth(20);
-                return true;
-            }
+            player.sendMessage(ChatColor.GREEN + "You healed yourself.");
+            player.setHealth(20.0);
+            return true;
         }
 
         if (args.length == 1) {
@@ -36,12 +33,12 @@ public class Heal implements CommandExecutor {
                 return true;
             }
 
+            target.setHealth(20.0);
             String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-            player.sendMessage(success + ChatColor.GREEN + "You have been healed by "+ ChatColor.GOLD + sender.getName()+ColorUtils.colorize("&a."));
-            player.setHealth(20);
+            target.sendMessage(success + ColorUtils.colorize("&7You have been healed by " + "&6" + player.getName() + "&7."));
+            player.sendMessage(success + ColorUtils.colorize("&7You have healed " + "&6" + target.getName() + "&7."));
+            return true;
         }
-
-
-        return true;
+        return false;
     }
 }
