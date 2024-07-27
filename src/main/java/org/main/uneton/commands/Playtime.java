@@ -34,7 +34,7 @@ public class Playtime implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
                 player.sendMessage(warn + ColorUtils.colorize("That player does not exist."));
                 return true;
             }

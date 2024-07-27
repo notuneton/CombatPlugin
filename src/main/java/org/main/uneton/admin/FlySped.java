@@ -24,7 +24,7 @@ public class FlySped implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7/flyspeed <speed>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ &7/flyspeed <speed>");
             player.sendMessage(usage);
             return true;
         }
@@ -34,7 +34,7 @@ public class FlySped implements CommandExecutor {
         float speed = Float.parseFloat(speedArg);
 
         if (speed < 0 || speed > 10) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
             player.sendMessage(warn +ColorUtils.colorize("&7Speed must be between 0 and 1."));
             return false;
         }

@@ -32,8 +32,8 @@ public class SetSpawn implements CommandExecutor {
         Location loc = player.getLocation();
         plugin.getConfig().set("spawn", loc);
         plugin.saveConfig();
-        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l- &7");
-        player.sendMessage(success + ChatColor.GREEN + "Successfully set the spawn to : X " + loc.getBlockX() + ", Y: " + loc.getBlockY() + ", X: " + loc.getBlockZ());
+        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l+ &7");
+        player.sendMessage(success + ColorUtils.colorize("&aSuccessfully set the spawn to : X " + loc.getBlockX() + ", Y: " + loc.getBlockY() + ", X: " + loc.getBlockZ()));
         return true;
 
 

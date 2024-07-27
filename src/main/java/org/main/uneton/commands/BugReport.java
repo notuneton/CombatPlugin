@@ -24,7 +24,7 @@ public class BugReport implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/bugreport <description>");
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/bugreport <description> ");
             player.sendMessage(usage);
             return true;
         }
