@@ -18,6 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
+import org.main.uneton.comvanilla.Msg;
 import org.main.uneton.comvanilla.Tp;
 import org.main.uneton.events.FreezeListener;
 import org.main.uneton.admin.Gm;
@@ -102,6 +103,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(new Sudo());
         getCommand("trash").setExecutor(new Trash());
         getCommand("tp").setExecutor(new Tp());
+        getCommand("msg").setExecutor(new Msg());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);

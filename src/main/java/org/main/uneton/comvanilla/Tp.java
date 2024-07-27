@@ -32,12 +32,13 @@ public class Tp implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
+                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ ");
                 player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
                 return true;
             }
             player.teleport(target);
             player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7Teleportataan. Wooosh..."));
+            target.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7"+ target.getName() + " Teleported to you"));
         }
 
         return true;

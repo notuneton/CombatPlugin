@@ -78,4 +78,7 @@ commands:
     usage: /trash
   tp:
     description: Teleports to or from the player.
-    usage: /tp <player> <target> | /tp <x> <y> <z>
+    usage: /tp <player> <target>
+  msg:
+    description: Send a whisper to the player.
+    usage: /msg <player> <message>

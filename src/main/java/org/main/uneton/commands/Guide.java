@@ -82,7 +82,8 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sign | Spawns you a sign. (Can be clicked!)"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sudo <target> <command> | Executes another player perform a task."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trash | Put your stuff in the menu and close it!"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/tp <player> <target> | /tp <x> <y> <z> | Teleports to or from the player."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/tp <player> <target> | Teleports to or from the player."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/msg <player> <message> | Send a whisper to the player."));
         player.sendMessage(ColorUtils.colorize("&8------------------------------------------------"));
     }
 
