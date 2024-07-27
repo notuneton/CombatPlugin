@@ -38,6 +38,7 @@ public class MagicStickEvent implements Listener {
         }
     }
 
+    @Deprecated
     private boolean isMagicToyStick(ItemStack item) {
         if (item == null || item.getType() != Material.STICK) {
             return false;
@@ -63,7 +64,7 @@ public class MagicStickEvent implements Listener {
     }
 
     public void summonLineParticle(final Player player) {
-        Location startLocation = player.getLocation().add(0, player.getEyeHeight(), 0); // Pelaajan pää
+        Location startLocation = player.getLocation().add(0, player.getEyeHeight(), 0);
         Vector direction = startLocation.getDirection().normalize();
         new BukkitRunnable() {
             private int localTicks = 0;
