@@ -102,6 +102,8 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sign").setExecutor(new Sign());
         getCommand("sudo").setExecutor(new Sudo());
         getCommand("trash").setExecutor(new Trash());
+
+        // vanilla
         getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
 
