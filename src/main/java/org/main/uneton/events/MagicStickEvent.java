@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -140,5 +141,16 @@ public class MagicStickEvent implements Listener {
                 fallingBlock.setVelocity(velocity);
             }
         });
+    }
+
+    @EventHandler
+    public void onFallingBlockLand(EntityChangeBlockEvent event) {
+        if (event.getEntityType() == EntityType.FALLING_BLOCK) {
+            Entity entity = event.getEntity();
+            if (entity instanceof FallingBlock) {
+                // Poista FallingBlock-olio, kun se osuu maahan
+                entity.remove();
+            }
+        }
     }
 }

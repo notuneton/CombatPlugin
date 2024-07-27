@@ -26,7 +26,7 @@ public class Puu implements CommandExecutor {
         }
 
         Location location = player.getLocation();
-        location.getWorld().generateTree(location, TreeType.TREE);
+        location.getWorld().generateTree(location, TreeType.BIG_TREE);
         return true;
     }
 }
