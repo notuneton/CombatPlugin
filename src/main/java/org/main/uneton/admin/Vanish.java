@@ -47,8 +47,6 @@ public class Vanish implements CommandExecutor {
                 p.showPlayer(plugin, player);
             }
             vanishedPlayers.remove(player);
-            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &x&2&E&2&E&2&E&l+ &7");
-            player.sendMessage(success + ColorUtils.colorize("&fYou are not longer in &cVANISHED"));
             cancelTask();
         } else {
             for (Player p : Bukkit.getOnlinePlayers()) {
