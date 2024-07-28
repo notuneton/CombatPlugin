@@ -35,6 +35,9 @@ commands:
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>
+  vanish:
+    description: Toggles vanish mode.
+    usage: /vanish
 
   setspawn:
     description: Sets the server spawn point!

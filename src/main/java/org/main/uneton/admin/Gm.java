@@ -47,7 +47,7 @@ public class Gm implements CommandExecutor {
         if (args.length == 1) {
             if (gm_list.contains(target)) {
                 gm_list.remove(target);
-                player.sendMessage(ColorUtils.colorize("You are not longer in Godmode."));
+                player.sendMessage(ColorUtils.colorize("&aYou are not longer in Godmode."));
                 cancelTask();
             } else {
                 gm_list.add(target);
