@@ -43,7 +43,6 @@ public class Combat extends JavaPlugin implements Listener {
     public static Combat getInstance() {
         return instance;
     }
-
     public static Combat getInstance;
     public static HashMap<UUID, Double> economy = new HashMap<>();
 

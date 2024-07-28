@@ -24,7 +24,7 @@ public class MagicStickEvent implements Listener {
 
     private static final Set<Block> explosionLocs = new HashSet<>();
 
-    private final double trailLength = 60; // Hiukkaspolun pituus suhde
+    private final double trailLength = 100; // Hiukkaspolun pituus suhde
     private final double spacing = 0.9; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin
     private final double lineDistance = 0.4; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
     private final float particleSize = 0.5f; // Hiukkasten koko

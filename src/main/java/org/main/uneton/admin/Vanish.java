@@ -47,11 +47,13 @@ public class Vanish implements CommandExecutor {
                 p.showPlayer(plugin, player);
             }
             vanishedPlayers.remove(player);
+            Bukkit.broadcastMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
             cancelTask();
         } else {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(plugin, player);
             }
+            Bukkit.broadcastMessage(ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
             vanishedPlayers.add(player);
             sendVanishPacked(player);
         }
