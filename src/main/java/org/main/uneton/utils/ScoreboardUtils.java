@@ -1,12 +1,19 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import static org.main.uneton.Combat.playTimes;
 
@@ -50,7 +57,25 @@ public class ScoreboardUtils {
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
         setScore(objective, currentTime, 12);
 
-        setScore(objective, "&7 ", 11);
+        ItemStack magicToyStick = new ItemStack(Material.STICK);
+        ItemMeta meta = magicToyStick.getItemMeta();
+
+        if (meta != null) {
+            meta.setDisplayName("Magic Toy Stick");
+            meta.setLore(List.of(
+                    ChatColor.GRAY + "Do not leave with an",
+                    ChatColor.GRAY + "unsupervised magician."
+            ));
+            meta.addEnchant(Enchantment.KNOCKBACK, 3, true);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            magicToyStick.setItemMeta(meta);
+        }
+        if (player.getInventory().getItemInMainHand().equals(magicToyStick)) {
+            setScore(objective, "&c&lBE CAREFUL WITH THAT!", 11);
+        } else {
+            setScore(objective, "&7 ", 11);
+        }
+
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
