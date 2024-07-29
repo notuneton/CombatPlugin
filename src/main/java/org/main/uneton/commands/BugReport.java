@@ -40,8 +40,8 @@ public class BugReport implements CommandExecutor {
         } else {
             updateCooldown(playerUUID);
             String description = String.join(" ", args);
-            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-            player.sendMessage(success + ColorUtils.colorize("&7Thank you for submitting a bug report!"));
+            String success = ColorUtils.colorize("&3>&b> &8+ &7");
+            player.sendMessage(success + "Thank you for submitting a bug report!");
 
             // Log the bug report
             plugin.getLogger().info(player.getName() + " submitted a bug report: " + description);

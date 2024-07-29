@@ -131,8 +131,6 @@ public class MagicStickEvent implements Listener {
                         Math.random() * 0.5,
                         (Math.random() - 0.5) * randomFactor
                 ));
-
-                //todo Varmistetaan, että nopeuskomponentit ovat äärellisiä
                 if (!Double.isFinite(velocity.getX()) || !Double.isFinite(velocity.getY()) || !Double.isFinite(velocity.getZ())) {
                     velocity = new Vector(0, 0, 0);
                 }
@@ -148,7 +146,6 @@ public class MagicStickEvent implements Listener {
         if (event.getEntityType() == EntityType.FALLING_BLOCK) {
             Entity entity = event.getEntity();
             if (entity instanceof FallingBlock) {
-                // Poista FallingBlock-olio, kun se osuu maahan
                 entity.remove();
             }
         }
