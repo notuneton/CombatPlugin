@@ -13,7 +13,6 @@ import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 import static org.main.uneton.Combat.playTimes;
 

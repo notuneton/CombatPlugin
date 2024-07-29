@@ -88,3 +88,5 @@ commands:
   msg:
     description: Send a whisper to the player.
     usage: /msg <player> <message>
+  sell:
+    usage: /sell
