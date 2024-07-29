@@ -41,16 +41,16 @@ public class Playtime implements CommandExecutor {
 
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(args[0]);
             if (offlinePlayer != null && offlinePlayer.hasPlayedBefore()) {
-                sendPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
+                getPlaytime(sender, offlinePlayer.getName(), plugin.playTimes.getOrDefault(offlinePlayer.getUniqueId(), 0));
             } else {
                 Player user = (Player) sender;
-                sendPlaytime(sender, user.getName(), plugin.playTimes.getOrDefault(user.getUniqueId(), 0));
+                getPlaytime(sender, user.getName(), plugin.playTimes.getOrDefault(user.getUniqueId(), 0));
             }
         }
         return true;
     }
 
-    private void sendPlaytime(CommandSender sender, String playerName, int playTime) {
+    public static void getPlaytime(CommandSender sender, String playerName, int playTime) {
         if (playTime <= 3600) {
             sender.sendMessage(ColorUtils.colorize(String.format("&3&l%s &bon pelannut &6%d &bminuuttia!\n", playerName, playTime / 60)));
         } else if (playTime <= 86400) {

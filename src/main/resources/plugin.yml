@@ -43,6 +43,7 @@ commands:
     usage: /vanish
   wipeprofile:
     description: Clear's players all stats.
+    usage: /wipeprofile <player>
 
   setspawn:
     description: Sets the server spawn point!
