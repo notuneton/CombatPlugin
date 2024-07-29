@@ -108,7 +108,6 @@ public class Combat extends JavaPlugin implements Listener {
         // vanilla
         getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
-        getCommand("sell").setExecutor(new Sell(this));
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
