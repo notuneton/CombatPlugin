@@ -65,6 +65,7 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/setspawn | Sets the server spawn point!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/slippery <player> | Drops Items from the player."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/vanish | Toggles vanish mode."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/wipeprofile | Clear's players all stats."));
         player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
     }
 
@@ -102,6 +103,7 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.launch.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.slippery.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.vanish.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.wipe.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.setspawn.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &6&lcombat.tp.sv"));
         player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));

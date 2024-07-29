@@ -2,19 +2,24 @@ package org.main.uneton.admin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 
+import java.util.UUID;
+
+import static org.main.uneton.commands.Playtime.getPlaytime;
+
 public class Wipeprofile implements CommandExecutor {
+
+    private final Combat plugin;
+    public Wipeprofile(Combat plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -42,7 +47,9 @@ public class Wipeprofile implements CommandExecutor {
                 return true;
             }
 
-
+            //todo remove all playtime
+            UUID playerUUID = player.getUniqueId();
+            getPlaytime(player, player.getName(), plugin.playTimes.getOrDefault(playerUUID, 0));
             player.sendMessage(ColorUtils.colorize("&aProfile successfully wiped!"));
         }
 
