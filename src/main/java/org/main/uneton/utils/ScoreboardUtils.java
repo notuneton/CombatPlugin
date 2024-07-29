@@ -57,25 +57,7 @@ public class ScoreboardUtils {
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
         setScore(objective, currentTime, 12);
 
-        ItemStack magicToyStick = new ItemStack(Material.STICK);
-        ItemMeta meta = magicToyStick.getItemMeta();
-
-        if (meta != null) {
-            meta.setDisplayName("Magic Toy Stick");
-            meta.setLore(List.of(
-                    ChatColor.GRAY + "Do not leave with an",
-                    ChatColor.GRAY + "unsupervised magician."
-            ));
-            meta.addEnchant(Enchantment.KNOCKBACK, 3, true);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            magicToyStick.setItemMeta(meta);
-        }
-        if (player.getInventory().getItemInMainHand().equals(magicToyStick)) {
-            setScore(objective, "&c&lBE CAREFUL WITH THAT!", 11);
-        } else {
-            setScore(objective, "&7 ", 11);
-        }
-
+        setScore(objective, "&7 ", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);

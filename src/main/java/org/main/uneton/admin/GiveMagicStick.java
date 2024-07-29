@@ -35,7 +35,6 @@ public class GiveMagicStick implements CommandExecutor {
             return true;
         }
 
-        // Create the Magic Toy Stick item
         ItemStack magicToyStick = new ItemStack(Material.STICK);
         ItemMeta meta = magicToyStick.getItemMeta();
 
