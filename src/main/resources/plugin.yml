@@ -41,6 +41,8 @@ commands:
   vanish:
     description: Toggles vanish mode.
     usage: /vanish
+  wipeprofile:
+    description: Clear's players all stats.
 
   setspawn:
     description: Sets the server spawn point!

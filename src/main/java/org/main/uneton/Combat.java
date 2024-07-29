@@ -86,6 +86,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("givestick").setExecutor(new GiveMagicStick());
         getCommand("slippery").setExecutor(new Slippery(this));
         getCommand("vanish").setExecutor(new Vanish(this));
+        getCommand("wipeprofile").setExecutor(new Wipeprofile());
 
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new CombatLog(this), this);
