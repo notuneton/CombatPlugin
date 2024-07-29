@@ -24,7 +24,7 @@ public class GiveMagicStick implements CommandExecutor {
             return true;
         }
 
-        if (!player.hasPermission("combat.givemagicstick.sv")) {
+        if (!player.hasPermission("combat.givestick.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run " + command.getName() + ".");
             return true;
         }
