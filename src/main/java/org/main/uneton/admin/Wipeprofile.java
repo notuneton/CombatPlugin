@@ -42,15 +42,6 @@ public class Wipeprofile implements CommandExecutor {
                 return true;
             }
 
-            ItemStack alert = new ItemStack(Material.WRITABLE_BOOK);
-            BookMeta meta = (BookMeta) alert.getItemMeta();
-            meta.setTitle(ColorUtils.colorize("Profile Wiped"));
-            meta.setAuthor("Server");
-            meta.addPage("Your profile has been wiped!");
-            alert.setItemMeta(meta);
-            target.getInventory().addItem(alert);
-            openBook(target, alert);
-
 
             player.sendMessage(ColorUtils.colorize("&aProfile successfully wiped!"));
         }
@@ -58,15 +49,4 @@ public class Wipeprofile implements CommandExecutor {
         return true;
     }
 
-    private void openBook(Player player, ItemStack book) {
-        int slot = player.getInventory().getHeldItemSlot();
-        ItemStack old = player.getInventory().getItem(slot);
-        player.getInventory().setItem(slot, book);
-
-        // Sending packet to open the book
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Combat.getInstance(), () -> {
-            (player).openBook(book);
-            player.getInventory().setItem(slot, old);
-        });
-    }
 }
