@@ -1,13 +1,7 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
@@ -85,6 +79,26 @@ public class ScoreboardUtils {
         player.setScoreboard(scoreboard);
     }
 
+    public static void setPlaytime(UUID playerUUID, int seconds) {
+        playTimes.put(playerUUID, seconds);
+    }
+    public static void setDeaths(UUID playerUUID) {
+        deaths.put(playerUUID, 0);
+    }
+
+    public static void setKills(UUID playerUUID) {
+        kills.put(playerUUID, 0);
+    }
+
+
+    public static void addKill(UUID playeruuid) {
+        kills.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
+    }
+
+    public static void addDeath(UUID playeruuid) {
+        deaths.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
+    }
+
     private static String formatPlaytime(int hours, int minutes, int seconds) {
         if (seconds >= 60) {
             minutes += seconds / 60;
@@ -106,13 +120,5 @@ public class ScoreboardUtils {
     private static void setScore(Objective objective, String text, int score) {
         Score line = objective.getScore(ColorUtils.colorize(text));
         line.setScore(score);
-    }
-
-    public static void addKill(UUID playeruuid) {
-        kills.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
-    }
-
-    public static void addDeath(UUID playeruuid) {
-        deaths.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
     }
 }

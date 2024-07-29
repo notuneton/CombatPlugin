@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
+import org.main.uneton.utils.ScoreboardUtils;
 
 import java.util.UUID;
 
@@ -47,10 +48,12 @@ public class Wipeprofile implements CommandExecutor {
                 return true;
             }
 
-            //todo remove all playtime
-            UUID playerUUID = player.getUniqueId();
-            getPlaytime(player, player.getName(), plugin.playTimes.getOrDefault(playerUUID, 0));
+            UUID targetUUID = player.getUniqueId();
+            ScoreboardUtils.setPlaytime(targetUUID, 0);
+            ScoreboardUtils.setKills(targetUUID);
+            ScoreboardUtils.setDeaths(targetUUID);
             player.sendMessage(ColorUtils.colorize("&aProfile successfully wiped!"));
+            target.sendMessage(ColorUtils.colorize("&aYour profile has been wiped!"));
         }
 
         return true;
