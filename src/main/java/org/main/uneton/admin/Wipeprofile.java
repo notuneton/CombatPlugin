@@ -52,8 +52,11 @@ public class Wipeprofile implements CommandExecutor {
             ScoreboardUtils.setPlaytime(targetUUID, 0);
             ScoreboardUtils.setKills(targetUUID);
             ScoreboardUtils.setDeaths(targetUUID);
+
             player.sendMessage(ColorUtils.colorize("&aProfile successfully wiped!"));
-            target.sendMessage(ColorUtils.colorize("&aYour profile has been wiped!"));
+            player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
+            target.sendMessage(ColorUtils.colorize("&f&l[WARNING] &cYour profile have been &4&lWIPED&c."));
+            player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         }
 
         return true;
