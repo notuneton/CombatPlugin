@@ -32,9 +32,9 @@ commands:
   launch:
     description: Throws the player high into the air
     usage: /launch <player>
-  givebucket:
-    description: Gives a custom infinite water bucket to the player
-    usage: /givebucket <player>
+  givestick:
+    description: Gives the player a magic toy Stick
+    usage: /givestick <player>
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>

@@ -82,7 +82,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("cure").setExecutor(new Cure());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("launch").setExecutor(new Launch());
-        getCommand("givebucket").setExecutor(new MagicalBucket());
+        getCommand("givestick").setExecutor(new GiveMagicStick());
         getCommand("slippery").setExecutor(new Slippery(this));
         getCommand("vanish").setExecutor(new Vanish(this));
 
@@ -112,7 +112,6 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new MagicalBucketPlace(), this);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MagicStickEvent(), this);
 

@@ -45,7 +45,7 @@ public class MagicStickEvent implements Listener {
     }
 
     @Deprecated
-    private boolean isMagicToyStick(ItemStack item) {
+    private static boolean isMagicToyStick(ItemStack item) {
         if (item == null || item.getType() != Material.STICK) {
             return false;
         }
