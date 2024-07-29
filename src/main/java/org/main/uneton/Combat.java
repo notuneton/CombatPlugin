@@ -40,6 +40,7 @@ public class Combat extends JavaPlugin implements Listener {
     
     private static Combat instance;
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
+    public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     public static Combat getInstance() {
         return instance;
     }
