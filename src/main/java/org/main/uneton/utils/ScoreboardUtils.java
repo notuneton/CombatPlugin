@@ -85,11 +85,9 @@ public class ScoreboardUtils {
     public static void setDeaths(UUID playerUUID) {
         deaths.put(playerUUID, 0);
     }
-
     public static void setKills(UUID playerUUID) {
         kills.put(playerUUID, 0);
     }
-
 
     public static void addKill(UUID playeruuid) {
         kills.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);

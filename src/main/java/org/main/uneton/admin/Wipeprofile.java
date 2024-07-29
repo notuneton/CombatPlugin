@@ -13,8 +13,6 @@ import org.main.uneton.utils.ScoreboardUtils;
 
 import java.util.UUID;
 
-import static org.main.uneton.commands.Playtime.getPlaytime;
-
 public class Wipeprofile implements CommandExecutor {
 
     private final Combat plugin;
@@ -54,9 +52,9 @@ public class Wipeprofile implements CommandExecutor {
             ScoreboardUtils.setDeaths(targetUUID);
 
             player.sendMessage(ColorUtils.colorize("&aProfile successfully wiped!"));
-            player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
+            target.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
             target.sendMessage(ColorUtils.colorize("&f&l[WARNING] &cYour profile have been &4&lWIPED&c."));
-            player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
+            target.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         }
 
         return true;
