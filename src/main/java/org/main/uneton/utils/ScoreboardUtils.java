@@ -73,11 +73,11 @@ public class ScoreboardUtils {
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
         if (playerDeaths > 0) {
-            setScore(objective, "  &fDeaths &a" + playerDeaths, 8);
+            setScore(objective, "  &fDeaths &a" + playerDeaths, 7);
         }
-        setScore(objective, "  &fKills &a" + playerKills, 7);
+        setScore(objective, "  &fKills &a" + playerKills, 6);
 
-        setScore(objective, "&8 ", 6);
+        setScore(objective, "&8 ", 5);
 
         player.setScoreboard(scoreboard);
     }
