@@ -4,11 +4,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.main.uneton.utils.ColorUtils;
 
-public class Guide implements CommandExecutor {
+import java.util.List;
+
+public class Guide implements TabCompleter, CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -114,5 +118,11 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"&b--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &x&2&E&2&E&2&E&l- &7/guide <komennot | oikeudet | admin>"));
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
+    }
+
+    String[] collections = {"komennot", "oikeudet", "admin"};
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        return args.length == 1 ? List.of(collections) : null;
     }
 }
