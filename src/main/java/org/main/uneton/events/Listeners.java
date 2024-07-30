@@ -61,7 +61,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onChat123(AsyncPlayerChatEvent event) {
+    public void onChatEvent(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
         if (message.contains(":123:")) {
@@ -77,6 +77,17 @@ public class Listeners implements Listener {
         if (!doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
             player.sendMessage(warn + "The command /"+command + " does not exist.");
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onCommandPreprocessPl(PlayerCommandPreprocessEvent event) {
+        String command = event.getMessage().split(" ")[0].substring(1);
+        Player player = event.getPlayer();
+        if (!player.hasPermission("bukkit.command.plugins")) {
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn + "The command /pl does not exist.");
             event.setCancelled(true);
         }
     }
