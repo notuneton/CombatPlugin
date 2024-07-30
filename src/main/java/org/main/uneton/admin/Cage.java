@@ -43,7 +43,7 @@ public class Cage implements CommandExecutor {
         return true;
     }
 
-    public void spawnTrap(Player player) {
+    public static void spawnTrap(Player player) {
         Location loc = player.getLocation();
         Location bottomCorner = loc.clone().add(0, 0, 0);
         player.setGameMode(GameMode.ADVENTURE);

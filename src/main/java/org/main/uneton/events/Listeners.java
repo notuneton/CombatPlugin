@@ -162,8 +162,8 @@ public class Listeners implements Listener {
         if (e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
             if (Math.random() < 0.2) {
-                int index = chance.nextInt(blocks.length);
-                ItemStack dropped_item = blocks[index];
+                int index = chance.nextInt(blocksList.length);
+                ItemStack dropped_item = blocksList[index];
                 block.getWorld().dropItemNaturally(loc, dropped_item);
 
             } else if (Math.random() < 0.8) {
@@ -172,7 +172,7 @@ public class Listeners implements Listener {
         }
     }
 
-    private final ItemStack[] blocks = new ItemStack[]{
+    private final ItemStack[] blocksList = new ItemStack[]{
             new ItemStack(Material.EMERALD),
             new ItemStack(Material.AMETHYST_SHARD),
             new ItemStack(Material.IRON_NUGGET),
@@ -189,13 +189,13 @@ public class Listeners implements Listener {
             if (player.getInventory().getItemInMainHand().getType() == Material.SHEARS) {
                 Random chance = new Random();
                 if (chance.nextDouble() < 0.001) {
-                    woolDrops(player, loc);
+                    woolDrop(player, loc);
                 }
             }
         }
     }
 
-    private void woolDrops(Player player, Location loc) {
+    private void woolDrop(Player player, Location loc) {
         ItemStack bluegem = new ItemStack(Material.LAPIS_LAZULI, 1);
         ItemMeta bluegem_meta = bluegem.getItemMeta();
         bluegem_meta.setDisplayName(ChatColor.BLUE + "Blue gem color");
