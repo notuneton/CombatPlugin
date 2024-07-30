@@ -15,6 +15,7 @@ public class ScoreboardUtils {
     private static Combat plugin;
     private static final HashMap<UUID, Integer> kills = new HashMap<>();
     private static final HashMap<UUID, Integer> deaths = new HashMap<>();
+    private static final HashMap<UUID, Integer> selfDeaths = new HashMap<>();
 
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
@@ -67,6 +68,8 @@ public class ScoreboardUtils {
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
+        int playerSelfDeaths = selfDeaths.getOrDefault(uuid, 0);
+        setScore(objective, "  &fDeaths &a" + playerSelfDeaths, 8);
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
         if (playerDeaths > 0) {
@@ -95,6 +98,9 @@ public class ScoreboardUtils {
 
     public static void addDeath(UUID playeruuid) {
         deaths.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
+    }
+    public static void addSelfDeath(UUID playeruuid) {
+        selfDeaths.put(playeruuid, selfDeaths.getOrDefault(playeruuid, 0) + 1);
     }
 
     private static String formatPlaytime(int hours, int minutes, int seconds) {
