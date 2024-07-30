@@ -147,6 +147,7 @@ public class MagicStickEvent implements Listener {
             Entity entity = event.getEntity();
             if (entity instanceof FallingBlock) {
                 entity.remove();
+                ((FallingBlock) entity).setDropItem(false);
             }
         }
     }
