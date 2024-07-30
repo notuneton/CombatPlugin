@@ -77,7 +77,8 @@ public class Guide implements TabCompleter, CommandExecutor {
         String title = ColorUtils.colorize(" &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B] &8");
         player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawnpoint."));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/bugreport | Report a bug. reporting false bugs will be punished!"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/bugreport <description> | Report a bug. reporting false bugs will be punished!"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/daily | Command that canbe used daily for a reward!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/enderchest | Opens your personal Enderchest."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/guide <text> | Show this list"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/ping <player> | Check player ping."));
