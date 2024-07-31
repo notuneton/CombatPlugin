@@ -104,7 +104,7 @@ public class MagicStick implements Listener {
     public static void explode(Location location) {
         World w = location.getWorld();
         explosionLocs.add(location.getBlock());
-        w.createExplosion(location, 7, false, true);
+        w.createExplosion(location, 8, false, true);
     }
 
     @EventHandler
@@ -120,7 +120,7 @@ public class MagicStick implements Listener {
         }
 
         e.blockList().forEach(b -> {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 Location bloc = b.getLocation();
                 Vector direction = bloc.toVector().subtract(location.toVector()).normalize();
 
