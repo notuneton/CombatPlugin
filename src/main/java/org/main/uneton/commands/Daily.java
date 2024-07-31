@@ -65,7 +65,7 @@ public class Daily implements CommandExecutor {
             long currentTime = System.currentTimeMillis();
             long cooldownTime = cooldownSeconds * 1000L;
 
-            return (cooldownTime - (currentTime - lastUsed)) / 1000; // Convert back to seconds
+            return (cooldownTime - (currentTime - lastUsed)) / 1000;
         }
         return 0;
     }
@@ -81,6 +81,4 @@ public class Daily implements CommandExecutor {
             new ItemStack(Material.COPPER_INGOT),
             new ItemStack(Material.STRING)
     };
-
-
 }
