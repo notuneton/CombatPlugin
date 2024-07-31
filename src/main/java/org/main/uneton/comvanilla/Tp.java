@@ -48,7 +48,7 @@ public class Tp implements CommandExecutor {
             assert toPlayer != null;
             assert fromPlayer != null;
             fromPlayer.teleport(toPlayer);
-            fromPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7You have been teleported to " + toPlayer.getName() + "."));
+            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7Teleportataan. Wooosh..."));
             toPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7'" + fromPlayer.getName() + "' has been teleported to you!"));
         }
         return true;

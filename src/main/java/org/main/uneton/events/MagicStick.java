@@ -20,7 +20,7 @@ import org.main.uneton.Combat;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MagicStickEvent implements Listener {
+public class MagicStick implements Listener {
 
     private static final Set<Block> explosionLocs = new HashSet<>();
 
@@ -131,6 +131,7 @@ public class MagicStickEvent implements Listener {
                         Math.random() * 0.5,
                         (Math.random() - 0.5) * randomFactor
                 ));
+
                 if (!Double.isFinite(velocity.getX()) || !Double.isFinite(velocity.getY()) || !Double.isFinite(velocity.getZ())) {
                     velocity = new Vector(0, 0, 0);
                 }

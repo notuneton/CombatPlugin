@@ -30,7 +30,7 @@ import org.main.uneton.events.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.commands.Trash;
-import org.main.uneton.events.MagicStickEvent;
+import org.main.uneton.events.MagicStick;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
@@ -119,7 +119,7 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new Secret(), this);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
-        Bukkit.getPluginManager().registerEvents(new MagicStickEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MagicStick(), this);
 
         Bukkit.getPluginManager().registerEvents(this, this);
         ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
