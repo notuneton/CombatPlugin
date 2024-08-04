@@ -16,5 +16,4 @@ public class TabComplete implements TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         return args.length == 1 ? List.of(collections) : null;
     }
-
 }
