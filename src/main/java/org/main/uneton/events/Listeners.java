@@ -77,7 +77,7 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + "The command /"+command + " does not exist.");
+            player.sendMessage(warn + "'"+command+"' is not recognized as an internal or external command.");
             event.setCancelled(true);
         }
     }
@@ -88,7 +88,7 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPermission("bukkit.command.plugins")) {
             String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + "The command /pl does not exist.");
+            player.sendMessage(warn + "'pl' is not recognized as an internal or external command.");
             event.setCancelled(true);
         }
     }
