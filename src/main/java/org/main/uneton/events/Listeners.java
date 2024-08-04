@@ -61,6 +61,40 @@ public class Listeners implements Listener {
         }
     }
 
+    private boolean isSyntaxValid(String command, String[] args) {
+        // Define expected syntax for the command
+        if (command.equalsIgnoreCase("mycommand")) {
+            // Example syntax: /mycommand <arg1> <arg2>
+            return args.length == 2; // Adjust based on the expected number of arguments
+        }
+        return true; // For other commands, assume syntax is correct or handle accordingly
+    }
+
+    @EventHandler
+    public void onCommandPreprocss(PlayerCommandPreprocessEvent event) {
+        String[] parts = event.getMessage().split(" ");
+        String command = parts[0].substring(1); // Remove the leading '/'
+        Player player = event.getPlayer();
+
+        if (!doesCommandExist(command)) {
+            // Handle non-existent command
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn + "'" + command + "' is not recognized as an internal or external command.");
+            event.setCancelled(true);
+            return;
+        }
+
+        String[] args = new String[parts.length - 1];
+        System.arraycopy(parts, 1, args, 0, args.length);
+
+        if (!isSyntaxValid(command, args)) {
+            // Handle incorrect syntax
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            player.sendMessage(warn + "The syntax for '" + command + "' is incorrect. Please use the correct syntax.");
+            event.setCancelled(true);
+        }
+    }
+
     @EventHandler
     public void onChatEvent(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
@@ -108,6 +142,7 @@ public class Listeners implements Listener {
             ScoreboardUtils.updateScoreboard(victim);
         }
     }
+
     @EventHandler
     public void onPlayerSelfDeath(PlayerDeathEvent event) {
         Player diedPlayer = event.getPlayer();
@@ -118,13 +153,12 @@ public class Listeners implements Listener {
         }
     }
 
-
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
 
-        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &fEvent&7."));
+        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &fSurvival&7."));
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();

