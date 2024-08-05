@@ -61,40 +61,6 @@ public class Listeners implements Listener {
         }
     }
 
-    private boolean isSyntaxValid(String command, String[] args) {
-        // Define expected syntax for the command
-        if (command.equalsIgnoreCase("mycommand")) {
-            // Example syntax: /mycommand <arg1> <arg2>
-            return args.length == 2; // Adjust based on the expected number of arguments
-        }
-        return true; // For other commands, assume syntax is correct or handle accordingly
-    }
-
-    @EventHandler
-    public void onCommandPreprocss(PlayerCommandPreprocessEvent event) {
-        String[] parts = event.getMessage().split(" ");
-        String command = parts[0].substring(1); // Remove the leading '/'
-        Player player = event.getPlayer();
-
-        if (!doesCommandExist(command)) {
-            // Handle non-existent command
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + "'" + command + "' is not recognized as an internal or external command.");
-            event.setCancelled(true);
-            return;
-        }
-
-        String[] args = new String[parts.length - 1];
-        System.arraycopy(parts, 1, args, 0, args.length);
-
-        if (!isSyntaxValid(command, args)) {
-            // Handle incorrect syntax
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + "The syntax for '" + command + "' is incorrect. Please use the correct syntax.");
-            event.setCancelled(true);
-        }
-    }
-
     @EventHandler
     public void onChatEvent(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
