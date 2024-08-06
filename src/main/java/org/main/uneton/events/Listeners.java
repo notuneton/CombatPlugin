@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -48,6 +49,46 @@ public class Listeners implements Listener {
     public Listeners(Combat plugin) {
         this.plugin = plugin;
         // this.vault = plugin.getVault();
+    }
+
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        Action a = event.getAction();
+        Block b = event.getClickedBlock();
+        if (player.isSneaking() && (a == Action.RIGHT_CLICK_BLOCK) && b != null && isShulkerBox(b.getType())) {
+            event.setCancelled(true);
+
+            ShulkerBox shulkerBox = (ShulkerBox) b.getState();
+            Inventory shulkerInv = shulkerBox.getInventory();
+            player.openInventory(shulkerInv);
+        }
+    }
+
+    private boolean isShulkerBox(Material mat) {
+        switch (mat) {
+            case SHULKER_BOX:
+            case WHITE_SHULKER_BOX:
+            case ORANGE_SHULKER_BOX:
+            case MAGENTA_SHULKER_BOX:
+            case LIGHT_BLUE_SHULKER_BOX:
+            case YELLOW_SHULKER_BOX:
+            case LIME_SHULKER_BOX:
+            case PINK_SHULKER_BOX:
+            case GRAY_SHULKER_BOX:
+            case LIGHT_GRAY_SHULKER_BOX:
+            case CYAN_SHULKER_BOX:
+            case PURPLE_SHULKER_BOX:
+            case BLUE_SHULKER_BOX:
+            case BROWN_SHULKER_BOX:
+            case GREEN_SHULKER_BOX:
+            case RED_SHULKER_BOX:
+            case BLACK_SHULKER_BOX:
+                return true;
+            default:
+                return false;
+        }
     }
 
     @EventHandler

