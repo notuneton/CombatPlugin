@@ -39,7 +39,8 @@ public class Daily implements CommandExecutor {
         UUID playerUUID = player.getUniqueId();
         if (isOnCooldown(playerUUID, 86400)) {
             long timeLeft = getTimeLeft(playerUUID, 86400);
-            player.sendMessage(ColorUtils.colorize("&cYou must wait " + timeLeft + "&c minutes before using this command again."));
+            String formattedTimeLeft = formatTime(timeLeft);
+            player.sendMessage(ColorUtils.colorize("&cYou must wait " + formattedTimeLeft + "&c before using this command again."));
         } else {
             updateCooldown(playerUUID);
             ItemStack raffledItem = rewardItem();
@@ -59,6 +60,7 @@ public class Daily implements CommandExecutor {
         }
         return false;
     }
+
     private long getTimeLeft(UUID playerUUID, int cooldownSeconds) {
         if (cooldowns.containsKey(playerUUID)) {
             long lastUsed = cooldowns.get(playerUUID);
@@ -69,9 +71,19 @@ public class Daily implements CommandExecutor {
         }
         return 0;
     }
+
     private void updateCooldown(UUID playerUUID) {
         cooldowns.put(playerUUID, System.currentTimeMillis());
     }
+
+    private String formatTime(long totalSeconds) {
+        long hours = totalSeconds / 3600;
+        long minutes = (totalSeconds % 3600) / 60;
+        long seconds = totalSeconds % 60;
+
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
 
     private final ItemStack[] blocksList = new ItemStack[]{
             new ItemStack(Material.EMERALD),
