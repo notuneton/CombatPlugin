@@ -93,7 +93,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
-        getCommand("bugreport").setExecutor(new BugReport(this));
         getCommand("daily").setExecutor(new Daily());
         getCommand("enderchest").setExecutor(new Ec());
         getCommand("guide").setExecutor(new Guide());
