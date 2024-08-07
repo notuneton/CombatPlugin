@@ -45,6 +45,8 @@ public class Daily implements CommandExecutor {
             updateCooldown(playerUUID);
             ItemStack raffledItem = rewardItem();
             player.getInventory().addItem(raffledItem);
+            String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l- &a");
+            player.sendMessage(success +ColorUtils.colorize("You have successfully claimed &3" + raffledItem.getType()+"&a!"));
         }
 
         return true;

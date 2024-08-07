@@ -51,10 +51,6 @@ public class Listeners implements Listener {
         // this.vault = plugin.getVault();
     }
 
-
-
-
-
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -93,10 +89,6 @@ public class Listeners implements Listener {
                 return false;
         }
     }
-
-
-
-
 
     @EventHandler
     public void onPing(PlayerMoveEvent event) {

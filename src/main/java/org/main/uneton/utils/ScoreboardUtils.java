@@ -48,11 +48,16 @@ public class ScoreboardUtils {
         clearExistingScores(scoreboard);
 
         int ping = player.getPing();
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
-        setScore(objective, currentTime, 12);
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
+        setScore(objective, currentTime, 13);
 
-        setScore(objective, "&7 ", 11);
+        if (!player.hasPermission("op")) {
+            setScore(objective, "&fRank &7Default", 12);
+        } else if (player.hasPermission("op")) {
+            setScore(objective, "&fRank &cADMIN", 12);
+        }
 
+        setScore(objective, "&a ", 11);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("  &fPlayers &a" + totalPlayers);
