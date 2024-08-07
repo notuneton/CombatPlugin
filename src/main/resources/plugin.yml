@@ -63,6 +63,8 @@ commands:
   playtime:
     description: Total playtime of a specified player in the game.
     usage: /playtime <player>
+  prototype:
+    usage: /prototype
   puu:
     description: Spawns an oak tree at the player's location.
     usage: /puu
