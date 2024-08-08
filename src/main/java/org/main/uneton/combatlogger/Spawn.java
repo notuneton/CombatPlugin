@@ -20,7 +20,7 @@ public class Spawn implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    public static String varoitus = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+    public static String varoitus = ColorUtils.colorize("&4>&c> &8+ &7");
     public static String onnistunut = ColorUtils.colorize("&3>&b> &8+ &7");
 
     @Override
@@ -45,7 +45,7 @@ public class Spawn implements CommandExecutor {
             public void run() {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel();
-                    if (!teleportPlayer(player, initialLocation)) { 
+                    if (!teleportPlayer(player, initialLocation)) {
                         player.sendMessage(varoitus + "Cancelled!");
                     }
                 } else {

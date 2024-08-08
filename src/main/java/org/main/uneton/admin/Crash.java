@@ -33,12 +33,12 @@ public class Crash implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
-                player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
+                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+                player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
                 return true;
             }
 
-            player.spawnParticle(Particle.EXPLOSION_LARGE, player.getLocation(), Integer.MAX_VALUE); // : 2147483647
+            player.spawnParticle(Particle.EXPLOSION_LARGE, player.getLocation(), Integer.MAX_VALUE); //  2147483647
             String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7");
             player.sendMessage(success + "You have crashed " + ChatColor.UNDERLINE+ ColorUtils.colorize("&a" +target.getName() + "&7" + "."));
         }

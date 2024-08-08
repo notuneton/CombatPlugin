@@ -40,13 +40,13 @@ public class Daily implements CommandExecutor {
         if (isOnCooldown(playerUUID, 86400)) {
             long timeLeft = getTimeLeft(playerUUID, 86400);
             String formattedTimeLeft = formatTime(timeLeft);
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendMessage(warn +ColorUtils.colorize("&cYou must wait " + formattedTimeLeft + "&c before using this command again."));
         } else {
             updateCooldown(playerUUID);
             ItemStack raffledItem = rewardItem();
             player.getInventory().addItem(raffledItem);
-            String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l- &a");
+            String success = ColorUtils.colorize("&2>&a> &8+ &a");
             player.sendMessage(success +ColorUtils.colorize("You have successfully claimed &3" + raffledItem.getType()+"&a!"));
         }
 

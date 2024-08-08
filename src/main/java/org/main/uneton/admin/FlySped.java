@@ -24,7 +24,7 @@ public class FlySped implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ &7/flyspeed <speed>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7/flyspeed <speed>");
             player.sendMessage(usage);
             return true;
         }
@@ -34,20 +34,20 @@ public class FlySped implements CommandExecutor {
         float speed = Float.parseFloat(speedArg);
 
         if (speed < 0 || speed > 10) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
             player.sendMessage(warn +ColorUtils.colorize("&7Speed must be between 0 and 1."));
             return false;
         }
 
         if (target.isFlying()) {
             target.setFlySpeed(speed);
-            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7");
 
-            player.sendMessage(success +ColorUtils.colorize("&7Fly speed for " + player.getName() + " set to " + speed));
-            target.sendMessage(success +ColorUtils.colorize("&7Your fly speed has been set to " + speed + " by " + player.getName()));
+            player.sendMessage(success + ColorUtils.colorize("Fly speed for " + player.getName() + " set to " + speed));
+            target.sendMessage(success + ColorUtils.colorize("Your fly speed has been set to " + speed + " by " + player.getName()));
         } else {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- ");
-            player.sendMessage(warn +ColorUtils.colorize("&7" +player.getName() + " must be flying to set fly speed."));
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+            player.sendMessage(warn +ColorUtils.colorize("&cplayer " +player.getName() + " must be flying to set fly speed."));
         }
 
         return true;

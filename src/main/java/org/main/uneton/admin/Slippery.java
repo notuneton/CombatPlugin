@@ -40,15 +40,15 @@ public class Slippery implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ &7/slippery <player>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7/slippery <player>");
             player.sendMessage(usage);
             return true;
         }
 
         Player target = Bukkit.getPlayerExact(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
-            player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+            player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
             return true;
         }
 
@@ -56,11 +56,11 @@ public class Slippery implements CommandExecutor {
         if (playerTasks.containsKey(targetUUID)) {
             playerTasks.get(targetUUID).cancel();
             playerTasks.remove(targetUUID);
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
             player.sendMessage(warn + ChatColor.GRAY + "Stopped dropping items from " + ChatColor.DARK_AQUA + target.getName() + "'s" + ChatColor.GRAY + " inventory.");
         } else {
             if (target.getInventory().isEmpty()) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
+                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
                 player.sendMessage(warn + ColorUtils.colorize("&7Target player has no items to drop."));
                 return true;
             }
@@ -78,13 +78,13 @@ public class Slippery implements CommandExecutor {
                     if (!hasItemsToDrop) {
                         this.cancel();
                         playerTasks.remove(targetUUID);
-                        String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
+                        String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
                         player.sendMessage(warn + ChatColor.GRAY + "Stopped dropping items from " + ChatColor.DARK_AQUA + target.getName() + "'s" + ChatColor.GRAY + " inventory as it's now empty.");
                     }
                 }
-            }.runTaskTimer(plugin, 0L, 60L); // Schedule the task every 60 ticks (3 seconds)
+            }.runTaskTimer(plugin, 0L, 60L);
             playerTasks.put(targetUUID, task);
-            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &x&2&E&2&E&2&E&l+ &7");
+            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+ &7");
             player.sendMessage(success + "Started dropping items from " + target.getName() + "'s inventory every 3 seconds.");
         }
         return true;

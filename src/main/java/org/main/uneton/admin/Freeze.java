@@ -29,15 +29,15 @@ public class Freeze implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ &7/freeze <player>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7/freeze <player>");
             player.sendMessage(usage);
             return true;
         }
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
-            player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+            player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
             return true;
         }
 

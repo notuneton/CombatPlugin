@@ -20,7 +20,7 @@ public class Cure implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.GREEN + "You healed yourself.");
+            player.sendMessage(ColorUtils.colorize("&aYou healed yourself."));
             player.setHealth(20.0);
             return true;
         }
@@ -28,13 +28,13 @@ public class Cure implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l+ ");
-                player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
+                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+                player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
                 return true;
             }
 
             target.setHealth(20.0);
-            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
+            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+");
             target.sendMessage(success + ColorUtils.colorize("&7You have been healed by " + "&6" + player.getName() + "&7."));
             player.sendMessage(success + ColorUtils.colorize("&7You have healed " + "&6" + target.getName() + "&7."));
             return true;

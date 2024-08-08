@@ -43,6 +43,11 @@ public class Trash implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
             return true;
         }
+        if (args.length == 1) {
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/trash ");
+            player.sendMessage(usage);
+            return true;
+        }
 
         trashcan = Bukkit.createInventory(player, 9*5, guimenu);
         createAndAddFiller();
