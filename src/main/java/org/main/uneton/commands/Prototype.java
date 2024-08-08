@@ -29,8 +29,10 @@ public class Prototype implements CommandExecutor {
             String success = ColorUtils.colorize("&3>&b> &8+ &7");
             player.sendMessage(success+ ColorUtils.colorize("&3>&b> &8+ &7Moved to &fspawn&7."));
             player.teleport(spawnLoc);
+        } else {
+            player.sendMessage("");
         }
 
-        return true;
+        return false;
     }
 }

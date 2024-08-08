@@ -41,7 +41,7 @@ public class Launch implements CommandExecutor {
         velocity.setY(6);
         player.setVelocity(velocity);
         String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &x&2&E&2&E&2&E&l+ &7");
-        target.sendMessage(success + ColorUtils.colorize("You've launched by "+ "&6"+player.getName() +"&a"+"!"));
+        target.sendMessage(success + ColorUtils.colorize("You've launched by "+ "&a"+player.getName() + "&7!"));
         return true;
     }
 }

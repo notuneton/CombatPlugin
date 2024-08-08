@@ -54,9 +54,9 @@ public class ScoreboardUtils {
         setScore(objective, currentTime, 13);
 
         if (!player.hasPermission("op")) {
-            setScore(objective, "&fRank &7Default", 12);
+            setScore(objective, "&f  Rank &7Default", 11);
         } else if (player.hasPermission("op")) {
-            setScore(objective, "&fRank &cADMIN", 12);
+            setScore(objective, "&f  Rank &cADMIN", 11);
         }
 
         setScore(objective, "&a ", 11);

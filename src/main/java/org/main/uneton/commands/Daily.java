@@ -40,7 +40,8 @@ public class Daily implements CommandExecutor {
         if (isOnCooldown(playerUUID, 86400)) {
             long timeLeft = getTimeLeft(playerUUID, 86400);
             String formattedTimeLeft = formatTime(timeLeft);
-            player.sendMessage(ColorUtils.colorize("&cYou must wait " + formattedTimeLeft + "&c before using this command again."));
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
+            player.sendMessage(warn +ColorUtils.colorize("&cYou must wait " + formattedTimeLeft + "&c before using this command again."));
         } else {
             updateCooldown(playerUUID);
             ItemStack raffledItem = rewardItem();

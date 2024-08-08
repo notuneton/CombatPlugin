@@ -27,17 +27,17 @@ public class Repair implements CommandExecutor {
 
         ItemStack heldRepair = player.getInventory().getItemInMainHand();
         if (heldRepair.getType() == Material.AIR) {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
             player.sendMessage(warn + ColorUtils.colorize("&7You are not holding an item to repair!"));
             return true;
         }
         if (heldRepair.getDurability() == 0) {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
             player.sendMessage(warn + ColorUtils.colorize("&7This item is already maxed!"));
             return true;
         }
         heldRepair.setDurability((short) 0);
-        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l- &7");
+        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l+ &7");
         player.sendMessage(success + ColorUtils.colorize("&7Your item has been repaired."));
         return true;
     }

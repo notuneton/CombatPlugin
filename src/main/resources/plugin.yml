@@ -89,3 +89,6 @@ commands:
   msg:
     description: Send a whisper to the player.
     usage: /msg <player> <message>
+  time:
+    description: Sets the time
+    usage: /time

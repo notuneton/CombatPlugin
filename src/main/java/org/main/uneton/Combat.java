@@ -19,6 +19,7 @@ import org.main.uneton.admin.*;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
 import org.main.uneton.comvanilla.Msg;
+import org.main.uneton.comvanilla.Time;
 import org.main.uneton.comvanilla.Tp;
 import org.main.uneton.events.FreezeListener;
 import org.main.uneton.admin.Gm;
@@ -57,6 +58,7 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
+        createElytraRecipe();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -107,9 +109,11 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(new Sudo());
         getCommand("trash").setExecutor(new Trash());
 
+
         // vanilla
         getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
+        getCommand("time").setExecutor(new Time());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
@@ -125,6 +129,32 @@ public class Combat extends JavaPlugin implements Listener {
         coarseDirtRecipe.shape("DD", "DD");
         coarseDirtRecipe.setIngredient('D', Material.DIRT);
         Bukkit.addRecipe(coarseDirtRecipe);
+    }
+
+    private void createElytraRecipe() {
+        // Create the Elytra item with custom name and unbreakable attribute
+        ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
+        ItemMeta elytraMeta = elytra.getItemMeta();
+
+        if (elytraMeta != null) {
+            elytraMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
+            elytraMeta.setUnbreakable(true);  // No need to use a durability tag
+            elytra.setItemMeta(elytraMeta);
+        }
+
+        // Create the recipe
+        NamespacedKey key = new NamespacedKey(instance, "elytra_recipe");
+        ShapedRecipe elytraRecipe = new ShapedRecipe(key, elytra);
+
+        // Define the shape and ingredients of the recipe
+        elytraRecipe.shape("FSF", "PDP", "P P");
+        elytraRecipe.setIngredient('F', Material.FEATHER);
+        elytraRecipe.setIngredient('S', Material.STRING);
+        elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
+        elytraRecipe.setIngredient('D', Material.DRAGON_BREATH);
+
+        // Add the recipe to the server
+        Bukkit.addRecipe(elytraRecipe);
     }
 
     @EventHandler
