@@ -10,7 +10,7 @@ public class Tab {
         for (Player player : Bukkit.getOnlinePlayers()) {
             int ping = player.getPing();
             double tps = getServerTPS();
-            String footercolor = "\n &7Your ping&8: " + "&3" + ping + "ms &8| &7TPS&8: &3" + String.format("%.2f", tps) + "\n";;
+            String footercolor = "\n &7PING&8: " + "&3" + ping + "ms &8| &7TPS&8: &3" + String.format("%.2f", tps) + "\n";;
 
             String header = headercolor.replace("&D", "&d").replace("&A", "&a").replace("&B", "&b")
                     .replace("&F", "&f").replace("&Q", "&q").replace("&S", "&s");

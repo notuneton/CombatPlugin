@@ -4,6 +4,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +21,7 @@ import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
 import org.main.uneton.comvanilla.Msg;
 import org.main.uneton.comvanilla.Time;
+import org.main.uneton.comvanilla.TimeTabs;
 import org.main.uneton.comvanilla.Tp;
 import org.main.uneton.events.FreezeListener;
 import org.main.uneton.admin.Gm;
@@ -98,7 +100,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("daily").setExecutor(new Daily());
         getCommand("enderchest").setExecutor(new Ec());
         getCommand("guide").setExecutor(new Guide());
-        getCommand("guide").setTabCompleter(new TabComplete());
+        getCommand("guide").setTabCompleter(new GuideTabs());
         getCommand("ping").setExecutor(new Ping());
         getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("prototype").setExecutor(new Prototype(this));
@@ -114,6 +116,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
         getCommand("time").setExecutor(new Time());
+        getCommand("time").setTabCompleter(new TimeTabs());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);

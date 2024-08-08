@@ -32,7 +32,7 @@ public class Vanish implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.vanish.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run " + command.getName() + ".");
+            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
             return true;
         }
 

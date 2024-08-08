@@ -90,5 +90,5 @@ commands:
     description: Send a whisper to the player.
     usage: /msg <player> <message>
   time:
-    description: Sets the time
-    usage: /time
+    description: Sets the time to day or night.
+    usage: /time <day|night>

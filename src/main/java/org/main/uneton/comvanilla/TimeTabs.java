@@ -1,4 +1,4 @@
-package org.main.uneton.commands;
+package org.main.uneton.comvanilla;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -8,9 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TabComplete implements TabCompleter {
-
-    String[] collections = {"komennot", "oikeudet", "admin"};
+public class TimeTabs implements TabCompleter {
+    String[] collections = {"day", "night"};
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

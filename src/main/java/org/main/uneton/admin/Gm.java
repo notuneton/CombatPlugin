@@ -27,7 +27,7 @@ public class Gm implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.gm.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run " + command.getName() + ".");
+            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
             return true;
         }
 
