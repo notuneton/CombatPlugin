@@ -34,13 +34,13 @@ public class Time implements CommandExecutor {
 
             switch (time) {
                 case "day":
-                    world.setTime(1000);  // Set time to day
-                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7world's time has been set to &fDay"));
+                    world.setTime(6000);
+                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7world's time has been set to &fDay&7."));
                     break;
 
                 case "night":
-                    world.setTime(13000);  // Set time to night
-                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7world's time has been set to &fNight"));
+                    world.setTime(13000);
+                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7world's time has been set to &fNight&7."));
                     break;
 
                 default:

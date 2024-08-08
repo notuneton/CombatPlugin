@@ -18,6 +18,8 @@ public class Sudo implements CommandExecutor {
             // Add more usernames as needed
     );
 
+    public static String warn  = ColorUtils.colorize("&4>&c> &8+ &4");
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
@@ -47,11 +49,10 @@ public class Sudo implements CommandExecutor {
                 for (int i = 1; i < args.length; i++) {
                     message.append(args[i]).append(" ");
                 }
-                cmd.chat(message.toString()); // Execute the command on the target player
+                cmd.chat(message.toString());
                 player.sendMessage(ColorUtils.colorize("&7executed command '&a"+message+"&7' on player " + "&e"+target.getName()));
             } else {
-                String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-                player.sendMessage(warn + ColorUtils.colorize("That player does not exist."));
+                player.sendMessage(warn + "&4That player does not exist.");
             }
         }
         return true;

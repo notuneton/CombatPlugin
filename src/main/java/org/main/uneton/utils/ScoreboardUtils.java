@@ -51,13 +51,7 @@ public class ScoreboardUtils {
         // String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
         // setScore(objective, currentTime, 12);
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 13);
-
-        if (!player.hasPermission("op")) {
-            setScore(objective, "&f  Rank &7Default", 11);
-        } else if (player.hasPermission("op")) {
-            setScore(objective, "&f  Rank &cADMIN", 11);
-        }
+        setScore(objective, currentTime, 12);
 
         setScore(objective, "&a ", 11);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
