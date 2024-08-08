@@ -41,13 +41,15 @@ public class ScoreboardUtils {
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 
         if (objective == null) {
-            String title = ColorUtils.colorize("  &x&4&D&9&8&F&B[&x&6&6&A&6&F&B[ &x&F&F&F&F&F&F&lQ&x&F&F&F&F&F&F&lu&x&F&F&F&F&F&F&lo&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&ll&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&le&x&F&F&F&F&F&F&lt&x&F&F&F&F&F&F&l &x&4&D&9&8&F&B]&x&6&6&A&6&F&B]  ");
+            String title = ColorUtils.colorize("  &e&lPROTOTYPE  ");
             objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
         clearExistingScores(scoreboard);
 
-        int ping = player.getPing();
+        // int ping = player.getPing();
+        // String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
+        // setScore(objective, currentTime, 12);
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
         setScore(objective, currentTime, 13);
 
@@ -74,7 +76,7 @@ public class ScoreboardUtils {
         setScore(objective, playtimeString, 9);
 
         int playerSelfDeaths = selfDeaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &fSelf Deaths &4" + playerSelfDeaths, 8);
+        setScore(objective, "  &fSelf Deaths &a" + playerSelfDeaths, 8);
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
         if (playerDeaths > 0) {
