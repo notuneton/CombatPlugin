@@ -28,9 +28,9 @@ commands:
   launch:
     description: Throws the player high into the air
     usage: /launch <player>
-  givestick:
-    description: Gives the player a magic toy Stick
-    usage: /givestick <player>
+  magictrick:
+    description: a cool magictrick thats worth it :)
+    usage: /magictrick <player>
   slippery:
     description: Drops Items from the player.
     usage: /slippery <player>

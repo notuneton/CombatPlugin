@@ -16,7 +16,7 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.List;
 
-public class GiveMagicStick implements CommandExecutor {
+public class Magictrick implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

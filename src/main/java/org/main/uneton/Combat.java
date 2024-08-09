@@ -4,7 +4,6 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -86,7 +85,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("cure").setExecutor(new Cure());
         getCommand("invsee").setExecutor(new Invsee());
         getCommand("launch").setExecutor(new Launch());
-        getCommand("givestick").setExecutor(new GiveMagicStick());
+        getCommand("magictrick").setExecutor(new Magictrick());
         getCommand("slippery").setExecutor(new Slippery(this));
         getCommand("vanish").setExecutor(new Vanish(this));
 

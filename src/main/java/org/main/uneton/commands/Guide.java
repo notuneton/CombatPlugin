@@ -57,6 +57,7 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/cage <player> | Create a cube around the player that the player cannot break."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/crash <player> | Crashes the specified player's game"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/freeze <player> | Cancels the player's movement."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/magictrick <player> | a cool magictrick thats worth it :)"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/gm <player> | Makes the player invulnerable to all faults."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/heal <player> | Heals the player's hearts."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/invsee <player> | See the inventory of other players."));
@@ -72,7 +73,6 @@ public class Guide implements CommandExecutor {
     private void sendBasicCommands(Player player) {
         player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawnpoint."));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/bugreport <description> | Report a bug. reporting false bugs will be punished!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/daily | Command that canbe used daily for a reward!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/enderchest | Opens your personal Enderchest."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/guide <text> | Show this list"));
