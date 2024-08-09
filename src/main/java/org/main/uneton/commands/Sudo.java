@@ -18,7 +18,8 @@ public class Sudo implements CommandExecutor {
             // Add more usernames as needed
     );
 
-    public static String warn  = ColorUtils.colorize("&4>&c> &8+ &4");
+    public static String warn = ColorUtils.colorize("&4>&c> &8+ &4");
+    public static String success = ColorUtils.colorize("&2>&a> &8+ ");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -36,8 +37,8 @@ public class Sudo implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l+ &7");
-            player.sendMessage(warn + ColorUtils.colorize("That player does not exist."));
+            String warn = ColorUtils.colorize("&4>&c> &8+ ");
+            player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
             return true;
         }
 
@@ -50,7 +51,8 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString());
-                player.sendMessage(ColorUtils.colorize("&7executed command '&a"+message+"&7' on player " + "&e"+target.getName()));
+
+                player.sendMessage(success + ColorUtils.colorize("&7executed command '&a"+message+"&7' on player " + "&e"+target.getName()));
             } else {
                 player.sendMessage(warn + "&4That player does not exist.");
             }
