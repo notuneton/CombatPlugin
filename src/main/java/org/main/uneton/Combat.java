@@ -68,10 +68,10 @@ public class Combat extends JavaPlugin implements Listener {
                     UUID uuid = user.getUniqueId();
                     int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                     playTimes.put(uuid, currentPlayTime + 1);
-                    instance.getConfig().set("seconds." + uuid, playTimes.get(uuid));
+                    instance.getConfig().set("minutes." + uuid, playTimes.get(uuid));
                 }
             }
-        }.runTaskTimer(this, 0L, 20L);
+        }.runTaskTimer(this, 0L, 120L);
 
 
         getConfig().options().copyDefaults();

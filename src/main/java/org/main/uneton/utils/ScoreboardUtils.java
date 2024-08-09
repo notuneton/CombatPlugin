@@ -64,9 +64,9 @@ public class ScoreboardUtils {
 
         int hours = playtimeSeconds / 3600;
         int minutes = (playtimeSeconds % 3600) / 60;
-        int seconds = playtimeSeconds % 60;
+        // int seconds = playtimeSeconds % 60;
 
-        String playtimeString = formatPlaytime(hours, minutes, seconds);
+        String playtimeString = formatPlaytime(hours, minutes);
         setScore(objective, playtimeString, 9);
 
         int playerSelfDeaths = selfDeaths.getOrDefault(uuid, 0);
@@ -94,16 +94,12 @@ public class ScoreboardUtils {
         selfDeaths.put(playeruuid, selfDeaths.getOrDefault(playeruuid, 0) + 1);
     }
 
-    private static String formatPlaytime(int hours, int minutes, int seconds) {
-        if (seconds >= 60) {
-            minutes += seconds / 60;
-            seconds %= 60;
-        }
+    private static String formatPlaytime(int hours, int minutes) {
         if (minutes >= 60) {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &fPlaytime &e%dh %dm %ds", hours, minutes, seconds);
+        return String.format("  &fPlaytime &e%dh %dm", hours, minutes);
     }
 
     private static void clearExistingScores(Scoreboard scoreboard) {
