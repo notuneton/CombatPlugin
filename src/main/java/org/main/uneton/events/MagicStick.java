@@ -25,6 +25,7 @@ public class MagicStick implements Listener {
     private static final Set<Block> explosionLocs = new HashSet<>();
 
     private final double trailLength = 100; // Hiukkaspolun pituus suhde
+    public static final int explosionPower = 8; // räjähdyksen voima
     private final double spacing = 1.0; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin
     private final double lineDistance = 0.4; // Ylemmän ja alemman hiukkasviivan välinen etäisyys
     private final float particleSize = 0.5f; // Hiukkasten koko
@@ -105,7 +106,7 @@ public class MagicStick implements Listener {
     public static void explode(Location location) {
         World w = location.getWorld();
         explosionLocs.add(location.getBlock());
-        w.createExplosion(location, 7, false, true);
+        w.createExplosion(location, explosionPower, false, true);
     }
 
     @EventHandler

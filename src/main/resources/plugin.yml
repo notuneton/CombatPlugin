@@ -13,9 +13,6 @@ commands:
   crash:
     description: Spawns a white ball around you.
     usage: /crash <player>
-  flyspeed:
-    description: Makes player flyspeed faster.
-    usage: /flyspeed <number>
   freeze:
     description: Cancels the player's movement.
     usage: /freeze <player>

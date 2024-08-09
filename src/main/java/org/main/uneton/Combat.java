@@ -81,7 +81,6 @@ public class Combat extends JavaPlugin implements Listener {
         // admin
         getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
-        getCommand("flyspeed").setExecutor(new FlySped());
         getCommand("freeze").setExecutor(new Freeze());
         getCommand("gm").setExecutor(new Gm());
         getCommand("cure").setExecutor(new Cure());
