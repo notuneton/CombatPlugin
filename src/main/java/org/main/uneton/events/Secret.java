@@ -33,7 +33,6 @@ public class Secret implements Listener {
                     player.getInventory().addItem(held_item);
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
-
         }
     }
 }
