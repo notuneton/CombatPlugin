@@ -48,26 +48,26 @@ public class ScoreboardUtils {
         }
         clearExistingScores(scoreboard);
 
-        // int ping = player.getPing();
-        // String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime() + " &7(" + (String.format("&3"+ping+"ms")+"&7)"));
-        // setScore(objective, currentTime, 12);
         String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 12);
+        setScore(objective, currentTime, 13);
 
-        setScore(objective, "&a ", 11);
+        setScore(objective, "&a ", 12);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("  &fPlayers &a" + totalPlayers);
-        setScore(objective, online, 10);
+        setScore(objective, online, 11);
+
+        int ping = player.getPing();
+        setScore(objective, "  &fPing " +String.format("&3"+ping+"ms"), 10);
 
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
 
         int hours = playtimeSeconds / 3600;
         int minutes = (playtimeSeconds % 3600) / 60;
-        // int seconds = playtimeSeconds % 60;
+        int seconds = playtimeSeconds % 60;
 
-        String playtimeString = formatPlaytime(hours, minutes);
+        String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 9);
 
         int playerSelfDeaths = selfDeaths.getOrDefault(uuid, 0);
@@ -93,12 +93,16 @@ public class ScoreboardUtils {
         selfDeaths.put(playeruuid, selfDeaths.getOrDefault(playeruuid, 0) + 1);
     }
 
-    private static String formatPlaytime(int hours, int minutes) {
+    private static String formatPlaytime(int hours, int minutes, int seconds) {
+        if (seconds >= 60) {
+            minutes += seconds / 60;
+            seconds %= 60;
+        }
         if (minutes >= 60) {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &fPlaytime &e%dh %dm", hours, minutes);
+        return String.format("  &fPlaytime &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     private static void clearExistingScores(Scoreboard scoreboard) {

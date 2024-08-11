@@ -67,10 +67,10 @@ public class Combat extends JavaPlugin implements Listener {
                     UUID uuid = user.getUniqueId();
                     int currentPlayTime = playTimes.getOrDefault(uuid, 0);
                     playTimes.put(uuid, currentPlayTime + 1);
-                    instance.getConfig().set("minutes." + uuid, playTimes.get(uuid));
+                    instance.getConfig().set("second." + uuid, playTimes.get(uuid));
                 }
             }
-        }.runTaskTimer(this, 0L, 120L);
+        }.runTaskTimer(this, 0L, 20L);
 
 
         getConfig().options().copyDefaults();
@@ -100,7 +100,6 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("guide").setExecutor(new Guide());
         getCommand("guide").setTabCompleter(new GuideTabs());
         getCommand("ping").setExecutor(new Ping());
-        getCommand("playtime").setExecutor(new Playtime(this));
         getCommand("prototype").setExecutor(new Prototype(this));
         getCommand("puu").setExecutor(new Puu());
         getCommand("repair").setExecutor(new Repair());

@@ -57,9 +57,6 @@ commands:
   ping:
     description: Check player ping.
     usage: /ping <player>
-  playtime:
-    description: Total playtime of a specified player in the game.
-    usage: /playtime <player>
   prototype:
     usage: /prototype
   puu:
