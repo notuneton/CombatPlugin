@@ -102,7 +102,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onChatEvent(AsyncPlayerChatEvent event) {
+    public void onChatEmojiEvent(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
         if (message.contains(":123:")) {
