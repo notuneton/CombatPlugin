@@ -36,7 +36,7 @@ public class CombatLog implements Listener {
                     player.sendMessage(ColorUtils.colorize(warn));
                 }
                 if (combat_tagged.containsKey(player)) {
-                    player.sendActionBar(ColorUtils.colorize("&7Combat: "+"&3"+ (endTime - System.currentTimeMillis()) / 1000));
+                    player.sendActionBar(ColorUtils.colorize("&7Combat: &3"+ (endTime - System.currentTimeMillis()) / 1000));
                 }
             });
             toRemove.forEach(this::endCombat);

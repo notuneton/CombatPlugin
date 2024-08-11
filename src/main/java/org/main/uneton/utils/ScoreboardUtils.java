@@ -58,7 +58,7 @@ public class ScoreboardUtils {
         setScore(objective, online, 11);
 
         int ping = player.getPing();
-        setScore(objective, "  &fPing " +String.format("&3"+ping+"ms"), 10);
+        setScore(objective, "  &fPing " +String.format("&d"+ping+"ms"), 10);
 
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
@@ -72,7 +72,7 @@ public class ScoreboardUtils {
 
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &fDeaths &6" + playerDeaths, 7);
+        setScore(objective, "  &fDeaths &a" + playerDeaths, 7);
         setScore(objective, "  &fKills &a" + playerKills, 6);
 
         setScore(objective, "&8 ", 5);
