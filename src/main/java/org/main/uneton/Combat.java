@@ -33,6 +33,7 @@ import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.commands.Trash;
 import org.main.uneton.events.MagicStick;
+import org.main.uneton.utils.AfkCheckTask;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
@@ -43,6 +44,7 @@ public class Combat extends JavaPlugin implements Listener {
     private static Combat instance;
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
+    private final Map<UUID, Long> lastMovementTime = new HashMap<>();
     public static Combat getInstance() {
         return instance;
     }
@@ -72,6 +74,9 @@ public class Combat extends JavaPlugin implements Listener {
             }
         }.runTaskTimer(this, 0L, 20L);
 
+        getServer().getPluginManager().registerEvents(new PlayerAfkMove(this), this);
+        this.getCommand("afkreturn").setExecutor(new AfkReturn(this));
+        new AfkCheckTask().runTaskTimer(this, 0, 20 * 60);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -129,6 +134,19 @@ public class Combat extends JavaPlugin implements Listener {
         coarseDirtRecipe.shape("DD", "DD");
         coarseDirtRecipe.setIngredient('D', Material.DIRT);
         Bukkit.addRecipe(coarseDirtRecipe);
+    }
+
+    public void updatePlayerActivity(Player player) {
+        lastMovementTime.put(player.getUniqueId(), System.currentTimeMillis());
+    }
+    public long getLastActivityTime(Player player) {
+        return lastMovementTime.getOrDefault(player.getUniqueId(), 0L);
+    }
+
+    public void kickPlayerForAFK(Player player) {
+        String due = "You are AFK. Type /afkreturn to return from AFK.";
+        player.kickPlayer(due);
+        Bukkit.broadcastMessage("A " + player.getName() + " was kicked for inactivity.");
     }
 
     private void createElytraRecipe() {

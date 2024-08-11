@@ -54,13 +54,13 @@ public class Gm implements CommandExecutor {
                 cancelTask();
             } else {
                 gm_list.add(target);
-                sendGodPacked(player);
+                sendGodModePacked(player);
             }
         }
         return true;
     }
 
-    private void sendGodPacked(Player player) {
+    private void sendGodModePacked(Player player) {
         task = Bukkit.getScheduler().runTaskTimer(Combat.getInstance(), () -> {
             player.sendActionBar(ColorUtils.colorize("You are currently in &9Godmode."));
         }, 0, 1);
