@@ -149,6 +149,7 @@ public class Listeners implements Listener {
         }
     }
 
+    /*
     @EventHandler
     public void onPlayerSelfDeath(PlayerDeathEvent event) {
         Player diedPlayer = event.getPlayer();
@@ -158,6 +159,7 @@ public class Listeners implements Listener {
             ScoreboardUtils.updateScoreboard(diedPlayer);
         }
     }
+     */
 
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
