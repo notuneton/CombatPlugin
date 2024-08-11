@@ -7,7 +7,7 @@ import org.main.uneton.Combat;
 
 public class AfkCheckTask extends BukkitRunnable {
 
-    private static final int AFK_TIME_TICKS = 20* 60 * 2;
+    private static final int AFK_TIME_TICKS = 1200;
 
     @Override
     public void run() {

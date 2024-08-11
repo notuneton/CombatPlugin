@@ -46,7 +46,6 @@ public class Combat extends JavaPlugin implements Listener {
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final Map<UUID, Long> lastMovementTime = new HashMap<>();
-    private static final int AFK_TIME_TICKS = 1200;
     public static Combat getInstance() {
         return instance;
     }
@@ -144,24 +143,9 @@ public class Combat extends JavaPlugin implements Listener {
         return lastMovementTime.getOrDefault(player.getUniqueId(), 0L);
     }
 
-    private class AFKCheckTask extends BukkitRunnable {
-        @Override
-        public void run() {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                long lastActivity = getLastActivityTime(player);
-                long currentTime = System.currentTimeMillis();
-                long timeSinceLastActivity = currentTime - lastActivity;
-
-                if (timeSinceLastActivity >= AFK_TIME_TICKS * 50) {
-                    kickPlayerForAFK(player);
-                }
-            }
-        }
-    }
-
     public void kickPlayerForAFK(Player player) {
         player.kickPlayer("You were afk for too long, Relog to continue.");
-        Bukkit.broadcastMessage(ColorUtils.colorize("&c"+player.getName() + " was kicked for inactivity."));
+        Bukkit.broadcastMessage(player.getName() + " was kicked for inactivity.");
     }
 
     private void createElytraRecipe() {
