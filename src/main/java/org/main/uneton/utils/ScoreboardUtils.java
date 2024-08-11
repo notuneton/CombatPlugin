@@ -39,9 +39,10 @@ public class ScoreboardUtils {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
+        String color = "  &x&5&2&A&5&F&B&lS&x&5&C&9&7&F&C&lL&x&6&6&8&9&F&D&lE&x&6&F&7&A&F&D&lE&x&7&9&6&C&F&E&lP&x&8&3&5&E&F&F&lL&x&8&7&5&4&F&D&lE&x&8&B&4&9&F&B&lS&x&8&E&3&F&F&A&l.&x&9&2&3&4&F&8&lI&x&9&6&2&A&F&6&lO  ";
 
         if (objective == null) {
-            String title = ColorUtils.colorize("  &e&lPROTOTYPE  ");
+            String title = ColorUtils.colorize(color);
             objective = scoreboard.registerNewObjective("scoreboard", "dummy", title);
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
