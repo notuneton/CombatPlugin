@@ -7,12 +7,17 @@ import org.main.uneton.Combat;
 
 public class AfkCheckTask extends BukkitRunnable {
 
+    private static final int AFK_TIME_TICKS = 20* 60 * 2;
+
     @Override
     public void run() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            long lastActivity = ((Combat) Bukkit.getPluginManager().getPlugin("Combat")).getLastActivityTime(player);
-            if (System.currentTimeMillis() - lastActivity > 5 * 60 * 1000) {
-                ((Combat) Bukkit.getPluginManager().getPlugin("Combat")).kickPlayerForAFK(player);
+            long lastActivity = ((Combat) Bukkit.getPluginManager().getPlugin("CombatV3")).getLastActivityTime(player);
+            long currentTime = System.currentTimeMillis();
+            long timeSinceLastActivity = currentTime - lastActivity;
+
+            if (timeSinceLastActivity >= AFK_TIME_TICKS * 50) { // Convert ticks back to milliseconds
+                ((Combat) Bukkit.getPluginManager().getPlugin("CombatV3")).kickPlayerForAFK(player);
             }
         }
     }

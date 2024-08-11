@@ -45,6 +45,7 @@ public class Combat extends JavaPlugin implements Listener {
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final Map<UUID, Long> lastMovementTime = new HashMap<>();
+    private static final int AFK_TIME_TICKS = 2 * 60 * 20; // 2 minutes in ticks
     public static Combat getInstance() {
         return instance;
     }
@@ -73,10 +74,6 @@ public class Combat extends JavaPlugin implements Listener {
                 }
             }
         }.runTaskTimer(this, 0L, 20L);
-
-        getServer().getPluginManager().registerEvents(new PlayerAfkMove(this), this);
-        this.getCommand("afkreturn").setExecutor(new AfkReturn(this));
-        new AfkCheckTask().runTaskTimer(this, 0, 20 * 60);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
@@ -129,6 +126,9 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MagicStick(), this);
 
+        getServer().getPluginManager().registerEvents(new PlayerAfkMove(this), this);
+        new AfkCheckTask().runTaskTimer(this, 0, 20);
+
         Bukkit.getPluginManager().registerEvents(this, this);
         ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
         coarseDirtRecipe.shape("DD", "DD");
@@ -139,14 +139,15 @@ public class Combat extends JavaPlugin implements Listener {
     public void updatePlayerActivity(Player player) {
         lastMovementTime.put(player.getUniqueId(), System.currentTimeMillis());
     }
+
+    // Get player's last activity time
     public long getLastActivityTime(Player player) {
         return lastMovementTime.getOrDefault(player.getUniqueId(), 0L);
     }
 
     public void kickPlayerForAFK(Player player) {
-        String due = "You are AFK. Type /afkreturn to return from AFK.";
-        player.kickPlayer(due);
-        Bukkit.broadcastMessage("A " + player.getName() + " was kicked for inactivity.");
+        player.kickPlayer("You were afk for too long, Relog to continue.");
+        Bukkit.broadcastMessage(player.getName() + " was kicked for inactivity.");
     }
 
     private void createElytraRecipe() {

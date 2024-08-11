@@ -15,7 +15,6 @@ public class ScoreboardUtils {
     private static Combat plugin;
     private static final HashMap<UUID, Integer> kills = new HashMap<>();
     private static final HashMap<UUID, Integer> deaths = new HashMap<>();
-    private static final HashMap<UUID, Integer> selfDeaths = new HashMap<>();
 
     public ScoreboardUtils(Combat plugin) {
         ScoreboardUtils.plugin = plugin;
