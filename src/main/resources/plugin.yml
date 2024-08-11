@@ -45,8 +45,6 @@ commands:
     description: Teleport to the spawnpoint.
     usage: /spawn
 
-  afkreturn:
-    usage: /afkreturn
   daily:
     description: Command that canbe used daily for a reward!
     usage: /daily

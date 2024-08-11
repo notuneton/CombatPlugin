@@ -7,12 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.main.uneton.utils.ColorUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -38,12 +33,12 @@ public class Time implements CommandExecutor {
             switch (time) {
                 case "day":
                     world.setTime(6000);
-                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7world's time has been set to &fDay&7."));
+                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7world's time has been set to &fDay&7."));
                     break;
 
                 case "night":
                     world.setTime(13000);
-                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7world's time has been set to &fNight&7."));
+                    player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7world's time has been set to &fNight&7."));
                     break;
 
                 default:

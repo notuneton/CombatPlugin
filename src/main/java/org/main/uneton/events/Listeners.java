@@ -149,18 +149,6 @@ public class Listeners implements Listener {
         }
     }
 
-    /*
-    @EventHandler
-    public void onPlayerSelfDeath(PlayerDeathEvent event) {
-        Player diedPlayer = event.getPlayer();
-        if (diedPlayer != null && diedPlayer instanceof Player) {
-            UUID attackerUUID = diedPlayer.getUniqueId();
-            ScoreboardUtils.addSelfDeath(attackerUUID);
-            ScoreboardUtils.updateScoreboard(diedPlayer);
-        }
-    }
-     */
-
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();

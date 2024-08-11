@@ -34,6 +34,7 @@ import org.main.uneton.events.*;
 import org.main.uneton.commands.Trash;
 import org.main.uneton.events.MagicStick;
 import org.main.uneton.utils.AfkCheckTask;
+import org.main.uneton.utils.ColorUtils;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
@@ -45,7 +46,7 @@ public class Combat extends JavaPlugin implements Listener {
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final Map<UUID, Long> lastMovementTime = new HashMap<>();
-    private static final int AFK_TIME_TICKS = 2 * 60 * 20; // 2 minutes in ticks
+    private static final int AFK_TIME_TICKS = 1200;
     public static Combat getInstance() {
         return instance;
     }
@@ -139,15 +140,28 @@ public class Combat extends JavaPlugin implements Listener {
     public void updatePlayerActivity(Player player) {
         lastMovementTime.put(player.getUniqueId(), System.currentTimeMillis());
     }
-
-    // Get player's last activity time
     public long getLastActivityTime(Player player) {
         return lastMovementTime.getOrDefault(player.getUniqueId(), 0L);
     }
 
+    private class AFKCheckTask extends BukkitRunnable {
+        @Override
+        public void run() {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                long lastActivity = getLastActivityTime(player);
+                long currentTime = System.currentTimeMillis();
+                long timeSinceLastActivity = currentTime - lastActivity;
+
+                if (timeSinceLastActivity >= AFK_TIME_TICKS * 50) {
+                    kickPlayerForAFK(player);
+                }
+            }
+        }
+    }
+
     public void kickPlayerForAFK(Player player) {
         player.kickPlayer("You were afk for too long, Relog to continue.");
-        Bukkit.broadcastMessage(player.getName() + " was kicked for inactivity.");
+        Bukkit.broadcastMessage(ColorUtils.colorize("&c"+player.getName() + " was kicked for inactivity."));
     }
 
     private void createElytraRecipe() {
