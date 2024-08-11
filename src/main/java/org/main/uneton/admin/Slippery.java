@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Slippery implements CommandExecutor {
 
     private final JavaPlugin plugin;
@@ -36,6 +38,7 @@ public class Slippery implements CommandExecutor {
 
         if (!player.hasPermission("combat.slippery.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

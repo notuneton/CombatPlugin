@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Time implements CommandExecutor {
 
     @Override
@@ -25,6 +27,7 @@ public class Time implements CommandExecutor {
 
         if (!player.hasPermission("combat.time.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

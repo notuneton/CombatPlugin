@@ -14,6 +14,8 @@ import org.main.uneton.utils.ColorUtils;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Vanish implements CommandExecutor {
 
     private static Combat plugin;
@@ -33,6 +35,7 @@ public class Vanish implements CommandExecutor {
 
         if (!player.hasPermission("combat.vanish.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

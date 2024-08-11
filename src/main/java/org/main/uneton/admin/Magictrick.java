@@ -16,6 +16,8 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.List;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Magictrick implements CommandExecutor {
 
     @Override
@@ -27,6 +29,7 @@ public class Magictrick implements CommandExecutor {
 
         if (!player.hasPermission("combat.givestick.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Cure implements CommandExecutor {
 
     @Override
@@ -16,6 +18,7 @@ public class Cure implements CommandExecutor {
         Player player = (Player) sender;
         if (!player.hasPermission("combat.heal.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

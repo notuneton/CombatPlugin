@@ -11,6 +11,8 @@ import org.main.uneton.utils.ColorUtils;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Sudo implements CommandExecutor {
 
     private final List<String> allowedPlayers = Arrays.asList(
@@ -26,6 +28,7 @@ public class Sudo implements CommandExecutor {
         Player player = (Player) sender;
         if (!allowedPlayers.contains(player.getName())) {
             player.sendMessage(ColorUtils.colorize("&8&l[i]") + ColorUtils.colorize(" &cThis command can only be executed as a specific person! Here is the list of players that can execute this command: "+ allowedPlayers));
+            playCancerSound(player);
             return true;
         }
 

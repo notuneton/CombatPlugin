@@ -14,6 +14,8 @@ import org.main.uneton.utils.ColorUtils;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Gm implements CommandExecutor {
 
     public static Set<Player> gm_list = new HashSet<>();
@@ -28,6 +30,7 @@ public class Gm implements CommandExecutor {
 
         if (!player.hasPermission("combat.gm.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

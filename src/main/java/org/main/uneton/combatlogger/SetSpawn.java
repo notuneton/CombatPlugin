@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class SetSpawn implements CommandExecutor {
 
     private final Combat plugin;
@@ -26,6 +28,7 @@ public class SetSpawn implements CommandExecutor {
 
         if (!player.hasPermission("combat.setspawn.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

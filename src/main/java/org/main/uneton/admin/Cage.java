@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Cage implements CommandExecutor {
 
     @Override
@@ -21,6 +23,7 @@ public class Cage implements CommandExecutor {
 
         if (!player.hasPermission("combat.cage.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 

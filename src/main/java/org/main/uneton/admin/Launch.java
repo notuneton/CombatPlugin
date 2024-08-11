@@ -10,6 +10,8 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
+
 public class Launch implements CommandExecutor {
 
     @Override
@@ -21,6 +23,7 @@ public class Launch implements CommandExecutor {
 
         if (!player.hasPermission("combat.launch.sv")) {
             player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            playCancerSound(player);
             return true;
         }
 
