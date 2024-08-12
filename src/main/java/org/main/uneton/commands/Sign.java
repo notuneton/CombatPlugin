@@ -7,7 +7,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.main.uneton.utils.ColorUtils;
 
 public class Sign implements CommandExecutor {
 
@@ -18,12 +17,7 @@ public class Sign implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/sign ");
-            player.sendMessage(usage);
-            return true;
-        }
-
+        player.sendMessage("A oak sign was spawned!");
         player.getWorld().getBlockAt(player.getLocation()).setType(Material.OAK_SIGN);
         return true;
     }

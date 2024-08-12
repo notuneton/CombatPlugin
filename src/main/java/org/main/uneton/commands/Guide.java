@@ -91,6 +91,7 @@ public class Guide implements CommandExecutor {
     private void sendPermissions(Player player) {
         player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"&b--------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.view.commands"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.bypass.afkkick"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.pl.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.cage.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.crash.sv"));

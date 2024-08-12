@@ -2,6 +2,7 @@ package org.main.uneton.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,14 +31,8 @@ public class Daily implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/daily ");
-            player.sendMessage(usage);
-            return true;
-        }
-
         UUID playerUUID = player.getUniqueId();
-        if (isOnCooldown(playerUUID, 86400)) {
+        if (isOnCooldown(playerUUID)) {
             long timeLeft = getTimeLeft(playerUUID, 86400);
             String formattedTimeLeft = formatTime(timeLeft);
             String warn = ColorUtils.colorize("&4>&c> &8+ &7");
@@ -47,17 +42,19 @@ public class Daily implements CommandExecutor {
             ItemStack raffledItem = rewardItem();
             player.getInventory().addItem(raffledItem);
             String success = ColorUtils.colorize("&2>&a> &8+ &a");
+
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 3.0f);
             player.sendMessage(success +ColorUtils.colorize("You have successfully claimed &3" + raffledItem.getType()+"&a!"));
         }
 
         return true;
     }
 
-    private boolean isOnCooldown(UUID playerUUID, int cooldownSeconds) {
+    private boolean isOnCooldown(UUID playerUUID) {
         if (cooldowns.containsKey(playerUUID)) {
             long lastUsed = cooldowns.get(playerUUID);
             long currentTime = System.currentTimeMillis();
-            long cooldownTime = cooldownSeconds * 1000L; // Convert to milliseconds
+            long cooldownTime = 86400 * 1000L; // Convert to milliseconds
 
             return (currentTime - lastUsed) < cooldownTime;
         }

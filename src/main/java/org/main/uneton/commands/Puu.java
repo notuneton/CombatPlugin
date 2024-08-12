@@ -19,12 +19,6 @@ public class Puu implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/puu ");
-            player.sendMessage(usage);
-            return true;
-        }
-
         Location location = player.getLocation();
         location.getWorld().generateTree(location, TreeType.BIG_TREE);
         return true;
