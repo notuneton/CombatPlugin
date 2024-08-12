@@ -1,16 +1,13 @@
 package org.main.uneton.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.Combat;
 
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MessageHolder implements Listener {
@@ -22,12 +19,9 @@ public class MessageHolder implements Listener {
     public void onChatSpam(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
-
-        // Check for repeated messages
         String previousMessage = lastMessage.put(player, message);
         if (message.equalsIgnoreCase(previousMessage)) {
             event.setCancelled(true);
-            sendWarnMessage(player, message);
             return;
         }
 
@@ -39,12 +33,6 @@ public class MessageHolder implements Listener {
                 antiSpam.remove(player);
             }, 20L); // 20 ticks = 1 second
         }
-    }
-
-    private void sendWarnMessage(Player player, String message) {
-        String blockedMessage = ChatColor.translateAlternateColorCodes('&',
-                ChatColor.GRAY + "" + ChatColor.ITALIC + player.getName() + " " + message);
-        player.sendMessage(blockedMessage);
     }
 }
 
