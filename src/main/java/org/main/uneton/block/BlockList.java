@@ -25,7 +25,7 @@ public class BlockList implements CommandExecutor {
         Set<String> blockSet = getBlockedPlayers(player.getName());
         if (args.length == 0) {
             if (blockSet.isEmpty()) {
-                player.sendMessage(ChatColor.YELLOW + "You don't have any ignored players.");
+                player.sendMessage(ChatColor.YELLOW + "You don't have any blocked players.");
             }
             return true;
         }
@@ -38,9 +38,9 @@ public class BlockList implements CommandExecutor {
         }
 
         if (blockSet.isEmpty()) {
-            player.sendMessage(ChatColor.YELLOW + "You don't have any ignored players.");
+            player.sendMessage(ChatColor.YELLOW + "You don't have any blocked players.");
         } else {
-            player.sendMessage(ChatColor.YELLOW + "You are Block:");
+            player.sendMessage(ChatColor.YELLOW + "You are Blocked:");
             for (String blocked : blockSet) {
                 player.sendMessage(ChatColor.YELLOW + "- " + blocked);
             }
