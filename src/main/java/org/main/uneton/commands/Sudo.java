@@ -40,8 +40,8 @@ public class Sudo implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ ");
-            player.sendMessage(warn + ColorUtils.colorize("&4That player does not exist."));
+            String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+            player.sendActionBar(warn + "That player does not exist.");
             return true;
         }
 

@@ -67,7 +67,7 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &f");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendMessage(warn + "'"+command+"' is not recognized as an internal or external command.");
             event.setCancelled(true);
         }
@@ -130,6 +130,18 @@ public class Listeners implements Listener {
                     dropped.remove();
                 }
             }, 200L);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
+        String permission = "op";
+        if (!event.getPlayer().hasPermission(permission)) {
+            String playerName = event.getPlayer().getName();
+            String message = event.getMessage();
+            String formattedMessage = ColorUtils.colorize("&7"+playerName + "> " + message);
+
+            event.setFormat(formattedMessage);
         }
     }
 

@@ -4,7 +4,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
-import org.bukkit.entity.Item;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,11 +16,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
+import org.main.uneton.block.BlockList;
+import org.main.uneton.block.BlockListener;
+import org.main.uneton.block.Blockplayer;
+import org.main.uneton.block.Unblock;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
 import org.main.uneton.comvanilla.Msg;
 import org.main.uneton.comvanilla.Time;
-import org.main.uneton.comvanilla.TimeTabs;
+import org.main.uneton.tabcomps.*;
 import org.main.uneton.comvanilla.Tp;
 import org.main.uneton.events.FreezeListener;
 import org.main.uneton.admin.Gm;
@@ -38,6 +42,8 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
+import static org.main.uneton.block.Blockplayer.blockedPlayers;
+import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.startUpdatingScoreboard;
 
 public class Combat extends JavaPlugin implements Listener {
@@ -46,6 +52,7 @@ public class Combat extends JavaPlugin implements Listener {
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final Map<UUID, Long> lastMovementTime = new HashMap<>();
+    private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
     public static Combat getInstance() {
         return instance;
     }
@@ -62,6 +69,7 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
+        loadBlockedPlayers();
         createElytraRecipe();
         new BukkitRunnable() {
             @Override
@@ -91,6 +99,11 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("slippery").setExecutor(new Slippery(this));
         getCommand("vanish").setExecutor(new Vanish(this));
 
+        getCommand("blocklist").setExecutor(new BlockList());
+        Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
+        getCommand("block").setExecutor(new Blockplayer());
+        getCommand("unblock").setExecutor(new Unblock());
+
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new CombatLog(this), this);
         getCommand("setspawn").setExecutor(new SetSpawn(this));
@@ -98,11 +111,9 @@ public class Combat extends JavaPlugin implements Listener {
 
         // commands
         getCommand("daily").setExecutor(new Daily());
-        getCommand("enderchest").setExecutor(new Ec());
+        getCommand("enderchest").setExecutor(new Enderchest());
         getCommand("guide").setExecutor(new Guide());
-        getCommand("guide").setTabCompleter(new GuideTabs());
         getCommand("ping").setExecutor(new Ping());
-        getCommand("prototype").setExecutor(new Prototype(this));
         getCommand("puu").setExecutor(new Puu());
         getCommand("repair").setExecutor(new Repair());
         getCommand("rules").setExecutor(new Rules());
@@ -110,12 +121,23 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sudo").setExecutor(new Sudo());
         getCommand("trash").setExecutor(new Trash());
 
+        // tabcompleters
+        getCommand("daily").setTabCompleter(new DailyTabs());
+        getCommand("enderchest").setTabCompleter(new EnderchestTabs());
+        getCommand("guide").setTabCompleter(new GuideTabs());
+        getCommand("puu").setTabCompleter(new PuuTabs());
+        getCommand("repair").setTabCompleter(new RepairTabs());
+        getCommand("rules").setTabCompleter(new RulesTabs());
+        getCommand("sign").setTabCompleter(new SignTabs());
+        getCommand("spawn").setTabCompleter(new SpawnTabs());
+        getCommand("time").setTabCompleter(new TimeTabs());
+        getCommand("trash").setTabCompleter(new TrashTabs());
+        getCommand("vanish").setTabCompleter(new VanishTabs());
 
         // vanilla
         getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
         getCommand("time").setExecutor(new Time());
-        getCommand("time").setTabCompleter(new TimeTabs());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
@@ -144,33 +166,31 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
     public void kickPlayerForAFK(Player player) {
-        player.kickPlayer("You were afk for too long, Relog to continue.");
-        Bukkit.broadcastMessage(player.getName() + " was kicked for inactivity.");
+        if (player.hasPermission("combat.bypass.afkkick")) {
+            return;
+        }
+        if (combat_tagged.containsKey(player)) {
+            return;
+        } else {
+            player.kickPlayer(ColorUtils.colorize("\n\n&6You were afk for too long, Relog to continue.\n\n"));
+            Bukkit.broadcastMessage(player.getName() + " was kicked for inactivity.");
+        }
     }
 
     private void createElytraRecipe() {
-        // Create the Elytra item with custom name and unbreakable attribute
         ItemStack elytra = new ItemStack(Material.ELYTRA, 1);
         ItemMeta elytraMeta = elytra.getItemMeta();
-
         if (elytraMeta != null) {
-            elytraMeta.setDisplayName(ChatColor.LIGHT_PURPLE + "Elytra");
-            elytraMeta.setUnbreakable(true);  // No need to use a durability tag
+            elytraMeta.setDisplayName(ColorUtils.colorize("&eElytra's"));
+            elytraMeta.setUnbreakable(true);
             elytra.setItemMeta(elytraMeta);
         }
-
-        // Create the recipe
         NamespacedKey key = new NamespacedKey(instance, "elytra_recipe");
         ShapedRecipe elytraRecipe = new ShapedRecipe(key, elytra);
-
-        // Define the shape and ingredients of the recipe
-        elytraRecipe.shape("FSF", "PDP", "P P");
+        elytraRecipe.shape("PDP", "P P", "F F");
         elytraRecipe.setIngredient('F', Material.FEATHER);
-        elytraRecipe.setIngredient('S', Material.STRING);
         elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
-        elytraRecipe.setIngredient('D', Material.DRAGON_BREATH);
-
-        // Add the recipe to the server
+        elytraRecipe.setIngredient('D', Material.DIAMOND);
         Bukkit.addRecipe(elytraRecipe);
     }
 
@@ -178,36 +198,31 @@ public class Combat extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-
-        // Load playtime for the player
         if (!playTimes.containsKey(uuid)) {
             int playtimeSeconds = getConfig().getInt("playtime." + uuid, 0);
             playTimes.put(uuid, playtimeSeconds);
         }
-
-        // Ensure the scoreboard updates for the player
         startUpdatingScoreboard(player, this);
     }
-
 
     private ItemStack compDirt() {
         ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
         ItemMeta compDirtMeta = compDirt.getItemMeta();
-        compDirtMeta.setDisplayName(ChatColor.YELLOW + "Compressed Dirt");
+        compDirtMeta.setDisplayName(ColorUtils.colorize("&eCompressed Dirt"));
         compDirt.setItemMeta(compDirtMeta);
         return compDirt;
     }
 
     @EventHandler
-    public void onBlockBroken(BlockBreakEvent event) {
+    public void onBlockBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
+        Location loc = block.getLocation();
+
         if (block.getType() == compDirt().getType()) {
             event.setDropItems(false);
-            Location loc = block.getLocation();
-            ItemStack dirt = new ItemStack(Material.DIRT, 9); // Create an ItemStack of 9 dirt blocks
-            Item dropped = loc.getWorld().dropItemNaturally(loc, dirt);
+            ItemStack dirt = new ItemStack(Material.DIRT, 9);
+            block.getWorld().dropItemNaturally(loc, dirt);
         }
-
     }
 
     public static boolean doesCommandExist(String commandName) {
@@ -219,9 +234,34 @@ public class Combat extends JavaPlugin implements Listener {
         return false;
     }
 
+    private void saveBlockedPlayers() {
+        FileConfiguration config = getConfig();
+        Map<String, List<String>> serializableMap = new HashMap<>();
+        for (Map.Entry<String, Set<String>> entry : blockedPlayers.entrySet()) {
+            serializableMap.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+        }
+        config.set("blockedPlayers", serializableMap);
+        saveConfig();
+    }
+
+    public static Map<String, Set<String>> getBlockedPlayers() {
+        return blockedPlayers;
+    }
+
+    private void loadBlockedPlayers() {
+        FileConfiguration config = getConfig();
+        Map<String, List<String>> serializableMap = (Map<String, List<String>>) config.get("blockedPlayers");
+        if (serializableMap != null) {
+            for (Map.Entry<String, List<String>> entry : serializableMap.entrySet()) {
+                blockedPlayers.put(entry.getKey(), new HashSet<>(entry.getValue()));
+            }
+        }
+    }
+
     @Override
     public void onDisable() {
-        // Save all playtimes to the configuration when the plugin is disabled
+        saveBlockedPlayers();
+
         for (UUID uuid : playTimes.keySet()) {
             getConfig().set("playtime." + uuid, playTimes.get(uuid));
         }

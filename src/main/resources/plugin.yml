@@ -38,6 +38,16 @@ commands:
     description: Toggles vanish mode.
     usage: /vanish
 
+  block:
+    description: Block a player.
+    usage: /block <help>
+  blocklist:
+    description: List blocked players.
+    usage: /blocklist
+  unblock:
+    description: Unblock a player.
+    usage: /unblock <player>
+
   setspawn:
     description: Sets the server spawn point!
     usage: /setspawn

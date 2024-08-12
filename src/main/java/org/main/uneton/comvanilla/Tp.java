@@ -35,8 +35,8 @@ public class Tp implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &8+ ");
-                player.sendMessage(warn + ColorUtils.colorize("&7That player does not exist."));
+                String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+                player.sendActionBar(warn + "That player does not exist.");
                 return true;
             }
             player.teleport(target);
