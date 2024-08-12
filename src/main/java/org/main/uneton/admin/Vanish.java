@@ -50,7 +50,7 @@ public class Vanish implements CommandExecutor {
                 p.showPlayer(plugin, player);
             }
             vanishedPlayers.remove(player);
-            Bukkit.broadcastMessage(ChatColor.DARK_GRAY + " [" + ChatColor.DARK_GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+            Bukkit.broadcastMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
             cancelTask();
         } else {
             for (Player p : Bukkit.getOnlinePlayers()) {

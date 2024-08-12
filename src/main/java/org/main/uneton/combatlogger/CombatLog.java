@@ -32,7 +32,7 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < System.currentTimeMillis()) {
                     toRemove.add(player);
-                    String warn = ColorUtils.colorize("&x&6&5&F&B&2&8Y&x&6&4&F&B&2&Co&x&6&4&F&B&3&1u &x&6&3&F&C&3&5a&x&6&3&F&C&3&9r&x&6&2&F&C&3&Ee &x&6&2&F&C&4&2n&x&6&1&F&C&4&6o &x&6&0&F&D&4&Bl&x&6&0&F&D&4&Fo&x&5&F&F&D&5&3n&x&5&F&F&D&5&8g&x&5&E&F&D&5&Ce&x&5&E&F&D&6&0r &x&5&D&F&E&6&5i&x&5&C&F&E&6&9n &x&5&C&F&E&6&Dc&x&5&B&F&E&7&2o&x&5&B&F&E&7&6m&x&5&A&F&F&7&Ab&x&5&A&F&F&7&Fa&x&5&9&F&F&8&3t");
+                    String warn = ColorUtils.colorize("&x&E&1&2&1&4&Ay&x&E&1&2&1&4&Ao&x&E&1&2&1&4&Au &x&E&1&2&1&4&Aa&x&E&1&2&1&4&Ar&x&E&1&2&1&4&Ae &x&E&1&2&1&4&An&x&E&1&2&1&4&Ao &x&E&1&2&1&4&Al&x&E&1&2&1&4&Ao&x&E&1&2&1&4&An&x&E&1&2&1&4&Ag&x&E&1&2&1&4&Ae&x&E&1&2&1&4&Ar &x&E&1&2&1&4&Ai&x&E&1&2&1&4&An &x&E&1&2&1&4&Ac&x&E&1&2&1&4&Ao&x&E&1&2&1&4&Am&x&E&1&2&1&4&Ab&x&E&1&2&1&4&Aa&x&E&1&2&1&4&At");
                     player.sendMessage(ColorUtils.colorize(warn));
                 }
                 if (combat_tagged.containsKey(player)) {
@@ -73,7 +73,7 @@ public class CombatLog implements Listener {
         Player player = event.getPlayer();
         if (combat_tagged.containsKey(player)) {
             event.setCancelled(true);
-            player.sendActionBar(ColorUtils.colorize("&cYou cannot use elytra while combat!"));
+            player.sendActionBar(ColorUtils.colorize("&x&E&1&2&1&4&AY&x&E&1&2&1&4&Ao&x&E&1&2&1&4&Au &x&E&1&2&1&4&Ac&x&E&1&2&1&4&Aa&x&E&1&2&1&4&An&x&E&1&2&1&4&An&x&E&1&2&1&4&Ao&x&E&1&2&1&4&At &x&E&1&2&1&4&Au&x&E&1&2&1&4&As&x&E&1&2&1&4&Ae &x&E&1&2&1&4&Ae&x&E&1&2&1&4&Al&x&E&1&2&1&4&Ay&x&E&1&2&1&4&At&x&E&1&2&1&4&Ar&x&E&1&2&1&4&Aa &x&E&1&2&1&4&Aw&x&E&1&2&1&4&Ah&x&E&1&2&1&4&Ai&x&E&1&2&1&4&Al&x&E&1&2&1&4&Ae &x&E&1&2&1&4&Ac&x&E&1&2&1&4&Ao&x&E&1&2&1&4&Am&x&E&1&2&1&4&Ab&x&E&1&2&1&4&Aa&x&E&1&2&1&4&At"));
         }
     }
 

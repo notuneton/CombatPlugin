@@ -57,8 +57,6 @@ commands:
   ping:
     description: Check player ping.
     usage: /ping <player>
-  prototype:
-    usage: /prototype
   puu:
     description: Spawns an oak tree at the player's location.
     usage: /puu

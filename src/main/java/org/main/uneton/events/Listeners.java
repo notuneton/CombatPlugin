@@ -52,62 +52,13 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        Action a = event.getAction();
-        Block b = event.getClickedBlock();
-        if (player.isSneaking() && (a == Action.RIGHT_CLICK_BLOCK) && b != null && isShulkerBox(b.getType())) {
-            event.setCancelled(true);
-
-            ShulkerBox shulkerBox = (ShulkerBox) b.getState();
-            Inventory shulkerInv = shulkerBox.getInventory();
-            player.openInventory(shulkerInv);
-        }
-    }
-
-    private boolean isShulkerBox(Material mat) {
-        switch (mat) {
-            case SHULKER_BOX:
-            case WHITE_SHULKER_BOX:
-            case ORANGE_SHULKER_BOX:
-            case MAGENTA_SHULKER_BOX:
-            case LIGHT_BLUE_SHULKER_BOX:
-            case YELLOW_SHULKER_BOX:
-            case LIME_SHULKER_BOX:
-            case PINK_SHULKER_BOX:
-            case GRAY_SHULKER_BOX:
-            case LIGHT_GRAY_SHULKER_BOX:
-            case CYAN_SHULKER_BOX:
-            case PURPLE_SHULKER_BOX:
-            case BLUE_SHULKER_BOX:
-            case BROWN_SHULKER_BOX:
-            case GREEN_SHULKER_BOX:
-            case RED_SHULKER_BOX:
-            case BLACK_SHULKER_BOX:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @EventHandler
     public void onPing(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
         if (ping >= 300) {
             String user = player.getName();
-            String kickMessage = ChatColor.GOLD + "You have been kicked out from the server for too high ping!";
+            String kickMessage = ColorUtils.colorize("&6You have been kicked out from the server for too high ping!");
             player.kickPlayer(kickMessage);
-        }
-    }
-
-    @EventHandler
-    public void onChatEmojiEvent(AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
-        String message = event.getMessage();
-        if (message.contains(":123:")) {
-            message = message.replace(":123:", ColorUtils.colorize("&a1&r&e2&r&c3"));
-            event.setMessage(message);
         }
     }
 
@@ -116,19 +67,8 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &f");
             player.sendMessage(warn + "'"+command+"' is not recognized as an internal or external command.");
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onCommandPreprocessPl(PlayerCommandPreprocessEvent event) {
-        String command = event.getMessage().split(" ")[0].substring(1);
-        Player player = event.getPlayer();
-        if (!player.hasPermission("bukkit.command.plugins")) {
-            String warn = ColorUtils.colorize("&4>&c> &x&2&E&2&E&2&E&l- &7");
-            player.sendMessage(warn + "'pl' is not recognized as an internal or external command.");
             event.setCancelled(true);
         }
     }
@@ -158,9 +98,9 @@ public class Listeners implements Listener {
         player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &f"+ server + "&7."));
 
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();
-        // e.setJoinMessage(now.format(formatter) + ChatColor.DARK_GRAY + " [" + ChatColor.GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
@@ -170,17 +110,9 @@ public class Listeners implements Listener {
         updateScoreboard(player);
 
         // String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();
-        // e.setQuitMessage(now.format(formatter) + ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
-    }
-
-    @EventHandler
-    public void onPlyaerDeath(PlayerDeathEvent e) {
-        if (e.getEntity().getKiller() != null) {
-            e.setKeepInventory(true);
-            e.getDrops().clear();
-        }
+        e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
@@ -218,6 +150,7 @@ public class Listeners implements Listener {
         if (e.getBlock().getType() == Material.POLISHED_DIORITE) {
             Random chance = new Random();
             if (Math.random() < 0.2) {
+                e.setDropItems(false);
                 int index = chance.nextInt(blocksList.length);
                 ItemStack dropped_item = blocksList[index];
                 block.getWorld().dropItemNaturally(loc, dropped_item);
