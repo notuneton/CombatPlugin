@@ -17,7 +17,7 @@ public class Cure implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
         if (!player.hasPermission("combat.heal.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
             playCancerSound(player);
             return true;
         }
@@ -31,7 +31,7 @@ public class Cure implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+                String warn = ColorUtils.colorize("&4>&c> &8+ &7");
                 player.sendActionBar(warn + "That player does not exist.");
                 return true;
             }

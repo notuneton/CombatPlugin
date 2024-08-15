@@ -21,7 +21,7 @@ public class Tp implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.tp.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
             playCancerSound(player);
             return true;
         }
@@ -35,8 +35,8 @@ public class Tp implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &8+ 7");
-                player.sendActionBar(warn + "That player does not exist.");
+                String warn = ColorUtils.colorize("&4>&c> &8+ &7");
+                player.sendMessage(warn + "That player does not exist.");
                 return true;
             }
             player.teleport(target);

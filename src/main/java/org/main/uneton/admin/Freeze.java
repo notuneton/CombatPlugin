@@ -26,7 +26,7 @@ public class Freeze implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.freeze.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
             playCancerSound(player);
             return true;
         }
@@ -39,7 +39,7 @@ public class Freeze implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendActionBar(warn + "That player does not exist.");
             return true;
         }

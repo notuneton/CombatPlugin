@@ -39,7 +39,7 @@ public class Guide implements CommandExecutor {
                         break;
                     } else {
                         player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
-                        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &7You don't have permission to view that"));
+                        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7You don't have permission to view that"));
                         player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
                         return true;
                     }
@@ -78,6 +78,11 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/guide <text> | Show this list"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/ping <player> | Check player ping."));
         //player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/playtime <player> | Total playtime of a specified player in the game."));
+
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/unblock <player> | Unblock a player."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/blocklist | List blocked players."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/block <help> | Block a player."));
+
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/puu | Spawns an oak tree at the player's location."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/repair | Repairs the durability of your armor."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/rules | Original Rules Of The Server."));
@@ -110,8 +115,9 @@ public class Guide implements CommandExecutor {
     }
 
     private void sendUsage(Player player) {
-        player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"&b--------------------"));
-        player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &x&2&E&2&E&2&E&l- &7/guide <komennot | oikeudet | admin>"));
+        player.sendMessage(ColorUtils.colorize("&b*----------------------------------------------------*"));
+        String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/guide <komennot, oikeudet, admin>");
+        player.sendMessage(usage);
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
     }
 }

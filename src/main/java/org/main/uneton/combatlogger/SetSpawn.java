@@ -27,7 +27,7 @@ public class SetSpawn implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.setspawn.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
             playCancerSound(player);
             return true;
         }
@@ -35,7 +35,7 @@ public class SetSpawn implements CommandExecutor {
         Location loc = player.getLocation();
         plugin.getConfig().set("spawn", loc);
         plugin.saveConfig();
-        String success = ColorUtils.colorize("&2>&a> &x&2&E&2&E&2&E&l+ &7");
+        String success = ColorUtils.colorize("&2>&a> &8+ &7");
         player.sendMessage(success + ColorUtils.colorize("&aSuccessfully set the spawn to : X " + loc.getBlockX() + ", Y: " + loc.getBlockY() + ", X: " + loc.getBlockZ()));
         return true;
 

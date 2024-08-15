@@ -23,23 +23,24 @@ public class Unblock implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "> /unblock <player>");
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/unblock <player> ");
+            player.sendMessage(usage);
             return true;
         }
 
         String targetName = args[0];
         Player target = Bukkit.getPlayerExact(targetName);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendActionBar(warn + "That player does not exist.");
             return true;
         }
 
         Set<String> blockSet = getBlockedPlayers(player.getName());
         if (blockSet.remove(targetName)) {
-            player.sendMessage(ChatColor.YELLOW + "Successfully unblock player " + targetName);
+            player.sendMessage(ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked " + targetName +"!"));
         } else {
-            player.sendMessage(ChatColor.RED + "Player " + targetName + " is not block");
+            player.sendMessage(ColorUtils.colorize("&cThis player isin't blocked!"));
         }
 
         return true;

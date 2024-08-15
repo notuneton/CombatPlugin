@@ -37,27 +37,30 @@ public class Blockplayer implements CommandExecutor {
                 break;
             case "add":
                 if (args.length < 2) {
-                    player.sendMessage(ChatColor.RED + "> /block add <player>");
+                    String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block add <player> ");
+                    player.sendMessage(usage);
                     return true;
                 }
                 blockPlayer(player, args[1]);
                 break;
             case "remove":
                 if (args.length < 2) {
-                    player.sendMessage(ChatColor.RED + "> /block remove <player>");
+                    String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block remove <player> ");
+                    player.sendMessage(usage);
                     return true;
                 }
                 unblockPlayer(player, args[1]);
                 break;
             default:
-                player.sendMessage(ChatColor.RED + "> /block help");
+                String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block /block help ");
+                player.sendMessage(usage);
                 break;
         }
         return true;
     }
 
     private void sendHelpMessage(Player player) {
-        player.sendMessage(ChatColor.GREEN + "Block Commands:");
+        player.sendMessage(ChatColor.GREEN + "Block Commands: ");
         player.sendMessage(ChatColor.YELLOW + "/block help" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Prints this help message");
         player.sendMessage(ChatColor.YELLOW + "/block list" + ChatColor.GRAY + " - " + ChatColor.AQUA + "List blocked players");
         player.sendMessage(ChatColor.YELLOW + "/block add <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Block a player");
@@ -69,13 +72,13 @@ public class Blockplayer implements CommandExecutor {
     }
 
     private void listBlockedPlayers(Player player) {
-        Set<String> ignoredSet = getBlockedPlayers(player.getName());
+        Set<String> blockedSet = getBlockedPlayers(player.getName());
 
-        if (ignoredSet.isEmpty()) {
+        if (blockedSet.isEmpty()) {
             player.sendMessage(ChatColor.RED + "BLOCKED - 0");
         } else {
             player.sendMessage(ChatColor.GREEN + "Blocked: ");
-            for (String blocked : ignoredSet) {
+            for (String blocked : blockedSet) {
                 player.sendMessage(ChatColor.YELLOW + "- " + ChatColor.GRAY + blocked);
             }
         }
@@ -84,7 +87,7 @@ public class Blockplayer implements CommandExecutor {
     private void blockPlayer(Player player, String targetName) {
         Player target = Bukkit.getPlayer(targetName);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendActionBar(warn + "That player does not exist.");
             return;
         }

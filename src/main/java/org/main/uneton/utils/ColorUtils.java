@@ -30,12 +30,6 @@ public class ColorUtils {
         hexSupport = CHAT_COLOR_FROM_COLOR != null;
     }
 
-    /*
-     *
-     * Class API
-     *
-     * */
-
     public static String colorize(String text) {
         return colorize(text, '&');
     }
@@ -116,12 +110,6 @@ public class ColorUtils {
         return result;
     }
 
-    /*
-     *
-     * Class Utilities
-     *
-     * */
-
     private static String rgbGradient(String text, Color start, Color end, char colorSymbol) {
         final StringBuilder builder = new StringBuilder();
         text = ChatColor.translateAlternateColorCodes(colorSymbol, text);
@@ -163,5 +151,4 @@ public class ColorUtils {
             throw new RuntimeException(e);
         }
     }
-
 }

@@ -151,6 +151,7 @@ public class MagicStick implements Listener {
             if (entity instanceof FallingBlock) {
                 entity.remove();
                 ((FallingBlock) entity).setDropItem(false);
+                event.getBlock().getDrops().clear();
             }
         }
     }

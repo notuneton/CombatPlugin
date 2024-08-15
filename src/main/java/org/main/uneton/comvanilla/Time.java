@@ -21,7 +21,7 @@ public class Time implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.time.sv")) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run /" + command.getName() + ".");
+            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
             playCancerSound(player);
             return true;
         }
