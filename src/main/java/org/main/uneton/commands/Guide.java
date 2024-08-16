@@ -38,9 +38,9 @@ public class Guide implements CommandExecutor {
                         sendAdminCommands(player);
                         break;
                     } else {
-                        player.sendMessage(ColorUtils.colorize("&8--------------------"+ title +"--------------------"));
+                        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
                         player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7You don't have permission to view that"));
-                        player.sendMessage(ColorUtils.colorize("&8----------------------------------------------------"));
+                        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
                         return true;
                     }
                 }
@@ -53,7 +53,7 @@ public class Guide implements CommandExecutor {
     }
 
     private void sendAdminCommands(Player player) {
-        player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"&b--------------------"));
+        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/cage <player> | Create a cube around the player that the player cannot break."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/crash <player> | Crashes the specified player's game"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/freeze <player> | Cancels the player's movement."));
@@ -71,7 +71,7 @@ public class Guide implements CommandExecutor {
     }
 
     private void sendBasicCommands(Player player) {
-        player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"--------------------"));
+        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawnpoint."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/daily | Command that canbe used daily for a reward!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/enderchest | Opens your personal Enderchest."));
@@ -90,11 +90,11 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sudo <target> <command> | Executes another player perform a task."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trash | Put your stuff in the menu and close it!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/msg <player> <message> | Send a whisper to the player."));
-        player.sendMessage(ColorUtils.colorize("&b------------------------------------------------"));
+        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
     }
 
     private void sendPermissions(Player player) {
-        player.sendMessage(ColorUtils.colorize("&b--------------------"+ title +"&b--------------------"));
+        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.view.commands"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.bypass.afkkick"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.pl.sv"));
@@ -115,7 +115,7 @@ public class Guide implements CommandExecutor {
     }
 
     private void sendUsage(Player player) {
-        player.sendMessage(ColorUtils.colorize("&b*----------------------------------------------------*"));
+        player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/guide <komennot, oikeudet, admin>");
         player.sendMessage(usage);
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));

@@ -52,7 +52,7 @@ public class Blockplayer implements CommandExecutor {
                 unblockPlayer(player, args[1]);
                 break;
             default:
-                String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block /block help ");
+                String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block help ");
                 player.sendMessage(usage);
                 break;
         }
@@ -61,10 +61,10 @@ public class Blockplayer implements CommandExecutor {
 
     private void sendHelpMessage(Player player) {
         player.sendMessage(ChatColor.GREEN + "Block Commands: ");
-        player.sendMessage(ChatColor.YELLOW + "/block help" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Prints this help message");
-        player.sendMessage(ChatColor.YELLOW + "/block list" + ChatColor.GRAY + " - " + ChatColor.AQUA + "List blocked players");
-        player.sendMessage(ChatColor.YELLOW + "/block add <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Block a player");
-        player.sendMessage(ChatColor.YELLOW + "/block remove <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + "Unblock a player");
+        player.sendMessage(ChatColor.YELLOW + "/block help" + ChatColor.GRAY + " - " + ChatColor.AQUA + " Prints this help message");
+        player.sendMessage(ChatColor.YELLOW + "/block list" + ChatColor.GRAY + " - " + ChatColor.AQUA + " List blocked players");
+        player.sendMessage(ChatColor.YELLOW + "/block add <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + " Block a player");
+        player.sendMessage(ChatColor.YELLOW + "/block remove <player>" + ChatColor.GRAY + " - " + ChatColor.AQUA + " Unblock a player");
     }
 
     public static Set<String> getBlockedPlayers(String playerName) {
