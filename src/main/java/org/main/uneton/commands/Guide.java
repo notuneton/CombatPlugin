@@ -92,7 +92,7 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/msg <player> <message> | Send a whisper to the player."));
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
     }
-
+    
     private void sendPermissions(Player player) {
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.view.commands"));
