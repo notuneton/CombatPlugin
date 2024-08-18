@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
+import org.main.uneton.utils.SoundsUtils;
 
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 
@@ -49,8 +50,8 @@ public class Spawn implements CommandExecutor {
                         player.sendMessage(varoitus + "Cancelled!");
                     }
                 } else {
-                    player.sendActionBar(ColorUtils.colorize("Teleporting in " + "&3" + (countdownSeconds - secondsPassed) + "&7" + " seconds..."));
-                    player.sendMessage(ColorUtils.colorize("Teleporting in " + "&3" + (countdownSeconds - secondsPassed) + "&7" + " seconds..."));
+                    player.sendActionBar(ColorUtils.colorize("Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
+                    player.sendMessage(ColorUtils.colorize("Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
                     secondsPassed++;
                 }
             }
@@ -69,7 +70,7 @@ public class Spawn implements CommandExecutor {
             Location spawnLoc = plugin.getConfig().getLocation("spawn");
             if (spawnLoc != null) {
                 player.teleport(spawnLoc);
-                player.sendMessage(onnistunut + "You have been teleported to " + "&3" + "spawn" + "&7" +"!");
+                player.sendMessage(onnistunut + "You have been teleported to &3" + "spawn"+"&7!");
                 return true;
             } else {
                 player.sendMessage(varoitus + "Teleport failed : location not found!");
