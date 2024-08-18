@@ -50,8 +50,8 @@ public class Spawn implements CommandExecutor {
                         player.sendMessage(varoitus + "Cancelled!");
                     }
                 } else {
-                    player.sendActionBar(ColorUtils.colorize("&fTeleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
-                    player.sendMessage(ColorUtils.colorize("&fTeleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
+                    player.sendActionBar(ColorUtils.colorize("&7Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
+                    player.sendMessage(ColorUtils.colorize("&7Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
                     secondsPassed++;
                 }
             }
