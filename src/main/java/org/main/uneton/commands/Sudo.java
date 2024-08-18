@@ -27,7 +27,7 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if (!allowedPlayers.contains(player.getName())) {
-            player.sendMessage(ColorUtils.colorize("&8&l[i]") + ColorUtils.colorize(" &cThis command can only be executed as a specific person! Here is the list of players that can execute this command: "+ allowedPlayers));
+            player.sendMessage(ColorUtils.colorize("&8[i]") + ColorUtils.colorize(" &cThis command can only be executed as a specific person! Here is the list of players that can execute this command: "+ allowedPlayers));
             playCancerSound(player);
             return true;
         }
@@ -40,7 +40,6 @@ public class Sudo implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendActionBar(warn + "That player does not exist.");
             return true;
         }
@@ -54,10 +53,7 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString());
-
                 player.sendMessage(success + ColorUtils.colorize("&7executed command '&a"+message+"&7' on player " + "&e"+target.getName()));
-            } else {
-                player.sendMessage(warn + "&4That player does not exist.");
             }
         }
         return true;
