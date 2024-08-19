@@ -6,11 +6,13 @@ group = 'org.Main'
 version = '1.19'
 
 repositories {
-    maven { url 'https://jitpack.io' }
+    maven { url "https://repo.dmulloy2.net/repository/public/" }
     mavenCentral()
     maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
+
     }
     maven {
         name = "sonatype"
@@ -19,8 +21,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
+    compileOnly 'com.comphenix.protocol:ProtocolLib:5.0.0'
+    //compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     compileOnly "io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT"
+
 }
 
 def targetJavaVersion = 17

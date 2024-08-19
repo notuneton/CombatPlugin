@@ -54,7 +54,7 @@ public class ScoreboardUtils {
     }
     private static long getCurrentDelay() {
         return switch (index) {
-            case 0 -> 120L;
+            case 0 -> 0L;
             case 1, 2, 3, 4, 5 -> 1L;
             case 6, 7 -> 1L;
             case 8, 9, 10, 11 -> 40L;

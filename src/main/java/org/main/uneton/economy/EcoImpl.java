@@ -1,5 +1,5 @@
 package org.main.uneton.economy;
-
+/*
 import net.milkbowl.vault.economy.AbstractEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -272,3 +272,5 @@ public class EcoImpl extends AbstractEconomy {
         return false;
     }
 }
+
+ */

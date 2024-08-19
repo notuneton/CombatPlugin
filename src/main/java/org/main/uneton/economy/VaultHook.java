@@ -1,4 +1,5 @@
 package org.main.uneton.economy;
+/*
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -9,7 +10,7 @@ import java.util.logging.Level;
 
 public class VaultHook {
     
-    /*
+
     public static Economy hook(Combat plugin) {
 
         plugin.getLogger().info("Hooking economy...");
@@ -34,5 +35,6 @@ public class VaultHook {
         return null;
     }
 
-     */
+
 }
+*/

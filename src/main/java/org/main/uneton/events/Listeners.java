@@ -1,7 +1,7 @@
 package org.main.uneton.events;
 
 import net.kyori.adventure.text.Component;
-import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
@@ -46,7 +46,7 @@ import static org.main.uneton.utils.ScoreboardUtils.*;
 public class Listeners implements Listener {
 
     private static Combat plugin;
-    private Economy vault;
+    //private Economy vault;
 
     public Listeners(Combat plugin) {
         this.plugin = plugin;
