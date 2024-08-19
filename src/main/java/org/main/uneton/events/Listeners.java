@@ -8,6 +8,7 @@ import org.bukkit.block.ShulkerBox;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,6 +40,7 @@ import java.util.UUID;
 import static org.bukkit.Bukkit.getCommandMap;
 import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.Combat.doesCommandExist;
+import static org.main.uneton.Combat.getInstance;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 
 public class Listeners implements Listener {
@@ -68,24 +70,8 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
             String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "'"+command+"' is not recognized as an internal or external command.");
+            player.sendMessage(warn + "'/"+command+"' is not recognized as an internal or external command.");
             event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        Player attacker = victim.getKiller();
-        if (attacker != null && attacker instanceof Player) {
-            UUID attackerUUID = attacker.getUniqueId();
-            UUID victimUUID = victim.getUniqueId();
-
-            ScoreboardUtils.addKill(attackerUUID);
-            ScoreboardUtils.addDeath(victimUUID);
-
-            ScoreboardUtils.updateScoreboard(attacker);
-            ScoreboardUtils.updateScoreboard(victim);
         }
     }
 
@@ -93,9 +79,10 @@ public class Listeners implements Listener {
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        ScoreboardUtils.createScoreboard(player);
 
-        String server = player.getServer().getName();
-        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7Siirryttiin palvelimelle &f"+ server + "&7."));
+        String server = "dev-server";
+        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7translated to the server &f"+ server + "&7."));
 
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
@@ -107,7 +94,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        updateScoreboard(player);
+        ScoreboardUtils.createScoreboard(player);
 
         // String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
@@ -122,7 +109,7 @@ public class Listeners implements Listener {
         Location location = victim.getLocation();
 
         if (killer != null && !killer.equals(victim)) {
-            ItemStack blood = new ItemStack(Material.RED_DYE, 3);
+            ItemStack blood = new ItemStack(Material.BONE, 3);
             Item dropped = location.getWorld().dropItemNaturally(location, blood);
             dropped.setPickupDelay(32767);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
@@ -135,13 +122,25 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        String permission = "op";
-        if (!event.getPlayer().hasPermission(permission)) {
-            String playerName = event.getPlayer().getName();
-            String message = event.getMessage();
-            String formattedMessage = ColorUtils.colorize("&7"+playerName + "> " + message);
+        String playerName = event.getPlayer().getName();
+        String message = event.getMessage();
+        String formattedMessage = ColorUtils.colorize("&7"+playerName + "> " + message);
+        event.setFormat(formattedMessage);
+    }
 
-            event.setFormat(formattedMessage);
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        Player attacker = victim.getKiller();
+        if (attacker != null && attacker instanceof Player) {
+            UUID attackerUUID = attacker.getUniqueId();
+            UUID victimUUID = victim.getUniqueId();
+
+            ScoreboardUtils.addKill(attackerUUID);
+            ScoreboardUtils.addDeath(victimUUID);
+
+            ScoreboardUtils.createScoreboard(attacker);
+            ScoreboardUtils.createScoreboard(victim);
         }
     }
 
@@ -173,15 +172,6 @@ public class Listeners implements Listener {
         }
     }
 
-    private final ItemStack[] blocksList = new ItemStack[]{
-            new ItemStack(Material.EMERALD),
-            new ItemStack(Material.AMETHYST_SHARD),
-            new ItemStack(Material.IRON_NUGGET),
-            new ItemStack(Material.GOLD_NUGGET),
-            new ItemStack(Material.COPPER_INGOT),
-            new ItemStack(Material.STRING)
-    };
-
     @EventHandler
     public void onShearSheep(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
@@ -195,6 +185,15 @@ public class Listeners implements Listener {
             }
         }
     }
+
+    private final ItemStack[] blocksList = new ItemStack[]{
+            new ItemStack(Material.EMERALD),
+            new ItemStack(Material.AMETHYST_SHARD),
+            new ItemStack(Material.IRON_NUGGET),
+            new ItemStack(Material.GOLD_NUGGET),
+            new ItemStack(Material.COPPER_INGOT),
+            new ItemStack(Material.STRING)
+    };
 
     private void woolDrop(Player player, Location loc) {
         ItemStack bluegem = new ItemStack(Material.LAPIS_LAZULI, 1);

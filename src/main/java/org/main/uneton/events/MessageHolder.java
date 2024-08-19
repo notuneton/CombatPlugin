@@ -7,13 +7,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.Combat;
+import org.main.uneton.utils.ColorUtils;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MessageHolder implements Listener {
 
     private final ConcurrentHashMap<Player, String> lastMessage = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Player, Boolean> antiSpam = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Player, Boolean> spam = new ConcurrentHashMap<>();
 
     @EventHandler
     public void onChatSpam(AsyncPlayerChatEvent event) {
@@ -21,20 +22,18 @@ public class MessageHolder implements Listener {
         String message = event.getMessage();
         String previousMessage = lastMessage.put(player, message);
         if (message.equalsIgnoreCase(previousMessage)) {
+            Bukkit.broadcastMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message '" + message + "' could not be sent!"));
             event.setCancelled(true);
             return;
         }
 
         // Check for spamming
-        if (antiSpam.putIfAbsent(player, true) != null) {
+        if (spam.putIfAbsent(player, true) != null) {
             event.setCancelled(true);
         } else {
             Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(Combat.class), () -> {
-                antiSpam.remove(player);
-            }, 20L); // 20 ticks = 1 second
+                spam.remove(player);
+            }, 30L);
         }
     }
 }
-
-
-// This can't be posted because it contains content blocked by this server. This may also be viewed by server owners.
