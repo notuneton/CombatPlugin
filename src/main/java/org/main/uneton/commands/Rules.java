@@ -17,7 +17,7 @@ public class Rules implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1) {
+        if (args.length < 1) {
             String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/rules ");
             player.sendMessage(usage);
             return true;

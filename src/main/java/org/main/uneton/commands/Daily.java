@@ -82,7 +82,6 @@ public class Daily implements CommandExecutor {
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
-
     private final ItemStack[] blocksList = new ItemStack[]{
             new ItemStack(Material.EMERALD),
             new ItemStack(Material.AMETHYST_SHARD),

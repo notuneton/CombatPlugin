@@ -88,7 +88,7 @@ public class Blockplayer implements CommandExecutor {
         Player target = Bukkit.getPlayer(targetName);
         if (target == null || !target.isOnline()) {
             String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendActionBar(warn + "That player does not exist.");
+            player.sendMessage(warn + "That player does not exist.");
             return;
         }
 

@@ -29,7 +29,7 @@ public class Msg implements CommandExecutor {
         Player recipient = Bukkit.getPlayer(args[0]);
         if (recipient == null || !recipient.isOnline()) {
             String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendActionBar(warn + "That player does not exist.");
+            player.sendMessage(warn + "That player does not exist.");
             return true;
         }
 

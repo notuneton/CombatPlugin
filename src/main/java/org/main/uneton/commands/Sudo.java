@@ -40,7 +40,7 @@ public class Sudo implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendActionBar(warn + "That player does not exist.");
+            player.sendMessage(warn + "That player does not exist.");
             return true;
         }
 

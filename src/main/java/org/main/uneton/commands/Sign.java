@@ -18,7 +18,7 @@ public class Sign implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage(ColorUtils.colorize("&9<Server>&8: &7oak sign was spawned!"));
+        player.sendMessage(ColorUtils.colorize("oak sign was spawned!"));
         player.getWorld().getBlockAt(player.getLocation()).setType(Material.OAK_SIGN);
         return true;
     }
