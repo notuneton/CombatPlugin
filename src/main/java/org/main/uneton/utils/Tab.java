@@ -17,13 +17,4 @@ public class Tab {
             player.setPlayerListHeaderFooter(ColorUtils.colorize(header), ColorUtils.colorize(footer));
         }
     }
-
-    private static double getServerTPS() {
-        return Bukkit.getServer().getTPS()[0];
-        // "&7tps&8: &3" + String.format("%.2f", tps);  double tps = getServerTPS();
-    }
-    private static int getPing(Player player) {
-        int ping = player.getPing();
-        return ping;
-    }
 }
