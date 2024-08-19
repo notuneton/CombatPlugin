@@ -19,10 +19,10 @@ import org.main.uneton.block.Blockplayer;
 import org.main.uneton.block.Unblock;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
-import org.main.uneton.vanilla.Msg;
-import org.main.uneton.vanilla.Time;
+import org.main.uneton.comvanilla.Msg;
+import org.main.uneton.comvanilla.Time;
 import org.main.uneton.tabcomps.*;
-import org.main.uneton.vanilla.Tp;
+import org.main.uneton.comvanilla.Tp;
 import org.main.uneton.events.FreezeListener;
 import org.main.uneton.admin.Gm;
 import org.main.uneton.events.GmListener;
@@ -165,7 +165,7 @@ public class Combat extends JavaPlugin implements Listener {
             return;
         } else {
             player.kickPlayer(ColorUtils.colorize("\n\n&6You were afk for too long, Relog to continue.\n\n"));
-            Bukkit.broadcastMessage(player.getName()+ " was kicked for inactivity.");
+            Bukkit.broadcastMessage(ColorUtils.colorize("&c" +player.getName()+ " was kicked for inactivity."));
         }
     }
 
@@ -223,6 +223,20 @@ public class Combat extends JavaPlugin implements Listener {
         saveConfig();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
