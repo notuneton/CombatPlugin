@@ -1,4 +1,4 @@
-package org.main.uneton.admin;
+package org.main.uneton.comvanilla;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

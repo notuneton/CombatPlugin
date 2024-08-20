@@ -2,9 +2,6 @@ package org.main.uneton;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.ListeningWhitelist;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.events.PacketListener;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -15,7 +12,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
@@ -25,6 +21,7 @@ import org.main.uneton.block.Blockplayer;
 import org.main.uneton.block.Unblock;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
+import org.main.uneton.comvanilla.Clear;
 import org.main.uneton.comvanilla.Msg;
 import org.main.uneton.comvanilla.Time;
 import org.main.uneton.tabcomps.*;
@@ -95,7 +92,6 @@ public class Combat extends JavaPlugin implements Listener {
 
         // admin
         getCommand("cage").setExecutor(new Cage());
-        getCommand("clear").setExecutor(new Clear());
         getCommand("crash").setExecutor(new Crash());
         getCommand("freeze").setExecutor(new Freeze());
         getCommand("gm").setExecutor(new Gm());
@@ -143,6 +139,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("vanish").setTabCompleter(new VanishTabs());
 
         // vanilla
+        getCommand("clear").setExecutor(new Clear());
         getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
         getCommand("time").setExecutor(new Time());
