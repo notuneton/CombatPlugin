@@ -69,19 +69,8 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "'/"+command+"' is not recognized as an internal or external command.");
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onCommandPreproces(PlayerCommandPreprocessEvent event) {
-        String command = event.getMessage().split(" ")[0].substring(1);
-        Player player = event.getPlayer();
-        if (command.equals("pl") || command.equals("plugins")) {
-            player.sendMessage(ColorUtils.colorize("&fServer Plugins (1): "));
-            player.sendMessage(ColorUtils.colorize("&8&l - &aKeyLogger"));
+            String warn = ColorUtils.colorize("&4>&c> &8- ");
+            player.sendMessage(warn + ColorUtils.colorize("&f'/"+command+"' &7is not recognized as an internal or external command."));
             event.setCancelled(true);
         }
     }
