@@ -7,6 +7,7 @@ import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
@@ -15,6 +16,7 @@ public class ScoreboardUtils {
 
     public static final HashMap<UUID, Integer> kills = new HashMap<>();
     public static final HashMap<UUID, Integer> deaths = new HashMap<>();
+    public static final Map<UUID, Integer> counters = new HashMap<>();
     public static void startUpdatingScoreboard(Player player, Combat plugin) {
         new BukkitRunnable() {
             @Override
@@ -81,6 +83,8 @@ public class ScoreboardUtils {
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
 
+        int max = 2147483647;
+
         if (objective == null) {
             objective = scoreboard.registerNewObjective("scoreboard", "dummy", "");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -110,12 +114,16 @@ public class ScoreboardUtils {
 
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 7);
-        setScore(objective, "&8 ", 6);
+        int counterValue = counters.getOrDefault(player.getUniqueId(), 0);
+        String counterStr = String.format(ColorUtils.colorize("  &1Yhteensä&8: &6%d"), counterValue);
+        setScore(objective, counterStr, 6);
+
+        setScore(objective, "&8 ", 5);
 
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &fDeaths &a" + playerDeaths, 5);
-        setScore(objective, "  &fKills &a" + playerKills, 4);
+        setScore(objective, "  &fDeaths &a" + playerDeaths, 4);
+        setScore(objective, "  &fKills &a" + playerKills, 3);
 
         setScore(objective, "&8 ", 0);
         updateTitle(player);

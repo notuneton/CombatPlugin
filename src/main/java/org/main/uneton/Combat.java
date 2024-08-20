@@ -16,16 +16,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
 import org.main.uneton.commands.BlockList;
+import org.main.uneton.commands_vanilla.*;
 import org.main.uneton.events.BlockListener;
 import org.main.uneton.commands.Blockplayer;
 import org.main.uneton.commands.Unblock;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
-import org.main.uneton.commands_vanilla.Clear;
-import org.main.uneton.commands_vanilla.Msg;
-import org.main.uneton.commands_vanilla.Time;
 import org.main.uneton.tabcomps.*;
-import org.main.uneton.commands_vanilla.Tp;
 import org.main.uneton.events.FreezeListener;
 import org.main.uneton.admin.Gm;
 import org.main.uneton.events.GmListener;
@@ -49,7 +46,6 @@ public class Combat extends JavaPlugin implements Listener {
     
     private static Combat instance;
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
-    public static HashMap<UUID, Integer> joins = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final Map<UUID, Long> lastMovementTime = new HashMap<>();
     private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
@@ -94,6 +90,8 @@ public class Combat extends JavaPlugin implements Listener {
         saveConfig();
 
         // admin
+        getCommand("addone").setExecutor(new Addone());
+
         getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
         getCommand("freeze").setExecutor(new Freeze());
@@ -213,10 +211,6 @@ public class Combat extends JavaPlugin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-        if (!joins.containsKey(uuid)) {
-            int countsJoined = getConfig().getInt("kills." + uuid, 0);
-            joins.put(uuid, countsJoined);
-        }
         if (!kills.containsKey(uuid)) {
             int countsKilled = getConfig().getInt("kills." + uuid, 0);
             kills.put(uuid, countsKilled);
