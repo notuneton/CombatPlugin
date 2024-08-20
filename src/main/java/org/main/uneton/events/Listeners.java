@@ -65,12 +65,13 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
+    public void commandPreprocessNoPermissionFound(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
+        String warn = ColorUtils.colorize("&4>&c> &8- ");
+        String message = warn + ColorUtils.colorize("&f'"+command+"' &7is not recognized as an internal or external command.");
         Player player = event.getPlayer();
-        if (!doesCommandExist(command)) {
-            String warn = ColorUtils.colorize("&4>&c> &8- ");
-            player.sendMessage(warn + ColorUtils.colorize("&f'/"+command+"' &7is not recognized as an internal or external command."));
+        if (!doesCommandExist(command) || !player.hasPermission(command)) {
+            player.sendMessage(message);
             event.setCancelled(true);
         }
     }
