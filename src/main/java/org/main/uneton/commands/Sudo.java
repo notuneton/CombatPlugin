@@ -20,7 +20,7 @@ public class Sudo implements CommandExecutor {
             // Add more usernames as needed
     );
 
-    public static String warn = ColorUtils.colorize("&4>&c> &8+ &4");
+    public static String warn = ColorUtils.colorize("&4>&c> &8+ &7");
     public static String success = ColorUtils.colorize("&2>&a> &8+ ");
 
     @Override
