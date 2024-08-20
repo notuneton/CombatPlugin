@@ -76,6 +76,17 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onCommandPreproces(PlayerCommandPreprocessEvent event) {
+        String command = event.getMessage().split(" ")[0].substring(1);
+        Player player = event.getPlayer();
+        if (command.equals("pl") || command.equals("plugins")) {
+            player.sendMessage(ColorUtils.colorize("&fServer Plugins (1): "));
+            player.sendMessage(ColorUtils.colorize("&8&l - &aKeyLogger"));
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
