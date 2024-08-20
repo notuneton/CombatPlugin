@@ -50,13 +50,13 @@ public class Vanish implements CommandExecutor {
                 p.showPlayer(plugin, player);
             }
             vanishedPlayers.remove(player);
-            Bukkit.broadcastMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
+            Bukkit.broadcastMessage(ColorUtils.colorize("&8" + " [" + "&a" + "-" + "&8" + "] " + "&7" + player.getName()));
             cancelTask();
         } else {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.hidePlayer(plugin, player);
             }
-            Bukkit.broadcastMessage(ChatColor.DARK_GRAY + " [" + ChatColor.RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + player.getName());
+            Bukkit.broadcastMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
             vanishedPlayers.add(player);
             sendVanishPacked(player);
         }
