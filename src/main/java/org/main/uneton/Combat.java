@@ -104,17 +104,14 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("slippery").setExecutor(new Slippery(this));
         getCommand("vanish").setExecutor(new Vanish(this));
 
-        getCommand("blocklist").setExecutor(new BlockList());
-        Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
-        getCommand("block").setExecutor(new Blockplayer());
-        getCommand("unblock").setExecutor(new Unblock());
-
         // combatlogger
         Bukkit.getPluginManager().registerEvents(new CombatLog(this), this);
         getCommand("setspawn").setExecutor(new SetSpawn(this));
         getCommand("spawn").setExecutor(new Spawn(this));
 
         // commands
+        getCommand("blocklist").setExecutor(new BlockList());
+        getCommand("block").setExecutor(new Blockplayer());
         getCommand("daily").setExecutor(new Daily());
         getCommand("enderchest").setExecutor(new Enderchest());
         getCommand("guide").setExecutor(new Guide());
@@ -125,6 +122,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("sign").setExecutor(new Sign());
         getCommand("sudo").setExecutor(new Sudo());
         getCommand("trash").setExecutor(new Trash());
+        getCommand("unblock").setExecutor(new Unblock());
 
         // tabcompleters
         getCommand("daily").setTabCompleter(new DailyTabs());
@@ -147,6 +145,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("time").setExecutor(new Time());
 
         // listeners
+        Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
