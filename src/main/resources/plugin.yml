@@ -11,7 +11,7 @@ commands:
     description: Create a cube around the player that the player cannot break.
     usage: /cage <player>
   clear:
-    description: Clear's players inventory.
+    description: Clears items from player inventory, including items.
     usage: /clear <player>
   crash:
     description: Spawns a white ball around you.

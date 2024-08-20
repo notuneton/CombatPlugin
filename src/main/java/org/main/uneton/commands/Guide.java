@@ -55,6 +55,7 @@ public class Guide implements CommandExecutor {
     private void sendAdminCommands(Player player) {
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/cage <player> | Create a cube around the player that the player cannot break."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/clear <player> | Clears items from player inventory, including items."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/crash <player> | Crashes the specified player's game"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/freeze <player> | Cancels the player's movement."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/magictrick <player> | a cool magictrick thats worth it :)"));

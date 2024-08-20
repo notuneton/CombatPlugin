@@ -53,7 +53,7 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString());
-                player.sendMessage(success + ColorUtils.colorize("&7executed command '&a"+message+"&7' on player " + "&e"+target.getName()));
+                player.sendMessage(success + ColorUtils.colorize("&7executed command '&a"+message+"&7' to " + "&e"+target.getName()));
             }
         }
         return true;
