@@ -67,8 +67,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void commandPreprocessNoPermissionFound(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
-        String warn = ColorUtils.colorize("&4>&c> &8- ");
-        String message = warn + ColorUtils.colorize("&f'"+command+"' &7is not recognized as an internal or external command.");
+        String message = ColorUtils.colorize("&8[i] &f'"+command+"' &7could not be recognized as internal or executable!");
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
             player.sendMessage(message);
