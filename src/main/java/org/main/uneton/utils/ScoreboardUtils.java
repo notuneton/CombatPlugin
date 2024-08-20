@@ -16,19 +16,8 @@ public class ScoreboardUtils {
 
     public static final HashMap<UUID, Integer> kills = new HashMap<>();
     public static final HashMap<UUID, Integer> deaths = new HashMap<>();
-    public static final Map<UUID, Integer> counters = new HashMap<>();
-    public static void startUpdatingScoreboard(Player player, Combat plugin) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (player.isOnline()) {
-                    createScoreboard(player);
-                } else {
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(plugin, 0L, 20L);
-    }
+    public static final Map<UUID, Integer> numbers = new HashMap<>();
+    private int globalNumbers = 0;
 
     private static int index = 0;
     public static void startTitleScheduler() {
@@ -114,11 +103,11 @@ public class ScoreboardUtils {
 
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 7);
-        int counterValue = counters.getOrDefault(player.getUniqueId(), 0);
-        String counterStr = String.format(ColorUtils.colorize("  &1Yhteensä&8: &6%d"), counterValue);
-        setScore(objective, counterStr, 6);
 
-        setScore(objective, "&8 ", 5);
+        int counterValue = numbers.getOrDefault(player.getUniqueId(), 0);
+        String counterStr = String.format(ColorUtils.colorize("  &aYhteensä&8: &6%d"), counterValue);
+        setScore(objective, counterStr, 6);
+        setScore(objective, "&5 ", 5);
 
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
@@ -128,6 +117,19 @@ public class ScoreboardUtils {
         setScore(objective, "&8 ", 0);
         updateTitle(player);
         player.setScoreboard(scoreboard);
+    }
+
+    public static void startUpdatingScoreboard(Player player, Combat plugin) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (player.isOnline()) {
+                    createScoreboard(player);
+                } else {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 10L);
     }
 
     public static void addKill(UUID playeruuid) {

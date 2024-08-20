@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-import static org.main.uneton.utils.ScoreboardUtils.counters;
+import static org.main.uneton.utils.ScoreboardUtils.numbers;
 
 public class Addone implements CommandExecutor {
 
@@ -24,7 +24,7 @@ public class Addone implements CommandExecutor {
         UUID id = player.getUniqueId();
 
         player.sendMessage("Your counter has been incremented!");
-        counters.put(id, counters.getOrDefault(id, 0) + 1);
+        numbers.put(id, numbers.getOrDefault(id, 0) + 1);
 
         return true;
     }
