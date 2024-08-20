@@ -1,11 +1,11 @@
-package org.main.uneton.block;
+package org.main.uneton.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import static org.main.uneton.block.Blockplayer.isPlayerBlocked;
+import static org.main.uneton.commands.Blockplayer.isPlayerBlocked;
 
 public class BlockListener implements Listener {
 

@@ -15,10 +15,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
-import org.main.uneton.block.BlockList;
-import org.main.uneton.block.BlockListener;
-import org.main.uneton.block.Blockplayer;
-import org.main.uneton.block.Unblock;
+import org.main.uneton.commands.BlockList;
+import org.main.uneton.events.BlockListener;
+import org.main.uneton.commands.Blockplayer;
+import org.main.uneton.commands.Unblock;
 import org.main.uneton.combatlogger.CombatLog;
 import org.main.uneton.admin.Freeze;
 import org.main.uneton.comvanilla.Clear;
@@ -62,6 +62,7 @@ public class Combat extends JavaPlugin implements Listener {
     // private Economy vault;
     // private Config config = new Config(this, "economy");
     // private FileConfiguration fileConfig = config.getConfig();
+
     private ProtocolManager protocolManager;
     public void onLoad() {
         protocolManager = ProtocolLibrary.getProtocolManager();
@@ -72,6 +73,7 @@ public class Combat extends JavaPlugin implements Listener {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
         createElytraRecipe();
+        createOldEnchantedAppleRecipe();
         startTitleScheduler(); // titlen päivitys
         new BukkitRunnable() {
             @Override
@@ -174,6 +176,21 @@ public class Combat extends JavaPlugin implements Listener {
             player.kickPlayer(ColorUtils.colorize("\n\n&6You were afk for too long, Relog to continue.\n\n"));
             Bukkit.broadcastMessage(ColorUtils.colorize("&c" +player.getName()+ " was kicked for inactivity."));
         }
+    }
+
+    private void createOldEnchantedAppleRecipe() {
+        ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
+        ItemMeta notch_apple_meta = notch_apple.getItemMeta();
+        if (notch_apple_meta != null) {
+            notch_apple_meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enchanted Apple");
+            notch_apple.setItemMeta(notch_apple_meta);
+        }
+
+        ShapedRecipe godAppleRecipe = new ShapedRecipe(new NamespacedKey(Combat.instance, "god_apple_recipe"), notch_apple);
+        godAppleRecipe.shape("GGG", "GAG", "GGG");
+        godAppleRecipe.setIngredient('G', Material.GOLD_BLOCK);
+        godAppleRecipe.setIngredient('A', Material.APPLE);
+        Bukkit.addRecipe(godAppleRecipe);
     }
 
     private void createElytraRecipe() {

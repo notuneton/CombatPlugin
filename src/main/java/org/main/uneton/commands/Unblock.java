@@ -1,4 +1,4 @@
-package org.main.uneton.block;
+package org.main.uneton.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,9 +11,9 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.Set;
 
-import static org.main.uneton.block.Blockplayer.getBlockedPlayers;
+import static org.main.uneton.commands.Blockplayer.getBlockedPlayers;
 
-public class BlockList implements CommandExecutor {
+public class Unblock implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -22,28 +22,25 @@ public class BlockList implements CommandExecutor {
             return true;
         }
 
-        Set<String> blockSet = getBlockedPlayers(player.getName());
         if (args.length == 0) {
-            if (blockSet.isEmpty()) {
-                player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7You don't have any blocked players."));
-            }
+            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/unblock <player> ");
+            player.sendMessage(usage);
             return true;
         }
 
-        Player target = Bukkit.getPlayerExact(args[0]);
+        String targetName = args[0];
+        Player target = Bukkit.getPlayerExact(targetName);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
             player.sendMessage(warn + "That player does not exist.");
             return true;
         }
 
-        if (blockSet.isEmpty()) {
-            player.sendMessage(ColorUtils.colorize("You don't have any blocked players."));
+        Set<String> blockSet = getBlockedPlayers(player.getName());
+        if (blockSet.remove(targetName)) {
+            player.sendMessage(ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked " + targetName +"!"));
         } else {
-            player.sendMessage(ColorUtils.colorize("You are Blocked:"));
-            for (String blocked : blockSet) {
-                player.sendMessage(ColorUtils.colorize("- " + blocked));
-            }
+            player.sendMessage(ColorUtils.colorize("&cThis player isin't blocked!"));
         }
 
         return true;
