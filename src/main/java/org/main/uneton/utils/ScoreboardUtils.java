@@ -11,15 +11,28 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
+import static org.main.uneton.utils.NumberFormatter.formatBigNumber;
 
 public class ScoreboardUtils {
 
     public static final HashMap<UUID, Integer> kills = new HashMap<>();
     public static final HashMap<UUID, Integer> deaths = new HashMap<>();
-    public static final Map<UUID, Integer> numbers = new HashMap<>();
-    private int globalNumbers = 0;
+    public static Map<UUID, Integer> numbers = new HashMap<>();
 
     private static int index = 0;
+
+    public static void startUpdatingScoreboard(Player player, Combat plugin) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (player.isOnline()) {
+                    createScoreboard(player);
+                } else {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 20L);
+    }
     public static void startTitleScheduler() {
         new BukkitRunnable() {
             @Override
@@ -71,9 +84,6 @@ public class ScoreboardUtils {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
-
-        int max = 2147483647;
-
         if (objective == null) {
             objective = scoreboard.registerNewObjective("scoreboard", "dummy", "");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -103,33 +113,16 @@ public class ScoreboardUtils {
 
         String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 7);
-
-        int counterValue = numbers.getOrDefault(player.getUniqueId(), 0);
-        String counterStr = String.format(ColorUtils.colorize("  &aYhteensä&8: &6%d"), counterValue);
-        setScore(objective, counterStr, 6);
-        setScore(objective, "&5 ", 5);
-
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &fDeaths &a" + playerDeaths, 4);
-        setScore(objective, "  &fKills &a" + playerKills, 3);
+        setScore(objective, "  &fDeaths &a" + playerDeaths, 6);
+        setScore(objective, "  &fKills &a" + playerKills, 5);
 
+        String countertext = String.format(ColorUtils.colorize("  &fCounts &6%s"), formatBigNumber(numbers.size()));
+        setScore(objective, countertext, 4);
         setScore(objective, "&8 ", 0);
         updateTitle(player);
         player.setScoreboard(scoreboard);
-    }
-
-    public static void startUpdatingScoreboard(Player player, Combat plugin) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (player.isOnline()) {
-                    createScoreboard(player);
-                } else {
-                    this.cancel();
-                }
-            }
-        }.runTaskTimer(plugin, 0L, 10L);
     }
 
     public static void addKill(UUID playeruuid) {

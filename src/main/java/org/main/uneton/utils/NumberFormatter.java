@@ -4,15 +4,19 @@ public class NumberFormatter {
 
     public static String formatBigNumber(int n) {
         // Define the suffixes and their powers
-        String data = "Septillion,24|Sextillion,21|Qt,18|Q,15|T,12|B,9|M,6|K,3";
+        String data = "Septillion,24|Sextillion,21|Qt,18|Q,15|T,12|B,9|M,6|K,3|H,2";
         String[] parts = data.split("\\|");
 
         for (String part : parts) {
             String[] suffixData = part.split(",");
-            int power = (int) Math.pow(10, Integer.parseInt(suffixData[1]));
-            if (n >= power) {
-                int scaledNumber = n / power;
-                return String.format("%d %s", scaledNumber, suffixData[0]);
+            int power = Integer.parseInt(suffixData[1]);
+
+            // Instead of computing the power as an integer, let's check using the actual magnitude.
+            double threshold = Math.pow(10, power);
+
+            if (n >= threshold) {
+                double scaledNumber = n / threshold;
+                return String.format("%.0f %s", scaledNumber, suffixData[0]);
             }
         }
 

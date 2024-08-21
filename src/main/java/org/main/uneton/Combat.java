@@ -89,9 +89,10 @@ public class Combat extends JavaPlugin implements Listener {
         saveDefaultConfig();
         saveConfig();
 
-        // admin
+
         getCommand("addone").setExecutor(new Addone());
 
+        // admin
         getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
         getCommand("freeze").setExecutor(new Freeze());
@@ -238,6 +239,7 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         for (UUID uuid : playTimes.keySet()) {
+            getConfig().set("counts." + uuid, numbers.get(uuid));
             getConfig().set("deaths." + uuid, kills.get(uuid));
             getConfig().set("kills." + uuid, deaths.get(uuid));
             getConfig().set("playtime." + uuid, playTimes.get(uuid));

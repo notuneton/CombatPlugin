@@ -22,10 +22,7 @@ public class Addone implements CommandExecutor {
 
         Player player = (Player) sender;
         UUID id = player.getUniqueId();
-
-        player.sendMessage("Your counter has been incremented!");
         numbers.put(id, numbers.getOrDefault(id, 0) + 1);
-
         return true;
     }
 }
