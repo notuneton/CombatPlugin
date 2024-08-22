@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
 import static org.main.uneton.utils.NumberFormatter.formatBigNumber;
+import static org.main.uneton.utils.NumberFormatter.formatFileSize;
 
 public class ScoreboardUtils {
 
@@ -31,7 +32,7 @@ public class ScoreboardUtils {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(plugin, 0L, 20L);
+        }.runTaskTimer(plugin, 0L, 3L);
     }
     public static void startTitleScheduler() {
         new BukkitRunnable() {
@@ -118,8 +119,13 @@ public class ScoreboardUtils {
         setScore(objective, "  &fDeaths &a" + playerDeaths, 6);
         setScore(objective, "  &fKills &a" + playerKills, 5);
 
-        String countertext = String.format(ColorUtils.colorize("  &fCounts &6%s"), formatBigNumber(numbers.size()));
-        setScore(objective, countertext, 4);
+        int bytesValue = numbers.getOrDefault(player.getUniqueId(), 0); // Replace this with your actual source of data
+        String byteStr = String.format(ColorUtils.colorize("  &fFile Size &6%s"), formatFileSize(bytesValue));
+        setScore(objective, byteStr, 4);
+
+
+        String counterText = String.format(ColorUtils.colorize("  &fCounts &6%s"), formatBigNumber(numbers.size()));
+        setScore(objective, counterText, 3);
         setScore(objective, "&8 ", 0);
         updateTitle(player);
         player.setScoreboard(scoreboard);
