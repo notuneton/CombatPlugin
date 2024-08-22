@@ -68,9 +68,11 @@ public class Listeners implements Listener {
     public void commandPreprocessNoPermissionFound(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
-        if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &f'"+command+"' &7is unknown or external command. You do not have permission to use it."));
+        if (!doesCommandExist(command)) {
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &f'"+command+"' &7is unknown or external command."));
             event.setCancelled(true);
+        } else if (!player.hasPermission(command)) {
+            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7Don't have permission to use that command!"));
         }
     }
 
