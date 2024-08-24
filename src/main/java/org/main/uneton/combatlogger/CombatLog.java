@@ -46,9 +46,6 @@ public class CombatLog implements Listener {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {
-            return;
-        }
         if (event.getDamager() instanceof Player attacker && event.getEntity() instanceof Player victim) {
             startCombat(attacker, victim);
         }
