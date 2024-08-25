@@ -1,7 +1,6 @@
 package org.main.uneton.admin;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,9 +36,9 @@ public class Cure implements CommandExecutor {
             }
 
             target.setHealth(20.0);
-            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+");
-            target.sendMessage(success + ColorUtils.colorize("&7You have been healed by " + "&6" + player.getName() + "&7."));
-            player.sendMessage(success + ColorUtils.colorize("&7You have healed " + "&6" + target.getName() + "&7."));
+            String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+ ");
+            target.sendMessage(success + ColorUtils.colorize("&7You have been healed by &e" + player.getName() + "&7."));
+            player.sendMessage(success + ColorUtils.colorize("&7You have healed &e" + target.getName() + "&7."));
             return true;
         }
         return false;

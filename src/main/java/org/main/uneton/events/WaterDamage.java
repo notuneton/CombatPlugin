@@ -19,9 +19,7 @@ public class WaterDamage implements Listener {
 
         if (player.isInWater() && !isRunning) {
             isRunning = true;
-
             new BukkitRunnable() {
-
                 @Override
                 public void run() {
                     if (!player.isInWater()) {
@@ -38,6 +36,7 @@ public class WaterDamage implements Listener {
                     } else {
                         double newHealth = playerHealth - DAMAGE;
                         player.setHealth(Math.max(newHealth, MIN_HEALTH));
+                        player.damage(0);
 
                         if (newHealth <= MIN_HEALTH) {
                             isRunning = false;
@@ -45,7 +44,7 @@ public class WaterDamage implements Listener {
                         }
                     }
                 }
-            }.runTaskTimer(Combat.getInstance(), 0L, 5L);
+            }.runTaskTimer(Combat.getInstance(), 0L, 20L);
         }
     }
 }
