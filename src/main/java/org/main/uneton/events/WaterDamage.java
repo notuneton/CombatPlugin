@@ -10,7 +10,7 @@ import org.main.uneton.Combat;
 public class WaterDamage implements Listener {
 
     private static final double MIN_HEALTH = 0.0;
-    private static final double DAMAGE = 1.0;
+    private static final double DAMAGE = 2.5;
     private boolean isRunning = false;
 
     @EventHandler
@@ -36,7 +36,6 @@ public class WaterDamage implements Listener {
                     } else {
                         double newHealth = playerHealth - DAMAGE;
                         player.setHealth(Math.max(newHealth, MIN_HEALTH));
-                        player.damage(0);
 
                         if (newHealth <= MIN_HEALTH) {
                             isRunning = false;
@@ -44,7 +43,7 @@ public class WaterDamage implements Listener {
                         }
                     }
                 }
-            }.runTaskTimer(Combat.getInstance(), 0L, 20L);
+            }.runTaskTimer(Combat.getInstance(), 0L, 10L);
         }
     }
 }
