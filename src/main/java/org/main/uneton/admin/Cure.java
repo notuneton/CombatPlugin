@@ -22,7 +22,7 @@ public class Cure implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ColorUtils.colorize("&aYou healed yourself."));
+            player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You healed yourself."));
             player.setHealth(20.0);
             player.setFoodLevel(20);
             return true;

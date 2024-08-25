@@ -59,7 +59,7 @@ public class Listeners implements Listener {
         int ping = player.getPing();
         if (ping >= 300) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("&6You have been kicked out from the server for too high ping!");
+            String kickMessage = ColorUtils.colorize("\n&6You have been kicked out from the server for too high ping!\n");
             player.kickPlayer(kickMessage);
         }
     }
