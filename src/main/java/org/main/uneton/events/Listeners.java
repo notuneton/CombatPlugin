@@ -46,7 +46,7 @@ import static org.main.uneton.utils.ScoreboardUtils.*;
 public class Listeners implements Listener {
 
     private static Combat plugin;
-    //private Economy vault;
+    // private Economy vault;
 
     public Listeners(Combat plugin) {
         this.plugin = plugin;

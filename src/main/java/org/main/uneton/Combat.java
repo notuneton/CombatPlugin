@@ -90,8 +90,6 @@ public class Combat extends JavaPlugin implements Listener {
         saveConfig();
 
 
-        getCommand("addone").setExecutor(new Addone());
-
         // admin
         getCommand("cage").setExecutor(new Cage());
         getCommand("crash").setExecutor(new Crash());
@@ -153,7 +151,6 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new Secret(), this);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
-        Bukkit.getPluginManager().registerEvents(new WaterDamage(), this);
 
         getServer().getPluginManager().registerEvents(new PlayerAfkMove(this), this);
         new AfkCheckTask().runTaskTimer(this, 0, 20);

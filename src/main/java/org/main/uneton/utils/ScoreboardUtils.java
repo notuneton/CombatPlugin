@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
-import static org.main.uneton.utils.NumberFormatter.formatBigNumber;
 
 public class ScoreboardUtils {
 
@@ -117,8 +116,6 @@ public class ScoreboardUtils {
         int playerDeaths = deaths.getOrDefault(uuid, 0);
         setScore(objective, "  &fDeaths &a" + playerDeaths, 6);
         setScore(objective, "  &fKills &a" + playerKills, 5);
-        String counterText = String.format(ColorUtils.colorize("  &fCounts &6%s"), formatBigNumber(numbers.size()));
-        setScore(objective, counterText, 4);
 
         setScore(objective, "&8 ", 0);
         updateTitle(player);
