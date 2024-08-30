@@ -17,17 +17,17 @@ public class MessageHolder implements Listener {
     private final ConcurrentHashMap<Player, Boolean> spam = new ConcurrentHashMap<>();
 
     @EventHandler
+    @Deprecated
     public void onChatSpam(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
         String previousMessage = lastMessage.put(player, message);
         if (message.equalsIgnoreCase(previousMessage)) {
-            Bukkit.broadcastMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message '" + message + "' could not be sent!"));
+            Bukkit.broadcastMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message &f" + message + " &7could not be sent!"));
             event.setCancelled(true);
             return;
         }
 
-        // Check for spamming
         if (spam.putIfAbsent(player, true) != null) {
             event.setCancelled(true);
         } else {

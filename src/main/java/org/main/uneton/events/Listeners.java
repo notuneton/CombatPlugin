@@ -42,6 +42,7 @@ import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.Combat.doesCommandExist;
 import static org.main.uneton.Combat.getInstance;
 import static org.main.uneton.utils.ScoreboardUtils.*;
+import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Listeners implements Listener {
 
@@ -69,10 +70,9 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &f'"+command+"' &7is unknown or external command."));
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7'/"+command+"' is unknown or external command."));
+            playCancerSound(player);
             event.setCancelled(true);
-        } else if (!player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7Don't have permission to use that command!"));
         }
     }
 
@@ -151,6 +151,25 @@ public class Listeners implements Listener {
         Block block = event.getClickedBlock();
         if (block.getType() != Material.OAK_SIGN) return;
         event.getPlayer().openSign((Sign) block.getState());
+    }
+
+    @EventHandler
+    public void onMilkCow(PlayerInteractEntityEvent e) {
+        Player player = e.getPlayer();
+        ItemStack milk = new ItemStack(Material.MILK_BUCKET);
+        if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
+            if (Math.random() < 0.4) {
+                player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
+                e.setCancelled(true);
+            } else if (Math.random() < 0.5) {
+                player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
+                e.setCancelled(true);
+            } else if (Math.random() < 0.1) {
+                player.getInventory().addItem(milk);
+                player.getInventory().remove(Material.BUCKET);
+                player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
+            }
+        }
     }
 
     @EventHandler
