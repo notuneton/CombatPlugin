@@ -21,19 +21,19 @@ public class Guide implements CommandExecutor {
 
         switch (args.length) {
             case 1:
-                if ("komennot".equalsIgnoreCase(args[0])) {
+                if ("commands".equalsIgnoreCase(args[0])) {
                     sendBasicCommands(player);
                     break;
                 }
 
             case 2:
-                if ("oikeudet".equalsIgnoreCase(args[0])) {
+                if ("perms".equalsIgnoreCase(args[0])) {
                     sendPermissions(player);
                     break;
                 }
 
             case 3:
-                if ("admin".equalsIgnoreCase(args[0])) {
+                if ("adminCommands".equalsIgnoreCase(args[0])) {
                     if (player.hasPermission("combat.view.commands")) {
                         sendAdminCommands(player);
                         break;
@@ -97,22 +97,23 @@ public class Guide implements CommandExecutor {
     
     private void sendPermissions(Player player) {
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.view.commands"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.bypass.afkkick"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.pl.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.cage.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.crash.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.freeze.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.gm.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.heal.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.invsee.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.launch.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.slippery.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.vanish.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.setspawn.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.tp.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.time.sv"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &dcombat.tp.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.view.commands"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.bypass.afkkick"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.pl.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.cage.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.crash.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.freeze.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.gm.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.heal.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.invsee.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.launch.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.slippery.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.vanish.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.setspawn.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.tp.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.time.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.op.sv"));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.tp.sv"));
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
     }
 

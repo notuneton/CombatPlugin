@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GuideTabs implements TabCompleter {
 
-    String[] collections = {"komennot", "oikeudet"};
+    String[] collections = {"commands", "perms", "adminCommands"};
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

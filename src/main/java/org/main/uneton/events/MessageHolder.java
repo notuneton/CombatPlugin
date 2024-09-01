@@ -28,6 +28,10 @@ public class MessageHolder implements Listener {
             return;
         }
 
+        if (message.contains("gg")) {
+            event.setFormat(ColorUtils.colorize("&7"+ player.getName() + "> &6gg"));
+        }
+
         if (spam.putIfAbsent(player, true) != null) {
             event.setCancelled(true);
         } else {

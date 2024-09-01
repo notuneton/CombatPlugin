@@ -71,7 +71,6 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         createElytraRecipe();
         createOldEnchantedAppleRecipe();
-        startTitleScheduler(); // titlen päivitys
         new BukkitRunnable() {
             @Override
             public void run() {
