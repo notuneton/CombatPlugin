@@ -16,7 +16,6 @@ public class ScoreboardUtils {
 
     public static final HashMap<UUID, Integer> kills = new HashMap<>();
     public static final HashMap<UUID, Integer> deaths = new HashMap<>();
-    public static Map<UUID, Integer> numbers = new HashMap<>();
 
     private static int index = 0;
 
@@ -84,7 +83,7 @@ public class ScoreboardUtils {
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("scoreboard", "dummy", "");
+            objective = scoreboard.registerNewObjective("scoreboard", "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
 
@@ -100,8 +99,8 @@ public class ScoreboardUtils {
 
         int ping = player.getPing();
         double tps = getServerTPS();
-        setScore(objective , "  &fTPS &9" + String.format("%.2f", tps), 9);
-        setScore(objective, "  &fPing &d" + String.format(ping + "ms"), 8);
+        //  setScore(objective , "  &fTPS &9" + String.format("%.2f", tps), 9);
+        setScore(objective, "  &fPing &9" + String.format(ping + "ms"), 8);
 
         setScore(objective, "&7 ", 8);
         UUID uuid = player.getUniqueId();
@@ -141,7 +140,8 @@ public class ScoreboardUtils {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &fPlaytime &b%dh &b%dm %ds", hours, minutes, seconds);
+
+        return String.format("  &fPlaytime &e%dh &b%dm %ds", hours, minutes, seconds);
     }
     private static void clearExistingScores(Scoreboard scoreboard) {
         for (String entry : scoreboard.getEntries()) {

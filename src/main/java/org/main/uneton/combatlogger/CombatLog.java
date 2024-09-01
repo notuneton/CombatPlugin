@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.main.uneton.utils.ColorUtils;
 
@@ -64,15 +63,6 @@ public class CombatLog implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         endCombat(victim);
-    }
-
-    @EventHandler
-    public void onElytra(PlayerToggleFlightEvent event) {
-        Player player = event.getPlayer();
-        if (combat_tagged.containsKey(player)) {
-            event.setCancelled(true);
-            player.sendActionBar(ColorUtils.colorize("&x&E&1&2&1&4&AY&x&E&1&2&1&4&Ao&x&E&1&2&1&4&Au &x&E&1&2&1&4&Ac&x&E&1&2&1&4&Aa&x&E&1&2&1&4&An&x&E&1&2&1&4&An&x&E&1&2&1&4&Ao&x&E&1&2&1&4&At &x&E&1&2&1&4&Au&x&E&1&2&1&4&As&x&E&1&2&1&4&Ae &x&E&1&2&1&4&Ae&x&E&1&2&1&4&Al&x&E&1&2&1&4&Ay&x&E&1&2&1&4&At&x&E&1&2&1&4&Ar&x&E&1&2&1&4&Aa &x&E&1&2&1&4&Aw&x&E&1&2&1&4&Ah&x&E&1&2&1&4&Ai&x&E&1&2&1&4&Al&x&E&1&2&1&4&Ae &x&E&1&2&1&4&Ac&x&E&1&2&1&4&Ao&x&E&1&2&1&4&Am&x&E&1&2&1&4&Ab&x&E&1&2&1&4&Aa&x&E&1&2&1&4&At"));
-        }
     }
 
     private void startCombat(Player player, Player target) {

@@ -169,8 +169,7 @@ public class Combat extends JavaPlugin implements Listener {
         if (combat_tagged.containsKey(player)) {
             return;
         } else {
-            player.kickPlayer(ColorUtils.colorize("\n\n&6You were afk for too long, Relog to continue.\n\n"));
-            Bukkit.broadcastMessage(ColorUtils.colorize("&c" +player.getName()+ " was kicked for inactivity."));
+            Bukkit.broadcastMessage(ColorUtils.colorize(player.getName() + " was kicked for inactivity."));
         }
     }
 
@@ -236,7 +235,6 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         for (UUID uuid : playTimes.keySet()) {
-            getConfig().set("counts." + uuid, numbers.get(uuid));
             getConfig().set("deaths." + uuid, kills.get(uuid));
             getConfig().set("kills." + uuid, deaths.get(uuid));
             getConfig().set("playtime." + uuid, playTimes.get(uuid));

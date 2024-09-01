@@ -55,22 +55,41 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPing(PlayerMoveEvent event) {
+    public void onPingTooHard(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
         if (ping >= 300) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("\n&6You have been kicked out from the server for too high ping!\n");
+            String kickMessage = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for too high ping!\n\n");
             player.kickPlayer(kickMessage);
         }
     }
 
     @EventHandler
-    public void commandPreprocessNoPermissionFound(PlayerCommandPreprocessEvent event) {
+    public void onMilkCow(PlayerInteractEntityEvent e) {
+        Player player = e.getPlayer();
+        ItemStack milk = new ItemStack(Material.MILK_BUCKET);
+        if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
+            if (Math.random() < 0.4) {
+                player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
+                e.setCancelled(true);
+            } else if (Math.random() < 0.5) {
+                player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
+                e.setCancelled(true);
+            } else if (Math.random() < 0.1) {
+                player.getInventory().addItem(milk);
+                player.getInventory().remove(Material.BUCKET);
+                player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7'/"+command+"' is unknown or external command."));
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7'/"+command+"' was not found to be executable"));
             playCancerSound(player);
             event.setCancelled(true);
         }
@@ -151,25 +170,6 @@ public class Listeners implements Listener {
         Block block = event.getClickedBlock();
         if (block.getType() != Material.OAK_SIGN) return;
         event.getPlayer().openSign((Sign) block.getState());
-    }
-
-    @EventHandler
-    public void onMilkCow(PlayerInteractEntityEvent e) {
-        Player player = e.getPlayer();
-        ItemStack milk = new ItemStack(Material.MILK_BUCKET);
-        if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
-            if (Math.random() < 0.4) {
-                player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
-                e.setCancelled(true);
-            } else if (Math.random() < 0.5) {
-                player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
-                e.setCancelled(true);
-            } else if (Math.random() < 0.1) {
-                player.getInventory().addItem(milk);
-                player.getInventory().remove(Material.BUCKET);
-                player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
-            }
-        }
     }
 
     @EventHandler
