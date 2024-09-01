@@ -7,9 +7,6 @@ softdepend:
   - Vault
 
 commands:
-  addone:
-    usage: /addone
-
   cage:
     description: Create a cube around the player that the player cannot break.
     usage: /cage <player>
@@ -97,6 +94,9 @@ commands:
   msg:
     description: Send a whisper to the player.
     usage: /msg <player> <message>
+  op:
+    description: Makes the player the host of the server!
+    usage: /op <player>
   time:
     description: Sets the time to day or night.
     usage: /time <day|night>

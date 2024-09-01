@@ -28,7 +28,7 @@ import org.main.uneton.admin.Gm;
 import org.main.uneton.events.GmListener;
 import org.main.uneton.combatlogger.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
-import org.main.uneton.commands.Sudo;
+import org.main.uneton.commands_vanilla.Sudo;
 import org.main.uneton.events.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
@@ -112,13 +112,11 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("block").setExecutor(new Blockplayer());
         getCommand("daily").setExecutor(new Daily());
         getCommand("enderchest").setExecutor(new Enderchest());
-        getCommand("guide").setExecutor(new Guide());
         getCommand("ping").setExecutor(new Ping());
         getCommand("puu").setExecutor(new Puu());
         getCommand("repair").setExecutor(new Repair());
         getCommand("rules").setExecutor(new Rules());
         getCommand("sign").setExecutor(new Sign());
-        getCommand("sudo").setExecutor(new Sudo());
         getCommand("trash").setExecutor(new Trash());
         getCommand("unblock").setExecutor(new Unblock());
 
@@ -137,10 +135,13 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("vanish").setTabCompleter(new VanishTabs());
 
         // vanilla
+        getCommand("guide").setExecutor(new Guide());
         getCommand("clear").setExecutor(new Clear());
-        getCommand("tp").setExecutor(new Tp());
         getCommand("msg").setExecutor(new Msg());
+        getCommand("op").setExecutor(new Op());
+        getCommand("sudo").setExecutor(new Sudo());
         getCommand("time").setExecutor(new Time());
+        getCommand("tp").setExecutor(new Tp());
 
         // listeners
         Bukkit.getPluginManager().registerEvents(new BlockListener(), this);

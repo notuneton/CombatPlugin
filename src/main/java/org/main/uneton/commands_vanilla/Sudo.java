@@ -1,4 +1,4 @@
-package org.main.uneton.commands;
+package org.main.uneton.commands_vanilla;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -27,7 +27,7 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if (!allowedPlayers.contains(player.getName())) {
-            player.sendMessage(ColorUtils.colorize("&8[i]") + ColorUtils.colorize(" &cThis command can only be executed as a specific person! Here is the list of players that can execute this command: "+ allowedPlayers));
+            player.sendMessage(ColorUtils.colorize("&cThis command can only be executed as a specific person! Here is the list of players that can execute this command "+ allowedPlayers));
             playCancerSound(player);
             return true;
         }
