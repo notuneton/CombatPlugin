@@ -34,14 +34,12 @@ public class ScoreboardUtils {
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("scoreboard", "dummy", "");
+            objective = scoreboard.registerNewObjective("owo", "owo", ColorUtils.colorize("  &x&D&C&2&7&2&D&lF&x&E&A&2&D&3&8&ll&x&F&8&3&2&4&3&ly&x&F&F&3&B&4&A&lM&x&F&F&4&6&4&E&lu&x&F&F&5&2&5&2&ld  "));
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
 
         clearExistingScores(scoreboard);
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 12);
-        setScore(objective, "&9 ", 11);
+        setScore(objective, "&1 ", 11);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
@@ -49,11 +47,9 @@ public class ScoreboardUtils {
         setScore(objective, online, 10);
 
         int ping = player.getPing();
-        double tps = getServerTPS();
-        //  setScore(objective , "  &fTPS &9" + String.format("%.2f", tps), 9);
         setScore(objective, "  &fPing: &d" + String.format(ping + "ms"), 8);
 
-        setScore(objective, "&7 ", 8);
+        setScore(objective, "&2 ", 8);
         UUID uuid = player.getUniqueId();
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
         int hours = playtimeSeconds / 3600;
@@ -64,10 +60,21 @@ public class ScoreboardUtils {
         setScore(objective, playtimeString, 7);
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
+
+        String kdRatio;
+        if (playerDeaths > 0) {
+            double ratio = (double) playerKills / playerDeaths;
+            kdRatio = String.format("  &fK/D: &c%.2f", ratio);
+        } else {
+            kdRatio = "  &fK/D: &7NaN";
+        }
+        setScore(objective, kdRatio,9);
         setScore(objective, "  &fDeaths: &a" + playerDeaths, 6);
         setScore(objective, "  &fKills: &a" + playerKills, 5);
+        setScore(objective, "&3 ", 4);
 
-        setScore(objective, "&8 ", 0);
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
+        setScore(objective, currentTime, 0);
         player.setScoreboard(scoreboard);
     }
 

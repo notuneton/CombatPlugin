@@ -32,7 +32,8 @@ public class Ping implements CommandExecutor {
                 return true;
             }
             int ping = target.getPing();
-            player.sendActionBar(ColorUtils.colorize("&f" + target.getName()) + "'s ping: " + ChatColor.AQUA + String.format("%d ms", ping));
+            player.sendMessage(ColorUtils.colorize("&f" + target.getName()) + "'s ping: " + ChatColor.AQUA + String.format("%dms", ping));
+            player.sendActionBar(ColorUtils.colorize("&f" + target.getName()) + "'s ping: " + ChatColor.AQUA + String.format("%dms", ping));
         }
         return true;
     }
