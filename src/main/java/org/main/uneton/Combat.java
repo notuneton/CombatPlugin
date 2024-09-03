@@ -17,6 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.admin.*;
 import org.main.uneton.commands.BlockList;
 import org.main.uneton.commands_vanilla.*;
+import org.main.uneton.death.PlayerDeaths;
 import org.main.uneton.events.BlockListener;
 import org.main.uneton.commands.Blockplayer;
 import org.main.uneton.commands.Unblock;
@@ -143,6 +144,7 @@ public class Combat extends JavaPlugin implements Listener {
         getCommand("tp").setExecutor(new Tp());
 
         // listeners
+        Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), this);
         Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
