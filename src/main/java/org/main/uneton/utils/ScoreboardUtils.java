@@ -51,7 +51,7 @@ public class ScoreboardUtils {
         int ping = player.getPing();
         double tps = getServerTPS();
         //  setScore(objective , "  &fTPS &9" + String.format("%.2f", tps), 9);
-        setScore(objective, "  &fPing: &E&1&2&1&4&A" + String.format(ping + "ms"), 8);
+        setScore(objective, "  &fPing: &d" + String.format(ping + "ms"), 8);
 
         setScore(objective, "&7 ", 8);
         UUID uuid = player.getUniqueId();
