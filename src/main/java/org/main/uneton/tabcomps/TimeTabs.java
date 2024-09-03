@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class TimeTabs implements TabCompleter {
-    String[] collections = {"day", "night"};
+    String[] collections = {"day", "noon" ,"night"};
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
