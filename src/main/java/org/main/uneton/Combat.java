@@ -169,6 +169,8 @@ public class Combat extends JavaPlugin implements Listener {
         if (combat_tagged.containsKey(player)) {
             return;
         } else {
+            String str = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for Away-From-Keyboard.\n\n");
+            player.kickPlayer(str);
             Bukkit.broadcastMessage(ColorUtils.colorize(player.getName() + " was kicked for inactivity."));
         }
     }

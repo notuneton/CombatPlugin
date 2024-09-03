@@ -41,6 +41,7 @@ import static org.bukkit.Bukkit.getCommandMap;
 import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.Combat.doesCommandExist;
 import static org.main.uneton.Combat.getInstance;
+import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -58,9 +59,12 @@ public class Listeners implements Listener {
     public void onPingTooHard(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
+        if (combat_tagged.containsKey(player)) {
+            return;
+        }
         if (ping >= 300) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for too high ping!\n\n");
+            String kickMessage = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
         }
     }
@@ -88,7 +92,7 @@ public class Listeners implements Listener {
     public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
-        if (!doesCommandExist(command)) {
+        if (!doesCommandExist(command) || !player.hasPermission(command)) {
             player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7'/"+command+"' was not found to be executable"));
             playCancerSound(player);
             event.setCancelled(true);
