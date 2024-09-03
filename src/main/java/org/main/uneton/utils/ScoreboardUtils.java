@@ -38,6 +38,8 @@ public class ScoreboardUtils {
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
 
+        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
+        setScore(objective, currentTime, 12);
         clearExistingScores(scoreboard);
         setScore(objective, "&1 ", 11);
 
@@ -72,9 +74,6 @@ public class ScoreboardUtils {
         setScore(objective, "  &fDeaths: &a" + playerDeaths, 6);
         setScore(objective, "  &fKills: &a" + playerKills, 5);
         setScore(objective, "&3 ", 4);
-
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
-        setScore(objective, currentTime, 0);
         player.setScoreboard(scoreboard);
     }
 
