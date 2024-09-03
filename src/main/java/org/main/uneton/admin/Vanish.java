@@ -23,7 +23,6 @@ public class Vanish implements CommandExecutor {
         Vanish.plugin = plugin;
     }
     BukkitTask task;
-
     private final Set<Player> vanishedPlayers = new HashSet<>();
 
     @Override

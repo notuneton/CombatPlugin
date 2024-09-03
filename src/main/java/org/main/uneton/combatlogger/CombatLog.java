@@ -47,7 +47,7 @@ public class CombatLog implements Listener {
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player attacker && event.getEntity() instanceof Player victim) {
             startCombat(attacker, victim);
-            victim.sendMessage(ColorUtils.colorize("&7You are combatlogged by the player" + attacker));
+            victim.sendMessage(ColorUtils.colorize("&7You are combat-logged by " + attacker.getName()));
         }
     }
     
