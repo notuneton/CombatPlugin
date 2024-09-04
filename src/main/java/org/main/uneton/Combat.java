@@ -17,10 +17,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.admin.*;
 import org.main.uneton.commands.BlockList;
 import org.main.uneton.commands_vanilla.*;
-import org.main.uneton.death.PlayerDeaths;
+import org.main.uneton.events.PlayerDeaths;
 import org.main.uneton.events.BlockListener;
 import org.main.uneton.commands.Blockplayer;
 import org.main.uneton.commands.Unblock;
@@ -73,6 +74,7 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
+
         ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
         coarseDirtRecipe.shape("DD", "DD");
         coarseDirtRecipe.setIngredient('D', Material.DIRT);

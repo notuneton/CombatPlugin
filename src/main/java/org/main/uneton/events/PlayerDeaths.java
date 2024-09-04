@@ -1,4 +1,4 @@
-package org.main.uneton.death;
+package org.main.uneton.events;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

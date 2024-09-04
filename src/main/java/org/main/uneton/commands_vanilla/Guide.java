@@ -68,6 +68,8 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/vanish | Toggles vanish mode."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/time <day|night> Sets the time to day or night."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/tp <player> <target> | Teleports to or from the player."));
+
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/wipeprofile <player> | Wipe a player profile!"));
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
     }
 
