@@ -34,7 +34,7 @@ public class ScoreboardUtils {
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("owo", "owo", ColorUtils.colorize("  &x&D&C&2&7&2&D&lF&x&E&A&2&D&3&8&ll&x&F&8&3&2&4&3&ly&x&F&F&3&B&4&A&lM&x&F&F&4&6&4&E&lu&x&F&F&5&2&5&2&ld  "));
+            objective = scoreboard.registerNewObjective("scoreboard", "owo", ColorUtils.colorize("  &x&D&C&2&7&2&D&lF&x&E&A&2&D&3&8&ll&x&F&8&3&2&4&3&ly&x&F&F&3&B&4&A&lM&x&F&F&4&6&4&E&lu&x&F&F&5&2&5&2&ld  "));
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
 
