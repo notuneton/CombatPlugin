@@ -63,7 +63,7 @@ public class Magictrick implements CommandExecutor {
 
             target.getInventory().addItem(magicToyStick);
             for (Player user : Bukkit.getOnlinePlayers()) {
-                if (user.hasPermission("combat.see.messages")) {
+                if (user.hasPermission("combat.see.messages.*")) {
                     user.sendMessage(ColorUtils.colorize("&aGave " + target.getName() + "&a item &eMAGIC_TOY_STICK"));
                 }
             }
