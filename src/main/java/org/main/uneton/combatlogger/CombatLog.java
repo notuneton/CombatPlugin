@@ -54,7 +54,7 @@ public class CombatLog implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player exited = event.getPlayer();
         if (combat_tagged.containsKey(exited)) {
-            Bukkit.broadcastMessage(ColorUtils.colorize(exited.getName() + " was killed while disconnected!"));
+            Bukkit.broadcastMessage(ColorUtils.colorize("&c" + exited.getName() + " was killed while disconnected!"));
             exited.setHealth(0);
             endCombatTag(exited);
         }

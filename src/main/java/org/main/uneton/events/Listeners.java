@@ -2,6 +2,7 @@ package org.main.uneton.events;
 
 import net.kyori.adventure.text.Component;
 
+import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
@@ -32,10 +33,7 @@ import org.main.uneton.utils.Tab;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 import static org.bukkit.Bukkit.getCommandMap;
 import static org.bukkit.Bukkit.getPlayer;
@@ -93,9 +91,22 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7'/"+command+"' was not found to be executable"));
+            player.sendMessage(ColorUtils.colorize("\n\n&c&lNOT FOUND! &7'/"+command+"' was not found to be executable, possible no access.\n\n"));
             playCancerSound(player);
             event.setCancelled(true);
+        }
+    }
+    @EventHandler
+    public void onPlayerCommandSend(PlayerCommandSendEvent event) {
+        Player player = event.getPlayer();
+        Set<String> commands = (Set<String>) event.getCommands();
+        Iterator<String> iterator = commands.iterator();
+
+        while (iterator.hasNext()) {
+            String command = iterator.next();
+            if (!player.hasPermission(command)) {
+                iterator.remove(); // Remove command from the list if the player doesn't have permission
+            }
         }
     }
 
@@ -105,8 +116,8 @@ public class Listeners implements Listener {
         Tab.updateTab();
         ScoreboardUtils.createScoreboard(player);
 
-        String server = "dev-server";
-        player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7translated to the server &f"+ server + "&7."));
+        //String server = "dev-server";
+        //player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7translated to the server &f"+ server + "&7."));
 
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
         DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
@@ -148,6 +159,7 @@ public class Listeners implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         String playerName = event.getPlayer().getName();
         String message = event.getMessage();
+        Player player = event.getPlayer();
         String formattedMessage = ColorUtils.colorize("&7"+playerName + "> " + message);
         event.setFormat(formattedMessage);
     }
