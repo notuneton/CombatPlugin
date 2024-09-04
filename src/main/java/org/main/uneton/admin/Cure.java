@@ -37,6 +37,7 @@ public class Cure implements CommandExecutor {
             }
 
             target.setHealth(20.0);
+            player.setFoodLevel(20);
             String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+ ");
             target.sendMessage(success + ColorUtils.colorize("&7You have been healed by &e" + player.getName() + "&7."));
             player.sendMessage(success + ColorUtils.colorize("&7You have healed &e" + target.getName() + "&7."));

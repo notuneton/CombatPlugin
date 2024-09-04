@@ -48,6 +48,10 @@ public class Spawn implements CommandExecutor {
                         player.sendMessage(warned + "Cancelled!");
                     }
                 } else {
+                    if (player.getLocation().distance(initialLocation) > 1) {
+                        player.sendActionBar(warned + "Teleport failed : you were moved!");
+                        this.cancel();
+                    }
                     player.sendActionBar(ColorUtils.colorize("&7Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
                     secondsPassed++;
                 }
