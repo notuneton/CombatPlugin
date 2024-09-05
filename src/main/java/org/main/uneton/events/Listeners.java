@@ -113,13 +113,13 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTab();
+        Tab.updateTablist();
         ScoreboardUtils.createScoreboard(player);
 
         //String server = "dev-server";
         //player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7translated to the server &f"+ server + "&7."));
-
         // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
+
         DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
         LocalDateTime now = LocalDateTime.now();
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
@@ -128,7 +128,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTab();
+        Tab.updateTablist();
         ScoreboardUtils.createScoreboard(player);
 
         // String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");

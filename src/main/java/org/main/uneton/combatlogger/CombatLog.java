@@ -51,6 +51,7 @@ public class CombatLog implements Listener {
     }
     
     @EventHandler
+    @Deprecated
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player exited = event.getPlayer();
         if (combat_tagged.containsKey(exited)) {
