@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,6 +45,7 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
+import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 

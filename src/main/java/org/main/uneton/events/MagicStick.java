@@ -120,24 +120,21 @@ public class MagicStick implements Listener {
         } else {
             return;
         }
-
         e.blockList().forEach(b -> {
             for (int i = 0; i < 6; i++) {
                 Location bloc = b.getLocation();
                 Vector direction = bloc.toVector().subtract(location.toVector()).normalize();
 
                 double randomFactor = 1.2;
-                double force = 1.1;
+                double force = 1.2;
                 Vector velocity = direction.multiply(force).add(new Vector(
                         (Math.random() - 0.5) * randomFactor,
                         Math.random() * 0.5,
                         (Math.random() - 0.5) * randomFactor
                 ));
-
                 if (!Double.isFinite(velocity.getX()) || !Double.isFinite(velocity.getY()) || !Double.isFinite(velocity.getZ())) {
                     velocity = new Vector(0, 0, 0);
                 }
-
                 FallingBlock fallingBlock = w.spawn(b.getLocation(), FallingBlock.class);
                 fallingBlock.setVelocity(velocity);
             }

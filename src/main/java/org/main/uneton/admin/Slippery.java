@@ -93,8 +93,8 @@ public class Slippery implements CommandExecutor {
         return true;
     }
 
-    private void dropItems(Player target, ItemStack invitems) {
-        target.getWorld().dropItemNaturally(target.getLocation(), invitems);
-        target.getInventory().remove(invitems);
+    private void dropItems(Player target, ItemStack inv_items) {
+        target.getWorld().dropItemNaturally(target.getLocation(), inv_items);
+        target.getInventory().remove(inv_items);
     }
 }

@@ -1,6 +1,9 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
@@ -68,7 +71,7 @@ public class ScoreboardUtils {
             double ratio = (double) playerKills / playerDeaths;
             kdRatio = String.format("  &fK/D: &c%.2f", ratio);
         } else {
-            kdRatio = "  &fK/D: &7NaN";
+            kdRatio = "  &fK/D: &7&oNaN";
         }
         setScore(objective, kdRatio,9);
         setScore(objective, "  &fDeaths: &a" + playerDeaths, 6);
@@ -82,9 +85,6 @@ public class ScoreboardUtils {
     }
     public static void addDeath(UUID playeruuid) {
         deaths.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
-    }
-    private static double getServerTPS() {
-        return Bukkit.getServer().getTPS()[0];
     }
 
     private static String formatPlaytime(int hours, int minutes, int seconds) {
