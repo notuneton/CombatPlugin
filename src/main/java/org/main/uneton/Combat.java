@@ -77,10 +77,6 @@ public class Combat extends JavaPlugin implements Listener {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
 
-        ShapedRecipe coarseDirtRecipe = new ShapedRecipe(new NamespacedKey(this, "coarseDirtRecipe"), compDirt());
-        coarseDirtRecipe.shape("DD", "DD");
-        coarseDirtRecipe.setIngredient('D', Material.DIRT);
-        Bukkit.addRecipe(coarseDirtRecipe);
         createElytraRecipe();
         createOldEnchantedAppleRecipe();
         new BukkitRunnable() {
@@ -181,7 +177,7 @@ public class Combat extends JavaPlugin implements Listener {
         if (combat_tagged.containsKey(player)) {
             return;
         } else {
-            String str = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for Away-From-Keyboard.\n\n");
+            String str = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for AFK.\n\n");
             player.kickPlayer(str);
             Bukkit.broadcastMessage(ColorUtils.colorize("&c" + player.getName() + " was kicked for inactivity."));
         }
@@ -216,34 +212,6 @@ public class Combat extends JavaPlugin implements Listener {
         elytraRecipe.setIngredient('P', Material.PHANTOM_MEMBRANE);
         elytraRecipe.setIngredient('D', Material.DIAMOND);
         Bukkit.addRecipe(elytraRecipe);
-    }
-
-    private ItemStack compDirt() {
-        ItemStack compDirt = new ItemStack(Material.COARSE_DIRT, 1);
-        ItemMeta compDirtMeta = compDirt.getItemMeta();
-        compDirtMeta.setDisplayName(ChatColor.YELLOW + "Compressed Dirt");
-        NamespacedKey key = new NamespacedKey(this, "custom_dirt");
-        compDirtMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "true");
-        compDirt.setItemMeta(compDirtMeta);
-        return compDirt;
-    }
-
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
-        Block block = event.getBlock();
-        Location loc = block.getLocation();
-        if (block.getType() == Material.COARSE_DIRT) {
-            ItemStack itemInHand = event.getPlayer().getInventory().getItemInMainHand();
-            if (itemInHand.hasItemMeta()) {
-                ItemMeta meta = itemInHand.getItemMeta();
-                NamespacedKey key = new NamespacedKey(this, "custom_dirt");
-                if (meta.getPersistentDataContainer().has(key, PersistentDataType.STRING)) {
-                    event.setDropItems(false);
-                    ItemStack dirt = new ItemStack(Material.DIRT, 9);
-                    block.getWorld().dropItemNaturally(loc, dirt);
-                }
-            }
-        }
     }
 
     @EventHandler
