@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class Tab {
 
-    public static void updateTablist() {
+    public static void updateTab() {
         String headerColor = "\n  \n";
         String footerColor = "\n  \n";
         for (Player player : Bukkit.getOnlinePlayers()) {

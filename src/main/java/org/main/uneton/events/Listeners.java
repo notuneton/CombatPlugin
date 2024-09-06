@@ -97,16 +97,16 @@ public class Listeners implements Listener {
             event.setCancelled(true);
         }
     }
+
     @EventHandler
     public void onPlayerCommandSend(PlayerCommandSendEvent event) {
         Player player = event.getPlayer();
         Set<String> commands = (Set<String>) event.getCommands();
         Iterator<String> iterator = commands.iterator();
-
         while (iterator.hasNext()) {
             String command = iterator.next();
             if (!player.hasPermission(command)) {
-                iterator.remove(); // Remove command from the list if the player doesn't have permission
+                iterator.remove();
             }
         }
     }
@@ -114,7 +114,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTablist();
+        Tab.updateTab();
         ScoreboardUtils.createScoreboard(player);
 
         //String server = "dev-server";
@@ -129,7 +129,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTablist();
+        Tab.updateTab();
         ScoreboardUtils.createScoreboard(player);
 
         // String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
