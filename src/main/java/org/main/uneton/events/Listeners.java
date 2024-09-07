@@ -36,10 +36,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static org.bukkit.Bukkit.getCommandMap;
-import static org.bukkit.Bukkit.getPlayer;
-import static org.main.uneton.Combat.doesCommandExist;
-import static org.main.uneton.Combat.getInstance;
+import static org.bukkit.Bukkit.*;
+import static org.main.uneton.Combat.*;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
@@ -63,7 +61,7 @@ public class Listeners implements Listener {
         }
         if (ping >= 300) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("\n\n&cYou have been kicked out from the server for too high ping.\n\n");
+            String kickMessage = ColorUtils.colorize("\n\n&7&lConnection Terminated\n\n&cYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
         }
     }
@@ -92,10 +90,26 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("\n\n&c&lNOT FOUND! &7'/"+command+"' was not found to be executable, possible no access.\n\n"));
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7the command '/"+command+"' not found to be executable, Or Mayby I Expected Access &a" + getPermissionName(command)));
+
             playCancerSound(player);
             event.setCancelled(true);
+
+
+            /*
+            if (getPermissionName(command) == null) {
+
+            }
+             */
         }
+    }
+
+    private String getPermissionName(String command) {
+        Command cmd = Bukkit.getCommandMap().getCommand(command);
+        if (cmd != null) {
+            return cmd.getPermission();
+        }
+        return null;
     }
 
     @EventHandler
@@ -114,27 +128,18 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTab();
+        // Tab.updateTab();
+        startUpdatingScoreboard(player, getInstance());
         ScoreboardUtils.createScoreboard(player);
 
-        //String server = "dev-server";
-        //player.sendMessage(ColorUtils.colorize("&3>&b> &8+ &7translated to the server &f"+ server + "&7."));
-        // String join = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime now = LocalDateTime.now();
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTab();
-        ScoreboardUtils.createScoreboard(player);
+        // Tab.updateTab();
 
-        // String quit = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l>");
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime now = LocalDateTime.now();
         e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
     }
 
@@ -182,6 +187,48 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        UUID uuid = player.getUniqueId();
+        if (!kills.containsKey(uuid)) {
+            int countsKilled = getInstance().getConfig().getInt("kills." + uuid, 0);
+            kills.put(uuid, countsKilled);
+        }
+        if (!deaths.containsKey(uuid)) {
+            int countsDeaths = getInstance().getConfig().getInt("deaths." + uuid, 0);
+            deaths.put(uuid, countsDeaths);
+        }
+        if (!playTimes.containsKey(uuid)) {
+            int playtimeSeconds = getInstance().getConfig().getInt("playtime." + uuid, 0);
+            playTimes.put(uuid, playtimeSeconds);
+        }
+    }
+
+    @EventHandler
+    public void onZombieDeath(EntityDeathEvent event) {
+        if (event.getEntity() instanceof Zombie) {
+            Location loc = event.getEntity().getLocation();
+            Player killer = event.getEntity().getKiller();
+            ItemStack lowChanceReward = new ItemStack(Material.DIAMOND, 1);
+            if (killer != null) {
+                double chance = 0.01;
+                if (Math.random() < chance) {
+                    loc.getWorld().dropItemNaturally(loc, lowChanceReward);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDeathByPlayer(PlayerDeathEvent event) {
+        Player victim = event.getPlayer();
+        Player killer = victim.getKiller();
+        if (killer != null) {
+            killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
+        }
+    }
+
+    @EventHandler
     public void onPlayerInteractSign(PlayerInteractEvent event) {
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
         Block block = event.getClickedBlock();
@@ -209,20 +256,6 @@ public class Listeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void onShearSheep(PlayerInteractEntityEvent event) {
-        Player player = event.getPlayer();
-        Location loc = player.getLocation();
-        if (event.getRightClicked() instanceof Sheep) {
-            if (player.getInventory().getItemInMainHand().getType() == Material.SHEARS) {
-                Random chance = new Random();
-                if (chance.nextDouble() < 0.001) {
-                    woolDrop(player, loc);
-                }
-            }
-        }
-    }
-
     private final ItemStack[] blocksList = new ItemStack[]{
             new ItemStack(Material.EMERALD),
             new ItemStack(Material.AMETHYST_SHARD),
@@ -231,19 +264,6 @@ public class Listeners implements Listener {
             new ItemStack(Material.COPPER_INGOT),
             new ItemStack(Material.STRING)
     };
-
-    private void woolDrop(Player player, Location loc) {
-        ItemStack bluegem = new ItemStack(Material.LAPIS_LAZULI, 1);
-        ItemMeta bluegem_meta = bluegem.getItemMeta();
-        bluegem_meta.setDisplayName(ChatColor.BLUE + "Blue gem color");
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(" ");
-        lore.add(ChatColor.GREEN + "Probability: " + ChatColor.YELLOW + "0.001%");
-        bluegem_meta.setLore(lore);
-        bluegem.setItemMeta(bluegem_meta);
-
-        player.getWorld().dropItemNaturally(loc, bluegem);
-    }
 
     @EventHandler
     @Deprecated

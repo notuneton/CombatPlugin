@@ -1,4 +1,4 @@
-package org.main.uneton.commands_vanilla;
+package org.main.uneton.vanillaCmds;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

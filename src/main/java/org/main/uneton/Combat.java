@@ -3,25 +3,18 @@ package org.main.uneton;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.admin.*;
 import org.main.uneton.commands.BlockList;
-import org.main.uneton.commands_vanilla.*;
+import org.main.uneton.vanillaCmds.*;
 import org.main.uneton.events.PlayerDeaths;
 import org.main.uneton.events.BlockListener;
 import org.main.uneton.commands.Blockplayer;
@@ -34,7 +27,7 @@ import org.main.uneton.admin.Gm;
 import org.main.uneton.events.GmListener;
 import org.main.uneton.combatlogger.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
-import org.main.uneton.commands_vanilla.Sudo;
+import org.main.uneton.vanillaCmds.Sudo;
 import org.main.uneton.events.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
@@ -59,14 +52,6 @@ public class Combat extends JavaPlugin implements Listener {
     public static Combat getInstance() {
         return instance;
     }
-    public static Combat getInstance;
-    public static HashMap<UUID, Double> economy = new HashMap<>();
-
-
-    // private Economy vault;
-    // private Config config = new Config(this, "economy");
-    // private FileConfiguration fileConfig = config.getConfig();
-
     private ProtocolManager protocolManager;
     public void onLoad() {
         protocolManager = ProtocolLibrary.getProtocolManager();
@@ -78,7 +63,7 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
 
         createElytraRecipe();
-        createOldEnchantedAppleRecipe();
+        createEnchantedAppleRecipe();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -183,7 +168,7 @@ public class Combat extends JavaPlugin implements Listener {
         }
     }
 
-    private void createOldEnchantedAppleRecipe() {
+    private void createEnchantedAppleRecipe() {
         ItemStack notch_apple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);
         ItemMeta notch_apple_meta = notch_apple.getItemMeta();
         if (notch_apple_meta != null) {
@@ -214,25 +199,6 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.addRecipe(elytraRecipe);
     }
 
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-        if (!kills.containsKey(uuid)) {
-            int countsKilled = getConfig().getInt("kills." + uuid, 0);
-            kills.put(uuid, countsKilled);
-        }
-        if (!deaths.containsKey(uuid)) {
-            int countsDeaths = getConfig().getInt("deaths." + uuid, 0);
-            deaths.put(uuid, countsDeaths);
-        }
-        if (!playTimes.containsKey(uuid)) {
-            int playtimeSeconds = getConfig().getInt("playtime." + uuid, 0);
-            playTimes.put(uuid, playtimeSeconds);
-        }
-        startUpdatingScoreboard(player, this);
-    }
-
     public static boolean doesCommandExist(String commandName) {
         CommandMap commandMap = getCommandMap();
         if (commandMap != null) {
@@ -252,93 +218,3 @@ public class Combat extends JavaPlugin implements Listener {
         saveConfig();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        getLogger().info(String.format("Disabled Version %s", getDescription().getName(), getDescription().getVersion()));
-        saveEconomy();
-
-
-
-        this.vault = VaultHook.hook(this);
-        loadEconomy(); // todo better error handling if vault cannot be hooked
-        loadData();
-
-        Config c = new Config(Combat.getInstance(), "data_config");
-        c.load();
-        c.getConfig().set("sd", "lol");
-        c.save();
-        double number = 1234567890123456789012345678901234567890.0;
-        System.out.println(formatNumber(number));
-
-    }
-
-
-    private void loadEconomy() {
-        if (fileConfig.isConfigurationSection("balances")) {
-            for (String playerUuid : fileConfig.getConfigurationSection("balances").getKeys(false)) {
-                double balance = fileConfig.getDouble("balances." + playerUuid);
-                UUID uuid = UUID.fromString(playerUuid);
-                economy.put(uuid, balance);
-            }
-        }
-    }
-
-    public void saveEconomy() {
-        for (Map.Entry<UUID, Double> entry : economy.entrySet()) {
-            UUID uuid = entry.getKey();
-            double balance = entry.getValue();
-            fileConfig.set("balances." + uuid, balance);
-        }
-        config.save();
-        config.reload();
-    }
-
-
-    public static Economy hook(Combat plugin) {
-        plugin.getLogger().info("Hooking economy...");
-        if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
-            plugin.getLogger().log(Level.WARNING, "Vault not found, Economy features disabled.");
-            return null;
-        } else {
-            plugin.getServer().getServicesManager().register(Economy.class, new EcoImpl(), plugin, ServicePriority.Highest);
-            RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
-            if (rsp != null) {
-                Economy vault;
-                vault = rsp.getProvider();
-                plugin.getLogger().info("Economy hooked! (" + vault.getName() + ")");
-                return vault;
-            }
-        }
-        return null;
-    }
-    public Economy getVault() {
-        return vault;
-    }
-*/
