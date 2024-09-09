@@ -18,11 +18,12 @@ import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class MagicStick implements Listener {
+public class MagicStickEvent implements Listener {
 
-    private static final Set<Block> explosionLocs = new HashSet<>();
+    private static final Set<Block> explosionLocations = new HashSet<>();
 
     private final double trailLength = 100; // Hiukkaspolun pituus suhde
     public static final int explosionPower = 8; // räjähdyksen voima
@@ -102,10 +103,9 @@ public class MagicStick implements Listener {
         }.runTaskTimer(Combat.getInstance(), 0L, 1L);
     }
 
-
     public static void explode(Location location) {
         World w = location.getWorld();
-        explosionLocs.add(location.getBlock());
+        explosionLocations.add(location.getBlock());
         w.createExplosion(location, explosionPower, false, true);
     }
 
@@ -115,17 +115,17 @@ public class MagicStick implements Listener {
         Location location = explosionPoint.getLocation();
         World w = location.getWorld();
         if (w == null) return;
-        if (explosionLocs.contains(explosionPoint)) {
-            explosionLocs.remove(explosionPoint);
+        if (explosionLocations.contains(explosionPoint)) {
+            explosionLocations.remove(explosionPoint);
         } else {
             return;
         }
         e.blockList().forEach(b -> {
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 5; i++) {
                 Location bloc = b.getLocation();
                 Vector direction = bloc.toVector().subtract(location.toVector()).normalize();
 
-                double randomFactor = 1.2;
+                double randomFactor = 1.1;
                 double force = 1.2;
                 Vector velocity = direction.multiply(force).add(new Vector(
                         (Math.random() - 0.5) * randomFactor,
@@ -135,21 +135,11 @@ public class MagicStick implements Listener {
                 if (!Double.isFinite(velocity.getX()) || !Double.isFinite(velocity.getY()) || !Double.isFinite(velocity.getZ())) {
                     velocity = new Vector(0, 0, 0);
                 }
+
                 FallingBlock fallingBlock = w.spawn(b.getLocation(), FallingBlock.class);
                 fallingBlock.setVelocity(velocity);
+                b.getDrops().clear();
             }
         });
-    }
-
-    @EventHandler
-    public void onFallingBlockLand(EntityChangeBlockEvent event) {
-        if (event.getEntityType() == EntityType.FALLING_BLOCK) {
-            Entity entity = event.getEntity();
-            if (entity instanceof FallingBlock) {
-                entity.remove();
-                ((FallingBlock) entity).setDropItem(false);
-                event.getBlock().getDrops().clear();
-            }
-        }
     }
 }

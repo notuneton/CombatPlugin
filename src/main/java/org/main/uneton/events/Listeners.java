@@ -106,15 +106,9 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
             player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
-            player.sendMessage(ColorUtils.colorize("&d&lDEBUG! &7command permission here: " + getPermissionName(command)));
+            player.sendMessage(ColorUtils.colorize("&d&lDEBUG! &7command permission here: &9" + getPermissionName(command)));
             playCancerSound(player);
             event.setCancelled(true);
-
-            /*
-            if (getPermissionName(command) == null) {
-
-            }
-             */
         }
     }
 
@@ -148,7 +142,7 @@ public class Listeners implements Listener {
         if (killer != null && !killer.equals(victim)) {
             ItemStack blood = new ItemStack(Material.BONE, 3);
             Item dropped = location.getWorld().dropItemNaturally(location, blood);
-            dropped.setPickupDelay(32767);
+            dropped.setCanPlayerPickup(false);
             Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
                 if (dropped.isValid()) {
                     dropped.remove();

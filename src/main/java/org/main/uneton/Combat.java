@@ -32,7 +32,7 @@ import org.main.uneton.events.TrashEvent;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
 import org.main.uneton.commands.Trash;
-import org.main.uneton.events.MagicStick;
+import org.main.uneton.events.MagicStickEvent;
 import org.main.uneton.utils.AfkCheckTask;
 import org.main.uneton.utils.ColorUtils;
 
@@ -140,7 +140,7 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
         Bukkit.getPluginManager().registerEvents(new GmListener(), this);
         Bukkit.getPluginManager().registerEvents(new Listeners(this), this);
-        Bukkit.getPluginManager().registerEvents(new MagicStick(), this);
+        Bukkit.getPluginManager().registerEvents(new MagicStickEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MessageHolder(), this);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), this);
 
