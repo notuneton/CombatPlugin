@@ -45,11 +45,8 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 public class Listeners implements Listener {
 
     private static Combat plugin;
-    // private Economy vault;
-
     public Listeners(Combat plugin) {
         this.plugin = plugin;
-        // this.vault = plugin.getVault();
     }
 
     @EventHandler
@@ -61,9 +58,27 @@ public class Listeners implements Listener {
         }
         if (ping >= 300) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("\n\n&7&lConnection Terminated\n\n&cYou have been kicked out from the server for too high ping.\n\n");
+            String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated:\n\n&cYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
         }
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player player = e.getPlayer();
+        // Tab.updateTab();
+
+        e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
+    }
+
+    @EventHandler
+    public void onJoinEvent(PlayerJoinEvent e) {
+        Player player = e.getPlayer();
+        // Tab.updateTab();
+        startUpdatingScoreboard(player, getInstance());
+        ScoreboardUtils.createScoreboard(player);
+
+        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
@@ -74,12 +89,12 @@ public class Listeners implements Listener {
             if (Math.random() < 0.4) {
                 player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
                 e.setCancelled(true);
-            } else if (Math.random() < 0.5) {
+            } else if (Math.random() < 0.4) {
                 player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
                 e.setCancelled(true);
-            } else if (Math.random() < 0.1) {
+            } else if (Math.random() < 0.2) {
                 player.getInventory().addItem(milk);
-                player.getInventory().remove(Material.BUCKET);
+                player.getInventory().removeItem(new ItemStack(Material.WATER_BUCKET, 1));
                 player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
             }
         }
@@ -90,11 +105,10 @@ public class Listeners implements Listener {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7the command '/"+command+"' not found to be executable, Or Mayby I Expected Access &a" + getPermissionName(command)));
-
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
+            player.sendMessage(ColorUtils.colorize("&d&lDEBUG! &7command permission here: " + getPermissionName(command)));
             playCancerSound(player);
             event.setCancelled(true);
-
 
             /*
             if (getPermissionName(command) == null) {
@@ -123,24 +137,6 @@ public class Listeners implements Listener {
                 iterator.remove();
             }
         }
-    }
-
-    @EventHandler
-    public void onJoinEvent(PlayerJoinEvent e) {
-        Player player = e.getPlayer();
-        // Tab.updateTab();
-        startUpdatingScoreboard(player, getInstance());
-        ScoreboardUtils.createScoreboard(player);
-
-        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
-    }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        Player player = e.getPlayer();
-        // Tab.updateTab();
-
-        e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
@@ -224,7 +220,7 @@ public class Listeners implements Listener {
         Player victim = event.getPlayer();
         Player killer = victim.getKiller();
         if (killer != null) {
-            killer.sendMessage(ChatColor.GREEN + "+300" + ChatColor.WHITE + " Kill.");
+            killer.sendMessage(ColorUtils.colorize("&a+$300 &fKill."));
         }
     }
 

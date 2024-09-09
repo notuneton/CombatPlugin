@@ -26,7 +26,7 @@ public class ScoreboardUtils {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(plugin, 0L, 10L);
+        }.runTaskTimer(plugin, 0L, 20L);
     }
 
     public static void createScoreboard(Player player) {
