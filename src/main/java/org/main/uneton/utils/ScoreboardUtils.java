@@ -6,15 +6,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
+import static org.main.uneton.utils.ConfigManager.*;
 
 public class ScoreboardUtils {
-
-    public static final HashMap<UUID, Integer> kills = new HashMap<>();
-    public static final HashMap<UUID, Integer> deaths = new HashMap<>();
 
     public static void startUpdatingScoreboard(Player player, Combat plugin) {
         new BukkitRunnable() {
@@ -71,30 +68,12 @@ public class ScoreboardUtils {
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
         int hours = playtimeSeconds / 3600;
         int minutes = (playtimeSeconds % 3600) / 60;
-        String playtimeString = formatPlaytime(hours, minutes, playtimeSeconds);
+        int seconds = playtimeSeconds % 60;
+        String playtimeString = formatPlaytime(hours, minutes, seconds);
         setScore(objective, playtimeString, 1);
 
         setScore(objective, "&3 ", 0);
         player.setScoreboard(scoreboard);
-    }
-
-    public static void addKill(UUID playeruuid) {
-        kills.put(playeruuid, kills.getOrDefault(playeruuid, 0) + 1);
-    }
-    public static void addDeath(UUID playeruuid) {
-        deaths.put(playeruuid, deaths.getOrDefault(playeruuid, 0) + 1);
-    }
-
-    private static String formatPlaytime(int hours, int minutes, int seconds) {
-        if (seconds >= 60) {
-            hours += minutes / 60;
-            seconds %= 60;
-        }
-        if (minutes >= 60) {
-            hours += minutes / 60;
-            minutes %= 60;
-        }
-        return String.format("  &fPlaytime: &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     private static void clearExistingScores(Scoreboard scoreboard) {

