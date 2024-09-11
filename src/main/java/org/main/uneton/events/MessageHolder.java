@@ -23,7 +23,7 @@ public class MessageHolder implements Listener {
         String message = event.getMessage();
         String previousMessage = lastMessage.put(player, message);
         if (message.equalsIgnoreCase(previousMessage)) {
-            Bukkit.broadcastMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message &f" + message + " &7could not be sent!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message &f" + message + " &7could not be sent!"));
             event.setCancelled(true);
             return;
         }

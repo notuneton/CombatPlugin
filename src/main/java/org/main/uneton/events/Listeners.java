@@ -39,7 +39,7 @@ public class Listeners implements Listener {
         if (combat_tagged.containsKey(player)) {
             return;
         }
-        if (ping >= 300) {
+        if (ping >= 600) {
             String user = player.getName();
             String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated:\n\n&cYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
