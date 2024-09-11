@@ -78,6 +78,11 @@ public class Listeners implements Listener {
         startUpdatingScoreboard(player, getInstance());
         ScoreboardUtils.createScoreboard(player);
 
+        boolean feed_players = this.plugin.getConfig().getBoolean("feed-players");
+        if (feed_players) {
+            player.setFoodLevel(20);
+        }
+
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
     }
 

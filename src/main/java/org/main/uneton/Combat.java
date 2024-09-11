@@ -40,6 +40,7 @@ import java.util.*;
 import static org.bukkit.Bukkit.getCommandMap;
 import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
+import static org.main.uneton.utils.CustomConfigManager.save;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 
 public class Combat extends JavaPlugin implements Listener {
@@ -61,7 +62,6 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
-        //todo how i can sout & debug into console if server was [WARN]: Can't keep up! Is the server overloaded? Running 5466ms or 109 ticks behind???
         createElytraRecipe();
         createEnchantedAppleRecipe();
         new BukkitRunnable() {
@@ -213,8 +213,9 @@ public class Combat extends JavaPlugin implements Listener {
         for (UUID uuid : playTimes.keySet()) {
             getConfig().set("deaths." + uuid, kills.get(uuid));
             getConfig().set("kills." + uuid, deaths.get(uuid));
-            getConfig().set("playtime." + uuid, playTimes.get(uuid));
+            getConfig().set("seconds." + uuid, playTimes.get(uuid));
         }
         saveConfig();
+        save();
     }
 }
