@@ -33,7 +33,7 @@ public class Daily implements CommandExecutor {
 
         UUID playerUUID = player.getUniqueId();
         if (isOnCooldown(playerUUID)) {
-            long timeLeft = getTimeLeft(playerUUID, 86400);
+            long timeLeft = getTimeLeft(playerUUID);
             String formattedTimeLeft = formatTime(timeLeft);
             player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You must wait " + formattedTimeLeft + "&7 before using this command again."));
         } else {
@@ -42,7 +42,7 @@ public class Daily implements CommandExecutor {
             player.getInventory().addItem(raffledItem);
             String success = ColorUtils.colorize("&2>&a> &8+ &a");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 3.0f);
-            player.sendMessage(success + ColorUtils.colorize("You have successfully claimed &3" + raffledItem.getType()+"&a!"));
+            player.sendMessage(success + ColorUtils.colorize("You have successfully claimed &e" + raffledItem.getType()+"!"));
         }
 
         return true;
@@ -59,11 +59,11 @@ public class Daily implements CommandExecutor {
         return false;
     }
 
-    private long getTimeLeft(UUID playerUUID, int cooldownSeconds) {
+    private long getTimeLeft(UUID playerUUID) {
         if (cooldowns.containsKey(playerUUID)) {
             long lastUsed = cooldowns.get(playerUUID);
             long currentTime = System.currentTimeMillis();
-            long cooldownTime = cooldownSeconds * 1000L;
+            long cooldownTime = 86400 * 1000L;
 
             return (cooldownTime - (currentTime - lastUsed)) / 1000;
         }
