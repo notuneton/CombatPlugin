@@ -32,20 +32,14 @@ public class SetSpawn implements CommandExecutor {
             return true;
         }
 
-        Location loc = player.getLocation();
-        plugin.getConfig().set("spawn", loc);
-        plugin.saveConfig();
-        String success = ColorUtils.colorize("&2>&a> &8+ &7");
-        player.sendMessage(success + ColorUtils.colorize("&aSuccessfully set the spawn to : X " + loc.getBlockX() + ", Y: " + loc.getBlockY() + ", X: " + loc.getBlockZ()));
-        return true;
-
-
-
-        /*
+        Location location = player.getLocation();
         plugin.getConfig().set("spawn.x", location.getX());
         plugin.getConfig().set("spawn.y", location.getY());
         plugin.getConfig().set("spawn.z", location.getZ());
         plugin.getConfig().set("spawn.worldName", location.getWorld().getName());
-         */
+        plugin.saveConfig();
+        String success = ColorUtils.colorize("&2>&a> &8+ &7");
+        player.sendMessage(success + ColorUtils.colorize("&7Successfully set the &aspawn&7 to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ()));
+        return true;
     }
 }
