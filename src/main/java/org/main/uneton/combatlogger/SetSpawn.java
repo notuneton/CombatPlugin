@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockCanBuildEvent;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
@@ -33,10 +34,7 @@ public class SetSpawn implements CommandExecutor {
         }
 
         Location location = player.getLocation();
-        plugin.getConfig().set("spawn.x", location.getX());
-        plugin.getConfig().set("spawn.y", location.getY());
-        plugin.getConfig().set("spawn.z", location.getZ());
-        plugin.getConfig().set("spawn.worldName", location.getWorld().getName());
+        plugin.getConfig().set("spawn", location);
         plugin.saveConfig();
         String success = ColorUtils.colorize("&2>&a> &8+ &7");
         player.sendMessage(success + ColorUtils.colorize("&7Successfully set the &aspawn&7 to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ()));

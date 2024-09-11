@@ -14,9 +14,8 @@ import org.main.uneton.vanillaCmds.*;
 public class RegistersUtils {
 
     private static Combat plugin;
-
     public RegistersUtils(Combat plugin) {
-        this.plugin = plugin;
+        RegistersUtils.plugin = plugin;
     }
 
     public static void registerCommands() {
@@ -56,7 +55,7 @@ public class RegistersUtils {
         plugin.getCommand("tp").setExecutor(new Tp());
     }
 
-    public static void registerTabCompleters() {
+    public static void registerTabCompletes() {
         plugin.getCommand("daily").setTabCompleter(new DailyTabs());
         plugin.getCommand("enderchest").setTabCompleter(new EnderchestTabs());
         plugin.getCommand("guide").setTabCompleter(new GuideTabs());
