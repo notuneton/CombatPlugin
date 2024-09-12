@@ -49,6 +49,7 @@ public class ScoreboardUtils {
         clearExistingScores(scoreboard);
         setScore(objective, "&1 ", 10);
 
+        setScore(objective, "  &fYou: &6"+ player.getName(), 8);
         UUID uuid = player.getUniqueId();
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);

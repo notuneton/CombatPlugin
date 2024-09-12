@@ -92,14 +92,13 @@ public class Combat extends JavaPlugin implements Listener {
     }
 
     public void kickPlayerForAFK(Player player) {
-        if (player.hasPermission("combat.bypass.afkkick") || combat_tagged.containsKey(player)) {
+        if (player.hasPermission("combat.bypass.afkkick") && combat_tagged.containsKey(player)) {
             return;
         }
-
         Location afk_location = this.getConfig().getLocation("spawn-location");
-
-        player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to &espawn&c!"));
-        player.sendMessage(ColorUtils.colorize("&cYou were spawned in &eStart-zone&c!"));
+        player.sendMessage("\n");
+        player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to &bLimbo&c!"));
+        player.sendMessage(ColorUtils.colorize("&cYou were spawned in &bLimbo&c!"));
         player.sendMessage("\n");
         player.teleport(afk_location);
         Bukkit.broadcastMessage(ColorUtils.colorize("&ca " + player.getName() + " was kicked for inactivity."));

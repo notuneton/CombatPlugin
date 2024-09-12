@@ -1,12 +1,9 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.main.uneton.Combat;
 
 import java.io.File;
@@ -18,7 +15,7 @@ public class ConfigManager {
     private final Combat plugin;
     private static FileConfiguration config;
     private static File configFile;
-    public static Map<UUID, Integer> playTimes = null; // Track player playTimes in a map
+    public static Map<UUID, Integer> playTimes = null;
     public static final Map<UUID, Integer> kills = new HashMap<>();
     public static final Map<UUID, Integer> deaths = new HashMap<>();
 
@@ -53,9 +50,9 @@ public class ConfigManager {
         }
     }
 
+    // Save players data
     public void saveAllData() {
         FileConfiguration config = ConfigManager.get();
-        // Save players data
         Set<UUID> alluuids = new HashSet<>();
         alluuids.addAll(playTimes.keySet());
         alluuids.addAll(kills.keySet());
@@ -82,7 +79,6 @@ public class ConfigManager {
             Bukkit.getLogger().warning("Failed to load configuration. Configuration is null.");
             return;
         }
-
         ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtime");
         if (playtimeSection != null) {
             for (String key : playtimeSection.getKeys(false)) {
@@ -91,7 +87,6 @@ public class ConfigManager {
                 playTimes.put(uuid, playtime);
             }
         }
-
         ConfigurationSection killsSection = config.getConfigurationSection("kills");
         if (killsSection != null) {
             for (String key : killsSection.getKeys(false)) {
@@ -100,7 +95,6 @@ public class ConfigManager {
                 kills.put(uuid, killsCount);
             }
         }
-
         ConfigurationSection deathsSection = config.getConfigurationSection("deaths");
         if (deathsSection != null) {
             for (String key : deathsSection.getKeys(false)) {

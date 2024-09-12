@@ -67,7 +67,7 @@ public class Spawn implements CommandExecutor {
         Location spawnLocation = plugin.getConfig().getLocation("spawn-location");
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&2>&a> &7You were spawned in &estart-zone&7!"));
+            player.sendMessage(ColorUtils.colorize("&2>&a> &7You have been teleported to &espawn&7!"));
             return true;
         }
         player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cLocation not found! Please contact an admin."));
