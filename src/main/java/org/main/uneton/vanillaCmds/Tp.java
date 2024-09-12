@@ -41,7 +41,6 @@ public class Tp implements CommandExecutor {
             }
             player.teleport(target);
             player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7Teleporting. Whoosh..."));
-            target.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &8+ &7'"+ target.getName() + "' Teleported to you!"));
         }
 
         if (args.length == 2) {

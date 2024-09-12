@@ -57,14 +57,15 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        ConfigManager.reload();
 
         UUID uuid = player.getUniqueId();
         configManager = new ConfigManager(plugin);
-
         int playtime = playTimes.getOrDefault(uuid, 0);
-        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG!
-        playTimes.put(uuid, playtime);
 
+        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
+
+        playTimes.put(uuid, playtime);
         ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
 
         ConfigManager.save();
@@ -79,15 +80,19 @@ public class Listeners implements Listener {
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
-        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG!
-        startUpdatingScoreboard(player, getInstance());
 
+        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
+
+        startUpdatingScoreboard(player, getInstance());
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
+
         boolean feed_players = plugin.getConfig().getBoolean("feed-players");
-        if (feed_players = true) {
+        if (feed_players) {
             player.setFoodLevel(20);
-        } else if (feed_players = false){
+            player.sendMessage(ColorUtils.colorize("&aYour food-level was set to '20'"));
+        } else {
             player.setFoodLevel(0);
+            player.sendMessage(ColorUtils.colorize("&aYour food-level was set to '0'"));
         }
     }
 

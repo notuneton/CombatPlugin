@@ -6,10 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockCanBuildEvent;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
+import org.main.uneton.utils.ConfigManager;
 
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -19,6 +19,8 @@ public class SetSpawn implements CommandExecutor {
     public SetSpawn(Combat plugin) {
         this.plugin = plugin;
     }
+
+    private final String success = ColorUtils.colorize("&2>&a> &8+ &7");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -35,9 +37,8 @@ public class SetSpawn implements CommandExecutor {
 
         Location location = player.getLocation();
         plugin.getConfig().set("spawn", location);
-        plugin.saveConfig();
-        String success = ColorUtils.colorize("&2>&a> &8+ &7");
-        player.sendMessage(success + ColorUtils.colorize("&7Successfully set the &aspawn&7 to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ()));
+        ConfigManager.save();
+        player.sendMessage(success + ColorUtils.colorize("Successfully set the &aspawn&7 to : X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", X: " + location.getBlockZ()));
         return true;
     }
 }

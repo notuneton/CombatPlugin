@@ -43,7 +43,6 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
-
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
         ConfigManager.loadAllData();
@@ -83,6 +82,10 @@ public class Combat extends JavaPlugin implements Listener {
     public void onDisable() {
         configManager = new ConfigManager(this);
         configManager.saveAllData();
+
+        if (getConfig().get("spawn") != null) {
+            ConfigManager.save();
+        }
     }
 
     public ConfigManager getConfigManager() {
@@ -103,7 +106,10 @@ public class Combat extends JavaPlugin implements Listener {
         }
 
         Location afk_location = this.getConfig().getLocation("spawn");
+        player.sendMessage("\n");
         player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to &espawn&c!"));
+        player.sendMessage(ColorUtils.colorize("&cYou were spawned in &eStart-zone&c!"));
+        player.sendMessage("\n");
         player.teleport(afk_location);
         Bukkit.broadcastMessage(ColorUtils.colorize("&ca " + player.getName() + " was kicked for inactivity."));
     }
