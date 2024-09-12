@@ -8,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockExplodeEvent;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +17,6 @@ import org.bukkit.util.Vector;
 import org.main.uneton.Combat;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class MagicStickEvent implements Listener {

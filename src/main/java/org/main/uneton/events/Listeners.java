@@ -56,7 +56,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        // Tab.updateTab();
+        Tab.updateTab();
 
         UUID uuid = player.getUniqueId();
         configManager = new ConfigManager(plugin);
@@ -74,15 +74,15 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
+        Tab.updateTab();
 
-        // Tab.updateTab();
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
         Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG!
         startUpdatingScoreboard(player, getInstance());
 
+        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
         boolean feed_players = plugin.getConfig().getBoolean("feed-players");
         if (feed_players = true) {
             player.setFoodLevel(20);

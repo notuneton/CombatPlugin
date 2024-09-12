@@ -7,10 +7,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Objects;
-
-import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
-
 public class Deaths implements Listener {
 
     @EventHandler
