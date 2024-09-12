@@ -1,6 +1,8 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,9 +11,7 @@ import org.main.uneton.Combat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ConfigManager {
 
@@ -26,7 +26,6 @@ public class ConfigManager {
         this.plugin = plugin;
         playTimes = new HashMap<>();
     }
-
     public static void setup(Combat plugin) {
         configFile = new File(plugin.getDataFolder(), "config.yml");
         if (!configFile.exists()) {
@@ -56,15 +55,24 @@ public class ConfigManager {
 
     public void saveAllData() {
         FileConfiguration config = ConfigManager.get();
-        for (UUID uuid : playTimes.keySet()) {
-            config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
+        // Save players data
+        Set<UUID> alluuids = new HashSet<>();
+        alluuids.addAll(playTimes.keySet());
+        alluuids.addAll(kills.keySet());
+        alluuids.addAll(deaths.keySet());
+        for (UUID uuid : alluuids) {
+            if (playTimes.containsKey(uuid)) {
+                config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
+            }
+            if (kills.containsKey(uuid)) {
+                config.set("kills." + uuid.toString(), kills.get(uuid));
+            }
+            if (deaths.containsKey(uuid)) {
+                config.set("deaths." + uuid.toString(), deaths.get(uuid));
+            }
         }
-        for (UUID uuid : kills.keySet()) {
-            config.set("kills." + uuid.toString(), kills.get(uuid));
-        }
-        for (UUID uuid : deaths.keySet()) {
-            config.set("deaths." + uuid.toString(), deaths.get(uuid));
-        }
+        String joinMessage = plugin.getConfig().getString("join-message");
+        config.set("join-message", joinMessage);
         ConfigManager.save();
     }
 
@@ -74,12 +82,31 @@ public class ConfigManager {
             Bukkit.getLogger().warning("Failed to load configuration. Configuration is null.");
             return;
         }
-        ConfigurationSection section = config.getConfigurationSection("players-playtime");
-        if (section != null) {
-            for (String key : section.getKeys(false)) {
+
+        ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtime");
+        if (playtimeSection != null) {
+            for (String key : playtimeSection.getKeys(false)) {
                 UUID uuid = UUID.fromString(key);
-                int playtime = section.getInt(key);
+                int playtime = playtimeSection.getInt(key);
                 playTimes.put(uuid, playtime);
+            }
+        }
+
+        ConfigurationSection killsSection = config.getConfigurationSection("kills");
+        if (killsSection != null) {
+            for (String key : killsSection.getKeys(false)) {
+                UUID uuid = UUID.fromString(key);
+                int killsCount = killsSection.getInt(key);
+                kills.put(uuid, killsCount);
+            }
+        }
+
+        ConfigurationSection deathsSection = config.getConfigurationSection("deaths");
+        if (deathsSection != null) {
+            for (String key : deathsSection.getKeys(false)) {
+                UUID uuid = UUID.fromString(key);
+                int deathsCount = deathsSection.getInt(key);
+                deaths.put(uuid, deathsCount);
             }
         }
     }

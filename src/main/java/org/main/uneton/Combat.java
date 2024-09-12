@@ -46,25 +46,22 @@ public class Combat extends JavaPlugin implements Listener {
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
         ConfigManager.loadAllData();
-
+        saveDefaultConfig();
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {
+            for (Player loop_player : Bukkit.getOnlinePlayers()) {
 
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                UUID uuid = player.getUniqueId();
+                UUID uuid = loop_player.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlaytime + 1);
-                ConfigManager.get().set("players-playtime." + uuid, playTimes.get(uuid));
+                ConfigManager.get().set("players-playtime." + uuid.toString(), playTimes.get(uuid));
             }
             ConfigManager.save();
         };
         scheduler.runTaskTimer(this, runnable, 0L, viive);
 
-
-        saveDefaultConfig();
         saveConfig();
-
         RecipeManager.createElytraRecipe();
         RecipeManager.createEnchantedAppleRecipe();
 
@@ -77,15 +74,10 @@ public class Combat extends JavaPlugin implements Listener {
         new AfkCheckTask().runTaskTimer(this, 0, 20);
     }
 
-
     @Override
     public void onDisable() {
         configManager = new ConfigManager(this);
         configManager.saveAllData();
-
-        if (getConfig().get("spawn") != null) {
-            ConfigManager.save();
-        }
     }
 
     public ConfigManager getConfigManager() {
@@ -105,8 +97,8 @@ public class Combat extends JavaPlugin implements Listener {
             return;
         }
 
-        Location afk_location = this.getConfig().getLocation("spawn");
-        player.sendMessage("\n");
+        Location afk_location = this.getConfig().getLocation("spawn-location");
+
         player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to &espawn&c!"));
         player.sendMessage(ColorUtils.colorize("&cYou were spawned in &eStart-zone&c!"));
         player.sendMessage("\n");

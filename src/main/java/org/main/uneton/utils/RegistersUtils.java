@@ -11,6 +11,8 @@ import org.main.uneton.events.*;
 import org.main.uneton.tabcomps.*;
 import org.main.uneton.vanillaCmds.*;
 
+import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
+
 public class RegistersUtils {
 
     private static Combat plugin;

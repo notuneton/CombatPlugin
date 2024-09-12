@@ -43,7 +43,7 @@ public class Spawn implements CommandExecutor {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel();
                     if (!teleportPlayer(player)) {
-                        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7[i] &cTeleportation cancelled."));
+                        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleportation cancelled."));
                     }
                     return;
                 }
@@ -53,7 +53,6 @@ public class Spawn implements CommandExecutor {
                     this.cancel();
                     return;
                 }
-
                 player.sendActionBar(ColorUtils.colorize("&7Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
                 secondsPassed++;
             }
@@ -65,14 +64,12 @@ public class Spawn implements CommandExecutor {
             player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport failed, You are combat tagged!"));
             return false;
         }
-
-        Location spawnLoc = plugin.getConfig().getLocation("spawn");
-        if (spawnLoc != null) {
-            player.teleport(spawnLoc);
-            player.sendMessage(ColorUtils.colorize("&cYou were spawned in &estart-zone&c!"));
+        Location spawnLocation = plugin.getConfig().getLocation("spawn-location");
+        if (spawnLocation != null) {
+            player.teleport(spawnLocation);
+            player.sendMessage(ColorUtils.colorize("&2>&a> &7You were spawned in &estart-zone&7!"));
             return true;
         }
-
         player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cLocation not found! Please contact an admin."));
         return false;
     }

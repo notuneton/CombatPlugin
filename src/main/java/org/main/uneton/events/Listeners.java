@@ -60,13 +60,11 @@ public class Listeners implements Listener {
         ConfigManager.reload();
 
         UUID uuid = player.getUniqueId();
-        configManager = new ConfigManager(plugin);
         int playtime = playTimes.getOrDefault(uuid, 0);
-
-        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
-
         playTimes.put(uuid, playtime);
         ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
+
+        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
 
         ConfigManager.save();
         e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
@@ -77,23 +75,21 @@ public class Listeners implements Listener {
         Player player = e.getPlayer();
         Tab.updateTab();
 
-        UUID uuid = player.getUniqueId();
-        int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
-        playTimes.put(uuid, playtime);
-
-        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
-
         startUpdatingScoreboard(player, getInstance());
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
 
-        boolean feed_players = plugin.getConfig().getBoolean("feed-players");
-        if (feed_players) {
-            player.setFoodLevel(20);
-            player.sendMessage(ColorUtils.colorize("&aYour food-level was set to '20'"));
-        } else {
-            player.setFoodLevel(0);
-            player.sendMessage(ColorUtils.colorize("&aYour food-level was set to '0'"));
+        String joinMessage = plugin.getConfig().getString("join-message");
+        if (joinMessage != null) {
+            joinMessage = joinMessage.replace("%player%", player.getName());
+            player.sendMessage("\n");
+            player.sendMessage(ColorUtils.colorize(joinMessage));
+            player.sendMessage("\n");
         }
+
+        UUID uuid = player.getUniqueId();
+        int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
+        playTimes.put(uuid, playtime);
+        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
     }
 
     @EventHandler
