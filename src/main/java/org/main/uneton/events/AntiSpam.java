@@ -11,7 +11,7 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MessageHolder implements Listener {
+public class AntiSpam implements Listener {
 
     private final ConcurrentHashMap<Player, String> lastMessage = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<Player, Boolean> spam = new ConcurrentHashMap<>();
@@ -23,13 +23,11 @@ public class MessageHolder implements Listener {
         String message = event.getMessage();
         String previousMessage = lastMessage.put(player, message);
         if (message.equalsIgnoreCase(previousMessage)) {
+            player.sendMessage("\n");
             player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message &f" + message + " &7could not be sent!"));
+            player.sendMessage("\n");
             event.setCancelled(true);
             return;
-        }
-
-        if (message.contains(":gg:")) {
-            event.setFormat(ColorUtils.colorize("&7"+ player.getName() + "> &6gg"));
         }
 
         if (spam.putIfAbsent(player, true) != null) {

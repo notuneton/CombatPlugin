@@ -4,6 +4,7 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,7 @@ import org.main.uneton.utils.*;
 
 import java.util.*;
 
+import static org.bukkit.Bukkit.getCommandMap;
 import static org.main.uneton.Combat.*;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.*;
@@ -131,8 +133,17 @@ public class Listeners implements Listener {
         }
     }
 
+    public static boolean doesCommandExist(String commandName) {
+        CommandMap commandMap = getCommandMap();
+        if (commandMap != null) {
+            Command command = commandMap.getCommand(commandName);
+            return command != null;
+        }
+        return false;
+    }
+
     private String getPermissionName(String command) {
-        Command cmd = Bukkit.getCommandMap().getCommand(command);
+        Command cmd = getCommandMap().getCommand(command);
         if (cmd != null) {
             return cmd.getPermission();
         }
