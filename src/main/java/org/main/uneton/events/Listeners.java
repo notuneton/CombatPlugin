@@ -175,7 +175,7 @@ public class Listeners implements Listener {
         String playerName = event.getPlayer().getName();
         String message = event.getMessage();
         Player player = event.getPlayer();
-        String formattedMessage = ColorUtils.colorize("&7"+playerName + "> " + message);
+        String formattedMessage = ColorUtils.colorize("&7"+playerName + ": " + message);
         event.setFormat(formattedMessage);
     }
 
@@ -186,9 +186,22 @@ public class Listeners implements Listener {
             Player killer = event.getEntity().getKiller();
             ItemStack lowChanceReward = new ItemStack(Material.DIAMOND, 1);
             if (killer != null) {
-                double chance = 0.1;
+                double chance = 0.01;
                 if (Math.random() < chance) {
                     loc.getWorld().dropItemNaturally(loc, lowChanceReward);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onMoveAwayVoid(EntityDamageEvent event) {
+        if (event.getEntity() != null && event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            int y_coordinate = -64;
+            if (event.getCause() == EntityDamageEvent.DamageCause.VOID) {
+                if (player.getLocation().getY() <= y_coordinate) {
+                    player.setHealth(0);
                 }
             }
         }

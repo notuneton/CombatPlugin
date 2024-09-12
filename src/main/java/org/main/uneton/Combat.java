@@ -6,12 +6,15 @@ import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.utils.ConfigManager;
 import org.main.uneton.utils.RegistersUtils;
 import org.main.uneton.events.*;
@@ -29,17 +32,19 @@ public class Combat extends JavaPlugin implements Listener {
     
     private static Combat instance;
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
-    private ConfigManager configManager;
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     private final Map<UUID, Long> lastMovementTime = new HashMap<>();
     private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
     public static Combat getInstance() {
         return instance;
     }
-    private ProtocolManager protocolManager;
     public void onLoad() {
         protocolManager = ProtocolLibrary.getProtocolManager();
     }
+    private ProtocolManager protocolManager;
+    private ConfigManager configManager;
+    long viive = 20L;
+
 
     @Override
     public void onEnable() {
@@ -48,19 +53,20 @@ public class Combat extends JavaPlugin implements Listener {
 
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
-        ConfigManager.loadAllData(); // Load data on startup
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    UUID uuid = player.getUniqueId();
-                    int currentPlaytime = playTimes.getOrDefault(uuid, 0);
-                    playTimes.put(uuid, currentPlaytime + 1);
-                    ConfigManager.get().set("players-playtime." + uuid, playTimes.get(uuid));
-                }
-                ConfigManager.save();
+        ConfigManager.loadAllData();
+
+        BukkitScheduler scheduler = Bukkit.getScheduler();
+        Runnable runnable = () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                UUID uuid = player.getUniqueId();
+                int currentPlaytime = playTimes.getOrDefault(uuid, 0);
+                playTimes.put(uuid, currentPlaytime + 1);
+                ConfigManager.get().set("players-playtime." + uuid, playTimes.get(uuid));
             }
-        }.runTaskTimer(this, 0L, 20L);
+            ConfigManager.save();
+        };
+        scheduler.runTaskTimer(this, runnable, 0L, viive);
+
 
         saveDefaultConfig();
         saveConfig();

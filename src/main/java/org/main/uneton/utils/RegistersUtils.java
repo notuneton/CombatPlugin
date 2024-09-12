@@ -71,6 +71,7 @@ public class RegistersUtils {
     }
 
     public static void registerEventListeners() {
+        Bukkit.getPluginManager().registerEvents(new AntiSpam(), plugin);
         Bukkit.getPluginManager().registerEvents(new CombatLog(plugin), plugin);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), plugin);
         Bukkit.getPluginManager().registerEvents(new BlockListener(), plugin);
@@ -78,7 +79,6 @@ public class RegistersUtils {
         Bukkit.getPluginManager().registerEvents(new GmListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new Listeners(plugin), plugin);
         Bukkit.getPluginManager().registerEvents(new MagicStickEvent(), plugin);
-        Bukkit.getPluginManager().registerEvents(new MessageHolder(), plugin);
         Bukkit.getPluginManager().registerEvents(new TrashEvent(), plugin);
     }
 }
