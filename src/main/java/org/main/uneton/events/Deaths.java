@@ -21,7 +21,7 @@ public class Deaths implements Listener {
             return;
         }
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " swallowed too big an apple... Or just noclip in a wall"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " swallowed too big apple... Or just noclip in a wall"));
         }
     }
 
@@ -34,7 +34,7 @@ public class Deaths implements Listener {
         }
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FALL) {
             event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " believed he could fly, but couldn't.."));
-            if (Math.random() < 0.2) {
+            if (Math.random() < 0.01) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " thought he could fly, What an autist.."));
             }
         }

