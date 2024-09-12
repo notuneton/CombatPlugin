@@ -6,6 +6,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.*;
 import org.main.uneton.Combat;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
@@ -26,6 +28,12 @@ public class ScoreboardUtils {
         }.runTaskTimer(plugin, 0L, 20L);
     }
 
+    public static String getCurrentFormattedTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        LocalDateTime now = LocalDateTime.now();
+        return now.format(formatter);
+    }
+
     public static void createScoreboard(Player player) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
@@ -35,7 +43,7 @@ public class ScoreboardUtils {
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
 
-        String currentTime = ColorUtils.colorize("&7" + TimeUtils.getCurrentFormattedTime());
+        String currentTime = ColorUtils.colorize("&7" + getCurrentFormattedTime());
         setScore(objective, currentTime, 8);
 
         clearExistingScores(scoreboard);
