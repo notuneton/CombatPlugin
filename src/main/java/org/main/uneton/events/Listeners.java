@@ -81,9 +81,7 @@ public class Listeners implements Listener {
         String joinMessage = plugin.getConfig().getString("join-message");
         if (joinMessage != null) {
             joinMessage = joinMessage.replace("%player%", player.getName());
-            player.sendMessage("\n");
             player.sendMessage(ColorUtils.colorize(joinMessage));
-            player.sendMessage("\n");
         }
 
         UUID uuid = player.getUniqueId();

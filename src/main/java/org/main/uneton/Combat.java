@@ -46,12 +46,10 @@ public class Combat extends JavaPlugin implements Listener {
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
         ConfigManager.loadAllData();
-        saveDefaultConfig();
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {
             for (Player loop_player : Bukkit.getOnlinePlayers()) {
-
                 UUID uuid = loop_player.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlaytime + 1);
@@ -61,6 +59,7 @@ public class Combat extends JavaPlugin implements Listener {
         };
         scheduler.runTaskTimer(this, runnable, 0L, viive);
 
+        saveDefaultConfig();
         saveConfig();
         RecipeManager.createElytraRecipe();
         RecipeManager.createEnchantedAppleRecipe();

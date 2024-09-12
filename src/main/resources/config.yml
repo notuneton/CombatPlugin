@@ -1,4 +1,4 @@
-join-message: '%nl%%nl%&fWelcome to the server &9%player%&f!%nl%'
+join-message: '&fWelcome to the server &9%player%&f!'
 spawn-location:
 players-playtime:
 deaths:
