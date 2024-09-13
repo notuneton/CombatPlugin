@@ -11,8 +11,6 @@ import org.main.uneton.events.*;
 import org.main.uneton.tabcomps.*;
 import org.main.uneton.vanillaCmds.*;
 
-import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
-
 public class RegistersUtils {
 
     private static Combat plugin;
@@ -76,6 +74,7 @@ public class RegistersUtils {
         Bukkit.getPluginManager().registerEvents(new AntiSpam(), plugin);
         Bukkit.getPluginManager().registerEvents(new CombatLog(plugin), plugin);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), plugin);
+        Bukkit.getPluginManager().registerEvents(new SelfDeaths(), plugin);
         Bukkit.getPluginManager().registerEvents(new BlockListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new GmListener(), plugin);

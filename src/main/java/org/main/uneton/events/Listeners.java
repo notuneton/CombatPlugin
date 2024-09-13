@@ -108,25 +108,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onMilkCow(PlayerInteractEntityEvent e) {
-        Player player = e.getPlayer();
-        ItemStack milk = new ItemStack(Material.MILK_BUCKET);
-        if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
-            if (Math.random() < 0.4) {
-                player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
-                e.setCancelled(true);
-            } else if (Math.random() < 0.4) {
-                player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
-                e.setCancelled(true);
-            } else if (Math.random() < 0.2) {
-                player.getInventory().addItem(milk);
-                player.getInventory().removeItem(new ItemStack(Material.WATER_BUCKET, 1));
-                player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
-            }
-        }
-    }
-
-    @EventHandler
     public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
@@ -164,6 +145,25 @@ public class Listeners implements Listener {
             String command = iterator.next();
             if (!player.hasPermission(command)) {
                 iterator.remove();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onMilkCow(PlayerInteractEntityEvent e) {
+        Player player = e.getPlayer();
+        ItemStack milk = new ItemStack(Material.MILK_BUCKET);
+        if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
+            if (Math.random() < 0.4) {
+                player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
+                e.setCancelled(true);
+            } else if (Math.random() < 0.4) {
+                player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
+                e.setCancelled(true);
+            } else if (Math.random() < 0.2) {
+                player.getInventory().addItem(milk);
+                player.getInventory().removeItem(new ItemStack(Material.BUCKET, 1));
+                player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
             }
         }
     }

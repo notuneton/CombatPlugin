@@ -3,16 +3,10 @@ package org.main.uneton;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.util.EulerAngle;
-import org.bukkit.util.Vector;
 import org.main.uneton.utils.*;
 import org.main.uneton.events.*;
 
@@ -70,9 +64,6 @@ public class Combat extends JavaPlugin implements Listener {
         registerCommands();
         registerTabCompletes();
         registerEventListeners();
-
-        getServer().getPluginManager().registerEvents(new PlayerAfkMove(this), this);
-        new AfkCheckTask().runTaskTimer(this, 0, 20);
     }
 
     @Override
@@ -83,27 +74,6 @@ public class Combat extends JavaPlugin implements Listener {
 
     public ConfigManager getConfigManager() {
         return configManager;
-    }
-
-    public static void updatePlayerActivity(Player player) {
-        lastMovementTime.put(player.getUniqueId(), System.currentTimeMillis());
-    }
-
-    public static long getLastActivityTime(Player player) {
-        return lastMovementTime.getOrDefault(player.getUniqueId(), 0L);
-    }
-
-    public void kickPlayerForAFK(Player player) {
-        if (player.hasPermission("combat.bypass.afkkick") && combat_tagged.containsKey(player)) {
-            return;
-        }
-        Location afk_location = this.getConfig().getLocation("spawn-location");
-        player.sendMessage("\n");
-        player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to &bLimbo&c!"));
-        player.sendMessage(ColorUtils.colorize("&cYou were spawned in &bLimbo&c!"));
-        player.sendMessage("\n");
-        player.teleport(afk_location);
-        Bukkit.broadcastMessage(ColorUtils.colorize("&ca " + player.getName() + " was kicked for inactivity."));
     }
 }
 
