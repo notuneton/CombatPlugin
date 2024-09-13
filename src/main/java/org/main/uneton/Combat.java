@@ -3,6 +3,7 @@ package org.main.uneton;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -46,6 +47,7 @@ public class Combat extends JavaPlugin implements Listener {
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
         ConfigManager.loadAllData();
+
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {

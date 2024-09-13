@@ -5,6 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -57,6 +58,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
+        e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
         ConfigManager.reload();
 
         UUID uuid = player.getUniqueId();
@@ -65,9 +67,7 @@ public class Listeners implements Listener {
         ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
 
         Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
-
         ConfigManager.save();
-        e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
     }
 
     @EventHandler
@@ -87,6 +87,7 @@ public class Listeners implements Listener {
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
+
         Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
     }
 
@@ -101,7 +102,6 @@ public class Listeners implements Listener {
             ConfigManager.addKill(attackerUUID);
             ConfigManager.addDeath(victimUUID);
 
-            // Päivitä scoreboard molemmille pelaajille
             ScoreboardUtils.createScoreboard(attacker);
             ScoreboardUtils.createScoreboard(victim);
         }
@@ -166,33 +166,6 @@ public class Listeners implements Listener {
                 iterator.remove();
             }
         }
-    }
-
-    @EventHandler
-    public void onDropOnDeath(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        Player killer = victim.getKiller();
-        Location location = victim.getLocation();
-
-        if (killer != null && !killer.equals(victim)) {
-            ItemStack blood = new ItemStack(Material.BONE, 3);
-            Item dropped = location.getWorld().dropItemNaturally(location, blood);
-            dropped.setCanPlayerPickup(false);
-            Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
-                if (dropped.isValid()) {
-                    dropped.remove();
-                }
-            }, 200L);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerChatFormat(AsyncPlayerChatEvent event) {
-        String playerName = event.getPlayer().getName();
-        String message = event.getMessage();
-        Player player = event.getPlayer();
-        String formattedMessage = ColorUtils.colorize("&7"+playerName + ": " + message);
-        event.setFormat(formattedMessage);
     }
 
     @EventHandler
