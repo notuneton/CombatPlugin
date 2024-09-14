@@ -43,7 +43,6 @@ public class RegistersUtils {
         plugin.getCommand("ping").setExecutor(new Ping());
         plugin.getCommand("puu").setExecutor(new Puu());
         plugin.getCommand("repair").setExecutor(new Repair());
-        plugin.getCommand("rules").setExecutor(new Rules());
         plugin.getCommand("sign").setExecutor(new Sign());
         plugin.getCommand("trash").setExecutor(new Trash());
         plugin.getCommand("unblock").setExecutor(new Unblock());
@@ -61,7 +60,6 @@ public class RegistersUtils {
         plugin.getCommand("guide").setTabCompleter(new GuideTabs());
         plugin.getCommand("puu").setTabCompleter(new PuuTabs());
         plugin.getCommand("repair").setTabCompleter(new RepairTabs());
-        plugin.getCommand("rules").setTabCompleter(new RulesTabs());
         plugin.getCommand("sign").setTabCompleter(new SignTabs());
         plugin.getCommand("spawn").setTabCompleter(new SpawnTabs());
         plugin.getCommand("time").setTabCompleter(new TimeTabs());

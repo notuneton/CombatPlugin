@@ -50,7 +50,6 @@ public class ConfigManager {
         }
     }
 
-    // Save players data
     public void saveAllData() {
         FileConfiguration config = ConfigManager.get();
         Set<UUID> alluuids = new HashSet<>();
@@ -59,13 +58,13 @@ public class ConfigManager {
         alluuids.addAll(deaths.keySet());
         for (UUID uuid : alluuids) {
             if (playTimes.containsKey(uuid)) {
-                config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
+                config.set("players-playtimes." + uuid.toString(), playTimes.get(uuid));
             }
             if (kills.containsKey(uuid)) {
-                config.set("kills." + uuid.toString(), kills.get(uuid));
+                config.set("player-kills." + uuid.toString(), kills.get(uuid));
             }
             if (deaths.containsKey(uuid)) {
-                config.set("deaths." + uuid.toString(), deaths.get(uuid));
+                config.set("player-deaths." + uuid.toString(), deaths.get(uuid));
             }
         }
         String joinMessage = plugin.getConfig().getString("join-message");
@@ -79,7 +78,7 @@ public class ConfigManager {
             Bukkit.getLogger().warning("Failed to load configuration. Configuration is null.");
             return;
         }
-        ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtime");
+        ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtimes");
         if (playtimeSection != null) {
             for (String key : playtimeSection.getKeys(false)) {
                 UUID uuid = UUID.fromString(key);
@@ -87,7 +86,7 @@ public class ConfigManager {
                 playTimes.put(uuid, playtime);
             }
         }
-        ConfigurationSection killsSection = config.getConfigurationSection("kills");
+        ConfigurationSection killsSection = config.getConfigurationSection("player-kills");
         if (killsSection != null) {
             for (String key : killsSection.getKeys(false)) {
                 UUID uuid = UUID.fromString(key);
@@ -95,7 +94,7 @@ public class ConfigManager {
                 kills.put(uuid, killsCount);
             }
         }
-        ConfigurationSection deathsSection = config.getConfigurationSection("deaths");
+        ConfigurationSection deathsSection = config.getConfigurationSection("player-deaths");
         if (deathsSection != null) {
             for (String key : deathsSection.getKeys(false)) {
                 UUID uuid = UUID.fromString(key);

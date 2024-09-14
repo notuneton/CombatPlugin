@@ -8,12 +8,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.utils.*;
-import org.main.uneton.events.*;
 
 import java.util.*;
 
 import static org.bukkit.Bukkit.getPlayer;
-import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
 import static org.main.uneton.utils.RegistersUtils.*;
 
 public class Combat extends JavaPlugin implements Listener {
@@ -49,7 +47,7 @@ public class Combat extends JavaPlugin implements Listener {
                 UUID uuid = loop_player.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlaytime + 1);
-                ConfigManager.get().set("players-playtime." + uuid.toString(), playTimes.get(uuid));
+                ConfigManager.get().set("players-playtimes." + uuid.toString(), playTimes.get(uuid));
             }
             ConfigManager.save();
         };
@@ -59,6 +57,7 @@ public class Combat extends JavaPlugin implements Listener {
         saveConfig();
         RecipeManager.createElytraRecipe();
         RecipeManager.createEnchantedAppleRecipe();
+        RecipeManager.createChainableArmorRecipe();
 
         new RegistersUtils(this);
         registerCommands();

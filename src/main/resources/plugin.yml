@@ -76,9 +76,6 @@ commands:
   repair:
     description: Repairs the durability of your armor.
     usage: /repair
-  rules:
-    description: Original Rules Of The Server.
-    usage: /rules
   sign:
     description: Spawns you a sign. (Can be clicked!)
     usage: /sign
