@@ -26,9 +26,9 @@ public class RegistersUtils {
         plugin.getCommand("gm").setExecutor(new Gm());
         plugin.getCommand("cure").setExecutor(new Cure());
         plugin.getCommand("invsee").setExecutor(new Invsee());
+        plugin.getCommand("slippery").setExecutor(new Slippery(plugin));
         plugin.getCommand("launch").setExecutor(new Launch());
         plugin.getCommand("magictrick").setExecutor(new Magictrick());
-        plugin.getCommand("slippery").setExecutor(new Slippery(plugin));
         plugin.getCommand("vanish").setExecutor(new Vanish(plugin));
 
         // Combat logger
