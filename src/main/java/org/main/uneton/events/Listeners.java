@@ -163,7 +163,7 @@ public class Listeners implements Listener {
             } else if (Math.random() < 0.2) {
                 player.getInventory().addItem(milk);
                 player.getInventory().removeItem(new ItemStack(Material.BUCKET, 1));
-                player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You have milked the cow!"));
+                player.sendMessage(ColorUtils.colorize("&aYou have milked the cow!"));
             }
         }
     }
