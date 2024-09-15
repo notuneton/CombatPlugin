@@ -59,9 +59,9 @@ public class ScoreboardUtils {
         String kdRatio;
         if (playerDeaths > 0) {
             double ratio = (double) playerKills / playerDeaths;
-            kdRatio = String.format("  &fK/D: &c%.2f", ratio);
+            kdRatio = String.format("  &fKDR: &c%.2f", ratio);
         } else {
-            kdRatio = "  &fK/D: &7&oNaN";
+            kdRatio = "  &fKDR: &7&oNaN";
         }
         setScore(objective, kdRatio,5);
 
