@@ -156,10 +156,10 @@ public class Listeners implements Listener {
         if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
             if (Math.random() < 0.4) {
                 player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
-                e.setCancelled(true);
+                return;
             } else if (Math.random() < 0.4) {
                 player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
-                e.setCancelled(true);
+                return;
             } else if (Math.random() < 0.2) {
                 player.getInventory().addItem(milk);
                 player.getInventory().removeItem(new ItemStack(Material.BUCKET, 1));
