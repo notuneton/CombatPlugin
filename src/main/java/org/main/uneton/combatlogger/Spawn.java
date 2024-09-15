@@ -49,11 +49,11 @@ public class Spawn implements CommandExecutor {
                 }
 
                 if (player.getLocation().distance(initial_location) > 1) {
-                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport failed, You were moved!"));
+                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &4Teleport cancelled because you moved!"));
                     this.cancel();
                     return;
                 }
-                player.sendActionBar(ColorUtils.colorize("&7Teleporting in &3" + (countdownSeconds - secondsPassed) + "&7 seconds..."));
+                player.sendActionBar(ColorUtils.colorize("&aTeleporting in " + (countdownSeconds - secondsPassed) + " seconds. Do not move."));
                 secondsPassed++;
             }
         };
@@ -61,16 +61,16 @@ public class Spawn implements CommandExecutor {
 
     public boolean teleportPlayer(Player player) {
         if (combat_tagged.containsKey(player)) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport failed, You are combat tagged!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &4Teleport cancelled You are combat tagged!"));
             return false;
         }
         Location spawnLocation = plugin.getConfig().getLocation("spawn-location");
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&2>&a> &7You have been teleported to &espawn&7!"));
+            player.sendMessage(ColorUtils.colorize("&2>&a> &aYou have been teleported to &espawn&7!"));
             return true;
         }
-        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cLocation not found! Please contact an admin."));
+        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &4Location not found! Please contact an admin."));
         return false;
     }
 }
