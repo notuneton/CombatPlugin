@@ -1,6 +1,8 @@
 package org.main.uneton.utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -26,9 +28,9 @@ public class ConfigManager {
     public static void setup(Combat plugin) {
         configFile = new File(plugin.getDataFolder(), "config.yml");
         if (!configFile.exists()) {
-            plugin.saveResource("config.yml", true); // Copy default file
+            plugin.saveResource("config.yml", false); // Copy default file
         }
-        reload();
+        reload(); //this class method
     }
     public static void reload() {
         if (configFile == null) {
@@ -39,9 +41,10 @@ public class ConfigManager {
     public static FileConfiguration get() {
         return config;
     }
+
     public static void save() {
         if (config == null || configFile == null) {
-            throw new IllegalArgumentException("File or configuration cannot be null");
+            throw new IllegalArgumentException("File or configuration cannot be null. Ensure the configuration is properly initialized.");
         }
         try {
             config.save(configFile);
@@ -56,6 +59,7 @@ public class ConfigManager {
         alluuids.addAll(playTimes.keySet());
         alluuids.addAll(kills.keySet());
         alluuids.addAll(deaths.keySet());
+
         for (UUID uuid : alluuids) {
             if (playTimes.containsKey(uuid)) {
                 config.set("players-playtimes." + uuid.toString(), playTimes.get(uuid));
@@ -67,7 +71,20 @@ public class ConfigManager {
                 config.set("player-deaths." + uuid.toString(), deaths.get(uuid));
             }
         }
+
         String joinMessage = plugin.getConfig().getString("join-message");
+        Location spawnLocation = ConfigManager.getSpawnLocation();
+        if (spawnLocation != null) {
+            config.set("spawn-location.world", spawnLocation.getWorld().getName());
+            config.set("spawn-location.x", spawnLocation.getX());
+            config.set("spawn-location.y", spawnLocation.getY());
+            config.set("spawn-location.z", spawnLocation.getZ());
+            config.set("spawn-location.yaw", spawnLocation.getYaw());
+            config.set("spawn-location.pitch", spawnLocation.getPitch());
+        } else {
+            Bukkit.getLogger().warning("[CombatV3]: Spawn location is null. Skipping save.");
+        }
+
         config.set("join-message", joinMessage);
         ConfigManager.save();
     }
@@ -75,9 +92,10 @@ public class ConfigManager {
     public static void loadAllData() {
         FileConfiguration config = ConfigManager.get();
         if (config == null) {
-            Bukkit.getLogger().warning("Failed to load configuration. Configuration is null.");
+            Bukkit.getLogger().warning("[CombatV3]: Failed to load configuration. Configuration is null.");
             return;
         }
+
         ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtimes");
         if (playtimeSection != null) {
             for (String key : playtimeSection.getKeys(false)) {
@@ -102,6 +120,52 @@ public class ConfigManager {
                 deaths.put(uuid, deathsCount);
             }
         }
+
+        String worldName = config.getString("spawn-location.world");
+        if (worldName != null) {
+            World world = Bukkit.getWorld(worldName);
+            if (world != null) {
+                double x = config.getDouble("spawn-location.x");
+                double y = config.getDouble("spawn-location.y");
+                double z = config.getDouble("spawn-location.z");
+                float yaw = (float) config.getDouble("spawn-location.yaw");
+                float pitch = (float) config.getDouble("spawn-location.pitch");
+
+                Location spawn_location = new Location(world, x, y, z, yaw, pitch);
+                config.set("spawn-location", spawn_location);
+            } else {
+                Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
+            }
+        } else {
+            Bukkit.getLogger().warning("[CombatV3]: World name in spawn-location is null.");
+        }
+    }
+
+    public static Location getSpawnLocation() {
+        FileConfiguration config = ConfigManager.get();
+        if (config == null) {
+            Bukkit.getLogger().warning("[CombatV3]: Configuration is null.");
+            return null;
+        }
+
+        String worldName = config.getString("spawn-location.world");
+        if (worldName == null) {
+            Bukkit.getLogger().warning("[CombatV3]: World name is null.");
+            return null;
+        }
+
+        World world = Bukkit.getWorld(worldName);
+        if (world == null) {
+            Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
+            return null;
+        }
+
+        double x = config.getDouble("spawn-location.x");
+        double y = config.getDouble("spawn-location.y");
+        double z = config.getDouble("spawn-location.z");
+        float yaw = (float) config.getDouble("spawn-location.yaw");
+        float pitch = (float) config.getDouble("spawn-location.pitch");
+        return new Location(world, x, y, z, yaw, pitch);
     }
 
     public static String formatPlaytime(int hours, int minutes, int seconds) {

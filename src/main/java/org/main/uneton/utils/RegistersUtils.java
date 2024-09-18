@@ -32,7 +32,7 @@ public class RegistersUtils {
         plugin.getCommand("vanish").setExecutor(new Vanish(plugin));
 
         // Combat logger
-        plugin.getCommand("setspawn").setExecutor(new SetSpawn(plugin));
+        plugin.getCommand("setspawn").setExecutor(new SetSpawn());
         plugin.getCommand("spawn").setExecutor(new Spawn(plugin));
 
         // Other commands

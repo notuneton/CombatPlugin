@@ -39,8 +39,8 @@ public class Msg implements CommandExecutor {
         }
         String message = msgBuilder.toString().trim();
 
-        player.sendMessage(ColorUtils.colorize("&dTo &7" + recipient.getName() + ": " + message));
-        recipient.sendMessage(ColorUtils.colorize("&dFrom &7" + player.getName() + ": " + message));
+        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &dTo &7" + recipient.getName() + ": " + message));
+        recipient.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &dFrom &7" + player.getName() + ": " + message));
 
         player.setMetadata("lastMsg", new FixedMetadataValue(Combat.getInstance(), recipient.getName()));
         recipient.setMetadata("lastMsg", new FixedMetadataValue(Combat.getInstance(), player.getName()));
