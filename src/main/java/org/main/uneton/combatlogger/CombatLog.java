@@ -27,15 +27,20 @@ public class CombatLog implements Listener {
     private void combatTask() {
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             List<Player> toRemove = new ArrayList<>();
+            long currentTime = System.currentTimeMillis();
             combat_tagged.keySet().forEach(player -> {
                 Long endTime = combat_tagged.get(player);
-                if (endTime < System.currentTimeMillis()) {
+                if (endTime < currentTime) {
                     toRemove.add(player);
-                    player.sendMessage(ColorUtils.colorize("&x&5&3&9&F&A&6Y&x&5&9&A&4&A&9o&x&5&E&A&8&A&Bu &x&6&4&A&D&A&Ea&x&6&9&B&1&B&0r&x&6&F&B&6&B&3e &x&7&5&B&A&B&6n&x&7&A&B&F&B&8o &x&8&0&C&4&B&Bl&x&8&6&C&8&B&Eo&x&8&B&C&D&C&0n&x&9&1&D&1&C&3g&x&9&6&D&6&C&5e&x&9&C&D&A&C&8r &x&A&2&D&F&C&Bi&x&A&7&E&4&C&Dn &x&A&D&E&8&D&0c&x&B&3&E&D&D&3o&x&B&8&F&1&D&5m&x&B&E&F&6&D&8b&x&C&3&F&A&D&Aa&x&C&9&F&F&D&Dt"));
+                    player.sendMessage(ColorUtils.colorize("&8[i] &cYou are no longer in combat!"));
                 }
                 if (combat_tagged.containsKey(player)) {
-                    player.sendActionBar(ColorUtils.colorize("&7Combat: &3" + (endTime - System.currentTimeMillis()) / 1000));
-                    player.sendActionBar(ColorUtils.colorize("&x&5&3&9&F&A&6Y&x&5&9&A&4&A&9o&x&5&E&A&8&A&Bu &x&6&4&A&D&A&Ea&x&6&9&B&1&B&0r&x&6&F&B&6&B&3e &x&7&5&B&A&B&6n&x&7&A&B&F&B&8o &x&8&0&C&4&B&Bl&x&8&6&C&8&B&Eo&x&8&B&C&D&C&0n&x&9&1&D&1&C&3g&x&9&6&D&6&C&5e&x&9&C&D&A&C&8r &x&A&2&D&F&C&Bi&x&A&7&E&4&C&Dn &x&A&D&E&8&D&0c&x&B&3&E&D&D&3o&x&B&8&F&1&D&5m&x&B&E&F&6&D&8b&x&C&3&F&A&D&Aa&x&C&9&F&F&D&Dt"));
+                    String combatColor = plugin.getConfig().getString("combat-name");
+                    if (combatColor != null) {
+                        long remainingTime = (endTime - currentTime) / 1000;
+                        player.sendActionBar(ColorUtils.colorize(combatColor + remainingTime));
+                    }
+                    plugin.saveConfig();
                 }
             });
             toRemove.forEach(this::endCombatTag);

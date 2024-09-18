@@ -81,13 +81,13 @@ public class Slippery implements CommandExecutor {
                         this.cancel();
                         playerTasks.remove(targetUUID);
                         String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
-                        player.sendMessage(warn + ChatColor.GRAY + "Stopped dropping items from " + ChatColor.YELLOW + target.getName() + "'s" + ChatColor.GRAY + " inventory as it's now empty.");
+                        player.sendMessage(warn + ChatColor.GRAY + "Stopped dropping items from " + ChatColor.YELLOW + target.getName() + "'s" + " inventory as it's now empty.");
                     }
                 }
             }.runTaskTimer(plugin, 0L, 60L);
             playerTasks.put(targetUUID, task);
             String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+ &7");
-            player.sendMessage(success + "Started dropping items from &e" + target.getName() + "'s &7inventory every 3 seconds.");
+            player.sendMessage(success + ColorUtils.colorize("Started dropping items from &e" + target.getName() + "'s &7inventory every 3 seconds."));
         }
         return true;
     }

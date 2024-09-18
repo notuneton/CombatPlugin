@@ -86,7 +86,11 @@ public class Listeners implements Listener {
             player.sendMessage("\n");
         }
 
-        ConfigManager.loadAllData();
+        Location spawnLocation = ConfigManager.get().getLocation("spawn-location");
+        if (spawnLocation != null) {
+            player.teleport(spawnLocation);
+        }
+
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtimes." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
@@ -116,7 +120,7 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
             player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
-            player.sendMessage(ColorUtils.colorize("&d&lDEBUG! &7command permission here: &9" + getPermissionName(command)));
+            player.sendMessage(ColorUtils.colorize("&d&lDEBUG! &7command permission '" + getPermissionName(command)) + "'");
             playCancerSound(player);
             event.setCancelled(true);
         }

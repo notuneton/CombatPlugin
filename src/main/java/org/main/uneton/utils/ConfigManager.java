@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.main.uneton.Combat;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class ConfigManager {
     private static File configFile;
     public static Map<UUID, Integer> playTimes = null;
     public static final Map<UUID, Integer> kills = new HashMap<>();
+    public static final Map<UUID, Integer> entity_kills = new HashMap<>();
     public static final Map<UUID, Integer> deaths = new HashMap<>();
 
     public ConfigManager(Combat plugin) {
@@ -53,7 +55,7 @@ public class ConfigManager {
         }
     }
 
-    public void saveAllData() {
+    public void saveAll() {
         FileConfiguration config = ConfigManager.get();
         Set<UUID> alluuids = new HashSet<>();
         alluuids.addAll(playTimes.keySet());
@@ -72,7 +74,11 @@ public class ConfigManager {
             }
         }
 
-        String joinMessage = plugin.getConfig().getString("join-message");
+        String combatColor = plugin.getConfig().getString("combat-name");
+        if (combatColor != null) {
+            config.set("combat-name", combatColor);
+        }
+
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null) {
             config.set("spawn-location.world", spawnLocation.getWorld().getName());
@@ -85,11 +91,12 @@ public class ConfigManager {
             Bukkit.getLogger().warning("[CombatV3]: Spawn location is null. Skipping save.");
         }
 
+        String joinMessage = plugin.getConfig().getString("join-message");
         config.set("join-message", joinMessage);
         ConfigManager.save();
     }
 
-    public static void loadAllData() {
+    public static void loadAll() {
         FileConfiguration config = ConfigManager.get();
         if (config == null) {
             Bukkit.getLogger().warning("[CombatV3]: Failed to load configuration. Configuration is null.");

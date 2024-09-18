@@ -14,7 +14,7 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Clear implements CommandExecutor {
 
-    public static String success = ColorUtils.colorize("&3>&b> &8+ &a");
+    public static String success = ColorUtils.colorize("&3>&b> &8+ &7");
     public static String warn = ColorUtils.colorize("&4>&c> &8+ &7 ");
 
     @Override
@@ -49,7 +49,7 @@ public class Clear implements CommandExecutor {
             }
         }
         String itemLabel = amount == 1 ? "item" : "item(s)";
-        player.sendMessage(success + ColorUtils.colorize(player.getName() + " &7has successfully cleared &7'&a" + target.getName() + "&7' inventory of &e" + amount + " " + itemLabel));
+        player.sendMessage(success + ColorUtils.colorize(player.getName() + " &7has successfully cleared &7'&e" + target.getName() + "&7' inventory of &a" + amount + " " + itemLabel));
         target.getInventory().clear();
         return true;
     }

@@ -70,6 +70,9 @@ public class SelfDeaths implements Listener {
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
             event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying."));
+            if (Math.random() < 0.6) {
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " committed suicide."));
+            }
         }
     }
 
@@ -98,6 +101,9 @@ public class SelfDeaths implements Listener {
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.STARVATION) {
             event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " couldn't afford food"));
+            if (Math.random() < 0.4) {
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was too poor.."));
+            }
         }
     }
 
@@ -139,7 +145,7 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FLY_INTO_WALL) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was not aware of physics"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " somebody said to him, No balls"));
             if (Math.random() < 0.5) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " tried to break the laws of physics"));
             }

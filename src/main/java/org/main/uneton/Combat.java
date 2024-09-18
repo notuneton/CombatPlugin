@@ -38,7 +38,7 @@ public class Combat extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
-        ConfigManager.loadAllData();
+        ConfigManager.loadAll();
 
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
@@ -69,7 +69,7 @@ public class Combat extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         configManager = new ConfigManager(this);
-        configManager.saveAllData();
+        configManager.saveAll();
     }
 
     public ConfigManager getConfigManager() {

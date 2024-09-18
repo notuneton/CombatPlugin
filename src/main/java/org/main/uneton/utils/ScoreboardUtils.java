@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
 import static org.main.uneton.utils.ConfigManager.*;
+import static org.main.uneton.utils.NumberFormatter.formatBigNumber;
 
 public class ScoreboardUtils {
 
@@ -49,12 +50,12 @@ public class ScoreboardUtils {
         clearExistingScores(scoreboard);
         setScore(objective, "&1 ", 10);
 
-        setScore(objective, "  &fYou: &6"+ player.getName(), 8);
+        setScore(objective, "  &fYou: &6" + player.getName(), 8);
         UUID uuid = player.getUniqueId();
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &fDeaths: &a" + playerDeaths, 7);
-        setScore(objective, "  &fKills: &a" + playerKills, 6);
+        setScore(objective, "  &fDeaths: &a" + formatBigNumber(playerDeaths), 7);
+        setScore(objective, "  &fKills: &a" + formatBigNumber(playerKills), 6);
 
         String kdRatio;
         if (playerDeaths > 0) {
