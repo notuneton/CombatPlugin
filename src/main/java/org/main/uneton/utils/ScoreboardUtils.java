@@ -86,18 +86,6 @@ public class ScoreboardUtils {
         player.setScoreboard(scoreboard);
     }
 
-    public static String formatPlaytime(int hours, int minutes, int seconds) {
-        if (seconds >= 60) {
-            hours += minutes / 60;
-            seconds %= 60;
-        }
-        if (minutes >= 60) {
-            hours += minutes / 60;
-            minutes %= 60;
-        }
-        return String.format("  &fPlaytime: &e%dh %dm %ds", hours, minutes, seconds);
-    }
-
     private static void clearExistingScores(Scoreboard scoreboard) {
         for (String entry : scoreboard.getEntries()) {
             scoreboard.resetScores(entry);
