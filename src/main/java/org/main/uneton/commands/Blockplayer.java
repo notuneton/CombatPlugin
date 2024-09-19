@@ -30,11 +30,12 @@ public class Blockplayer implements CommandExecutor {
             return true;
         }
 
-        String subCommand = args[0].toLowerCase();
-        switch (subCommand) {
+        String argumentOne = args[0].toLowerCase();
+        switch (argumentOne) {
             case "list":
                 listBlockedPlayers(player);
                 break;
+
             case "add":
                 if (args.length < 2) {
                     String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block add <player> ");
@@ -43,6 +44,7 @@ public class Blockplayer implements CommandExecutor {
                 }
                 blockPlayer(player, args[1]);
                 break;
+
             case "remove":
                 if (args.length < 2) {
                     String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block remove <player> ");
@@ -51,6 +53,7 @@ public class Blockplayer implements CommandExecutor {
                 }
                 unblockPlayer(player, args[1]);
                 break;
+
             default:
                 String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block help ");
                 player.sendMessage(usage);

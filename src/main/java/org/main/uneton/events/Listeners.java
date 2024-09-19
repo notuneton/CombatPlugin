@@ -2,6 +2,7 @@ package org.main.uneton.events;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.Furnace;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -11,12 +12,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
@@ -38,7 +44,6 @@ public class Listeners implements Listener {
         this.plugin = plugin;
     }
     private ConfigManager configManager;
-
 
     @EventHandler
     public void onPingTooHard(PlayerMoveEvent event) {
@@ -143,6 +148,40 @@ public class Listeners implements Listener {
         return null;
     }
 
+    public static ItemStack[] createJoinItems() {
+        ItemStack[] items = new ItemStack[]{
+                new ItemStack(Material.STONE_SWORD),
+                new ItemStack(Material.STONE_PICKAXE),
+                new ItemStack(Material.STONE_AXE)
+        };
+        for (ItemStack item : items) {
+            ItemMeta meta = item.getItemMeta();
+            if (meta != null) {
+                meta.setUnbreakable(true);
+                meta.setLore(Arrays.asList(ChatColor.RED.toString()+ChatColor.UNDERLINE +"When you die this item comes to ", "Your inventory automatically and doesn't dupelicate!"));
+                meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES);
+                item.setItemMeta(meta);
+            }
+        }
+        return items;
+    }
+
+    @EventHandler
+    public void onPlayerDies(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        for (ItemStack item : createJoinItems()) {
+            player.getInventory().remove(item);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        for (ItemStack item : createJoinItems()) {
+            player.getInventory().addItem(item);
+        }
+    }
+
     @EventHandler
     public void onPlayerCommandSend(PlayerCommandSendEvent event) {
         Player player = event.getPlayer();
@@ -161,6 +200,9 @@ public class Listeners implements Listener {
         Block block = e.getBlock();
         if (!block.getDrops().isEmpty()) {
             for (ItemStack drop : block.getDrops()) {
+                if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+                    return;
+                }
                 e.setDropItems(false);
                 Material item = drop.getType();
                 Player player = e.getPlayer();

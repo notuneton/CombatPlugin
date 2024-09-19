@@ -24,7 +24,7 @@ public class AntiSpam implements Listener {
         String previousMessage = lastMessage.put(player, message);
         if (message.equalsIgnoreCase(previousMessage)) {
             player.sendMessage("\n");
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7your message &f" + message + " &7could not be sent!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7You cannot say the same message twice &f"));
             player.sendMessage("\n");
             event.setCancelled(true);
             return;
@@ -32,10 +32,11 @@ public class AntiSpam implements Listener {
 
         if (spam.putIfAbsent(player, true) != null) {
             event.setCancelled(true);
+            player.sendMessage("\n");
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7You're sending messages too quickly!"));
+            player.sendMessage("\n");
         } else {
-            Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(Combat.class), () -> {
-                spam.remove(player);
-            }, 30L);
+            Bukkit.getScheduler().runTaskLater(JavaPlugin.getPlugin(Combat.class), () -> spam.remove(player), 30L);
         }
     }
 }

@@ -40,7 +40,7 @@ public class Unblock implements CommandExecutor {
         if (blockSet.remove(targetName)) {
             player.sendMessage(ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked " + targetName +"!"));
         } else {
-            player.sendMessage(ColorUtils.colorize("&cThis player isin't blocked!"));
+            player.sendMessage(ColorUtils.colorize("&cThis player isn't blocked!"));
         }
 
         return true;

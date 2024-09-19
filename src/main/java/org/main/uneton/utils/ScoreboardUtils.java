@@ -43,14 +43,14 @@ public class ScoreboardUtils {
             objective = scoreboard.registerNewObjective("scoreboard", "owo", ColorUtils.colorize("    "));
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
-
-        String currentTime = ColorUtils.colorize("&7" + getCurrentFormattedTime());
-        setScore(objective, currentTime, 11);
-
         clearExistingScores(scoreboard);
-        setScore(objective, "&1 ", 10);
 
+        String clockSymbol = "\u23F0";
+        String currentTime = ColorUtils.colorize("&7" + clockSymbol + " " + getCurrentFormattedTime());
+        setScore(objective, currentTime, 11);
+        setScore(objective, "&1 ", 10);
         setScore(objective, "  &fYou: &6" + player.getName(), 8);
+
         UUID uuid = player.getUniqueId();
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
@@ -68,7 +68,7 @@ public class ScoreboardUtils {
 
         setScore(objective, "&2 ", 4);
         int ping = player.getPing();
-        setScore(objective, "  &fPing: &d" + String.format(ping + "ms"), 3);
+        setScore(objective, "  &fPing: &d " + String.format(ping + "ms"), 3);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
@@ -84,6 +84,18 @@ public class ScoreboardUtils {
 
         setScore(objective, "&3 ", 0);
         player.setScoreboard(scoreboard);
+    }
+
+    public static String formatPlaytime(int hours, int minutes, int seconds) {
+        if (seconds >= 60) {
+            hours += minutes / 60;
+            seconds %= 60;
+        }
+        if (minutes >= 60) {
+            hours += minutes / 60;
+            minutes %= 60;
+        }
+        return String.format("  &fPlaytime: &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     private static void clearExistingScores(Scoreboard scoreboard) {

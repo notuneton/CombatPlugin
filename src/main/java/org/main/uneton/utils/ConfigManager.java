@@ -175,17 +175,7 @@ public class ConfigManager {
         return new Location(world, x, y, z, yaw, pitch);
     }
 
-    public static String formatPlaytime(int hours, int minutes, int seconds) {
-        if (seconds >= 60) {
-            hours += minutes / 60;
-            seconds %= 60;
-        }
-        if (minutes >= 60) {
-            hours += minutes / 60;
-            minutes %= 60;
-        }
-        return String.format("  &fPlaytime: &e%dh %dm %ds", hours, minutes, seconds);
-    }
+
 
     public static void addKill(UUID player_uuid) {
         kills.put(player_uuid, kills.getOrDefault(player_uuid, 0) + 1);
