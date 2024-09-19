@@ -151,19 +151,19 @@ public class ConfigManager {
     public static Location getSpawnLocation() {
         FileConfiguration config = ConfigManager.get();
         if (config == null) {
-            Bukkit.getLogger().warning("[CombatV3]: Configuration is null.");
+            Bukkit.getLogger().warning("[CombatV3]: configuration is null.");
             return null;
         }
 
         String worldName = config.getString("spawn-location.world");
         if (worldName == null) {
-            Bukkit.getLogger().warning("[CombatV3]: World name is null.");
+            Bukkit.getLogger().warning("[CombatV3]: world name is null.");
             return null;
         }
 
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
-            Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
+            Bukkit.getLogger().warning("[CombatV3]: world not found: " + worldName);
             return null;
         }
 

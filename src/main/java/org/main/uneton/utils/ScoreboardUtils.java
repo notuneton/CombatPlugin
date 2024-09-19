@@ -45,8 +45,8 @@ public class ScoreboardUtils {
         }
         clearExistingScores(scoreboard);
 
-        String clockSymbol = "\u23F0";
-        String currentTime = ColorUtils.colorize("&7" + clockSymbol + " " + getCurrentFormattedTime());
+        String clock = "\u23F0";
+        String currentTime = ColorUtils.colorize("&7" + clock + " " + getCurrentFormattedTime());
         setScore(objective, currentTime, 11);
         setScore(objective, "&1 ", 10);
         setScore(objective, "  &fYou: &6" + player.getName(), 8);
