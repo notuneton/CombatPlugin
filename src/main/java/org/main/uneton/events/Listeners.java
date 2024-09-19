@@ -75,7 +75,7 @@ public class Listeners implements Listener {
         Player player = e.getPlayer();
         Tab.updateTab();
 
-        startUpdatingScoreboard(player, getInstance());
+        updateScoreboard(player, getInstance());
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
 
         String joinMessage = plugin.getConfig().getString("join-message");
@@ -152,6 +152,19 @@ public class Listeners implements Listener {
             String command = iterator.next();
             if (!player.hasPermission(command)) {
                 iterator.remove();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onBlockBreakEvent(BlockBreakEvent e) {
+        Block block = e.getBlock();
+        if (!block.getDrops().isEmpty()) {
+            for (ItemStack drop : block.getDrops()) {
+                e.setDropItems(false);
+                Material item = drop.getType();
+                Player player = e.getPlayer();
+                player.getInventory().addItem(drop);
             }
         }
     }

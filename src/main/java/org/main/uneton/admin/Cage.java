@@ -74,7 +74,7 @@ public class Cage implements CommandExecutor {
                     removeTrapBox(bottomCorner);
                 }
             }
-        }.runTaskLater(Combat.getInstance(), 1200); // 1200 ticks = 1 minute
+        }.runTaskLater(Combat.getInstance(), 1200); // 1 minute
     }
 
     private static void removeTrapBox(Location bottomCorner) {

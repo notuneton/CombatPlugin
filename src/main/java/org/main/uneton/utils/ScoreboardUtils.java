@@ -16,7 +16,7 @@ import static org.main.uneton.utils.NumberFormatter.formatBigNumber;
 
 public class ScoreboardUtils {
 
-    public static void startUpdatingScoreboard(Player player, Combat plugin) {
+    public static void updateScoreboard(Player player, Combat plugin) {
         new BukkitRunnable() {
             @Override
             public void run() {

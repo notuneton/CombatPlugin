@@ -3,15 +3,18 @@ package org.main.uneton.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 
-public class RecipeManager {
+import java.util.ArrayList;
 
-    public RecipeManager(Combat plugin) {
-    }
+public class RecipeManager {
 
     public static void createEnchantedAppleRecipe() {
         ItemStack notchApple = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE, 1);

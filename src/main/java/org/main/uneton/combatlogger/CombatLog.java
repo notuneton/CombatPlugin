@@ -32,7 +32,7 @@ public class CombatLog implements Listener {
                 Long endTime = combat_tagged.get(player);
                 if (endTime < currentTime) {
                     toRemove.add(player);
-                    player.sendMessage(ColorUtils.colorize("&8[i] &cYou are no longer in combat!"));
+                    player.sendMessage(ColorUtils.colorize("&aYou are no longer in combat!"));
                 }
                 if (combat_tagged.containsKey(player)) {
                     String combatColor = plugin.getConfig().getString("combat-name");
