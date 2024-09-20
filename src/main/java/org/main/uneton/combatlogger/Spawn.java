@@ -39,6 +39,7 @@ public class Spawn implements CommandExecutor {
         int countdownSeconds = 5;
         return new BukkitRunnable() {
             private int secondsPassed = 0;
+            private Location lastLocation = initial_location;
             @Override
             public void run() {
                 if (secondsPassed >= countdownSeconds) {
@@ -50,13 +51,14 @@ public class Spawn implements CommandExecutor {
                     }
                     return;
                 }
-                if (player.getLocation().distance(initial_location) > 1) {
+                double distanceMoved = player.getLocation().distance(lastLocation);
+                if (distanceMoved > 1.5) {
                     player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled! because you moved!"));
                     this.cancel();
                     return;
                 }
-                player.sendActionBar(ColorUtils.colorize("&aTeleporting in " + (countdownSeconds - secondsPassed) + " seconds..."));
-                player.sendMessage(ColorUtils.colorize("&7You will be teleported in &65 " + (countdownSeconds - secondsPassed) + " &7seconds. &cDo not move&7!"));
+                lastLocation = player.getLocation();
+                player.sendActionBar(ColorUtils.colorize("&7Teleporting in &6" + (countdownSeconds - secondsPassed) + " &7seconds... &4Do not move&7!"));
                 secondsPassed++;
             }
         };
@@ -71,7 +73,7 @@ public class Spawn implements CommandExecutor {
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&2>&a> &7You have been teleported to &espawn&7!"));
+            player.sendMessage(ColorUtils.colorize("&2>&a> &8+ &7You have been teleported to the &aspawn&7!"));
             return true;
         }
 
