@@ -48,7 +48,6 @@ public class ScoreboardUtils {
         String currentTime = ColorUtils.colorize("&7" + getCurrentFormattedTime());
         setScore(objective, currentTime, 11);
         setScore(objective, "&1 ", 10);
-        setScore(objective, "  &fYou: &6" + player.getName(), 8);
 
         UUID uuid = player.getUniqueId();
         int playerKills = kills.getOrDefault(uuid, 0);

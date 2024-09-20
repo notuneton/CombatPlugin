@@ -49,7 +49,7 @@ public class Clear implements CommandExecutor {
             }
         }
         String itemLabel = amount == 1 ? "item" : "item(s)";
-        player.sendMessage(success + ColorUtils.colorize(player.getName() + " &7has successfully cleared &7'&e" + target.getName() + "&7' inventory of &a" + amount + " " + itemLabel));
+        player.sendMessage(success + ColorUtils.colorize(player.getName() + " &7has successfully cleared &7'&e" + target.getName() + "&7' inventory of &a" + amount + " " + itemLabel+ "&7."));
         target.getInventory().clear();
         return true;
     }
