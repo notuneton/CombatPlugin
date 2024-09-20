@@ -38,6 +38,9 @@ commands:
   vanish:
     description: Toggles vanish mode.
     usage: /vanish
+  wipeprofile:
+    description: Completely removes all player's own made data and progress from their uuid!
+    usage: /wipeprofile <player>
 
   block:
     description: Block a player.

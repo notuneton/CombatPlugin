@@ -78,7 +78,6 @@ public class ConfigManager {
             config.set("combat-name", combatColor);
         }
 
-
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null && spawnLocation.getWorld() != null) {
             config.set("spawn-location.world", spawnLocation.getWorld().getName());
