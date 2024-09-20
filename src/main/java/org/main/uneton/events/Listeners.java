@@ -156,7 +156,7 @@ public class Listeners implements Listener {
         };
         for (ItemStack item : items) {
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ColorUtils.colorize("&x&5&3&7&6&A&4S&x&5&7&7&C&A&Ct&x&5&B&8&1&B&3a&x&5&E&8&7&B&Br&x&6&2&8&C&C&2t&x&6&6&9&2&C&Ae&x&6&A&9&7&D&2r &x&6&E&9&D&D&9T&x&7&1&A&2&E&1o&x&7&5&A&8&E&8o&x&7&9&A&D&F&0l"));
+            meta.setDisplayName(ColorUtils.colorize("&x&5&2&3&C&2&5&lP&x&5&9&4&1&2&8&le&x&6&0&4&6&2&B&la&x&6&7&4&B&2&F&ls&x&6&E&5&0&3&2&la&x&7&5&5&5&3&5&ln&x&7&C&5&A&3&8&lt &x&7&C&5&A&3&8&lP&x&7&5&5&5&3&5&li&x&6&E&5&0&3&2&lc&x&6&7&4&B&2&F&lk&x&6&0&4&6&2&B&la&x&5&9&4&1&2&8&lx&x&5&2&3&C&2&5&le"));
             if (meta != null) {
                 meta.setUnbreakable(true);
                 ArrayList<String> loreList = new ArrayList<>();
