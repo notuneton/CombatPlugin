@@ -19,7 +19,7 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " ran out of air.."));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + "'s ran out of oxygen.."));
         }
     }
 
