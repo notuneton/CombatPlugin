@@ -19,7 +19,6 @@ public class ConfigManager {
     private static File configFile;
     public static Map<UUID, Integer> playTimes = null;
     public static final Map<UUID, Integer> kills = new HashMap<>();
-    public static final Map<UUID, Integer> entity_kills = new HashMap<>();
     public static final Map<UUID, Integer> deaths = new HashMap<>();
 
     public ConfigManager(Combat plugin) {
@@ -63,7 +62,7 @@ public class ConfigManager {
 
         for (UUID uuid : uuids) {
             if (playTimes.containsKey(uuid)) {
-                config.set("players-playtimes." + uuid.toString(), playTimes.get(uuid));
+                config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
             }
             if (kills.containsKey(uuid)) {
                 config.set("player-kills." + uuid.toString(), kills.get(uuid));
@@ -102,7 +101,7 @@ public class ConfigManager {
             return;
         }
 
-        ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtimes");
+        ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtime");
         if (playtimeSection != null) {
             for (String key : playtimeSection.getKeys(false)) {
                 UUID uuid = UUID.fromString(key);

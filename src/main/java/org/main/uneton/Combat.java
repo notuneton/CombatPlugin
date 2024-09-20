@@ -50,7 +50,7 @@ public class Combat extends JavaPlugin implements Listener {
                 UUID uuid = loop_player.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlaytime + 1);
-                ConfigManager.get().set("players-playtimes." + uuid.toString(), playTimes.get(uuid));
+                ConfigManager.get().set("players-playtime." + uuid.toString(), playTimes.get(uuid));
             }
             ConfigManager.save();
         };

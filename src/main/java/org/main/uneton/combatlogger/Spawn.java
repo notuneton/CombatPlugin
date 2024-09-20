@@ -53,7 +53,7 @@ public class Spawn implements CommandExecutor {
                 }
                 double distanceMoved = player.getLocation().distance(lastLocation);
                 if (distanceMoved > 1.5) {
-                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled! because you moved!"));
+                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled because you moved!"));
                     this.cancel();
                     return;
                 }
@@ -66,14 +66,14 @@ public class Spawn implements CommandExecutor {
 
     public boolean teleportPlayer(Player player) {
         if (combat_tagged.containsKey(player)) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled! You are combat tagged!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled. You are combat tagged!"));
             return false;
         }
 
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&2>&a> &8+ &7You have been teleported to the &aspawn&7!"));
+            player.sendMessage(ColorUtils.colorize("&3>&b> &7You have been teleported to the &3spawn!"));
             return true;
         }
 

@@ -58,5 +58,4 @@ public class Sudo implements CommandExecutor {
         }
         return true;
     }
-
 }

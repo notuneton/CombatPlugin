@@ -6,20 +6,24 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
+import org.main.uneton.utils.ConfigManager;
+import org.main.uneton.utils.ScoreboardUtils;
 
-import java.util.HashMap;
 import java.util.UUID;
 
-import static org.main.uneton.utils.ConfigManager.deaths;
-import static org.main.uneton.utils.ConfigManager.kills;
+import static org.main.uneton.utils.ConfigManager.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Wipe implements CommandExecutor {
 
-    public static HashMap<UUID, Integer> playTimes = new HashMap<>();
-
+    private final Combat plugin;
+    public Wipe(Combat plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -35,7 +39,7 @@ public class Wipe implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ /wipeprofile <player> ");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7/wipeprofile <player> ");
             player.sendMessage(usage);
             return true;
         }
@@ -48,13 +52,21 @@ public class Wipe implements CommandExecutor {
         }
 
         UUID uuid = target.getUniqueId();
-        playTimes.remove(uuid);
         kills.remove(uuid);
         deaths.remove(uuid);
-        player.sendMessage("\n");
+        playTimes.put(uuid, 0);
+        ConfigManager.get().set("player-kills." + uuid, 0);
+        ConfigManager.get().set("player-deaths." + uuid, 0);
+        for (ItemStack item : target.getInventory().getContents()) {
+            if (item != null) {
+                target.getInventory().removeItem(item);
+            }
+        }
+
+        ConfigManager.save();
         target.sendMessage(ColorUtils.colorize("&f[IMPORTANT] &cYour uuid has been wiped by &e" + player.getName() + "&c."));
-        player.sendMessage("\n");
-        player.sendMessage(ColorUtils.colorize("&eSuccessfully wiped the uuid player of &c" + target.getName() + "&e."));
+        player.sendMessage(ColorUtils.colorize("&eSuccessfully wiped uuid player of &c" + target.getName() + "&e."));
+        ScoreboardUtils.updateScoreboard(target, plugin);
         return true;
     }
 }

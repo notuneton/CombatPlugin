@@ -69,7 +69,7 @@ public class Listeners implements Listener {
         UUID uuid = player.getUniqueId();
         int playtime = playTimes.getOrDefault(uuid, 0);
         playTimes.put(uuid, playtime);
-        ConfigManager.get().set("players-playtimes." + uuid.toString(), playtime);
+        ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
 
         Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
         ConfigManager.save();
@@ -94,8 +94,9 @@ public class Listeners implements Listener {
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
         }
+
         UUID uuid = player.getUniqueId();
-        int playtime = ConfigManager.get().getInt("players-playtimes." + uuid.toString(), 0);
+        int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
 
         Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!

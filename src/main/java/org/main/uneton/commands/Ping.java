@@ -27,12 +27,11 @@ public class Ping implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getServer().getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &8+ 7");
+                String warn = ColorUtils.colorize("&4>&c> &8+ &7");
                 player.sendMessage(warn + "That player does not exist.");
                 return true;
             }
             int ping = target.getPing();
-            player.sendMessage(ColorUtils.colorize("&f" + target.getName()) + "'s ping: " + ChatColor.AQUA + String.format("%dms", ping));
             player.sendActionBar(ColorUtils.colorize("&f" + target.getName()) + "'s ping: " + ChatColor.AQUA + String.format("%dms", ping));
         }
         return true;
