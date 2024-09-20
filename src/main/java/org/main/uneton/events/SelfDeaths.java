@@ -19,7 +19,7 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " their teleporter didn't work right, and noclipped into a wall.."));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " ran out of air.."));
         }
     }
 
@@ -33,7 +33,7 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FALL) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " believed he could fly, but couldn't.."));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " fell a free fall.."));
             if (Math.random() < 0.5) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " tried water mlg clutch but.."));
             } else if (Math.random() < 0.01) {
@@ -52,11 +52,12 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying."));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " committed suicide."));
             if (Math.random() < 0.5) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was caught escaping the map"));
+
             } else if (Math.random() < 0.4) {
-                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " committed suicide."));
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying"));
             }
         }
     }
@@ -102,7 +103,10 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FREEZE) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " froze to death from the coldness of winter"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " fell into a sudden ice age"));
+            if (Math.random() < 0.3) {
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " froze to death from the coldness of winter"));
+            }
         }
     }
 
@@ -116,7 +120,21 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.CONTACT) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " hugged something spiky a little too tight"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying"));
+        }
+    }
+
+    @EventHandler
+    @Deprecated
+    public void onPlayerHadIdea(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        EntityDamageEvent lastDamage = victim.getLastDamageCause();
+        if (lastDamage == null) {
+            return;
+        }
+
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.POISON) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " ate the wrong apple"));
         }
     }
 
@@ -130,7 +148,7 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FLY_INTO_WALL) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " somebody said to him, No balls"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " somebody said to him. No balls"));
             if (Math.random() < 0.5) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " tried to break the laws of physics"));
             }
@@ -146,8 +164,22 @@ public class SelfDeaths implements Listener {
             return;
         }
 
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE) { // normal fire
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " wanted to be a human torch"));
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " didn't get to water in time"));
+        }
+    }
+
+    @EventHandler
+    @Deprecated
+    public void onPlayerLava(PlayerDeathEvent event){
+        Player victim = event.getEntity();
+        EntityDamageEvent lastDamage = victim.getLastDamageCause();
+        if (lastDamage == null) {
+            return;
+        }
+
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.LAVA) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " jumped into the wrong pool"));
         }
     }
 
@@ -160,13 +192,8 @@ public class SelfDeaths implements Listener {
             return;
         }
 
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) { // in flames
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " hallucinated and jumped into the flames"));
-            if (Math.random() < 0.4) {
-                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " obviously isn't fireproof"));
-            } else if (Math.random() < 0.4) {
-                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " didn't get to water in time"));
-            }
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " obviously isn't fireproof"));
         }
     }
 }
