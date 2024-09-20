@@ -52,7 +52,7 @@ public class Spawn implements CommandExecutor {
                     return;
                 }
                 double distanceMoved = player.getLocation().distance(lastLocation);
-                if (distanceMoved > 1.5) {
+                if (distanceMoved > 0.8) {
                     player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled because you moved!"));
                     this.cancel();
                     return;
@@ -73,7 +73,7 @@ public class Spawn implements CommandExecutor {
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&3>&b> &7You have been teleported to the &3spawn!"));
+            player.sendMessage(ColorUtils.colorize("&3>&b> &7You have been teleported to the &3spawn&7!"));
             return true;
         }
 

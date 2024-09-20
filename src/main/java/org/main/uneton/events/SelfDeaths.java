@@ -52,25 +52,10 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.VOID) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " joined to the darkside."));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying."));
             if (Math.random() < 0.5) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was caught escaping the map"));
-            }
-        }
-    }
-
-    @EventHandler
-    @Deprecated
-    public void onPlayerSuicide(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        EntityDamageEvent lastDamage = victim.getLastDamageCause();
-        if (lastDamage == null) {
-            return;
-        }
-
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUICIDE) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying."));
-            if (Math.random() < 0.6) {
+            } else if (Math.random() < 0.4) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " committed suicide."));
             }
         }

@@ -54,7 +54,6 @@ public class Wipe implements CommandExecutor {
         UUID uuid = target.getUniqueId();
         kills.remove(uuid);
         deaths.remove(uuid);
-        playTimes.put(uuid, 0);
         ConfigManager.get().set("player-kills." + uuid, 0);
         ConfigManager.get().set("player-deaths." + uuid, 0);
         for (ItemStack item : target.getInventory().getContents()) {
@@ -62,11 +61,9 @@ public class Wipe implements CommandExecutor {
                 target.getInventory().removeItem(item);
             }
         }
-
         ConfigManager.save();
         target.sendMessage(ColorUtils.colorize("&f[IMPORTANT] &cYour uuid has been wiped by &e" + player.getName() + "&c."));
         player.sendMessage(ColorUtils.colorize("&eSuccessfully wiped uuid player of &c" + target.getName() + "&e."));
-        ScoreboardUtils.updateScoreboard(target, plugin);
         return true;
     }
 }

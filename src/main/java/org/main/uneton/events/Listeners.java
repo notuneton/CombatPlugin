@@ -1,6 +1,8 @@
 package org.main.uneton.events;
 
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
 import org.bukkit.block.Sign;
@@ -124,7 +126,6 @@ public class Listeners implements Listener {
         Player player = event.getPlayer();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
             player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
-            player.sendMessage(ColorUtils.colorize("&d&lDEBUG! &7command permission '" + getPermissionName(command)) + "'");
             playCancerSound(player);
             event.setCancelled(true);
         }
@@ -155,10 +156,23 @@ public class Listeners implements Listener {
         };
         for (ItemStack item : items) {
             ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ColorUtils.colorize("&fStarter Tool"));
             if (meta != null) {
                 meta.setUnbreakable(true);
-                meta.setLore(Arrays.asList(ChatColor.RED.toString()+ChatColor.UNDERLINE +"When you die this item comes to ", "Your inventory automatically and doesn't dupelicate!"));
-                meta.hasItemFlag(ItemFlag.HIDE_ATTRIBUTES);
+                ArrayList<String> loreList = new ArrayList<>();
+                String pickaxe = "\u26CF";
+                AttributeModifier damageModifier = new AttributeModifier(
+                        UUID.randomUUID(),
+                        "generic.attack_damage",
+                        5.0,
+                        AttributeModifier.Operation.ADD_NUMBER
+                );
+                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
+                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+5.0"));
+                loreList.add(ColorUtils.colorize(" "));
+                loreList.add(ColorUtils.colorize("&cNot breakable"));
+                meta.setLore(loreList);
                 item.setItemMeta(meta);
             }
         }
