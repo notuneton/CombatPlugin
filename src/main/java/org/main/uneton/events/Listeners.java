@@ -90,12 +90,10 @@ public class Listeners implements Listener {
             player.sendMessage(ColorUtils.colorize(joinMessage));
             player.sendMessage("\n");
         }
-
         Location spawnLocation = ConfigManager.get().getLocation("spawn-location");
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
         }
-
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtimes." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);

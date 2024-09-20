@@ -45,34 +45,33 @@ public class ScoreboardUtils {
         }
         clearExistingScores(scoreboard);
 
-        String clock = "\u23F0";
-        String currentTime = ColorUtils.colorize("&7" + clock + " " + getCurrentFormattedTime());
+        String currentTime = ColorUtils.colorize("&7" + getCurrentFormattedTime());
         setScore(objective, currentTime, 11);
         setScore(objective, "&1 ", 10);
-        setScore(objective, "  &fYou: &6" + player.getName(), 8);
+        setScore(objective, "  &fYou:  &6" + player.getName(), 8);
 
         UUID uuid = player.getUniqueId();
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "  &fDeaths: &a" + formatBigNumber(playerDeaths), 7);
-        setScore(objective, "  &fKills: &a" + formatBigNumber(playerKills), 6);
+        setScore(objective, "  &fDeaths:  &a" + formatBigNumber(playerDeaths), 7);
+        setScore(objective, "  &fKills:  &a" + formatBigNumber(playerKills), 6);
 
         String kdRatio;
         if (playerDeaths > 0) {
             double ratio = (double) playerKills / playerDeaths;
-            kdRatio = String.format("  &fKDR: &c%.2f", ratio);
+            kdRatio = String.format("  &fKDR:  &c%.2f", ratio);
         } else {
-            kdRatio = "  &fKDR: &7&oNaN";
+            kdRatio = "  &fKDR:  &7&oNaN";
         }
         setScore(objective, kdRatio,5);
 
         setScore(objective, "&2 ", 4);
         int ping = player.getPing();
-        setScore(objective, "  &fPing: &d " + String.format(ping + "ms"), 3);
+        setScore(objective, "  &fPing:  &d" + String.format(ping + "ms"), 3);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
-        String online = ColorUtils.colorize("  &fPlayers: &a" + totalPlayers);
+        String online = ColorUtils.colorize("  &fPlayers:  &a" + totalPlayers);
         setScore(objective, online, 2);
 
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);

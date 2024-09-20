@@ -18,20 +18,20 @@ import static org.bukkit.Bukkit.getPlayer;
 import static org.main.uneton.utils.RegistersUtils.*;
 
 public class Combat extends JavaPlugin implements Listener {
-    
-    private static Combat instance;
+
     public static HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     public static final Map<UUID, Long> lastMovementTime = new HashMap<>();
     private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
-    public static Combat getInstance() {
-        return instance;
-    }
     public void onLoad() {
         protocolManager = ProtocolLibrary.getProtocolManager();
     }
     private ProtocolManager protocolManager;
     private ConfigManager configManager;
+    private static Combat instance;
+    public static Combat getInstance() {
+        return instance;
+    }
     long viive = 20L;
 
 

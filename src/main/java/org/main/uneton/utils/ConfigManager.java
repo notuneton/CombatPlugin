@@ -6,7 +6,6 @@ import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.main.uneton.Combat;
 
 import java.io.File;
@@ -57,12 +56,12 @@ public class ConfigManager {
 
     public void saveAll() {
         FileConfiguration config = ConfigManager.get();
-        Set<UUID> alluuids = new HashSet<>();
-        alluuids.addAll(playTimes.keySet());
-        alluuids.addAll(kills.keySet());
-        alluuids.addAll(deaths.keySet());
+        Set<UUID> uuids = new HashSet<>();
+        uuids.addAll(playTimes.keySet());
+        uuids.addAll(kills.keySet());
+        uuids.addAll(deaths.keySet());
 
-        for (UUID uuid : alluuids) {
+        for (UUID uuid : uuids) {
             if (playTimes.containsKey(uuid)) {
                 config.set("players-playtimes." + uuid.toString(), playTimes.get(uuid));
             }
@@ -74,13 +73,14 @@ public class ConfigManager {
             }
         }
 
-        String combatColor = plugin.getConfig().getString("combat-name");
+        String combatColor = config.getString("combat-name");
         if (combatColor != null) {
             config.set("combat-name", combatColor);
         }
 
+
         Location spawnLocation = ConfigManager.getSpawnLocation();
-        if (spawnLocation != null) {
+        if (spawnLocation != null && spawnLocation.getWorld() != null) {
             config.set("spawn-location.world", spawnLocation.getWorld().getName());
             config.set("spawn-location.x", spawnLocation.getX());
             config.set("spawn-location.y", spawnLocation.getY());
@@ -88,10 +88,10 @@ public class ConfigManager {
             config.set("spawn-location.yaw", spawnLocation.getYaw());
             config.set("spawn-location.pitch", spawnLocation.getPitch());
         } else {
-            Bukkit.getLogger().warning("[CombatV3]: Spawn location is null. Skipping save.");
+            Bukkit.getLogger().warning("[CombatV3]: Spawn location or world is null. Skipping save.");
         }
 
-        String joinMessage = plugin.getConfig().getString("join-message");
+        String joinMessage = config.getString("join-message");
         config.set("join-message", joinMessage);
         ConfigManager.save();
     }
@@ -127,43 +127,22 @@ public class ConfigManager {
                 deaths.put(uuid, deathsCount);
             }
         }
-
-        String worldName = config.getString("spawn-location.world");
-        if (worldName != null) {
-            World world = Bukkit.getWorld(worldName);
-            if (world != null) {
-                double x = config.getDouble("spawn-location.x");
-                double y = config.getDouble("spawn-location.y");
-                double z = config.getDouble("spawn-location.z");
-                float yaw = (float) config.getDouble("spawn-location.yaw");
-                float pitch = (float) config.getDouble("spawn-location.pitch");
-
-                Location spawn_location = new Location(world, x, y, z, yaw, pitch);
-                config.set("spawn-location", spawn_location);
-            } else {
-                Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
-            }
-        } else {
-            Bukkit.getLogger().warning("[CombatV3]: World name in spawn-location is null.");
-        }
     }
 
     public static Location getSpawnLocation() {
         FileConfiguration config = ConfigManager.get();
         if (config == null) {
-            Bukkit.getLogger().warning("[CombatV3]: configuration is null.");
+            Bukkit.getLogger().warning("[CombatV3]: Configuration is null.");
             return null;
         }
-
         String worldName = config.getString("spawn-location.world");
         if (worldName == null) {
-            Bukkit.getLogger().warning("[CombatV3]: world name is null.");
+            Bukkit.getLogger().warning("[CombatV3]: World name is null.");
             return null;
         }
-
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
-            Bukkit.getLogger().warning("[CombatV3]: world not found: " + worldName);
+            Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
             return null;
         }
 
@@ -184,7 +163,7 @@ public class ConfigManager {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &fPlaytime: &e%dh %dm %ds", hours, minutes, seconds);
+        return String.format("  &fPlaytime:  &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     public static void addKill(UUID player_uuid) {

@@ -13,6 +13,8 @@ import org.main.uneton.utils.ColorUtils;
 
 public class Msg implements CommandExecutor {
 
+    private static final String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&6&3&0&3&8- ");
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
@@ -27,9 +29,11 @@ public class Msg implements CommandExecutor {
         }
 
         Player recipient = Bukkit.getPlayer(args[0]);
-        if (recipient == null || !recipient.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "That player does not exist.");
+        if (recipient == null) {
+            if (!recipient.isOnline()) {
+                player.sendMessage(warn + "You cannot message this player!");
+            }
+            player.sendMessage(warn + "That player does not exist."); //
             return true;
         }
 

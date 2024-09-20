@@ -29,12 +29,6 @@ public class Spawn implements CommandExecutor {
             return true;
         }
 
-        Location spawnLocation = ConfigManager.getSpawnLocation();
-        if (spawnLocation == null) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &4Location not found! Please contact an admin."));
-            return true;
-        }
-
         Location initialLocation = player.getLocation();
         BukkitRunnable countdownTask = getBukkitRunnable(player, initialLocation);
         countdownTask.runTaskTimer(plugin, 0L, 20L);
@@ -50,18 +44,19 @@ public class Spawn implements CommandExecutor {
                 if (secondsPassed >= countdownSeconds) {
                     this.cancel();
                     if (!teleportPlayer(player)) {
+                        player.sendMessage("\n");
                         player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleportation cancelled."));
+                        player.sendMessage("\n");
                     }
                     return;
                 }
-
                 if (player.getLocation().distance(initial_location) > 1) {
-                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled because you moved!"));
+                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled! because you moved!"));
                     this.cancel();
                     return;
                 }
-                player.sendActionBar(ColorUtils.colorize("&aTeleporting in " + (countdownSeconds - secondsPassed) + " seconds. Do not move."));
-                player.sendMessage(ColorUtils.colorize("&aTeleporting in " + (countdownSeconds - secondsPassed) + " seconds. Do not move."));
+                player.sendActionBar(ColorUtils.colorize("&aTeleporting in " + (countdownSeconds - secondsPassed) + " seconds..."));
+                player.sendMessage(ColorUtils.colorize("&7You will be teleported in &65 " + (countdownSeconds - secondsPassed) + " &7seconds. &cDo not move&7!"));
                 secondsPassed++;
             }
         };
@@ -69,7 +64,7 @@ public class Spawn implements CommandExecutor {
 
     public boolean teleportPlayer(Player player) {
         if (combat_tagged.containsKey(player)) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled You are combat tagged!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&E&2&E&2&E&l- &cTeleport cancelled! You are combat tagged!"));
             return false;
         }
 
