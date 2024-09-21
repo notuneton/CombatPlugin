@@ -74,7 +74,7 @@ public class Guide implements CommandExecutor {
 
     private void sendBasicCommands(Player player) {
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawnpoint."));
+        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/spawn | Teleport to the spawn."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/daily | Command that canbe used daily for a reward!"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/enderchest | Opens your personal Enderchest."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/guide <text> | Show this list"));
@@ -86,7 +86,6 @@ public class Guide implements CommandExecutor {
 
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/puu | Spawns an oak tree at the player's location."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/repair | Repairs the durability of your armor."));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/rules | Original Rules Of The Server."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sign | Spawns you a sign. (Can be clicked!)"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/sudo <target> <command> | Executes another player perform a task."));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &7/trash | Put your stuff in the menu and close it!"));
@@ -118,7 +117,7 @@ public class Guide implements CommandExecutor {
 
     private void sendUsage(Player player) {
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
-        String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/guide <komennot, oikeudet, adminCommands>");
+        String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/guide <commands, perms, adminCommands>");
         player.sendMessage(usage);
         player.sendMessage(ColorUtils.colorize("&b----------------------------------------------------"));
     }

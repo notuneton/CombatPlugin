@@ -56,8 +56,72 @@ public class Listeners implements Listener {
         }
         if (ping >= 600) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated:\n\n&cYou have been kicked out from the server for too high ping.\n\n");
+            String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated:\n\n&fYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
+        }
+    }
+
+    public static ItemStack[] createJoinItems() {
+        ItemStack[] items = new ItemStack[]{
+                new ItemStack(Material.STONE_SWORD),
+                new ItemStack(Material.STONE_PICKAXE),
+                new ItemStack(Material.STONE_AXE)
+        };
+        for (ItemStack item : items) {
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ColorUtils.colorize("&fStarter Tool"));
+            if (meta != null) {
+                meta.setUnbreakable(true);
+                ArrayList<String> loreList = new ArrayList<>();
+                String pickaxe = "\u26CF";
+                AttributeModifier damageModifier = new AttributeModifier(
+                        UUID.randomUUID(),
+                        "generic.attack_damage",
+                        3.2,
+                        AttributeModifier.Operation.ADD_NUMBER
+                );
+                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
+                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+3.2"));
+                loreList.add(ColorUtils.colorize(" "));
+                loreList.add(ColorUtils.colorize("&cNot breakable"));
+                meta.setLore(loreList);
+                item.setItemMeta(meta);
+            }
+        }
+        return items;
+    }
+
+    @EventHandler
+    public void onPlayerDies(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        for (ItemStack item : createJoinItems()) {
+            event.getDrops().clear();
+            player.getInventory().remove(item);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        for (ItemStack item : createJoinItems()) {
+            player.getInventory().addItem(item);
+        }
+    }
+
+    @EventHandler
+    public void onBlockBreakEvent(BlockBreakEvent e) {
+        Block block = e.getBlock();
+        if (!block.getDrops().isEmpty()) {
+            for (ItemStack drop : block.getDrops()) {
+                if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+                    return;
+                }
+                e.setDropItems(false);
+                Material item = drop.getType();
+                Player player = e.getPlayer();
+                player.getInventory().addItem(drop);
+            }
         }
     }
 
@@ -148,53 +212,6 @@ public class Listeners implements Listener {
         return null;
     }
 
-    public static ItemStack[] createJoinItems() {
-        ItemStack[] items = new ItemStack[]{
-                new ItemStack(Material.STONE_SWORD),
-                new ItemStack(Material.STONE_PICKAXE),
-                new ItemStack(Material.STONE_AXE)
-        };
-        for (ItemStack item : items) {
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ColorUtils.colorize("&x&5&2&3&C&2&5&lP&x&5&9&4&1&2&8&le&x&6&0&4&6&2&B&la&x&6&7&4&B&2&F&ls&x&6&E&5&0&3&2&la&x&7&5&5&5&3&5&ln&x&7&C&5&A&3&8&lt &x&7&C&5&A&3&8&lP&x&7&5&5&5&3&5&li&x&6&E&5&0&3&2&lc&x&6&7&4&B&2&F&lk&x&6&0&4&6&2&B&la&x&5&9&4&1&2&8&lx&x&5&2&3&C&2&5&le"));
-            if (meta != null) {
-                meta.setUnbreakable(true);
-                ArrayList<String> loreList = new ArrayList<>();
-                String pickaxe = "\u26CF";
-                AttributeModifier damageModifier = new AttributeModifier(
-                        UUID.randomUUID(),
-                        "generic.attack_damage",
-                        3.2,
-                        AttributeModifier.Operation.ADD_NUMBER
-                );
-                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
-                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+3.2"));
-                loreList.add(ColorUtils.colorize(" "));
-                loreList.add(ColorUtils.colorize("&cNot breakable"));
-                meta.setLore(loreList);
-                item.setItemMeta(meta);
-            }
-        }
-        return items;
-    }
-
-    @EventHandler
-    public void onPlayerDies(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        for (ItemStack item : createJoinItems()) {
-            player.getInventory().remove(item);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
-        for (ItemStack item : createJoinItems()) {
-            player.getInventory().addItem(item);
-        }
-    }
-
     @EventHandler
     public void onPlayerCommandSend(PlayerCommandSendEvent event) {
         Player player = event.getPlayer();
@@ -204,22 +221,6 @@ public class Listeners implements Listener {
             String command = iterator.next();
             if (!player.hasPermission(command)) {
                 iterator.remove();
-            }
-        }
-    }
-
-    @EventHandler
-    public void onBlockBreakEvent(BlockBreakEvent e) {
-        Block block = e.getBlock();
-        if (!block.getDrops().isEmpty()) {
-            for (ItemStack drop : block.getDrops()) {
-                if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-                    return;
-                }
-                e.setDropItems(false);
-                Material item = drop.getType();
-                Player player = e.getPlayer();
-                player.getInventory().addItem(drop);
             }
         }
     }
