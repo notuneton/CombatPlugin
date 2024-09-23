@@ -95,7 +95,6 @@ public class Guide implements CommandExecutor {
         player.sendMessage(ColorUtils.colorize("&6l----------------------------------------------------"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.view.commands"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.see.messages.*"));
-        player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.pl.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.cage.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.crash.sv"));
         player.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l- &acombat.freeze.sv"));
