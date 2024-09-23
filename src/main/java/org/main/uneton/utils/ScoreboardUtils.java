@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import static org.main.uneton.Combat.playTimes;
 import static org.main.uneton.utils.ConfigManager.*;
-import static org.main.uneton.utils.NumberFormatter.formatBigNumber;
+import static org.main.uneton.utils.NumberFormatter.*;
 
 public class ScoreboardUtils {
 
@@ -52,6 +52,8 @@ public class ScoreboardUtils {
         UUID uuid = player.getUniqueId();
         int playerKills = kills.getOrDefault(uuid, 0);
         int playerDeaths = deaths.getOrDefault(uuid, 0);
+        int playerCoins = some_coins.getOrDefault(uuid, 0);
+        setScore(objective, "  &fCoins: &6" + formatLargeCoinAmount(playerCoins), 8);
         setScore(objective, "  &fDeaths: &a" + formatBigNumber(playerDeaths), 7);
         setScore(objective, "  &fKills: &a" + formatBigNumber(playerKills), 6);
 
@@ -63,10 +65,7 @@ public class ScoreboardUtils {
             kdRatio = "  &fKDR: &7&oNaN";
         }
         setScore(objective, kdRatio,5);
-
         setScore(objective, "&2 ", 4);
-        int ping = player.getPing();
-        setScore(objective, "  &fPing: &d" + String.format(ping + "ms"), 3);
 
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);

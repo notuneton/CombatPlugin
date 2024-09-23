@@ -19,6 +19,7 @@ public class ConfigManager {
     private static File configFile;
     public static Map<UUID, Integer> playTimes = null;
     public static final Map<UUID, Integer> kills = new HashMap<>();
+    public static final Map<UUID, Integer> some_coins = new HashMap<>();
     public static final Map<UUID, Integer> deaths = new HashMap<>();
 
     public ConfigManager(Combat plugin) {
@@ -53,12 +54,13 @@ public class ConfigManager {
         }
     }
 
-    public void saveAll() {
+    public static void saveAll() {
         FileConfiguration config = ConfigManager.get();
         Set<UUID> uuids = new HashSet<>();
         uuids.addAll(playTimes.keySet());
         uuids.addAll(kills.keySet());
         uuids.addAll(deaths.keySet());
+        uuids.addAll(some_coins.keySet());
 
         for (UUID uuid : uuids) {
             if (playTimes.containsKey(uuid)) {
@@ -70,12 +72,17 @@ public class ConfigManager {
             if (deaths.containsKey(uuid)) {
                 config.set("player-deaths." + uuid.toString(), deaths.get(uuid));
             }
+            if (some_coins.containsKey(uuid)) {
+                config.set("coins." + uuid.toString(), some_coins.get(uuid));
+            }
         }
 
         String combatColor = config.getString("combat-name");
         if (combatColor != null) {
             config.set("combat-name", combatColor);
         }
+        String joinMessage = config.getString("join-message");
+        config.set("join-message", joinMessage);
 
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null && spawnLocation.getWorld() != null) {
@@ -88,9 +95,6 @@ public class ConfigManager {
         } else {
             Bukkit.getLogger().warning("[CombatV3]: Spawn location or world is null. Skipping save.");
         }
-
-        String joinMessage = config.getString("join-message");
-        config.set("join-message", joinMessage);
         ConfigManager.save();
     }
 
@@ -123,6 +127,14 @@ public class ConfigManager {
                 UUID uuid = UUID.fromString(key);
                 int deathsCount = deathsSection.getInt(key);
                 deaths.put(uuid, deathsCount);
+            }
+        }
+        ConfigurationSection coinsSection = config.getConfigurationSection("coins");
+        if (coinsSection != null) {
+            for (String key : coinsSection.getKeys(false)) {
+                UUID uuid = UUID.fromString(key);
+                int coinsCount = coinsSection.getInt(key);
+                some_coins.put(uuid, coinsCount);
             }
         }
     }
@@ -164,6 +176,10 @@ public class ConfigManager {
         return String.format("  &fPlaytime:  &e%dh %dm %ds", hours, minutes, seconds);
     }
 
+    public static void addSomeCoins(UUID player_uniqueId, int amount) {
+        int currentCoins = some_coins.getOrDefault(player_uniqueId, 0);
+        some_coins.put(player_uniqueId, currentCoins + amount);
+    }
     public static void addKill(UUID player_uuid) {
         kills.put(player_uuid, kills.getOrDefault(player_uuid, 0) + 1);
     }

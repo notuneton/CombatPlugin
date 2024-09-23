@@ -4,19 +4,15 @@ import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
-import org.bukkit.block.Furnace;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -24,10 +20,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
-import org.bukkit.util.EulerAngle;
-import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.*;
 
@@ -150,8 +142,8 @@ public class Listeners implements Listener {
     @EventHandler
     public void onJoinEvent(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        Tab.updateTab();
 
+        Tab.updateTab();
         updateScoreboard(player, getInstance());
         e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
 
@@ -184,9 +176,36 @@ public class Listeners implements Listener {
 
             ConfigManager.addKill(attackerUUID);
             ConfigManager.addDeath(victimUUID);
-
             ScoreboardUtils.createScoreboard(attacker);
             ScoreboardUtils.createScoreboard(victim);
+        }
+    }
+
+    public static final ItemStack[] listOfVictimOres() {
+        return new ItemStack[] {
+                new ItemStack(Material.DIAMOND),
+                new ItemStack(Material.GOLD_INGOT),
+                new ItemStack(Material.IRON_INGOT)
+        };
+    }
+
+    @EventHandler
+    public void onPlayerKill(EntityDeathEvent event) {
+        // Tarkista, että kuollut entity on pelaaja
+        if (event.getEntity() instanceof Player victim) {
+            Player attacker = event.getEntity().getKiller();
+            if (attacker != null) {
+                UUID attackerUUID = attacker.getUniqueId();
+
+                for (ItemStack items : listOfVictimOres()) {
+                    if (victim.getInventory().contains(items.getType())) {
+                        attacker.getInventory().addItem(items);
+                    }
+                }
+                // Kutsu omaa metodia
+                attacker.sendMessage(ColorUtils.colorize("&6+200 coins!"));
+                ConfigManager.addSomeCoins(attackerUUID, 200);
+            }
         }
     }
 
@@ -245,6 +264,46 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onBedBroke(BlockBreakEvent event) {
+        Block block = event.getBlock();
+        if (block.getType().equals(getListBeds())) {
+            Location loc = event.getBlock().getLocation();
+            ItemStack[] beds = getListBeds();
+            Random random = new Random();
+            ItemStack bed = beds[random.nextInt(beds.length)];
+
+            Item dropped = loc.getWorld().dropItemNaturally(loc, bed);
+            dropped.setCanPlayerPickup(false);
+            Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
+                if (dropped.isValid()) {
+                    dropped.remove();
+                }
+            }, 300L);
+        }
+    }
+
+    private final ItemStack[] getListBeds() {
+        return new ItemStack[] {
+                new ItemStack(Material.RED_BED),
+                new ItemStack(Material.GREEN_BED),
+                new ItemStack(Material.BLACK_BED),
+                new ItemStack(Material.BLUE_BED),
+                new ItemStack(Material.BROWN_BED),
+                new ItemStack(Material.CYAN_BED),
+                new ItemStack(Material.GRAY_BED),
+                new ItemStack(Material.LIGHT_BLUE_BED),
+                new ItemStack(Material.LIGHT_GRAY_BED),
+                new ItemStack(Material.LIME_BED),
+                new ItemStack(Material.MAGENTA_BED),
+                new ItemStack(Material.ORANGE_BED),
+                new ItemStack(Material.PINK_BED),
+                new ItemStack(Material.PURPLE_BED),
+                new ItemStack(Material.WHITE_BED),
+                new ItemStack(Material.YELLOW_BED)
+        };
+    }
+
+    @EventHandler
     public void onMilkCow(PlayerInteractEntityEvent e) {
         Player player = e.getPlayer();
         ItemStack milk = new ItemStack(Material.MILK_BUCKET);
@@ -279,7 +338,7 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onMoveAwayVoid(EntityDamageEvent event) {
+    public void onMoveAwayFromValidGround(EntityDamageEvent event) {
         if (event.getEntity() != null && event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             int y_coordinate = -64;
