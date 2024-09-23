@@ -1,4 +1,4 @@
-package org.main.uneton.tabcomps;
+package org.main.uneton.tabcompletes;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

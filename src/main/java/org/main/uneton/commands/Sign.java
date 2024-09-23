@@ -1,5 +1,6 @@
 package org.main.uneton.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -18,7 +19,7 @@ public class Sign implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage(ColorUtils.colorize("oak sign was spawned!"));
+        Bukkit.broadcastMessage(ColorUtils.colorize("&aOak sign was spawned!"));
         player.getWorld().getBlockAt(player.getLocation()).setType(Material.OAK_SIGN);
         return true;
     }

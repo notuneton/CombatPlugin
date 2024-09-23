@@ -1,4 +1,4 @@
-package org.main.uneton.tabcomps;
+package org.main.uneton.tabcompletes;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class EnderchestTabs implements TabCompleter {
+public class PuuTabs implements TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

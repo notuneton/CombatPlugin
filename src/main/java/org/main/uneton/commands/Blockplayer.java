@@ -38,7 +38,7 @@ public class Blockplayer implements CommandExecutor {
 
             case "add":
                 if (args.length < 2) {
-                    String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block add <player> ");
+                    String usage = ColorUtils.colorize("&3>&b> &7usage: &f/block add <player> ");
                     player.sendMessage(usage);
                     return true;
                 }
@@ -47,7 +47,7 @@ public class Blockplayer implements CommandExecutor {
 
             case "remove":
                 if (args.length < 2) {
-                    String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block remove <player> ");
+                    String usage = ColorUtils.colorize("&3>&b> &7usage: &f/block remove <player> ");
                     player.sendMessage(usage);
                     return true;
                 }
@@ -55,7 +55,7 @@ public class Blockplayer implements CommandExecutor {
                 break;
 
             default:
-                String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/block help ");
+                String usage = ColorUtils.colorize("&3>&b> &7usage: &f/block help ");
                 player.sendMessage(usage);
                 break;
         }
@@ -90,8 +90,7 @@ public class Blockplayer implements CommandExecutor {
     private void blockPlayer(Player player, String targetName) {
         Player target = Bukkit.getPlayer(targetName);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "That player does not exist.");
+            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
             return;
         }
 

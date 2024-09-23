@@ -13,8 +13,6 @@ import org.main.uneton.utils.ColorUtils;
 
 public class Msg implements CommandExecutor {
 
-    private static final String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&2&6&3&0&3&8- ");
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
@@ -31,9 +29,9 @@ public class Msg implements CommandExecutor {
         Player recipient = Bukkit.getPlayer(args[0]);
         if (recipient == null) {
             if (!recipient.isOnline()) {
-                player.sendMessage(warn + "You cannot message this player!");
+                player.sendMessage(ColorUtils.colorize("&cYou cannot message this player!"));
             }
-            player.sendMessage(warn + "That player does not exist."); //
+            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ recipient.getName() +"!"));
             return true;
         }
 
@@ -43,8 +41,8 @@ public class Msg implements CommandExecutor {
         }
         String message = msgBuilder.toString().trim();
 
-        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &dTo &7" + recipient.getName() + ": " + message));
-        recipient.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &dFrom &7" + player.getName() + ": " + message));
+        player.sendMessage(ColorUtils.colorize("&dTo &7" + recipient.getName() + ": " + message));
+        recipient.sendMessage(ColorUtils.colorize("&dFrom &7" + player.getName() + ": " + message));
 
         player.setMetadata("lastMsg", new FixedMetadataValue(Combat.getInstance(), recipient.getName()));
         recipient.setMetadata("lastMsg", new FixedMetadataValue(Combat.getInstance(), player.getName()));

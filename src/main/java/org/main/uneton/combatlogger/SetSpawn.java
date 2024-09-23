@@ -38,7 +38,7 @@ public class SetSpawn implements CommandExecutor {
         ConfigManager.get().set("spawn-location.pitch", location.getPitch());
         ConfigManager.save();
 
-        player.sendMessage(success + ColorUtils.colorize("Successfully set the &aspawn&7 to: X " + location.getBlockX() + ", Y: " + location.getBlockY() + ", Z: " + location.getBlockZ()));
+        player.sendMessage(success + ColorUtils.colorize("Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()));
         return true;
     }
 }

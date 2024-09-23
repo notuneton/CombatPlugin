@@ -20,7 +20,6 @@ public class Spawn implements CommandExecutor {
     public Spawn(Plugin plugin) {
         this.plugin = plugin;
     }
-    public static String success = ColorUtils.colorize("&3>&b> &8+ &7");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

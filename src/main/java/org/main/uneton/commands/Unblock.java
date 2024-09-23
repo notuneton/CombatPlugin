@@ -31,8 +31,7 @@ public class Unblock implements CommandExecutor {
         String targetName = args[0];
         Player target = Bukkit.getPlayerExact(targetName);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "That player does not exist.");
+            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ targetName +"!"));
             return true;
         }
 

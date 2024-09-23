@@ -34,7 +34,7 @@ public class Magictrick implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7/magictrick <player>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7/magictrick <player>");
             player.sendMessage(usage);
             return true;
         }
@@ -42,8 +42,7 @@ public class Magictrick implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &8+ &7 ");
-                player.sendMessage(warn + "That player does not exist.");
+                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
                 return true;
             }
 

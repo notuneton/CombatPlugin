@@ -15,7 +15,6 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 public class Clear implements CommandExecutor {
 
     public static String success = ColorUtils.colorize("&3>&b> &8+ &7");
-    public static String warn = ColorUtils.colorize("&4>&c> &8+ &7 ");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -38,7 +37,7 @@ public class Clear implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(warn + "That player does not exist.");
+            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
             return true;
         }
 

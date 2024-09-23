@@ -22,7 +22,7 @@ public class Cure implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ColorUtils.colorize("&a&lSUCCESS! &7You healed yourself."));
+            player.sendMessage(ColorUtils.colorize("&d&lHEALED! &7You healed yourself, :)"));
             player.setHealth(20.0);
             player.setFoodLevel(20);
             return true;
@@ -31,8 +31,7 @@ public class Cure implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-                player.sendMessage(warn + "That player does not exist.");
+                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
                 return true;
             }
 

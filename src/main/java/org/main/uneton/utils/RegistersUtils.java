@@ -8,7 +8,7 @@ import org.main.uneton.combatlogger.SetSpawn;
 import org.main.uneton.combatlogger.Spawn;
 import org.main.uneton.commands.*;
 import org.main.uneton.events.*;
-import org.main.uneton.tabcomps.*;
+import org.main.uneton.tabcompletes.*;
 import org.main.uneton.vanillaCmds.*;
 
 public class RegistersUtils {
@@ -40,7 +40,6 @@ public class RegistersUtils {
         plugin.getCommand("blocklist").setExecutor(new BlockList());
         plugin.getCommand("block").setExecutor(new Blockplayer());
         plugin.getCommand("daily").setExecutor(new Daily());
-        plugin.getCommand("enderchest").setExecutor(new Enderchest());
         plugin.getCommand("ping").setExecutor(new Ping());
         plugin.getCommand("puu").setExecutor(new Puu());
         plugin.getCommand("repair").setExecutor(new Repair());

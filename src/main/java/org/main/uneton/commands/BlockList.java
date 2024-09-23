@@ -32,13 +32,12 @@ public class BlockList implements CommandExecutor {
 
         Player target = Bukkit.getPlayerExact(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "That player does not exist.");
+            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
             return true;
         }
 
         if (blockSet.isEmpty()) {
-            player.sendMessage(ColorUtils.colorize("You don't have any blocked players."));
+            player.sendMessage(ColorUtils.colorize("&7You haven't blocked anyone."));
         } else {
             player.sendMessage(ColorUtils.colorize("You are Blocked:"));
             for (String blocked : blockSet) {

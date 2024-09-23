@@ -25,6 +25,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import org.bukkit.util.EulerAngle;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
@@ -54,7 +55,7 @@ public class Listeners implements Listener {
         if (combat_tagged.containsKey(player)) {
             return;
         }
-        if (ping >= 600) {
+        if (ping >= 500) {
             String user = player.getName();
             String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated:\n\n&fYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
@@ -63,13 +64,20 @@ public class Listeners implements Listener {
 
     public static ItemStack[] createJoinItems() {
         ItemStack[] items = new ItemStack[]{
-                new ItemStack(Material.STONE_SWORD),
-                new ItemStack(Material.STONE_PICKAXE),
-                new ItemStack(Material.STONE_AXE)
+                new ItemStack(Material.STONE_SWORD, 1),
+                new ItemStack(Material.STONE_PICKAXE, 1),
+                new ItemStack(Material.STONE_AXE, 1)
         };
-        for (ItemStack item : items) {
+        String[] names = {
+                ColorUtils.colorize("&7Starter Sword"),
+                ColorUtils.colorize("&7Starter Pickaxe"),
+                ColorUtils.colorize("&7Starter Axe")
+        };
+
+        for (int i = 0; i < items.length; i++) {
+            ItemStack item = items[i];
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ColorUtils.colorize("&fStarter Tool"));
+            meta.setDisplayName(ColorUtils.colorize(names[i]));
             if (meta != null) {
                 meta.setUnbreakable(true);
                 ArrayList<String> loreList = new ArrayList<>();
@@ -96,11 +104,9 @@ public class Listeners implements Listener {
     public void onPlayerDies(PlayerDeathEvent event) {
         Player player = event.getEntity();
         for (ItemStack item : createJoinItems()) {
-            event.getDrops().clear();
             player.getInventory().remove(item);
         }
     }
-
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();

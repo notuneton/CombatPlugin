@@ -62,9 +62,6 @@ commands:
   daily:
     description: Command that canbe used daily for a reward!
     usage: /daily
-  enderchest:
-    description: Opens your personal Enderchest.
-    usage: /enderchest
   guide:
     description: plugin commands.
     usage: /guide <text>

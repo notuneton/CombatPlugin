@@ -35,12 +35,12 @@ public class Daily implements CommandExecutor {
         if (isOnCooldown(playerUUID)) {
             long timeLeft = getTimeLeft(playerUUID);
             String formattedTimeLeft = formatTime(timeLeft);
-            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You must wait " + formattedTimeLeft + "&7 before using this command again."));
+            player.sendMessage(ColorUtils.colorize("&d&lWOAH THERE! &7You must wait " + formattedTimeLeft + "&7 before using this command again."));
         } else {
             updateCooldown(playerUUID);
             ItemStack raffledItem = rewardItem();
             player.getInventory().addItem(raffledItem);
-            String success = ColorUtils.colorize("&2>&a> &8+ &a");
+            String success = ColorUtils.colorize("&2>&a> &a");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 3.0f);
             player.sendMessage(success + ColorUtils.colorize("You have successfully claimed &e" + raffledItem.getType()+"!"));
         }

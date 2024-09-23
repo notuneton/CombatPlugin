@@ -42,15 +42,14 @@ public class Slippery implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ &7/slippery <player>");
+            String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7/slippery <player>");
             player.sendMessage(usage);
             return true;
         }
 
         Player target = Bukkit.getPlayerExact(args[0]);
         if (target == null || !target.isOnline()) {
-            String warn = ColorUtils.colorize("&4>&c> &8+ &7");
-            player.sendMessage(warn + "That player does not exist.");
+            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
             return true;
         }
 
@@ -58,11 +57,11 @@ public class Slippery implements CommandExecutor {
         if (playerTasks.containsKey(targetUUID)) {
             playerTasks.get(targetUUID).cancel();
             playerTasks.remove(targetUUID);
-            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+            String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> ");
             player.sendMessage(warn + ChatColor.GRAY + "Stopped dropping items from " + ChatColor.YELLOW + target.getName() + "'s" + ChatColor.GRAY + " inventory.");
         } else {
             if (target.getInventory().isEmpty()) {
-                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+                String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> ");
                 player.sendMessage(warn + ColorUtils.colorize("&7Target player has no items to drop."));
                 return true;
             }
@@ -80,13 +79,13 @@ public class Slippery implements CommandExecutor {
                     if (!hasItemsToDrop) {
                         this.cancel();
                         playerTasks.remove(targetUUID);
-                        String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &8+ ");
+                        String warn = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> ");
                         player.sendMessage(warn + ChatColor.GRAY + "Stopped dropping items from " + ChatColor.YELLOW + target.getName() + "'s" + " inventory as it's now empty.");
                     }
                 }
             }.runTaskTimer(plugin, 0L, 60L);
             playerTasks.put(targetUUID, task);
-            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+ &7");
+            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7");
             player.sendMessage(success + ColorUtils.colorize("Started dropping items from &e" + target.getName() + "'s &7inventory every 3 seconds."));
         }
         return true;
