@@ -56,7 +56,6 @@ public class RegistersUtils {
 
     public static void registerTabCompletes() {
         plugin.getCommand("daily").setTabCompleter(new DailyTabs());
-        plugin.getCommand("enderchest").setTabCompleter(new EnderchestTabs());
         plugin.getCommand("guide").setTabCompleter(new GuideTabs());
         plugin.getCommand("puu").setTabCompleter(new PuuTabs());
         plugin.getCommand("repair").setTabCompleter(new RepairTabs());

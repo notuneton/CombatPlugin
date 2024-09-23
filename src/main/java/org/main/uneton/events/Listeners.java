@@ -232,6 +232,19 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onPlayerConsume(PlayerItemConsumeEvent event) {
+        ItemStack item = event.getItem();
+        Player p = event.getPlayer();
+        if (item.getType() == Material.POTION || item.getType() == Material.SPLASH_POTION || item.getType() == Material.LINGERING_POTION) {
+            BukkitScheduler scheduler = Bukkit.getScheduler();
+            Runnable runnable = () -> {
+                p.getInventory().removeItemAnySlot(new ItemStack(Material.GLASS_BOTTLE));
+            };
+            scheduler.runTaskTimer(plugin, runnable, 0L, 1L);
+        }
+    }
+
+    @EventHandler
     public void onMilkCow(PlayerInteractEntityEvent e) {
         Player player = e.getPlayer();
         ItemStack milk = new ItemStack(Material.MILK_BUCKET);

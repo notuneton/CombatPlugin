@@ -14,8 +14,6 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class SetSpawn implements CommandExecutor {
 
-    private final String success = ColorUtils.colorize("&2>&a> &8+ &7");
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
@@ -37,8 +35,7 @@ public class SetSpawn implements CommandExecutor {
         ConfigManager.get().set("spawn-location.yaw", location.getYaw());
         ConfigManager.get().set("spawn-location.pitch", location.getPitch());
         ConfigManager.save();
-
-        player.sendMessage(success + ColorUtils.colorize("Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()));
+        player.sendMessage(ColorUtils.colorize("Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()));
         return true;
     }
 }
