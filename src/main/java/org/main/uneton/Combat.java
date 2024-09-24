@@ -25,13 +25,13 @@ public class Combat extends JavaPlugin implements Listener {
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     public static final Map<UUID, Long> lastMovementTime = new HashMap<>();
     private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
-    public void onLoad() {
-        protocolManager = ProtocolLibrary.getProtocolManager();
-    }
     private ProtocolManager protocolManager;
     private ConfigManager configManager;
     private LimboManager limboManager;
     private static Combat instance;
+    public void onLoad() {
+        protocolManager = ProtocolLibrary.getProtocolManager();
+    }
     public static Combat getInstance() {
         return instance;
     }
@@ -42,9 +42,10 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
+        Bukkit.getPluginManager().registerEvents(new PlayerActivityListener(limboManager), this);
+
         Location limboLocation = ConfigManager.getSpawnLocation();
         limboManager = new LimboManager(this, limboLocation);
-        this.getServer().getPluginManager().registerEvents(new PlayerActivityListener(limboManager), this);
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
         ConfigManager.loadAll();
