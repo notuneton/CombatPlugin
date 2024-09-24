@@ -55,6 +55,7 @@ public class Wipe implements CommandExecutor {
         deaths.remove(uuid);
         ConfigManager.get().set("player-kills." + uuid, 0);
         ConfigManager.get().set("player-deaths." + uuid, 0);
+        target.getActivePotionEffects().clear();
         for (ItemStack item : target.getInventory().getContents()) {
             if (item != null) {
                 target.getInventory().removeItem(item);
