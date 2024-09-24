@@ -29,6 +29,11 @@ public class LimboManager {
         UUID uuid = player.getUniqueId();
         playerActivity.put(uuid, System.currentTimeMillis());
         notifiedPlayers.put(uuid, false); // Reset notification status when player moves
+
+        // Remove player from limbo if they are currently in it
+        if (playersInLimbo.contains(uuid)) {
+            playersInLimbo.remove(uuid);
+        }
     }
 
     private void startInactivityCheckTask() {
@@ -58,14 +63,21 @@ public class LimboManager {
         }.runTaskTimer(plugin, 0L, 20L);
     }
 
+    public void removePlayerFromLimbo(Player player) {
+        // Poista pelaaja limbo-listasta
+        // Oletetaan, että sinulla on lista, joka pitää kirjaa limboon sijoitetuista pelaajista
+        if (playersInLimbo.contains(player)) {
+            playersInLimbo.remove(player);
+        }
+    }
+
+
     private void sendPlayerToLimbo(Player player) {
         limboLocation = ConfigManager.getSpawnLocation();
         assert limboLocation != null;
         player.teleport(limboLocation);
         UUID uuid = player.getUniqueId();
         playersInLimbo.add(uuid);
-
-        // Send initial messages when sent to limbo
         notifyPlayerInLimbo(player);
     }
 

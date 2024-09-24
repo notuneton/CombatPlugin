@@ -16,6 +16,7 @@ public class PlayerActivityListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         if (limboManager != null) {
+            limboManager.removePlayerFromLimbo(event.getPlayer());
             limboManager.updatePlayerActivity(event.getPlayer());
         } else {
             Bukkit.getLogger().warning("[CombatV3]: limboManager is null!");

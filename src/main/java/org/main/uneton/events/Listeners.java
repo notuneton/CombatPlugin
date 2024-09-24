@@ -203,8 +203,11 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onCreatuneSpawn(CreatureSpawnEvent event) {
+        if (!(event.getEntity() instanceof Creature)) {
+            return;
+        }
         Creature creature = (Creature) event.getEntity();
-        if (creature == null) {
+        if (creature != null) {
             return;
         }
         if (creature instanceof Monster) {
