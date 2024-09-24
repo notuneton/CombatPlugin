@@ -14,7 +14,6 @@ public class LimboManager {
 
     private final JavaPlugin plugin;
     private Location limboLocation;
-
     public LimboManager(JavaPlugin plugin, Location limboLocation) {
         this.plugin = plugin;
         this.limboLocation = limboLocation; // Initialize the field
