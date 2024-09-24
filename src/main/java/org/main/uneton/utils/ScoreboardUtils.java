@@ -46,10 +46,7 @@ public class ScoreboardUtils {
         clearExistingLines(scoreboard);
 
         String now = ColorUtils.colorize("&7" + getCurrentTime());
-        setScore(objective, now, 13);
-
-        setScore(objective, "&fThis game is under ", 11);
-        setScore(objective, "&fHeavy development! ", 10);
+        setScore(objective, now, 10);
 
         UUID uuid = player.getUniqueId();
         int playerDeaths = deaths.getOrDefault(uuid, 0);
@@ -72,7 +69,6 @@ public class ScoreboardUtils {
         int playerCoins = some_coins.getOrDefault(uuid, 0);
         setScore(objective, "&fCoins: &6" + formatWithComma(playerCoins), 1);
 
-        setScore(objective, "&5 ", 12);
         setScore(objective, "&4 ", 9);
         setScore(objective, "&3 ", 6);
         setScore(objective, "&2 ", 3);
