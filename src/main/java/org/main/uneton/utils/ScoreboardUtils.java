@@ -43,24 +43,26 @@ public class ScoreboardUtils {
             objective = scoreboard.registerNewObjective("scoreboard", "owo", ColorUtils.colorize("    "));
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
+        String now = ColorUtils.colorize("&7" + getCurrentTime());
+        setScore(objective, now, 11);
         clearExistingLines(scoreboard);
 
-        String now = ColorUtils.colorize("&7" + getCurrentTime());
-        setScore(objective, now, 10);
 
         UUID uuid = player.getUniqueId();
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "&fDeaths &a" + formatLargeNumberIntoChar(playerDeaths), 8);
+        setScore(objective, "&fDeaths &a" + formatLargeNumberIntoChar(playerDeaths), 9);
         int playerKills = kills.getOrDefault(uuid, 0);
-        setScore(objective, "&fKills: &a" + formatLargeNumberIntoChar(playerKills), 7);
+        setScore(objective, "&fKills: &a" + formatLargeNumberIntoChar(playerKills), 8);
 
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
         int hours = playtimeSeconds / 3600;
         int minutes = (playtimeSeconds % 3600) / 60;
         int seconds = playtimeSeconds % 60;
         String playtimeString = formatPlaytime(hours, minutes, seconds);
-        setScore(objective, playtimeString, 5);
+        setScore(objective, playtimeString, 6);
 
+        int ping = player.getPing();
+        setScore(objective, "&fPing: &d" + String.format(ping + "ms"), 5);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("&fPlayers: &2" + totalPlayers);
@@ -69,8 +71,8 @@ public class ScoreboardUtils {
         int playerCoins = some_coins.getOrDefault(uuid, 0);
         setScore(objective, "&fCoins: &6" + formatWithComma(playerCoins), 1);
 
-        setScore(objective, "&4 ", 9);
-        setScore(objective, "&3 ", 6);
+        setScore(objective, "&4 ", 10);
+        setScore(objective, "&3 ", 7);
         setScore(objective, "&2 ", 3);
         setScore(objective, "&1 ", 0);
         player.setScoreboard(scoreboard);

@@ -14,20 +14,22 @@ public class LimboManager {
 
     private final JavaPlugin plugin;
     private Location limboLocation;
+
     public LimboManager(JavaPlugin plugin, Location limboLocation) {
         this.plugin = plugin;
         this.limboLocation = limboLocation; // Initialize the field
         startInactivityCheckTask();
     }
+
     private final Map<UUID, Long> playerActivity = new HashMap<>();
     private final Set<UUID> playersInLimbo = new HashSet<>();
-    private final Map<UUID, Long> lastRewardTime = new HashMap<>();
+    private final Map<UUID, Boolean> notifiedPlayers = new HashMap<>(); // To track if a player has been notified
     private final long inactivityThreshold = 3 * 60 * 1000; // in milliseconds
-    private final long rewardInterval = 3 * 60 * 1000;
 
     public void updatePlayerActivity(Player player) {
-        playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
-        lastRewardTime.remove(player.getUniqueId());
+        UUID uuid = player.getUniqueId();
+        playerActivity.put(uuid, System.currentTimeMillis());
+        notifiedPlayers.put(uuid, false); // Reset notification status when player moves
     }
 
     private void startInactivityCheckTask() {
@@ -39,14 +41,18 @@ public class LimboManager {
                     UUID uuid = loopPlayer.getUniqueId();
                     long lastActivityTime = playerActivity.getOrDefault(uuid, currentTime);
 
-                    // Tarkista onko pelaaja epäaktiivinen JA ei ole jo limbo-tilassa
+                    // Check for inactivity
                     if ((currentTime - lastActivityTime) >= inactivityThreshold && !playersInLimbo.contains(uuid)) {
                         sendPlayerToLimbo(loopPlayer);
                     }
 
-                    // Jos pelaaja on limbo-tilassa, tarkista palkkion antaminen
+                    // Check if player is in limbo
                     if (playersInLimbo.contains(uuid)) {
-                        giveRewardIfIntervalPassed(loopPlayer, currentTime);
+                        // Send messages only if not already notified
+                        if (!notifiedPlayers.getOrDefault(uuid, false)) {
+                            notifyPlayerInLimbo(loopPlayer);
+                            notifiedPlayers.put(uuid, true); // Mark as notified
+                        }
                     }
                 }
             }
@@ -60,18 +66,13 @@ public class LimboManager {
         UUID uuid = player.getUniqueId();
         playersInLimbo.add(uuid);
 
-        player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to limbo!"));
-        player.sendMessage(ColorUtils.colorize("&cYou were spawned in Limbo."));
+        // Send initial messages when sent to limbo
+        notifyPlayerInLimbo(player);
     }
 
-    private void giveRewardIfIntervalPassed(Player player, long currentTime) {
-        UUID uuid = player.getUniqueId();
-        long lastReward = lastRewardTime.getOrDefault(uuid, 0L);
-        if (currentTime - lastReward >= rewardInterval) {
-            lastRewardTime.put(uuid, currentTime);
-            player.sendMessage(ColorUtils.colorize("&6You received &f20 coins&6!"));
-            ConfigManager.addSomeCoins(uuid, 20);
-        }
+    private void notifyPlayerInLimbo(Player player) {
+        player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to limbo!"));
+        player.sendMessage(ColorUtils.colorize("&cYou were spawned in Limbo."));
     }
 }
 

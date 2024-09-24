@@ -132,8 +132,8 @@ public class Listeners implements Listener {
                         attacker.getInventory().addItem(stolen_items);
                     }
                 }
-                attacker.sendMessage(ColorUtils.colorize("&6+40 coins!"));
-                ConfigManager.addSomeCoins(attackerUUID, 40);
+                attacker.sendMessage(ColorUtils.colorize("&6+80 coins!"));
+                ConfigManager.addSomeCoins(attackerUUID, 80);
             }
         }
     }
@@ -201,42 +201,19 @@ public class Listeners implements Listener {
         }
     }
 
-    public static ItemStack[] createJoinItems() {
-        ItemStack[] items = new ItemStack[]{
-                new ItemStack(Material.STONE_SWORD, 1),
-                new ItemStack(Material.STONE_PICKAXE, 1),
-                new ItemStack(Material.STONE_AXE, 1)
-        };
-        String[] names = {
-                ColorUtils.colorize("&7Starter Sword"),
-                ColorUtils.colorize("&7Starter Pickaxe"),
-                ColorUtils.colorize("&7Starter Axe")
-        };
-
-        for (int i = 0; i < items.length; i++) {
-            ItemStack item = items[i];
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ColorUtils.colorize(names[i]));
-            if (meta != null) {
-                meta.setUnbreakable(true);
-                ArrayList<String> loreList = new ArrayList<>();
-                String pickaxe = "\u26CF";
-                AttributeModifier damageModifier = new AttributeModifier(
-                        UUID.randomUUID(),
-                        "generic.attack_damage",
-                        3.2,
-                        AttributeModifier.Operation.ADD_NUMBER
-                );
-                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
-                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+3.2"));
-                loreList.add(ColorUtils.colorize(" "));
-                loreList.add(ColorUtils.colorize("&cNot breakable"));
-                meta.setLore(loreList);
-                item.setItemMeta(meta);
-            }
+    @EventHandler
+    public void onCreatuneSpawn(CreatureSpawnEvent event) {
+        Creature creature = (Creature) event.getEntity();
+        if (creature == null) {
+            return;
         }
-        return items;
+        if (creature instanceof Monster) {
+            Monster mob = (Monster) creature;
+            mob.setCustomNameVisible(true);
+
+            String mobName = creature.getType().name();
+            mob.setCustomName(ColorUtils.colorize("&c"+ mobName));
+        }
     }
 
     @EventHandler
@@ -303,6 +280,44 @@ public class Listeners implements Listener {
             new ItemStack(Material.COPPER_INGOT),
             new ItemStack(Material.STRING)
     };
+
+    public static ItemStack[] createJoinItems() {
+        ItemStack[] items = new ItemStack[]{
+                new ItemStack(Material.STONE_SWORD, 1),
+                new ItemStack(Material.STONE_PICKAXE, 1),
+                new ItemStack(Material.STONE_AXE, 1)
+        };
+        String[] names = {
+                ColorUtils.colorize("&7Starter Sword"),
+                ColorUtils.colorize("&7Starter Pickaxe"),
+                ColorUtils.colorize("&7Starter Axe")
+        };
+
+        for (int i = 0; i < items.length; i++) {
+            ItemStack item = items[i];
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ColorUtils.colorize(names[i]));
+            if (meta != null) {
+                meta.setUnbreakable(true);
+                ArrayList<String> loreList = new ArrayList<>();
+                String pickaxe = "\u26CF";
+                AttributeModifier damageModifier = new AttributeModifier(
+                        UUID.randomUUID(),
+                        "generic.attack_damage",
+                        3.2,
+                        AttributeModifier.Operation.ADD_NUMBER
+                );
+                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
+                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+3.2"));
+                loreList.add(ColorUtils.colorize(" "));
+                loreList.add(ColorUtils.colorize("&cNot breakable"));
+                meta.setLore(loreList);
+                item.setItemMeta(meta);
+            }
+        }
+        return items;
+    }
 
     public static boolean doesCommandExist(String commandName) {
         CommandMap commandMap = getCommandMap();
