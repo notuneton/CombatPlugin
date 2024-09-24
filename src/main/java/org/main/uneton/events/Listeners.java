@@ -54,75 +54,6 @@ public class Listeners implements Listener {
         }
     }
 
-    public static ItemStack[] createJoinItems() {
-        ItemStack[] items = new ItemStack[]{
-                new ItemStack(Material.STONE_SWORD, 1),
-                new ItemStack(Material.STONE_PICKAXE, 1),
-                new ItemStack(Material.STONE_AXE, 1)
-        };
-        String[] names = {
-                ColorUtils.colorize("&7Starter Sword"),
-                ColorUtils.colorize("&7Starter Pickaxe"),
-                ColorUtils.colorize("&7Starter Axe")
-        };
-
-        for (int i = 0; i < items.length; i++) {
-            ItemStack item = items[i];
-            ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ColorUtils.colorize(names[i]));
-            if (meta != null) {
-                meta.setUnbreakable(true);
-                ArrayList<String> loreList = new ArrayList<>();
-                String pickaxe = "\u26CF";
-                AttributeModifier damageModifier = new AttributeModifier(
-                        UUID.randomUUID(),
-                        "generic.attack_damage",
-                        3.2,
-                        AttributeModifier.Operation.ADD_NUMBER
-                );
-                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
-                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+3.2"));
-                loreList.add(ColorUtils.colorize(" "));
-                loreList.add(ColorUtils.colorize("&cNot breakable"));
-                meta.setLore(loreList);
-                item.setItemMeta(meta);
-            }
-        }
-        return items;
-    }
-
-    @EventHandler
-    public void onPlayerDies(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        for (ItemStack item : createJoinItems()) {
-            player.getInventory().remove(item);
-        }
-    }
-    @EventHandler
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
-        for (ItemStack item : createJoinItems()) {
-            player.getInventory().addItem(item);
-        }
-    }
-
-    @EventHandler
-    public void onBlockBreakEvent(BlockBreakEvent e) {
-        Block block = e.getBlock();
-        if (!block.getDrops().isEmpty()) {
-            for (ItemStack drop : block.getDrops()) {
-                if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-                    return;
-                }
-                e.setDropItems(false);
-                Material item = drop.getType();
-                Player player = e.getPlayer();
-                player.getInventory().addItem(drop);
-            }
-        }
-    }
-
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
@@ -185,68 +116,56 @@ public class Listeners implements Listener {
         return new ItemStack[] {
                 new ItemStack(Material.DIAMOND),
                 new ItemStack(Material.GOLD_INGOT),
-                new ItemStack(Material.IRON_INGOT)
+                new ItemStack(Material.IRON_INGOT),
+                new ItemStack(Material.EMERALD)
         };
     }
 
     @EventHandler
     public void onPlayerKill(EntityDeathEvent event) {
-        // Tarkista, että kuollut entity on pelaaja
         if (event.getEntity() instanceof Player victim) {
             Player attacker = event.getEntity().getKiller();
             if (attacker != null) {
                 UUID attackerUUID = attacker.getUniqueId();
-
-                for (ItemStack items : listOfVictimOres()) {
-                    if (victim.getInventory().contains(items.getType())) {
-                        attacker.getInventory().addItem(items);
+                for (ItemStack stolen_items : listOfVictimOres()) {
+                    if (victim.getInventory().contains(stolen_items.getType())) {
+                        attacker.getInventory().addItem(stolen_items);
                     }
                 }
-                // Kutsu omaa metodia
-                attacker.sendMessage(ColorUtils.colorize("&6+200 coins!"));
-                ConfigManager.addSomeCoins(attackerUUID, 200);
+                attacker.sendMessage(ColorUtils.colorize("&6+40 coins!"));
+                ConfigManager.addSomeCoins(attackerUUID, 40);
             }
         }
     }
 
     @EventHandler
-    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
-        String command = event.getMessage().split(" ")[0].substring(1);
-        Player player = event.getPlayer();
-        if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
-            playCancerSound(player);
-            event.setCancelled(true);
+    public void onBlockBreakEvent(BlockBreakEvent e) {
+        Block block = e.getBlock();
+        if (!block.getDrops().isEmpty()) {
+            for (ItemStack drop : block.getDrops()) {
+                if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
+                    return;
+                }
+                e.setDropItems(false);
+                Material item = drop.getType();
+                Player player = e.getPlayer();
+                player.getInventory().addItem(drop);
+            }
         }
-    }
-
-    public static boolean doesCommandExist(String commandName) {
-        CommandMap commandMap = getCommandMap();
-        if (commandMap != null) {
-            Command command = commandMap.getCommand(commandName);
-            return command != null;
-        }
-        return false;
-    }
-
-    private String getPermissionName(String command) {
-        Command cmd = getCommandMap().getCommand(command);
-        if (cmd != null) {
-            return cmd.getPermission();
-        }
-        return null;
     }
 
     @EventHandler
-    public void onPlayerCommandSend(PlayerCommandSendEvent event) {
+    public void onPlayerDies(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        for (ItemStack item : createJoinItems()) {
+            player.getInventory().remove(item);
+        }
+    }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        Set<String> commands = (Set<String>) event.getCommands();
-        Iterator<String> iterator = commands.iterator();
-        while (iterator.hasNext()) {
-            String command = iterator.next();
-            if (!player.hasPermission(command)) {
-                iterator.remove();
-            }
+        for (ItemStack item : createJoinItems()) {
+            player.getInventory().addItem(item);
         }
     }
 
@@ -261,46 +180,6 @@ public class Listeners implements Listener {
             };
             scheduler.runTaskTimer(plugin, runnable, 0L, 1L);
         }
-    }
-
-    @EventHandler
-    public void onBedBroke(BlockBreakEvent event) {
-        Block block = event.getBlock();
-        if (block.getType().equals(getListBeds())) {
-            Location loc = event.getBlock().getLocation();
-            ItemStack[] beds = getListBeds();
-            Random random = new Random();
-            ItemStack bed = beds[random.nextInt(beds.length)];
-
-            Item dropped = loc.getWorld().dropItemNaturally(loc, bed);
-            dropped.setCanPlayerPickup(false);
-            Bukkit.getScheduler().runTaskLater(Combat.getPlugin(Combat.class), () -> {
-                if (dropped.isValid()) {
-                    dropped.remove();
-                }
-            }, 300L);
-        }
-    }
-
-    private final ItemStack[] getListBeds() {
-        return new ItemStack[] {
-                new ItemStack(Material.RED_BED),
-                new ItemStack(Material.GREEN_BED),
-                new ItemStack(Material.BLACK_BED),
-                new ItemStack(Material.BLUE_BED),
-                new ItemStack(Material.BROWN_BED),
-                new ItemStack(Material.CYAN_BED),
-                new ItemStack(Material.GRAY_BED),
-                new ItemStack(Material.LIGHT_BLUE_BED),
-                new ItemStack(Material.LIGHT_GRAY_BED),
-                new ItemStack(Material.LIME_BED),
-                new ItemStack(Material.MAGENTA_BED),
-                new ItemStack(Material.ORANGE_BED),
-                new ItemStack(Material.PINK_BED),
-                new ItemStack(Material.PURPLE_BED),
-                new ItemStack(Material.WHITE_BED),
-                new ItemStack(Material.YELLOW_BED)
-        };
     }
 
     @EventHandler
@@ -320,6 +199,44 @@ public class Listeners implements Listener {
                 player.sendMessage(ColorUtils.colorize("&aYou have milked the cow!"));
             }
         }
+    }
+
+    public static ItemStack[] createJoinItems() {
+        ItemStack[] items = new ItemStack[]{
+                new ItemStack(Material.STONE_SWORD, 1),
+                new ItemStack(Material.STONE_PICKAXE, 1),
+                new ItemStack(Material.STONE_AXE, 1)
+        };
+        String[] names = {
+                ColorUtils.colorize("&7Starter Sword"),
+                ColorUtils.colorize("&7Starter Pickaxe"),
+                ColorUtils.colorize("&7Starter Axe")
+        };
+
+        for (int i = 0; i < items.length; i++) {
+            ItemStack item = items[i];
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ColorUtils.colorize(names[i]));
+            if (meta != null) {
+                meta.setUnbreakable(true);
+                ArrayList<String> loreList = new ArrayList<>();
+                String pickaxe = "\u26CF";
+                AttributeModifier damageModifier = new AttributeModifier(
+                        UUID.randomUUID(),
+                        "generic.attack_damage",
+                        3.2,
+                        AttributeModifier.Operation.ADD_NUMBER
+                );
+                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
+                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+                loreList.add(ColorUtils.colorize("&4"+ pickaxe +" &7Damage: &c+3.2"));
+                loreList.add(ColorUtils.colorize(" "));
+                loreList.add(ColorUtils.colorize("&cNot breakable"));
+                meta.setLore(loreList);
+                item.setItemMeta(meta);
+            }
+        }
+        return items;
     }
 
     @EventHandler
@@ -386,6 +303,47 @@ public class Listeners implements Listener {
             new ItemStack(Material.COPPER_INGOT),
             new ItemStack(Material.STRING)
     };
+
+    public static boolean doesCommandExist(String commandName) {
+        CommandMap commandMap = getCommandMap();
+        if (commandMap != null) {
+            Command command = commandMap.getCommand(commandName);
+            return command != null;
+        }
+        return false;
+    }
+
+    private String getPermissionName(String command) {
+        Command cmd = getCommandMap().getCommand(command);
+        if (cmd != null) {
+            return cmd.getPermission();
+        }
+        return null;
+    }
+
+    @EventHandler
+    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
+        String command = event.getMessage().split(" ")[0].substring(1);
+        Player player = event.getPlayer();
+        if (!doesCommandExist(command) || !player.hasPermission(command)) {
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
+            playCancerSound(player);
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerCommandSend(PlayerCommandSendEvent event) {
+        Player player = event.getPlayer();
+        Set<String> commands = (Set<String>) event.getCommands();
+        Iterator<String> iterator = commands.iterator();
+        while (iterator.hasNext()) {
+            String command = iterator.next();
+            if (!player.hasPermission(command)) {
+                iterator.remove();
+            }
+        }
+    }
 
     @EventHandler
     @Deprecated

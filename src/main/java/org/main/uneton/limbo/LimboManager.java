@@ -3,9 +3,13 @@ package org.main.uneton.limbo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.utils.ColorUtils;
+import org.main.uneton.utils.ConfigManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +18,7 @@ import java.util.UUID;
 public class LimboManager {
 
     private final JavaPlugin plugin;
-    private final Location limboLocation;
+    private Location limboLocation;
     public LimboManager(JavaPlugin plugin, Location limboLocation) {
         this.plugin = plugin;
         this.limboLocation = limboLocation; // Initialize the field
@@ -22,7 +26,7 @@ public class LimboManager {
     }
 
     private final Map<UUID, Long> playerActivity = new HashMap<>();
-    private final long inactivityThreshold = 5 * 60 * 1000; // 5 minutes in milliseconds
+    private final long inactivityThreshold = 3 * 60 * 1000; // in milliseconds
 
     public void updatePlayerActivity(Player player) {
         playerActivity.put(player.getUniqueId(), System.currentTimeMillis());
@@ -37,9 +41,7 @@ public class LimboManager {
                     UUID uuid = loopPlayer.getUniqueId();
                     long lastActivityTime = playerActivity.getOrDefault(uuid, currentTime);
                     if ((currentTime - lastActivityTime) >= inactivityThreshold) {
-                        if (!loopPlayer.isInsideVehicle()) {  // Optional check: prevent teleporting if in a vehicle
-                            sendPlayerToLimbo(loopPlayer);
-                        }
+                        sendPlayerToLimbo(loopPlayer);
                     }
                 }
             }
@@ -47,7 +49,13 @@ public class LimboManager {
     }
 
     private void sendPlayerToLimbo(Player player) {
+        limboLocation = ConfigManager.getSpawnLocation();
+        assert limboLocation != null;
         player.teleport(limboLocation);
+        UUID uuid = player.getUniqueId();
+        player.sendMessage(ColorUtils.colorize("&6You received &f60 coins for being teleported to Limbo!"));
+        ConfigManager.addSomeCoins(uuid, 60);
+        player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to limbo!"));
         player.sendMessage(ColorUtils.colorize("&cYou were spawned in Limbo."));
     }
 }

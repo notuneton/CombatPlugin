@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.main.uneton.limbo.LimboManager;
+import org.main.uneton.limbo.PlayerActivityListener;
 import org.main.uneton.utils.*;
 
 import java.io.File;
@@ -28,6 +30,7 @@ public class Combat extends JavaPlugin implements Listener {
     }
     private ProtocolManager protocolManager;
     private ConfigManager configManager;
+    private LimboManager limboManager;
     private static Combat instance;
     public static Combat getInstance() {
         return instance;
@@ -39,6 +42,9 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
+        Location limboLocation = new Location(Bukkit.getWorld("world"), 0, 81, 0);
+        limboManager = new LimboManager(this, limboLocation);
+        this.getServer().getPluginManager().registerEvents(new PlayerActivityListener(limboManager), this);
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
         ConfigManager.loadAll();
