@@ -3,9 +3,6 @@ package org.main.uneton.limbo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.main.uneton.utils.ColorUtils;
@@ -53,8 +50,9 @@ public class LimboManager {
         assert limboLocation != null;
         player.teleport(limboLocation);
         UUID uuid = player.getUniqueId();
-        player.sendMessage(ColorUtils.colorize("&6You received &f60 coins for being teleported to Limbo!"));
+        player.sendMessage(ColorUtils.colorize("&6You received &f60 coins&6!"));
         ConfigManager.addSomeCoins(uuid, 60);
+
         player.sendMessage(ColorUtils.colorize("&cAn exception occurred in your connection, so you have been routed to limbo!"));
         player.sendMessage(ColorUtils.colorize("&cYou were spawned in Limbo."));
     }

@@ -173,7 +173,7 @@ public class ConfigManager {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("  &x&6&3&9&2&B&8P&x&6&D&9&3&C&1l&x&7&6&9&4&C&Aa&x&8&0&9&5&D&3y&x&8&A&9&6&D&Ct&x&9&3&9&6&E&4i&x&9&D&9&7&E&Dm&x&A&6&9&8&F&6e&x&B&0&9&9&F&F:  &f&e%dh %dm %ds", hours, minutes, seconds);
+        return String.format("  &fPlaytime: &b%dh %dm %ds", hours, minutes, seconds);
     }
 
     public static void addSomeCoins(UUID player_uniqueId, int amount) {
