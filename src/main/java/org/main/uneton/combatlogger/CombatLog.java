@@ -43,7 +43,7 @@ public class CombatLog implements Listener {
                     plugin.saveConfig();
                 }
             });
-            toRemove.forEach(this::endCombatTag);
+            toRemove.forEach(this::endCombat);
         }, 0, 20L);
     }
 
@@ -61,14 +61,14 @@ public class CombatLog implements Listener {
         if (combat_tagged.containsKey(exited)) {
             Bukkit.broadcastMessage(ColorUtils.colorize("&c" + exited.getName() + " was killed while disconnected"));
             exited.setHealth(0);
-            endCombatTag(exited);
+            endCombat(exited);
         }
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
-        endCombatTag(victim);
+        endCombat(victim);
     }
 
     private void startCombat(Player player, Player target) {
@@ -78,7 +78,7 @@ public class CombatLog implements Listener {
         addToCombatList(target, player);
     }
 
-    private void endCombatTag(Player player) {
+    private void endCombat(Player player) {
         combat_tagged.remove(player);
         isInCombat.remove(player);
         removeFromTargetLists(player);

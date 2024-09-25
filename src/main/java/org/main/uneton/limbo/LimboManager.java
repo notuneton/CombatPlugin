@@ -49,10 +49,7 @@ public class LimboManager {
                     if ((currentTime - lastActivityTime) >= inactivityThreshold && !playersInLimbo.contains(uuid)) {
                         sendPlayerToLimbo(loopPlayer);
                     }
-
-                    // Check if player is in limbo
                     if (playersInLimbo.contains(uuid)) {
-                        // Send messages only if not already notified
                         if (!notifiedPlayers.getOrDefault(uuid, false)) {
                             notifyPlayerInLimbo(loopPlayer);
                             notifiedPlayers.put(uuid, true); // Mark as notified
@@ -70,7 +67,6 @@ public class LimboManager {
             playersInLimbo.remove(player);
         }
     }
-
 
     private void sendPlayerToLimbo(Player player) {
         limboLocation = ConfigManager.getSpawnLocation();
