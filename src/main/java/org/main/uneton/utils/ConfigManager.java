@@ -173,17 +173,21 @@ public class ConfigManager {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("&fPlaytime: &b%dh %dm %ds", hours, minutes, seconds);
+        return String.format("&7Total Playtime: &4%dh %dm %ds", hours, minutes, seconds);
     }
 
     public static void addSomeCoins(UUID player_uniqueId, int amount) {
         int currentCoins = some_coins.getOrDefault(player_uniqueId, 0);
         some_coins.put(player_uniqueId, currentCoins + amount);
     }
+
     public static void addKill(UUID player_uuid) {
-        kills.put(player_uuid, kills.getOrDefault(player_uuid, 0) + 1);
+        int currentKills = kills.getOrDefault(player_uuid, 0);
+        kills.put(player_uuid, currentKills + 1);
     }
+
     public static void addDeath(UUID player_uuid) {
-        deaths.put(player_uuid, deaths.getOrDefault(player_uuid, 0) + 1);
+        int currentDeaths = deaths.getOrDefault(player_uuid, 0);
+        deaths.put(player_uuid, currentDeaths + 1);
     }
 }

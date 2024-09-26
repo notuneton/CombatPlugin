@@ -1,5 +1,7 @@
 package org.main.uneton.events;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -12,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemFlag;
@@ -217,6 +220,19 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onTntPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        Block block = event.getBlockPlaced();
+        if (block.getType() == Material.TNT) {
+            event.setCancelled(true);
+
+            block.setType(Material.AIR);
+            TNTPrimed tnt = (TNTPrimed) block.getWorld().spawn(block.getLocation(), TNTPrimed.class);
+            tnt.setFuseTicks(80);
+        }
+    }
+
+    @EventHandler
     public void onMoveAwayFromValidGround(EntityDamageEvent event) {
         if (event.getEntity() != null && event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
@@ -323,12 +339,17 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
-        String command = event.getMessage().split(" ")[0].substring(1);
         Player player = event.getPlayer();
+        String input = event.getMessage().split(" ")[0].substring(1);
+        String command = input.toLowerCase();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/"+command+"' not found to be executable. "));
-            playCancerSound(player);
-            event.setCancelled(true);
+            if (!input.equals(command)) {
+                player.sendMessage(ColorUtils.colorize("&c&lINCORRECT! &7The syntax of the command '/" + input + "' is incorrect. Did you mean '/" + command + "'?"));
+            } else {
+                player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/" + command + "' not found to be executable."));
+                playCancerSound(player);
+                event.setCancelled(true);
+            }
         }
     }
 
