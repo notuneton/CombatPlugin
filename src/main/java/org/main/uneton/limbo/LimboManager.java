@@ -61,8 +61,6 @@ public class LimboManager {
     }
 
     public void removePlayerFromLimbo(Player player) {
-        // Poista pelaaja limbo-listasta
-        // Oletetaan, että sinulla on lista, joka pitää kirjaa limboon sijoitetuista pelaajista
         if (playersInLimbo.contains(player)) {
             playersInLimbo.remove(player);
         }

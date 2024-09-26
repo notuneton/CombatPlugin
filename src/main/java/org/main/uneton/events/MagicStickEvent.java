@@ -124,7 +124,7 @@ public class MagicStickEvent implements Listener {
                 Vector direction = bloc.toVector().subtract(location.toVector()).normalize();
 
                 double randomFactor = 1.1;
-                double force = 1.2;
+                double force = 1.5;
                 Vector velocity = direction.multiply(force).add(new Vector(
                         (Math.random() - 0.5) * randomFactor,
                         Math.random() * 0.5,
