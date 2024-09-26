@@ -343,13 +343,9 @@ public class Listeners implements Listener {
         String input = event.getMessage().split(" ")[0].substring(1);
         String command = input.toLowerCase();
         if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            if (!input.equals(command)) {
-                player.sendMessage(ColorUtils.colorize("&c&lINCORRECT! &7The syntax of the command '/" + input + "' is incorrect. Did you mean '/" + command + "'?"));
-            } else {
-                player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7command '/" + command + "' not found to be executable."));
-                playCancerSound(player);
-                event.setCancelled(true);
-            }
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7The syntax of the command '/" + command + "' not found to be executable."));
+            playCancerSound(player);
+            event.setCancelled(true);
         }
     }
 
