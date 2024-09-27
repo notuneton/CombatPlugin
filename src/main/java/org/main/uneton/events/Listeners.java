@@ -212,35 +212,26 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onMilkCow(PlayerInteractEntityEvent e) {
-        Player player = e.getPlayer();
-        ItemStack milk = new ItemStack(Material.MILK_BUCKET);
-        if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
-            if (Math.random() < 0.4) {
-                player.sendMessage(ColorUtils.colorize("&cYou milked this cow wrong!"));
-                return;
-            } else if (Math.random() < 0.4) {
-                player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
-                return;
-            } else if (Math.random() < 0.2) {
-                player.getInventory().addItem(milk);
-                player.getInventory().removeItem(new ItemStack(Material.BUCKET, 1));
-                player.sendMessage(ColorUtils.colorize("&aYou have milked the cow!"));
-            }
-        }
-    }
-
-    @EventHandler
-    public void onZombieDeath(EntityDeathEvent event) {
+    public void onZombieDeathReward(EntityDeathEvent event) {
         if (event.getEntity() instanceof Zombie) {
             Location loc = event.getEntity().getLocation();
             Player killer = event.getEntity().getKiller();
-            ItemStack lowChanceReward = new ItemStack(Material.DIAMOND, 1);
-            if (killer != null) {
-                double chance = 0.01;
-                if (Math.random() < chance) {
+            // Tarkista, että tappaja ei ole null
+            if (killer == null) return;
+
+            ItemStack tool = killer.getInventory().getItemInMainHand();
+            if (tool.getType() == Material.STICK) {
+                double tenPercentChance = 0.1;
+                if (Math.random() < tenPercentChance) {
+                    ItemStack lowChanceReward = new ItemStack(Material.DIAMOND, 1);
                     loc.getWorld().dropItemNaturally(loc, lowChanceReward);
                 }
+            }
+
+            double onePercentChance = 0.01;
+            if (Math.random() < onePercentChance) {
+                ItemStack rareReward = new ItemStack(Material.DIAMOND, 1);
+                loc.getWorld().dropItemNaturally(loc, rareReward);
             }
         }
     }
