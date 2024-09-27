@@ -50,9 +50,9 @@ public class ScoreboardUtils {
 
         UUID uuid = player.getUniqueId();
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "&fDeaths &a" + formatLargeNumberIntoChar(playerDeaths), 9);
+        setScore(objective, "&fDeaths: &a" + formatLargeNumberIntoChar(playerDeaths), 9);
         int playerKills = kills.getOrDefault(uuid, 0);
-        setScore(objective, "&fKills: &a" + formatLargeNumberIntoChar(playerKills), 8);
+        setScore(objective, "&fPeople killed: &a" + formatLargeNumberIntoChar(playerKills), 8);
 
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
         int hours = playtimeSeconds / 3600;
@@ -69,7 +69,7 @@ public class ScoreboardUtils {
         setScore(objective, online, 4);
 
         int playerCoins = some_coins.getOrDefault(uuid, 0);
-        setScore(objective, "&fCoins: &6" + formatWithComma(playerCoins), 1);
+        setScore(objective, "&fCoins: &6" + formatLargeNumberIntoChar(playerCoins), 1);
 
         setScore(objective, "&4 ", 10);
         setScore(objective, "&3 ", 7);

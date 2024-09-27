@@ -104,14 +104,17 @@ public class Listeners implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         Player attacker = victim.getKiller();
-        if (attacker != null && attacker instanceof Player) {
+
+        if (attacker != null) {
             UUID attackerUUID = attacker.getUniqueId();
             UUID victimUUID = victim.getUniqueId();
 
-            ConfigManager.addKill(attackerUUID);
-            ConfigManager.addDeath(victimUUID);
-            ScoreboardUtils.createScoreboard(attacker);
-            ScoreboardUtils.createScoreboard(victim);
+            if (victim instanceof Player || victim instanceof Villager) {
+                ConfigManager.addKill(attackerUUID);
+                ConfigManager.addDeath(victimUUID);
+                ScoreboardUtils.createScoreboard(attacker);
+                ScoreboardUtils.createScoreboard(victim);
+            }
         }
     }
 
@@ -135,8 +138,8 @@ public class Listeners implements Listener {
                         attacker.getInventory().addItem(stolen_items);
                     }
                 }
-                attacker.sendMessage(ColorUtils.colorize("&6+80 coins!"));
-                ConfigManager.addSomeCoins(attackerUUID, 80);
+                attacker.sendMessage(ColorUtils.colorize("&6+25 coins!"));
+                ConfigManager.addSomeCoins(attackerUUID, 25);
             }
         }
     }
