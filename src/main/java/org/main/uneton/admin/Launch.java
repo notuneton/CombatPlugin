@@ -10,6 +10,9 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
+import java.util.Arrays;
+
+import static org.main.uneton.Combat.perm;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Launch implements CommandExecutor {
@@ -22,7 +25,7 @@ public class Launch implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.launch.sv")) {
-            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
+            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
             playCancerSound(player);
             return true;
         }

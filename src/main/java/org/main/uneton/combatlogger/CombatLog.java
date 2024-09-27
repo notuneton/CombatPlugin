@@ -1,6 +1,7 @@
 package org.main.uneton.combatlogger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,7 +60,7 @@ public class CombatLog implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player exited = event.getPlayer();
         if (combat_tagged.containsKey(exited)) {
-            Bukkit.broadcastMessage(ColorUtils.colorize("&c" + exited.getName() + " was killed while disconnected"));
+            Bukkit.broadcastMessage(ChatColor.RED + exited.getName() + " was killed while disconnected.");
             exited.setHealth(0);
             endCombat(exited);
         }

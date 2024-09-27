@@ -11,10 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.ConfigManager;
-import org.main.uneton.utils.ScoreboardUtils;
 
+import java.util.Arrays;
 import java.util.UUID;
 
+import static org.main.uneton.Combat.perm;
 import static org.main.uneton.utils.ConfigManager.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -33,7 +34,7 @@ public class Wipe implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.wipe.sv")) {
-            player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &7You do not have permission to run /" + command.getName() + "."));
+            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
             playCancerSound(player);
             return true;
         }
@@ -53,8 +54,10 @@ public class Wipe implements CommandExecutor {
         UUID uuid = target.getUniqueId();
         kills.remove(uuid);
         deaths.remove(uuid);
+        Combat.playTimes.remove(uuid);
         ConfigManager.get().set("player-kills." + uuid, 0);
         ConfigManager.get().set("player-deaths." + uuid, 0);
+        ConfigManager.get().set("players-playtime." + uuid, 0);
         target.getActivePotionEffects().clear();
         for (ItemStack item : target.getInventory().getContents()) {
             if (item != null) {

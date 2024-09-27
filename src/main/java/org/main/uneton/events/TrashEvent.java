@@ -1,6 +1,5 @@
 package org.main.uneton.events;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,20 +12,19 @@ public class TrashEvent implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getView().getTitle().equals(ColorUtils.colorize("&lTrashcan menu :-)"))) {
+        if (event.getView().getTitle().equals(ColorUtils.colorize("&6Trashcan :-)"))) {
             ItemStack clickedItem = event.getCurrentItem();
-            if (clickedItem != null) {
+            if (clickedItem != null) return;
 
-                switch (event.getCurrentItem().getType()) {
-                    case BLACK_STAINED_GLASS_PANE:
-                        event.setCancelled(true);
-                        break;
+            switch (event.getCurrentItem().getType()) {
+                case BLACK_STAINED_GLASS_PANE:
+                    event.setCancelled(true);
+                    break;
+                case BARRIER:
+                    event.setCancelled(true);
+                    player.closeInventory();
+                    break;
 
-                    case BARRIER:
-                        event.setCancelled(true);
-                        player.closeInventory();
-                        break;
-                }
             }
         }
     }

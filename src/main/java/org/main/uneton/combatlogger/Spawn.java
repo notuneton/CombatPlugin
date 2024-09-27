@@ -76,7 +76,20 @@ public class Spawn implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &cLocation not found! Please contact an admin."));
+        int i = 0;
+        int times = 1;
+        StringBuilder message = new StringBuilder();
+        while (i < times) {
+            message.append("\n");
+            i++;
+        }
+        message.append(ColorUtils.colorize("&c&lNOT FOUND! &7Location not found! Please contact an admin."));
+        i = 0;
+        while (i < times) {
+            message.append("\n");
+            i++;
+        }
+        player.sendMessage(message.toString());
         return false;
     }
 }

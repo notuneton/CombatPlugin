@@ -35,6 +35,7 @@ public class Combat extends JavaPlugin implements Listener {
     public static Combat getInstance() {
         return instance;
     }
+    public static String[] perm = {ColorUtils.colorize("&c&lCAN'T! &cMmh.. Seems like you do not have permission to run /")};
     long viive = 20L;
 
 

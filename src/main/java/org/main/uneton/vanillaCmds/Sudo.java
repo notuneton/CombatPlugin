@@ -15,18 +15,16 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Sudo implements CommandExecutor {
 
-    private final List<String> allowedPlayers = Arrays.asList(
+    private final List<String> allowed = Arrays.asList(
             "unetonn"
     );
-
-    public static String warn = ColorUtils.colorize("&4>&c> &8+ &7");
     public static String success = ColorUtils.colorize("&2>&a> &8+ ");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
-        if (!allowedPlayers.contains(player.getName())) {
-            player.sendMessage(ColorUtils.colorize("&cIllegalAccessError: &7This command can only be executed as a specific person! Here is the list of players that can execute this command "+ allowedPlayers));
+        if (!allowed.contains(player.getName())) {
+            player.sendMessage(ColorUtils.colorize("&cIllegalAccessError: &7This command can only be executed as a specific person! Here is the list of players that can execute this command "+ allowed));
             playCancerSound(player);
             return true;
         }
@@ -52,7 +50,7 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString());
-                player.sendMessage(success + ColorUtils.colorize("&7executed command '&a"+message+"&7' to " + "&e"+target.getName()));
+                player.sendMessage(success + ColorUtils.colorize("&7executed command '&f"+message+"&7' to " + "&a"+target.getName()));
             }
         }
         return true;

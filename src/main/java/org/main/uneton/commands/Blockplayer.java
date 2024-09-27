@@ -103,6 +103,8 @@ public class Blockplayer implements CommandExecutor {
         } else {
             player.sendMessage(ColorUtils.colorize("&cMmh... You already blocked that player!"));
             player.sendMessage(ColorUtils.colorize("&cUse /unblock to remove it."));
+
+
         }
     }
 

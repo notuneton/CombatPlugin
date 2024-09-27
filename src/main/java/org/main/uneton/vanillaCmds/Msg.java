@@ -29,7 +29,7 @@ public class Msg implements CommandExecutor {
         Player recipient = Bukkit.getPlayer(args[0]);
         if (recipient == null) {
             if (!recipient.isOnline()) {
-                player.sendMessage(ColorUtils.colorize("&cYou cannot message this player!"));
+                player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &cYou cannot message this player!"));
             }
             player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ recipient.getName() +"!"));
             return true;
