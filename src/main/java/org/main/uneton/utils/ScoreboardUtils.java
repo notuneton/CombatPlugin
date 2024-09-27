@@ -53,14 +53,14 @@ public class ScoreboardUtils {
         setScore(objective, playtimeString, 6);
 
         int ping = player.getPing();
-        setScore(objective, "&7Ping: &d" + String.format(ping + "ms"), 5);
+        setScore(objective, "&7Ping: &b" + String.format(ping + "ms"), 5);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
-        String online = ColorUtils.colorize("&7Players: &2" + totalPlayers);
+        String online = ColorUtils.colorize("&7Players: &a" + totalPlayers);
         setScore(objective, online, 4);
 
         int playerCoins = some_coins.getOrDefault(uuid, 0);
-        setScore(objective, "&7Coins: &6" + formatLargeNumberIntoChar(playerCoins), 1);
+        setScore(objective, "&7Coins: &6" + formatWithComma(playerCoins), 1);
 
         setScore(objective, "&4 ", 10);
         setScore(objective, "&3 ", 7);

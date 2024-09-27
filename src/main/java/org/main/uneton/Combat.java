@@ -43,7 +43,7 @@ public class Combat extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
-        Location limboLocation = new Location(Bukkit.getWorld("world"), 32, 1, -47);
+        Location limboLocation = new Location(Bukkit.getWorld("world"), 38, -7, -51);
         limboManager = new LimboManager(this, limboLocation);
         Bukkit.getPluginManager().registerEvents(new PlayerActivityListener(limboManager), this);
 

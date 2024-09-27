@@ -50,28 +50,31 @@ public class Cage implements CommandExecutor {
 
     public static void spawnTrap(Player player) {
         Location loc = player.getLocation();
-        Location bottomCorner = loc.clone().add(0, 0, 0);
+        Location bottomCorner = loc.clone();
         player.setGameMode(GameMode.ADVENTURE);
+
         String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-        player.sendMessage(success + ChatColor.GRAY + "You were trapped by " + ChatColor.UNDERLINE+ChatColor.WHITE+ player.getName() +ChatColor.GRAY +"!");
-        for (int x = 0; x < 5; x++) {
-            for (int y = 0; y < 5; y++) {
-                for (int z = 0; z < 5; z++) {
-                    if (x > 0 && x < 4 && y > 0 && y < 4 && z > 0 && z < 4) {
-                        continue;
+        player.sendMessage(success + ChatColor.GRAY + "You were trapped by " + ChatColor.UNDERLINE + ChatColor.WHITE + player.getName() + ChatColor.GRAY + "!");
+
+        // Set spawner blocks only at the outer edges
+        for (int x = 0; x <= 4; x++) {
+            for (int y = 0; y <= 4; y++) {
+                for (int z = 0; z <= 4; z++) {
+                    if (x == 0 || x == 4 || y == 0 || y == 4 || z == 0 || z == 4) {
+                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.SPAWNER);
                     }
-                    bottomCorner.clone().add(x, y, z).getBlock().setType(Material.SPAWNER);
                 }
             }
         }
+
         Location middleLocation = bottomCorner.clone().add(2, 3, 2);
         player.teleport(middleLocation);
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (player.isOnline() && !player.isDead()) {
                     player.setGameMode(GameMode.SURVIVAL);
-                    String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
                     player.sendMessage(success + ChatColor.GRAY + "You have been released from the trap!");
                     removeTrapBox(bottomCorner);
                 }
@@ -80,13 +83,12 @@ public class Cage implements CommandExecutor {
     }
 
     private static void removeTrapBox(Location bottomCorner) {
-        for (int x = 0; x < 5; x++) {
-            for (int y = 0; y < 5; y++) {
-                for (int z = 0; z < 5; z++) {
-                    if (x > 0 && x < 4 && y > 0 && y < 4 && z > 0 && z < 4) {
-                        continue;
+        for (int x = 0; x <= 4; x++) {
+            for (int y = 0; y <= 4; y++) {
+                for (int z = 0; z <= 4; z++) {
+                    if (x == 0 || x == 4 || y == 0 || y == 4 || z == 0 || z == 4) {
+                        bottomCorner.clone().add(x, y, z).getBlock().setType(Material.AIR);
                     }
-                    bottomCorner.clone().add(x, y, z).getBlock().setType(Material.AIR);
                 }
             }
         }

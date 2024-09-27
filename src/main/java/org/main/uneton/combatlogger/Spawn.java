@@ -72,7 +72,7 @@ public class Spawn implements CommandExecutor {
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&7You were spawned in '&6spawn&7'."));
+            player.sendMessage(ColorUtils.colorize("&7You were teleported in '&6spawn&7'."));
             return true;
         }
 
