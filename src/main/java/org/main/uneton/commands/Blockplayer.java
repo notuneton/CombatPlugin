@@ -38,7 +38,7 @@ public class Blockplayer implements CommandExecutor {
 
             case "add":
                 if (args.length < 2) {
-                    String usage = ColorUtils.colorize("&3>&b> &7usage: &f/block add <player> ");
+                    String usage = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &f/block add <player> ");
                     player.sendMessage(usage);
                     return true;
                 }
@@ -47,7 +47,7 @@ public class Blockplayer implements CommandExecutor {
 
             case "remove":
                 if (args.length < 2) {
-                    String usage = ColorUtils.colorize("&3>&b> &7usage: &f/block remove <player> ");
+                    String usage = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &f/block remove <player> ");
                     player.sendMessage(usage);
                     return true;
                 }
@@ -55,7 +55,7 @@ public class Blockplayer implements CommandExecutor {
                 break;
 
             default:
-                String usage = ColorUtils.colorize("&3>&b> &7usage: &f/block help ");
+                String usage = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &f/block help ");
                 player.sendMessage(usage);
                 break;
         }

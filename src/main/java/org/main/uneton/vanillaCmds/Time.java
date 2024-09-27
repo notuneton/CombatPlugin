@@ -50,7 +50,7 @@ public class Time implements CommandExecutor {
                     break;
 
                 default:
-                    String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/time <day, night>");
+                    String usage = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &f/time <day, night>");
                     player.sendMessage(usage);
                     break;
             }

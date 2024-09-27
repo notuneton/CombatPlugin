@@ -19,7 +19,7 @@ public class Sign implements CommandExecutor {
             return true;
         }
 
-        Bukkit.broadcastMessage(ColorUtils.colorize("&aOak sign was spawned!"));
+        Bukkit.broadcastMessage(ColorUtils.colorize("&2>&a> &x&8&8&8&3&A&4- &7oak-sign was spawned."));
         player.getWorld().getBlockAt(player.getLocation()).setType(Material.OAK_SIGN);
         return true;
     }

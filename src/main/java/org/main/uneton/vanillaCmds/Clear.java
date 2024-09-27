@@ -21,7 +21,7 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Clear implements CommandExecutor {
 
-    public static String success = ColorUtils.colorize("&3>&b> &8+ &7");
+    public static String success = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &7");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -37,16 +37,12 @@ public class Clear implements CommandExecutor {
         }
 
         switch (args.length) {
-            case 0:
-                String usage = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7/clear <player> ");
-                player.sendMessage(usage);
-                return true;
             case 1:
                 try {
                     int radius = Integer.parseInt(args[0]);
                     clearGroundItems(player, radius);
                 } catch (NumberFormatException exception) {
-                    player.sendMessage(ColorUtils.colorize("&c&lHEYO! &7Please provide a valid number."));
+                    player.sendMessage(ColorUtils.colorize("&c&lHEY! &7Please provide a valid number."));
                 }
                 return true;
             case 2:

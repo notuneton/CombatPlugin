@@ -29,8 +29,8 @@ public class Repair implements CommandExecutor {
             return true;
         }
         heldRepair.setDurability((short) 0);
-        String success = ColorUtils.colorize("&2>&a> &8+ &7");
-        player.sendMessage(success+ ColorUtils.colorize("Your item has been repaired."));
+        String success = ColorUtils.colorize("&2>&a> &x&8&8&8&3&A&4- &7");
+        player.sendMessage(success + "Your item has been repaired.");
         return true;
     }
 }

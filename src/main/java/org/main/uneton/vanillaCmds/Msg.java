@@ -21,7 +21,7 @@ public class Msg implements CommandExecutor {
         }
 
         if (args.length < 2) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/msg <player> <message> ");
+            String usage = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &f/msg <player> <message> ");
             player.sendMessage(usage);
             return true;
         }
