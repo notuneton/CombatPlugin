@@ -10,8 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.ConfigManager;
 
-import java.util.Arrays;
-
 import static org.main.uneton.Combat.perm;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -25,7 +23,7 @@ public class SetSpawn implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.setspawn.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

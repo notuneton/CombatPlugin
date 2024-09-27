@@ -1,12 +1,5 @@
 package org.main.uneton.admin;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.utility.MinecraftReflection;
-import com.comphenix.protocol.wrappers.EnumWrappers;
-import com.comphenix.protocol.wrappers.PlayerInfoData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -26,11 +19,9 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 public class Vanish implements CommandExecutor {
 
     private static Combat plugin;
-    private final ProtocolManager protocolManager;
 
     public Vanish(Combat plugin) {
         Vanish.plugin = plugin;
-        this.protocolManager = ProtocolLibrary.getProtocolManager();
     }
     BukkitTask task;
     private final Set<Player> vanishedPlayers = new HashSet<>();
@@ -43,7 +34,7 @@ public class Vanish implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.vanish.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

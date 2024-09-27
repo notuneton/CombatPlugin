@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Arrays;
-
 import static org.main.uneton.Combat.perm;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -19,7 +17,7 @@ public class Cure implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
         if (!player.hasPermission("combat.heal.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

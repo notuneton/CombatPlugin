@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class Gm implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.gm.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

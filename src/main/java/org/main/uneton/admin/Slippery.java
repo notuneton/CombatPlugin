@@ -13,7 +13,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -38,7 +37,7 @@ public class Slippery implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.slippery.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

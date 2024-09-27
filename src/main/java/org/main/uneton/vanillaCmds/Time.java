@@ -9,8 +9,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Arrays;
-
 import static org.main.uneton.Combat.perm;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -24,7 +22,7 @@ public class Time implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.time.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

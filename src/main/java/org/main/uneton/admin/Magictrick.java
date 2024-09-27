@@ -14,7 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.main.uneton.Combat.perm;
@@ -30,7 +29,7 @@ public class Magictrick implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.givestick.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

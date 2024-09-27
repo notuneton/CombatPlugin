@@ -12,7 +12,6 @@ import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.ConfigManager;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 import static org.main.uneton.Combat.perm;
@@ -32,7 +31,7 @@ public class Wipe implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.wipe.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }

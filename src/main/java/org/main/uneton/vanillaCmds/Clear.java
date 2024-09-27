@@ -13,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.main.uneton.Combat.perm;
@@ -31,7 +30,7 @@ public class Clear implements CommandExecutor {
         }
 
         if (!player.hasPermission("combat.clear.sv")) {
-            player.sendMessage(ColorUtils.colorize(Arrays.toString(perm) + command.getName()));
+            player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
             return true;
         }
@@ -39,13 +38,10 @@ public class Clear implements CommandExecutor {
         switch (args.length) {
             case 1:
                 String firstArg = args[0];
-
-                if (firstArg.equals("6") || firstArg.equals("10")) {
-                    // Kun argumentti on 6 tai 10, puhdista maassa olevat esineet
+                if (firstArg.equals("20") || firstArg.equals("10")) {
                     int radius = Integer.parseInt(firstArg);
                     clearGroundItems(player, radius);
                 } else {
-                    // Muuten yritetään löytää pelaaja
                     Player target = Bukkit.getServer().getPlayer(firstArg);
                     if (target == null || !target.isOnline()) {
                         player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username " + firstArg + "!"));

@@ -8,9 +8,6 @@ commands:
   cage:
     description: Create a cube around the player that the player cannot break.
     usage: /cage <player>
-  clear:
-    description: Clears items from player inventory, including items.
-    usage: /clear <...> <integer>
   crash:
     description: Spawns a white ball around you.
     usage: /crash <player>
@@ -41,6 +38,18 @@ commands:
   wipeprofile:
     description: Completely removes all player's own made data and progress from their uuid!
     usage: /wipeprofile <player>
+  sudo:
+    description: Executes another player perform a task.
+    usage: /sudo <target> <command>
+  tp:
+    description: Teleports to or from the player.
+    usage: /tp <player> <target>
+  clear:
+    description: Clears items from player inventory, including items.
+    usage: /clear <...> <integer>
+  time:
+    description: Sets the time to day or night.
+    usage: /time <day|night>
 
   block:
     description: Block a player.
@@ -77,18 +86,9 @@ commands:
   sign:
     description: Spawns you a sign. (Can be clicked!)
     usage: /sign
-  sudo:
-    description: Executes another player perform a task.
-    usage: /sudo <target> <command>
   trash:
     description: Put your stuff in the menu and close it!
     usage: /trash
-  tp:
-    description: Teleports to or from the player.
-    usage: /tp <player> <target>
   msg:
     description: Send a whisper to the player.
     usage: /msg <player> <message>
-  time:
-    description: Sets the time to day or night.
-    usage: /time <day|night>
