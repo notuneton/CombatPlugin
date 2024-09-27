@@ -20,6 +20,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -176,6 +177,27 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        String input = event.getMessage().split(" ")[0].substring(1);
+        String command = input.toLowerCase();
+        if (!doesCommandExist(command) || !player.hasPermission(command)) {
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7The syntax of the command '/" + command + "' not found to be executable."));
+            playCancerSound(player);
+            event.setCancelled(true);
+        }
+
+        if (command.equals("pl") || command.equals("plugins")) {
+            Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
+            StringBuilder pluginList = new StringBuilder("&6Loaded Plugins:&7\n");
+            for (Plugin plugin : plugins) {
+                pluginList.append("&8- &f").append(plugin.getName()).append("\n");
+            }
+            player.sendMessage(ColorUtils.colorize(pluginList.toString()));
+        }
+    }
+
+    @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent event) {
         ItemStack item = event.getItem();
         Player p = event.getPlayer();
@@ -194,7 +216,7 @@ public class Listeners implements Listener {
         ItemStack milk = new ItemStack(Material.MILK_BUCKET);
         if (e.getRightClicked() instanceof Cow && player.getItemInHand().getType().equals(Material.BUCKET)) {
             if (Math.random() < 0.4) {
-                player.sendMessage(ColorUtils.colorize("&cYou cannot milk this cow!"));
+                player.sendMessage(ColorUtils.colorize("&cYou milked this cow wrong!"));
                 return;
             } else if (Math.random() < 0.4) {
                 player.sendMessage(ColorUtils.colorize("&cYou have failed to milk this cow!"));
@@ -338,18 +360,6 @@ public class Listeners implements Listener {
             return cmd.getPermission();
         }
         return null;
-    }
-
-    @EventHandler
-    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
-        Player player = event.getPlayer();
-        String input = event.getMessage().split(" ")[0].substring(1);
-        String command = input.toLowerCase();
-        if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7The syntax of the command '/" + command + "' not found to be executable."));
-            playCancerSound(player);
-            event.setCancelled(true);
-        }
     }
 
     @EventHandler
