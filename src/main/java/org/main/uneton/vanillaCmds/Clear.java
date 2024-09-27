@@ -38,40 +38,40 @@ public class Clear implements CommandExecutor {
 
         switch (args.length) {
             case 1:
-                try {
-                    int radius = Integer.parseInt(args[0]);
-                    clearGroundItems(player, radius);
-                } catch (NumberFormatException exception) {
-                    player.sendMessage(ColorUtils.colorize("&c&lHEY! &7Please provide a valid number."));
-                }
-                return true;
-            case 2:
-                Player target = Bukkit.getServer().getPlayer(args[0]);
-                if (target == null || !target.isOnline()) {
-                    player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
-                    return true;
-                }
+                String firstArg = args[0];
 
-                clearInventory(player, target);
+                if (firstArg.equals("6") || firstArg.equals("10")) {
+                    // Kun argumentti on 6 tai 10, puhdista maassa olevat esineet
+                    int radius = Integer.parseInt(firstArg);
+                    clearGroundItems(player, radius);
+                } else {
+                    // Muuten yritetään löytää pelaaja
+                    Player target = Bukkit.getServer().getPlayer(firstArg);
+                    if (target == null || !target.isOnline()) {
+                        player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username " + firstArg + "!"));
+                    } else {
+                        clearInventory(player, target);
+                    }
+                }
                 return true;
 
             default:
-                player.sendMessage(ColorUtils.colorize("&cI'm not sure what you meant by /"+ command.getName() +". Use /clear <player> <radius> & /clear <radius>"));
+                player.sendMessage(ColorUtils.colorize("&cI'm not sure what you meant by /" + command.getName() + ". Use /clear <player> <radius> or /clear <radius>."));
                 return true;
         }
     }
 
     private void clearGroundItems(Player player, int radius) {
         Location loc_player = player.getLocation();
-        List<Entity> nearby_items = player.getWorld()
+        List<Entity> nearbyItems = player.getWorld()
                 .getNearbyEntities(loc_player, radius, radius, radius).stream()
                 .filter(entity -> entity instanceof Item)
                 .toList();
 
-        for (Entity entity : nearby_items) {
+        for (Entity entity : nearbyItems) {
             entity.remove();
         }
-        player.sendMessage(success + ColorUtils.colorize("Cleared &e" + nearby_items.size() + " &7ground items within a &f" + radius + " &7block radius."));
+        player.sendMessage(success + ColorUtils.colorize("Cleared &e" + nearbyItems.size() + " &7ground items within a &f" + radius + " &7block radius."));
     }
 
     private void clearInventory(Player player, Player target) {

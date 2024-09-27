@@ -139,7 +139,7 @@ public class Listeners implements Listener {
                         attacker.getInventory().addItem(stolen_items);
                     }
                 }
-                attacker.sendMessage(ColorUtils.colorize("&6+25 coins!"));
+                attacker.sendActionBar(ColorUtils.colorize("&6+25 coins!"));
                 ConfigManager.addSomeCoins(attackerUUID, 25);
             }
         }
@@ -177,19 +177,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
-        Player player = event.getPlayer();
-        String input = event.getMessage().split(" ")[0].substring(1);
-        String command = input.toLowerCase();
-        if (!doesCommandExist(command) || !player.hasPermission(command)) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7The syntax of the command '/" + command + "' not found to be executable."));
-            playCancerSound(player);
-            event.setCancelled(true);
-            return;
-        }
-    }
-
-    @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent event) {
         ItemStack item = event.getItem();
         Player p = event.getPlayer();
@@ -204,7 +191,7 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onZombieDeathReward(EntityDeathEvent event) {
-        if (event.getEntity() instanceof Zombie) {
+        if (event.getEntity() instanceof Mob) {
             Location loc = event.getEntity().getLocation();
             Player killer = event.getEntity().getKiller();
             // Tarkista, että tappaja ei ole null
@@ -346,13 +333,34 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onCommandPreProcess(PlayerCommandPreprocessEvent event) {
+    public void onCommandNotFound(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
+        String input = event.getMessage().split(" ")[0].substring(1);
+        String command = input.toLowerCase();
+        if (!doesCommandExist(command) || !player.hasPermission(command)) {
+            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7The syntax of the command '/" + command + "' not found to be executable."));
+            playCancerSound(player);
+            event.setCancelled(true);
+            return;
+        }
+    }
+
+    @EventHandler
+    public void onCommandPreProcessPlugins(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        String input = event.getMessage().split(" ")[0].substring(1);
+        String command = input.toLowerCase();
+
         if (event.getMessage().equalsIgnoreCase("/plugins") || event.getMessage().equalsIgnoreCase("/pl")) {
+            if (!player.hasPermission(getPermissionName(command))) {
+                player.sendMessage(ColorUtils.colorize("&c&lCAN'T! &9&lUh nuh.."));
+                event.setCancelled(true);
+                return;
+            }
             event.setCancelled(true);
 
             Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
-            StringBuilder pluginList = new StringBuilder("&6Loaded Plugins:\n");
+            StringBuilder pluginList = new StringBuilder("&2Loaded Plugins:\n");
             for (Plugin plugin : plugins) {
                 pluginList.append("&8- &f").append(plugin.getName()).append("\n");
             }

@@ -62,8 +62,7 @@ public class LimboManager {
     }
 
     private void sendPlayerToLimbo(Player player) {
-        limboLocation = ConfigManager.getSpawnLocation();
-        assert limboLocation != null;
+        limboLocation = new Location(Bukkit.getWorld("world"), 175, 157, -14);
         player.teleport(limboLocation);
         UUID uuid = player.getUniqueId();
         playersInLimbo.add(uuid);

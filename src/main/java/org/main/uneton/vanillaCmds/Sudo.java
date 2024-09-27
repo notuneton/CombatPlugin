@@ -18,7 +18,7 @@ public class Sudo implements CommandExecutor {
     private final List<String> allowed = Arrays.asList(
             "unetonn"
     );
-    public static String success = ColorUtils.colorize("&3>&b> &8+ &7");
+    public static String success = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- ");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
