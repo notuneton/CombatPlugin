@@ -187,15 +187,6 @@ public class Listeners implements Listener {
             event.setCancelled(true);
             return;
         }
-
-        if (command.equals("pl") || command.equals("plugins")) {
-            Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
-            StringBuilder pluginList = new StringBuilder("&6Loaded Plugins:\n");
-            for (Plugin plugin : plugins) {
-                pluginList.append("&8- &f").append(plugin.getName()).append("\n");
-            }
-            player.sendMessage(ColorUtils.colorize(pluginList.toString()));
-        }
     }
 
     @EventHandler
@@ -352,6 +343,21 @@ public class Listeners implements Listener {
             return cmd.getPermission();
         }
         return null;
+    }
+
+    @EventHandler
+    public void onCommandPreProcess(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        if (event.getMessage().equalsIgnoreCase("/plugins") || event.getMessage().equalsIgnoreCase("/pl")) {
+            event.setCancelled(true);
+
+            Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
+            StringBuilder pluginList = new StringBuilder("&6Loaded Plugins:\n");
+            for (Plugin plugin : plugins) {
+                pluginList.append("&8- &f").append(plugin.getName()).append("\n");
+            }
+            player.sendMessage(ColorUtils.colorize(pluginList.toString()));
+        }
     }
 
     @EventHandler

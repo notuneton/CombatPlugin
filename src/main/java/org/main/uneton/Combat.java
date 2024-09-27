@@ -51,7 +51,6 @@ public class Combat extends JavaPlugin implements Listener {
         ConfigManager.setup(this);
         ConfigManager.loadAll();
 
-
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {
             for (Player loop_player : Bukkit.getOnlinePlayers()) {

@@ -10,7 +10,7 @@ commands:
     usage: /cage <player>
   clear:
     description: Clears items from player inventory, including items.
-    usage: /clear <player>
+    usage: /clear <...> <integer>
   crash:
     description: Spawns a white ball around you.
     usage: /crash <player>

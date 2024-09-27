@@ -20,9 +20,9 @@ public class ClearTabs implements TabCompleter {
             for (Player loopPlayer : Bukkit.getOnlinePlayers()) {
                 completions.add(loopPlayer.getName());
             }
-        } else if (args.length == 3) {
+        } else if (args.length == 2) {
             completions.add("10");
-            completions.add("20");
+            completions.add("6");
         }
         return completions;
     }

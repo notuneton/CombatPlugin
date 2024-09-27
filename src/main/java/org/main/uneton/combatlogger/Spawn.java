@@ -45,14 +45,14 @@ public class Spawn implements CommandExecutor {
                     this.cancel();
                     if (!teleportPlayer(player)) {
                         player.sendMessage("\n");
-                        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &cTeleportation cancelled."));
+                        player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&8&8&8&3&A&4- &cTeleportation cancelled."));
                         player.sendMessage("\n");
                     }
                     return;
                 }
                 double distanceMoved = player.getLocation().distance(lastLocation);
                 if (distanceMoved > 0.8) {
-                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &cTeleport cancelled because you moved!"));
+                    player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&8&8&8&3&A&4- &cTeleport cancelled because you moved!"));
                     this.cancel();
                     return;
                 }
@@ -65,14 +65,14 @@ public class Spawn implements CommandExecutor {
 
     public boolean teleportPlayer(Player player) {
         if (combat_tagged.containsKey(player)) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &cTeleport cancelled. You are combat tagged!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &x&8&8&8&3&A&4- &cTeleport cancelled. You are combat tagged!"));
             return false;
         }
 
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null) {
             player.teleport(spawnLocation);
-            player.sendMessage(ColorUtils.colorize("&2>&a> &x&8&8&8&3&A&4- &7You were teleported in '&espawn&7'."));
+            player.sendMessage(ColorUtils.colorize("&2>&a> &x&8&8&8&3&A&4- &7You were teleported in '&fspawn&7'."));
             return true;
         }
 

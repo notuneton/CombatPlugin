@@ -31,9 +31,7 @@ public class LimboManager {
         notifiedPlayers.put(uuid, false); // Reset notification status when player moves
 
         // Remove player from limbo if they are currently in it
-        if (playersInLimbo.contains(uuid)) {
-            playersInLimbo.remove(uuid);
-        }
+        playersInLimbo.remove(uuid);
     }
 
     private void startInactivityCheckTask() {
@@ -51,7 +49,6 @@ public class LimboManager {
                     }
                     if (playersInLimbo.contains(uuid)) {
                         if (!notifiedPlayers.getOrDefault(uuid, false)) {
-                            notifyPlayerInLimbo(loopPlayer);
                             notifiedPlayers.put(uuid, true); // Mark as notified
                         }
                     }
@@ -61,9 +58,7 @@ public class LimboManager {
     }
 
     public void removePlayerFromLimbo(Player player) {
-        if (playersInLimbo.contains(player)) {
-            playersInLimbo.remove(player);
-        }
+        playersInLimbo.remove(player);
     }
 
     private void sendPlayerToLimbo(Player player) {
