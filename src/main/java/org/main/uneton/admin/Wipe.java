@@ -21,9 +21,7 @@ import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Wipe implements CommandExecutor {
 
-    private final Combat plugin;
     public Wipe(Combat plugin) {
-        this.plugin = plugin;
     }
 
     @Override

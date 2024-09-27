@@ -1,23 +1,29 @@
 package org.main.uneton.tabcompletes;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SetTimeTabs implements TabCompleter {
+public class ClearTabs implements TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+        List<String> completions = new ArrayList<>();
         if (args.length == 1) {
-            return Arrays.asList("day", "night", "noon");
+            for (Player loopPlayer : Bukkit.getOnlinePlayers()) {
+                completions.add(loopPlayer.getName());
+            }
+        } else if (args.length == 3) {
+            completions.add("10");
+            completions.add("20");
         }
-
-        return Collections.emptyList();
+        return completions;
     }
 }

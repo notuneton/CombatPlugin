@@ -55,6 +55,7 @@ public class RegistersUtils {
     }
 
     public static void registerTabCompletes() {
+        plugin.getCommand("clear").setTabCompleter(new ClearTabs());
         plugin.getCommand("daily").setTabCompleter(new DailyTabs());
         plugin.getCommand("guide").setTabCompleter(new GuideTabs());
         plugin.getCommand("puu").setTabCompleter(new PuuTabs());
@@ -62,7 +63,7 @@ public class RegistersUtils {
         plugin.getCommand("sign").setTabCompleter(new SignTabs());
         plugin.getCommand("spawn").setTabCompleter(new SpawnTabs());
         plugin.getCommand("setspawn").setTabCompleter(new SetSpawnTabs());
-        plugin.getCommand("time").setTabCompleter(new SetTimeTabs());
+        plugin.getCommand("time").setTabCompleter(new TimeTabs());
         plugin.getCommand("tp").setTabCompleter(new TpTabs());
         plugin.getCommand("trash").setTabCompleter(new TrashTabs());
         plugin.getCommand("vanish").setTabCompleter(new VanishTabs());

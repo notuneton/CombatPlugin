@@ -19,7 +19,7 @@ public class Ping implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/ping <player>");
+            String usage = ColorUtils.colorize("&3>&b> &7usage: &f/ping <player>");
             player.sendMessage(usage);
             return true;
         }

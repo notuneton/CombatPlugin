@@ -23,7 +23,7 @@ public class Unblock implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            String usage = ColorUtils.colorize("&3>&b> &8+ &7usage: &f/unblock <player> ");
+            String usage = ColorUtils.colorize("&3>&b> &7usage: &f/unblock <player> ");
             player.sendMessage(usage);
             return true;
         }
