@@ -29,12 +29,6 @@ public class ScoreboardUtils {
         }.runTaskTimer(plugin, 0L, 20L);
     }
 
-    public static String getCurrentTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
-        LocalDateTime now = LocalDateTime.now();
-        return now.format(formatter);
-    }
-
     public static void createScoreboard(Player player) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();

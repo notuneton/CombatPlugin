@@ -185,11 +185,12 @@ public class Listeners implements Listener {
             player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7The syntax of the command '/" + command + "' not found to be executable."));
             playCancerSound(player);
             event.setCancelled(true);
+            return;
         }
 
         if (command.equals("pl") || command.equals("plugins")) {
             Plugin[] plugins = Bukkit.getPluginManager().getPlugins();
-            StringBuilder pluginList = new StringBuilder("&6Loaded Plugins:&7\n");
+            StringBuilder pluginList = new StringBuilder("&6Loaded Plugins:\n");
             for (Plugin plugin : plugins) {
                 pluginList.append("&8- &f").append(plugin.getName()).append("\n");
             }

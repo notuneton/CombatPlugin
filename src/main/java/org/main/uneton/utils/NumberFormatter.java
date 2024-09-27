@@ -19,7 +19,7 @@ public class NumberFormatter {
             BigDecimal threshold = BigDecimal.TEN.pow(power);
             if (number.compareTo(threshold) >= 0) {
                 BigDecimal scaledNumber = number.divide(threshold, RoundingMode.DOWN);
-                return String.format("%s %s", scaledNumber.toPlainString(), suffix);
+                return String.format("%s%s", scaledNumber.toPlainString(), suffix);
             }
         }
         return String.format("%d", n);
