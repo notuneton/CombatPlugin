@@ -79,6 +79,6 @@ public class RegistersUtils {
         Bukkit.getPluginManager().registerEvents(new GmListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new Listeners(plugin), plugin);
         Bukkit.getPluginManager().registerEvents(new MagicStickEvent(), plugin);
-        Bukkit.getPluginManager().registerEvents(new TrashEvent(), plugin);
+        Bukkit.getPluginManager().registerEvents(new TrashGuiListener(), plugin);
     }
 }

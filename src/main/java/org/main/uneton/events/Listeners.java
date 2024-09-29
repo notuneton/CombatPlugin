@@ -249,6 +249,17 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
+    public void onInteractCake(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            Block clickedBlock = event.getClickedBlock();
+            if (clickedBlock != null && clickedBlock.getType() == Material.CAKE) {
+                CakeUtil.gui(player);
+            }
+        }
+    }
+
+    @EventHandler
     public void onLootBox(BlockBreakEvent e) {
         Player player = e.getPlayer();
         Block block = e.getBlock();

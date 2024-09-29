@@ -7,7 +7,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.main.uneton.utils.ColorUtils;
 
-public class TrashEvent implements Listener {
+public class TrashGuiListener implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {
