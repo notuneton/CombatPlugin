@@ -28,13 +28,13 @@ public class ScoreboardUtils {
             }
         }.runTaskTimer(plugin, 0L, 20L);
     }
-
+    
     public static void createScoreboard(Player player) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
         Objective objective = scoreboard.getObjective(DisplaySlot.SIDEBAR);
         if (objective == null) {
-            objective = scoreboard.registerNewObjective("scoreboard", "owo", ColorUtils.colorize("    "));
+            objective = scoreboard.registerNewObjective("scoreboard", "owo", ColorUtils.colorize("  &x&F&B&B&7&F&2&lL&x&F&C&A&6&F&5&lO&x&F&D&9&5&F&8&lC&x&F&E&8&4&F&B&lA&x&F&F&7&3&F&E&lL  "));
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         }
         clearExistingLines(scoreboard);
