@@ -40,7 +40,7 @@ public class Tp implements CommandExecutor {
                 return true;
             }
             player.teleport(target);
-            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7Teleporting. Whoosh..."));
+            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &x&8&8&8&3&A&4- &7Teleporting. Whoosh..."));
         }
 
         if (args.length == 2) {
@@ -50,8 +50,8 @@ public class Tp implements CommandExecutor {
             assert toPlayer != null;
             assert fromPlayer != null;
             fromPlayer.teleport(toPlayer);
-            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7Teleporting. Whoosh..."));
-            toPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &7'" + fromPlayer.getName() + "' has been teleported to you!"));
+            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &x&8&8&8&3&A&4- &7Teleporting. Whoosh..."));
+            toPlayer.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&1&C&7&A&1&7&l>&x&3&3&D&D&2&A&l> &x&8&8&8&3&A&4- &7'" + fromPlayer.getName() + "' has been teleported to you!"));
         }
         return true;
     }

