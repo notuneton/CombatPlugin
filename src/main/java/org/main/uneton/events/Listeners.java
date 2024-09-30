@@ -16,6 +16,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -246,17 +247,6 @@ public class Listeners implements Listener {
         Block block = event.getClickedBlock();
         if (block.getType() != Material.OAK_SIGN) return;
         event.getPlayer().openSign((Sign) block.getState());
-    }
-
-    @EventHandler
-    public void onInteractCake(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            Block clickedBlock = event.getClickedBlock();
-            if (clickedBlock != null && clickedBlock.getType() == Material.CAKE) {
-                CakeUtil.gui(player);
-            }
-        }
     }
 
     @EventHandler
