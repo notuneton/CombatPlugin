@@ -37,7 +37,7 @@ public class Clear implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7The command of &f" + command.getName() + " &7syntax is invalid!"));
+            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7The command of &f/" + command.getName() + " &7syntax is invalid!"));
             return true;
         }
 

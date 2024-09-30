@@ -27,7 +27,12 @@ public class ClearTabs implements TabCompleter {
             completions.add("ground_items");
             completions.add("living_entities");
         } else if (args.length == 2) {
-            completions.add("20");
+            completions.add("100");
+            completions.add("80");
+            completions.add("60");
+            completions.add("40");
+            completions.add("30");
+            completions.add("25");
             completions.add("10");
         }
 
