@@ -61,7 +61,6 @@ public class Clear implements CommandExecutor {
             return true;
         }
 
-        // Handle clearing player's inventory
         Player target = Bukkit.getServer().getPlayer(targetType);
         if (target == null || !target.isOnline()) {
             player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username " + targetType + "!"));
@@ -107,7 +106,7 @@ public class Clear implements CommandExecutor {
         }
 
         String itemLabel = amount == 1 ? "item" : "item(s)";
-        player.sendMessage(success + ColorUtils.colorize("&e" +player.getName() + " &7has successfully cleared '&e" + target.getName() + " s&7' inventory of &f" + amount + " " + itemLabel + "&7."));
+        player.sendMessage(success + ColorUtils.colorize(player.getName() + " &7has successfully cleared '&e" + target.getName() + " s&7' inventory of &f" + amount + " " + itemLabel + "&7."));
         target.getInventory().clear();
         target.getActivePotionEffects().clear();
     }
