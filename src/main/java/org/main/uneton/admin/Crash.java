@@ -10,7 +10,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.perm;
+import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Crash implements CommandExecutor {
@@ -37,13 +38,12 @@ public class Crash implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+                player.sendMessage(unknown);
                 return true;
             }
 
             player.spawnParticle(Particle.EXPLOSION_LARGE, player.getLocation(), Integer.MAX_VALUE);
-            String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7");
-            player.sendMessage(success + "You have crashed " + ChatColor.UNDERLINE+ ColorUtils.colorize("&a" +target.getName() + "&7" + "."));
+            player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7You have crashed " + ChatColor.UNDERLINE + ColorUtils.colorize("&a" + target.getName() + "&7" + ".")));
         }
         return true;
     }

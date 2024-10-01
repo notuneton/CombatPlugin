@@ -10,8 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 
-
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Cage implements CommandExecutor {
@@ -38,7 +37,7 @@ public class Cage implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+                player.sendMessage(unknown);
                 return true;
             }
 
@@ -52,8 +51,7 @@ public class Cage implements CommandExecutor {
         Location bottomCorner = loc.clone();
         player.setGameMode(GameMode.ADVENTURE);
 
-        String success = ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> ");
-        player.sendMessage(success + ChatColor.GRAY + "You were trapped by " + ChatColor.UNDERLINE + ChatColor.WHITE + player.getName() + ChatColor.GRAY + "!");
+        player.sendMessage(ColorUtils.colorize("&x&5&B&5&B&5&B&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &7You were trapped by " + ChatColor.UNDERLINE + ChatColor.WHITE + player.getName() + "&7!"));
 
         // Set spawner blocks only at the outer edges
         for (int x = 0; x <= 4; x++) {
@@ -74,7 +72,7 @@ public class Cage implements CommandExecutor {
             public void run() {
                 if (player.isOnline() && !player.isDead()) {
                     player.setGameMode(GameMode.SURVIVAL);
-                    player.sendMessage(success + ChatColor.GRAY + "You have been released from the trap!");
+                    player.sendMessage(ColorUtils.colorize("&aYou have been released from the trap!"));
                     removeTrapBox(bottomCorner);
                 }
             }

@@ -12,7 +12,8 @@ import org.main.uneton.utils.ColorUtils;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.perm;
+import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Freeze implements CommandExecutor {
@@ -40,7 +41,7 @@ public class Freeze implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+            player.sendMessage(unknown);
             return true;
         }
 

@@ -16,12 +16,10 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.List;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Clear implements CommandExecutor {
-
-    public static String success = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &7");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -37,7 +35,7 @@ public class Clear implements CommandExecutor {
         }
 
         if (args.length == 0) {
-            player.sendMessage(ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7The command of &f/" + command.getName() + " &7syntax is invalid!"));
+            player.sendMessage(unknown_syntax);
             return true;
         }
 
@@ -63,7 +61,7 @@ public class Clear implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(targetType);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username " + targetType + "!"));
+            player.sendMessage(unknown);
         } else {
             clearPlayerOwnInventory(player, target);
         }
@@ -81,7 +79,7 @@ public class Clear implements CommandExecutor {
         for (Entity entity : nearbyItems) {
             entity.remove();
         }
-        player.sendMessage(success + ColorUtils.colorize("Cleared &e" + nearbyItems.size() + " &7ground items within a &f" + radius + " &7block radius."));
+        player.sendMessage(getSuccess + ColorUtils.colorize("Cleared &e" + nearbyItems.size() + " &7ground items within a &f" + radius + " &7block radius."));
     }
 
     private void clearGroundMobs(Player player, int radius) {
@@ -94,7 +92,7 @@ public class Clear implements CommandExecutor {
         for (Entity entity : nearbyMobs) {
             entity.remove();
         }
-        player.sendMessage(success + ColorUtils.colorize("Removed &e" + nearbyMobs.size() + " &7living mobs within a &f" + radius + " &7block radius."));
+        player.sendMessage(getSuccess + ColorUtils.colorize("Removed &e" + nearbyMobs.size() + " &7living mobs within a &f" + radius + " &7block radius."));
     }
 
     private void clearPlayerOwnInventory(Player player, Player target) {
@@ -106,7 +104,7 @@ public class Clear implements CommandExecutor {
         }
 
         String itemLabel = amount == 1 ? "item" : "item(s)";
-        player.sendMessage(success + ColorUtils.colorize(player.getName() + " &7has successfully cleared '&e" + target.getName() + " s&7' inventory of &f" + amount + " " + itemLabel + "&7."));
+        player.sendMessage(getSuccess + ColorUtils.colorize(player.getName() + " &7has successfully cleared '&e" + target.getName() + " s&7' inventory of &f" + amount + " " + itemLabel + "&7."));
         target.getInventory().clear();
         target.getActivePotionEffects().clear();
     }

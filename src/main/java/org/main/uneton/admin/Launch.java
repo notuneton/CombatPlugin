@@ -10,7 +10,8 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.perm;
+import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Launch implements CommandExecutor {
@@ -36,15 +37,14 @@ public class Launch implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+            player.sendMessage(unknown);
             return true;
         }
 
         Vector velocity = player.getVelocity();
         velocity.setY(6);
         player.setVelocity(velocity);
-        String success = ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &8+ &7");
-        target.sendMessage(success + ColorUtils.colorize("You've launched by &f"+player.getName() + "&7!"));
+        target.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &x&8&8&8&3&A&4- &7You've launched by &f"+player.getName() + "&7!"));
         return true;
     }
 }

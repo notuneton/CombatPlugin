@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static org.main.uneton.utils.MessageHolder.*;
+
 public class Blockplayer implements CommandExecutor {
 
     public static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
@@ -90,7 +92,7 @@ public class Blockplayer implements CommandExecutor {
     private void blockPlayer(Player player, String targetName) {
         Player target = Bukkit.getPlayer(targetName);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+            player.sendMessage(unknown);
             return;
         }
 
@@ -99,19 +101,17 @@ public class Blockplayer implements CommandExecutor {
         Set<String> ignoredSet = blockedPlayers.get(playerName);
 
         if (ignoredSet.add(targetName)) {
-            player.sendMessage(ColorUtils.colorize("&c&lBLOCKED! &7You blocked " + targetName +"!"));
+            player.sendMessage(blocked);
         } else {
             player.sendMessage(ColorUtils.colorize("&cMmh... You already blocked that player!"));
             player.sendMessage(ColorUtils.colorize("&cUse /unblock to remove it."));
-
-
         }
     }
 
     private void unblockPlayer(Player player, String targetName) {
         Set<String> blockdSet = getBlockedPlayers(player.getName());
         if (blockdSet.remove(targetName)) {
-            player.sendMessage(ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked " + targetName +"!"));
+            player.sendMessage(unblocked);
         } else {
             player.sendMessage(ColorUtils.colorize("&cThis player isn't blocked!"));
         }

@@ -16,7 +16,8 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.List;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.perm;
+import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Magictrick implements CommandExecutor {
@@ -43,7 +44,7 @@ public class Magictrick implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+                player.sendMessage(unknown);
                 return true;
             }
 

@@ -25,7 +25,6 @@ public class Combat extends JavaPlugin implements Listener {
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     public static final Map<UUID, Long> lastMovementTime = new HashMap<>();
     private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
-    public static final String perm = ColorUtils.colorize("&c&lCAN'T! &cMmh.. Seems like you do not have permission to run /");
     private ProtocolManager protocolManager;
     private ConfigManager configManager;
     private LimboManager limboManager;
@@ -37,7 +36,6 @@ public class Combat extends JavaPlugin implements Listener {
         return instance;
     }
     long viive = 20L;
-
 
     @Override
     public void onEnable() {

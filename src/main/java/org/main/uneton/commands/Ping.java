@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
+import static org.main.uneton.utils.MessageHolder.unknown;
+
+
 public class Ping implements CommandExecutor {
 
     @Override
@@ -27,7 +30,7 @@ public class Ping implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getServer().getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+                player.sendMessage(unknown);
                 return true;
             }
             int ping = target.getPing();

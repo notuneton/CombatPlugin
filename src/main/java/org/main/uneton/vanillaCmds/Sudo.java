@@ -12,6 +12,8 @@ import org.main.uneton.utils.ColorUtils;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.main.uneton.utils.MessageHolder.getSuccess;
+import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Sudo implements CommandExecutor {
@@ -19,7 +21,6 @@ public class Sudo implements CommandExecutor {
     private final List<String> allowed = Arrays.asList(
             "unetonn"
     );
-    public static String success = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- ");
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
@@ -38,7 +39,7 @@ public class Sudo implements CommandExecutor {
 
         Player target = Bukkit.getServer().getPlayer(args[0]);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+            player.sendMessage(unknown);
             return true;
         }
 
@@ -51,7 +52,7 @@ public class Sudo implements CommandExecutor {
                     message.append(args[i]).append(" ");
                 }
                 cmd.chat(message.toString());
-                player.sendMessage(success + ColorUtils.colorize("&7executed command ' &f"+message+"&7' to " + "&a"+target.getName()));
+                player.sendMessage(getSuccess + ColorUtils.colorize("&7executed command ' &f"+message+"&7' to " + "&a"+target.getName()));
             }
         }
         return true;

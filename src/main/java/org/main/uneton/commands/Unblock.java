@@ -12,6 +12,8 @@ import org.main.uneton.utils.ColorUtils;
 import java.util.Set;
 
 import static org.main.uneton.commands.Blockplayer.getBlockedPlayers;
+import static org.main.uneton.utils.MessageHolder.unblocked;
+import static org.main.uneton.utils.MessageHolder.unknown;
 
 public class Unblock implements CommandExecutor {
 
@@ -31,13 +33,13 @@ public class Unblock implements CommandExecutor {
         String targetName = args[0];
         Player target = Bukkit.getPlayerExact(targetName);
         if (target == null || !target.isOnline()) {
-            player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ targetName +"!"));
+            player.sendMessage(unknown);
             return true;
         }
 
         Set<String> blockSet = getBlockedPlayers(player.getName());
         if (blockSet.remove(targetName)) {
-            player.sendMessage(ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked " + targetName +"!"));
+            player.sendMessage(ColorUtils.colorize(unblocked));
         } else {
             player.sendMessage(ColorUtils.colorize("&cThis player isn't blocked!"));
         }

@@ -10,7 +10,8 @@ import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.perm;
+import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Invsee implements CommandExecutor {
@@ -37,7 +38,7 @@ public class Invsee implements CommandExecutor {
         if (args.length == 1) {
             Player target = Bukkit.getPlayerExact(args[0]);
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ColorUtils.colorize("&c&lWHO?! &7Couldn't find a player with username "+ target.getName() +"!"));
+                player.sendMessage(unknown);
                 return true;
             }
             Inventory inventory = target.getInventory();

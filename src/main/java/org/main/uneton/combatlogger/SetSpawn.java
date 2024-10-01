@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.ConfigManager;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.args_not_found;
+import static org.main.uneton.utils.MessageHolder.perm;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class SetSpawn implements CommandExecutor {
@@ -40,7 +41,7 @@ public class SetSpawn implements CommandExecutor {
             player.sendMessage(ColorUtils.colorize("&7Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()+ "!"));
 
         } else if (args.length == 0) {
-            player.sendMessage(ColorUtils.colorize("&c&lNOT FOUND! &7You did not specify an argument for this command!"));
+            player.sendMessage(args_not_found);
             return true;
         }
         return true;

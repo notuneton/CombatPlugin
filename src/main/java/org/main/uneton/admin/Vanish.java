@@ -13,7 +13,7 @@ import org.main.uneton.utils.ColorUtils;
 
 import java.util.*;
 
-import static org.main.uneton.Combat.perm;
+import static org.main.uneton.utils.MessageHolder.perm;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Vanish implements CommandExecutor {
