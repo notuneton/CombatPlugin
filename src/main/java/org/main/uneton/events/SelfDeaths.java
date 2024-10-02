@@ -11,20 +11,6 @@ public class SelfDeaths implements Listener {
 
     @EventHandler
     @Deprecated
-    public void onPlayerSuffocate(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        EntityDamageEvent lastDamage = victim.getLastDamageCause();
-        if (lastDamage == null) {
-            return;
-        }
-
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + "'s ran out of oxygen.."));
-        }
-    }
-
-    @EventHandler
-    @Deprecated
     public void onPlayerFall(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         EntityDamageEvent lastDamage = victim.getLastDamageCause();
@@ -64,6 +50,22 @@ public class SelfDeaths implements Listener {
 
     @EventHandler
     @Deprecated
+    public void onPlayerSuffocate(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        EntityDamageEvent lastDamage = victim.getLastDamageCause();
+        if (lastDamage == null) {
+            return;
+        }
+
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.SUFFOCATION) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + "'s ran out of oxygen.."));
+        } else if (Math.random() < 0.4) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " held their breath for fun"));
+        }
+    }
+
+    @EventHandler
+    @Deprecated
     public void onPlayerDrown(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         EntityDamageEvent lastDamage = victim.getLastDamageCause();
@@ -72,23 +74,26 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.DROWNING) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " drowned below the surface and didn't make it"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " drowned below the surface but it was too late"));
+        } else if (Math.random() < 0.5) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying"));
+
         }
     }
 
     @EventHandler
     @Deprecated
-    public void onPlayerStarve(PlayerDeathEvent event) {
+    public void onPlayerHitAWallFlying(PlayerDeathEvent event) {
         Player victim = event.getEntity();
         EntityDamageEvent lastDamage = victim.getLastDamageCause();
         if (lastDamage == null) {
             return;
         }
 
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.STARVATION) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " couldn't afford food"));
-            if (Math.random() < 0.4) {
-                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was too poor.."));
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FLY_INTO_WALL) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " tried 9/11 or smth....."));
+            if (Math.random() < 0.5) {
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " tried to break the laws of physics"));
             }
         }
     }
@@ -103,24 +108,10 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FREEZE) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " fell into a sudden ice age"));
-            if (Math.random() < 0.3) {
-                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " froze to death from the coldness of winter"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " froze to death from the coldness of winter"));
+            if (Math.random() < 0.6) {
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " went back to 9700 BC.. ice age"));
             }
-        }
-    }
-
-    @EventHandler
-    @Deprecated
-    public void onPlayerContact(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
-        EntityDamageEvent lastDamage = victim.getLastDamageCause();
-        if (lastDamage == null) {
-            return;
-        }
-
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.CONTACT) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " made an excuse for dying"));
         }
     }
 
@@ -134,24 +125,21 @@ public class SelfDeaths implements Listener {
         }
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.POISON) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " ate the wrong apple"));
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " it was not certain which one was poisoned"));
         }
     }
 
     @EventHandler
     @Deprecated
-    public void onPlayerHitAWallFlying(PlayerDeathEvent event) {
+    public void onPlayerLava(PlayerDeathEvent event){
         Player victim = event.getEntity();
         EntityDamageEvent lastDamage = victim.getLastDamageCause();
         if (lastDamage == null) {
             return;
         }
 
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FLY_INTO_WALL) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " somebody said to him. No balls"));
-            if (Math.random() < 0.5) {
-                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " tried to break the laws of physics"));
-            }
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.LAVA) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " fell into the wrong pool (This is brutal..)"));
         }
     }
 
@@ -171,20 +159,6 @@ public class SelfDeaths implements Listener {
 
     @EventHandler
     @Deprecated
-    public void onPlayerLava(PlayerDeathEvent event){
-        Player victim = event.getEntity();
-        EntityDamageEvent lastDamage = victim.getLastDamageCause();
-        if (lastDamage == null) {
-            return;
-        }
-
-        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.LAVA) {
-            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " jumped into the wrong pool"));
-        }
-    }
-
-    @EventHandler
-    @Deprecated
     public void onPlayerBurn(PlayerDeathEvent event){
         Player victim = event.getEntity();
         EntityDamageEvent lastDamage = victim.getLastDamageCause();
@@ -194,6 +168,41 @@ public class SelfDeaths implements Listener {
 
         if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.FIRE_TICK) {
             event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " obviously isn't fireproof"));
+        }
+    }
+
+
+
+    @EventHandler
+    @Deprecated
+    public void onPlayerContact(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        EntityDamageEvent lastDamage = victim.getLastDamageCause();
+        if (lastDamage == null) {
+            return;
+        }
+
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.CONTACT) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " thought kissing a cactus was a good idea."));
+        } else if (Math.random() < 0.5) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " thought he could respawn."));
+        }
+    }
+
+    @EventHandler
+    @Deprecated
+    public void onPlayerStarve(PlayerDeathEvent event) {
+        Player victim = event.getEntity();
+        EntityDamageEvent lastDamage = victim.getLastDamageCause();
+        if (lastDamage == null) {
+            return;
+        }
+
+        if (event.getEntity().getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+            event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " couldn't afford food"));
+            if (Math.random() < 0.4) {
+                event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was too poor.."));
+            }
         }
     }
 }

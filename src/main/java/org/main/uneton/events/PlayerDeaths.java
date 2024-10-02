@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.main.uneton.utils.ColorUtils;
 
-import java.util.Random;
 
 public class PlayerDeaths implements Listener {
 
@@ -16,28 +15,25 @@ public class PlayerDeaths implements Listener {
         Player victim = event.getEntity();
         Player attacker = victim.getKiller();
         if (attacker != null && attacker.getType() == EntityType.PLAYER) {
-            Random random = new Random();
-            int chance = random.nextInt(100);
-            if (chance < 10) {
+
+            if (Math.random() < 0.1) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " took the L to " + attacker.getName()));
-            } else if (chance < 20) {
+            } else if (Math.random() < 0.2) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " got rekt by " + attacker.getName()));
-            } else if (chance < 30) {
+            } else if (Math.random() < 0.3) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was oinked down by " + attacker.getName()));
-            } else if (chance < 40) {
+            } else if (Math.random() < 0.4) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was hunted down by " + attacker.getName()));
-            } else if (chance < 50) {
+            } else if (Math.random() < 0.5) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " got clapped by " + attacker.getName()));
-            } else if (chance < 60) {
+            } else if (Math.random() < 0.6) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " got eliminated by " + attacker.getName()));
-            } else if (chance < 70) {
+            } else if (Math.random() < 0.7) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was destroyed by " + attacker.getName()));
-            } else if (chance < 80) {
+            } else if (Math.random() < 0.8) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " was yeeted by " + attacker.getName()));
-            } else if (chance < 90) {
+            } else if (Math.random() < 0.9) {
                 event.setDeathMessage(ColorUtils.colorize("&c" + victim.getName() + " got jumped by " + attacker.getName()));
-            } else {
-                event.setDeathMessage(ColorUtils.colorize("&c" + attacker.getName() + " ruined brutally " + victim.getName()));
             }
         }
     }

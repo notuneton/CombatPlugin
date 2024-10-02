@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,6 +26,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.*;
 
@@ -34,6 +37,7 @@ import static org.bukkit.Bukkit.getCommandMap;
 import static org.main.uneton.Combat.*;
 import static org.main.uneton.admin.Gm.gm_list;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
+import static org.main.uneton.utils.MessageHolder.debug_msg;
 import static org.main.uneton.utils.ScoreboardUtils.*;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
@@ -59,6 +63,10 @@ public class Listeners implements Listener {
         }
     }
 
+
+
+
+
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
@@ -70,9 +78,11 @@ public class Listeners implements Listener {
         int playtime = playTimes.getOrDefault(uuid, 0);
         playTimes.put(uuid, playtime);
         ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
-
-        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
         ConfigManager.save();
+
+
+
+        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime);
     }
 
     @EventHandler
@@ -99,7 +109,9 @@ public class Listeners implements Listener {
         int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
 
-        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime); //todo DEBUG MSG!
+
+
+        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime);
     }
 
     @EventHandler
@@ -340,7 +352,7 @@ public class Listeners implements Listener {
                 @Override
                 public void run() {
                     int amount = amountOfGroundItems(player.getWorld());
-                    player.sendMessage(ColorUtils.colorize("&x&0&0&0&9&2&E&l>&x&2&1&4&0&6&9&l>&x&6&7&A&6&C&E&l> &8? &7Killed &f'" + amount + "' &7of entites!"));
+                    player.sendMessage(ColorUtils.colorize("&x&0&0&0&9&2&E&l>&x&2&1&4&0&6&9&l>&x&6&7&A&6&C&E&l> &8? &7Killed &f'" + amount + "' &7entites from radius &650&7!"));
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
         }

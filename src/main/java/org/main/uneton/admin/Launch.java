@@ -2,6 +2,7 @@ package org.main.uneton.admin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -44,7 +45,15 @@ public class Launch implements CommandExecutor {
         Vector velocity = player.getVelocity();
         velocity.setY(6);
         player.setVelocity(velocity);
-        target.sendMessage(ColorUtils.colorize("&x&2&E&2&E&2&E&l>&x&2&0&8&1&8&A&l>&x&3&6&D&D&E&E&l> &x&8&8&8&3&A&4- &7You've launched by &f"+player.getName() + "&7!"));
+        Location playerLoc = player.getLocation();
+        launchPlayers(playerLoc);
+
+        target.sendMessage(ColorUtils.colorize("&aYou've launched by &e"+player.getName() + "&e!"));
+        sender.sendMessage(ColorUtils.colorize("&aLaunched " + target.getName() + "!"));
         return true;
+    }
+
+    private void launchPlayers(Location location) {
+        location.getWorld().strikeLightning(location);
     }
 }

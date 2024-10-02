@@ -73,6 +73,7 @@ public class Combat extends JavaPlugin implements Listener {
         registerEventListeners();
     }
 
+
     @Override
     public void onDisable() {
         configManager = new ConfigManager(this);

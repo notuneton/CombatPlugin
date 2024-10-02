@@ -14,6 +14,7 @@ public class MessageHolder {
     public static final String unblocked = ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked a player!");
     public static final String getSuccess = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &7");
 
-    public static final String success = ColorUtils.colorize("&a&lSUCCESS! &a");
-    public static final String debug = ColorUtils.colorize("&aSuccess!");
+    public static final String success_bold = ColorUtils.colorize("&a&lSUCCESS! &a ...");
+
+    public static final String debug_msg = ColorUtils.colorize("&aSuccess!");
 }
