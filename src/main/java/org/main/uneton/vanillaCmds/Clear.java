@@ -62,10 +62,10 @@ public class Clear implements CommandExecutor {
         Player target = Bukkit.getServer().getPlayer(targetType);
         if (target == null || !target.isOnline()) {
             player.sendMessage(unknown);
+            return true;
         } else {
             clearPlayerOwnInventory(player, target);
         }
-
         return true;
     }
 
@@ -104,7 +104,7 @@ public class Clear implements CommandExecutor {
         }
 
         String itemLabel = amount == 1 ? "item" : "item(s)";
-        player.sendMessage(getSuccess + ColorUtils.colorize(player.getName() + " &7has successfully cleared '&e" + target.getName() + " s&7' inventory of &f" + amount + " " + itemLabel + "&7."));
+        player.sendMessage(getSuccess + ColorUtils.colorize("&f"+ player.getName() + " &7has successfully cleared '&e" + target.getName() + " s&7' inventory of &f" + amount + " " + itemLabel + "&7."));
         target.getInventory().clear();
         target.getActivePotionEffects().clear();
     }

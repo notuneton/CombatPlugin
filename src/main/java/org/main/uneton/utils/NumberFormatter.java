@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 public class NumberFormatter {
 
     public static String formatLargeNumberIntoChar(int n) {
-        String data = "Q,18|q,15|T,12|B,9|M,6|K,3";
+        String data = "q,15|t,12|b,9|m,6|k,3";
         String[] parts = data.split("\\|");
 
         BigDecimal number = new BigDecimal(n);
@@ -26,7 +26,7 @@ public class NumberFormatter {
     }
 
     public static double formatLargeNumberIntoCharDouble(double n) {
-        String data = "Q,18|q,15|T,12|B,9|M,6|K,3";
+        String data = "q,15|t,12|b,9|m,6|k,3";
         String[] parts = data.split("\\|");
 
         BigDecimal number = new BigDecimal(n);
@@ -40,7 +40,6 @@ public class NumberFormatter {
                 return scaledNumber.doubleValue(); // Palauta double-arvo
             }
         }
-        // Palauta alkuperäinen luku double-arvona
         return n;
     }
 

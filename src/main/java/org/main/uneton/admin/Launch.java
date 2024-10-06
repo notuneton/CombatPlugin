@@ -46,14 +46,14 @@ public class Launch implements CommandExecutor {
         velocity.setY(6);
         player.setVelocity(velocity);
         Location playerLoc = player.getLocation();
-        launchPlayers(playerLoc);
+        launchPlayersUpwards(playerLoc);
 
         target.sendMessage(ColorUtils.colorize("&aYou've launched by &e"+player.getName() + "&e!"));
         sender.sendMessage(ColorUtils.colorize("&aLaunched " + target.getName() + "!"));
         return true;
     }
 
-    private void launchPlayers(Location location) {
+    private void launchPlayersUpwards(Location location) {
         location.getWorld().strikeLightning(location);
     }
 }

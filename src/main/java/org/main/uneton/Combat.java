@@ -51,8 +51,8 @@ public class Combat extends JavaPlugin implements Listener {
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {
-            for (Player loop_player : Bukkit.getOnlinePlayers()) {
-                UUID uuid = loop_player.getUniqueId();
+            for (Player loopedPlayer : Bukkit.getOnlinePlayers()) {
+                UUID uuid = loopedPlayer.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlaytime + 1);
                 ConfigManager.get().set("players-playtime." + uuid.toString(), playTimes.get(uuid));
