@@ -7,12 +7,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.main.uneton.utils.ColorUtils;
 
-
 public class PlayerDeaths implements Listener {
 
     @EventHandler
+    @Deprecated
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Player victim = event.getEntity();
+        Player victim = event.getPlayer();
         Player attacker = victim.getKiller();
         if (attacker != null && attacker.getType() == EntityType.PLAYER) {
 
