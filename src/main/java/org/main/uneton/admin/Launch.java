@@ -48,7 +48,7 @@ public class Launch implements CommandExecutor {
         Location playerLoc = player.getLocation();
         launchPlayersUpwards(playerLoc);
 
-        target.sendMessage(ColorUtils.colorize("&aYou've launched by &e"+player.getName() + "&e!"));
+        target.sendMessage(ColorUtils.colorize("&aYou've launched by &e"+player.getName() + "&a!"));
         sender.sendMessage(ColorUtils.colorize("&aLaunched " + target.getName() + "!"));
         return true;
     }

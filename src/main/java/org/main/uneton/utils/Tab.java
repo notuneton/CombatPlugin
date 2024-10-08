@@ -9,7 +9,7 @@ public class Tab {
         int online = Bukkit.getOnlinePlayers().size();
 
         String headerColor = "\n  \n";
-        String footerColor = "\n  " + online + "\n";
+        String footerColor = "\n  \n";
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             String header = headerColor.replace("&D", "&d").replace("&A", "&a").replace("&B", "&b")

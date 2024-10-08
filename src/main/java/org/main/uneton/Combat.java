@@ -1,15 +1,11 @@
 package org.main.uneton;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.main.uneton.limbo.LimboManager;
-import org.main.uneton.limbo.PlayerActivityListener;
 import org.main.uneton.utils.*;
 
 import java.io.File;
@@ -21,30 +17,21 @@ import static org.main.uneton.utils.RegistersUtils.*;
 
 public class Combat extends JavaPlugin implements Listener {
 
-    public static HashMap<UUID, Integer> playTimes = new HashMap<>();
+    public static final HashMap<UUID, Integer> playTimes = new HashMap<>();
     public static final HashMap<UUID, Long> cooldowns = new HashMap<>();
     public static final Map<UUID, Long> lastMovementTime = new HashMap<>();
     private static final Map<String, Set<String>> blockedPlayers = new HashMap<>();
-    private ProtocolManager protocolManager;
     private ConfigManager configManager;
-    private LimboManager limboManager;
     private static Combat instance;
-    public void onLoad() {
-        protocolManager = ProtocolLibrary.getProtocolManager();
-    }
     public static Combat getInstance() {
         return instance;
     }
-    long viive = 20L;
 
     @Override
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
-
-        Location limboLocation = new Location(Bukkit.getWorld("world"), 175, 157, -14);
-        limboManager = new LimboManager(this, limboLocation);
-        Bukkit.getPluginManager().registerEvents(new PlayerActivityListener(limboManager), this);
+        long viive = 20L;
 
         configManager = new ConfigManager(this);
         ConfigManager.setup(this);
