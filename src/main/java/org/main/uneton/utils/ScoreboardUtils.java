@@ -57,7 +57,7 @@ public class ScoreboardUtils {
         String online = ColorUtils.colorize("&7Players: &a" + totalPlayers);
         setScore(objective, online, 4);
 
-        int playerCoins = some_coins.getOrDefault(uuid, 0);
+        int playerCoins = someCoins.getOrDefault(uuid, 0);
         setScore(objective, "&7Coins: &6" + formatLargeNumberIntoChar(playerCoins), 1);
 
         setScore(objective, "&4 ", 10);

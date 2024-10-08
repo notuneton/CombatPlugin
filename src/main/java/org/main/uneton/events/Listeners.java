@@ -1,15 +1,10 @@
 package org.main.uneton.events;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandMap;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,31 +12,21 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.main.uneton.Combat;
 import org.main.uneton.utils.*;
-
 import java.util.*;
-
-import static org.bukkit.Bukkit.getCommandMap;
 import static org.main.uneton.Combat.*;
 import static org.main.uneton.admin.Gm.gm_list;
 import static org.main.uneton.combatlogger.CombatLog.combat_tagged;
-import static org.main.uneton.utils.MessageHolder.debug_msg;
 import static org.main.uneton.utils.ScoreboardUtils.*;
-import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class Listeners implements Listener {
 
@@ -52,7 +37,7 @@ public class Listeners implements Listener {
     private ConfigManager configManager;
 
     @EventHandler
-    public void onPingTooHard(PlayerMoveEvent event) {
+    public void onPingGoesCrazy(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         int ping = player.getPing();
         if (combat_tagged.containsKey(player)) {
@@ -60,14 +45,10 @@ public class Listeners implements Listener {
         }
         if (ping >= 500) {
             String user = player.getName();
-            String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated:\n\n&fYou have been kicked out from the server for too high ping.\n\n");
+            String kickMessage = ColorUtils.colorize("\n\n &7&lConnection Terminated: \n\n &fYou have been kicked out from the server for too high ping.\n\n");
             player.kickPlayer(kickMessage);
         }
     }
-
-
-
-
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
@@ -81,10 +62,6 @@ public class Listeners implements Listener {
         playTimes.put(uuid, playtime);
         ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
         ConfigManager.save();
-
-
-
-        Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime);
     }
 
     @EventHandler
@@ -110,8 +87,6 @@ public class Listeners implements Listener {
         UUID uuid = player.getUniqueId();
         int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
-
-        Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime);
     }
 
     @EventHandler
@@ -128,32 +103,6 @@ public class Listeners implements Listener {
                 ConfigManager.addDeath(victimUUID);
                 ScoreboardUtils.createScoreboard(attacker);
                 ScoreboardUtils.createScoreboard(victim);
-            }
-        }
-    }
-
-    public static final ItemStack[] listOfVictimOres() {
-        return new ItemStack[] {
-                new ItemStack(Material.DIAMOND),
-                new ItemStack(Material.GOLD_INGOT),
-                new ItemStack(Material.IRON_INGOT),
-                new ItemStack(Material.EMERALD)
-        };
-    }
-
-    @EventHandler
-    public void onPlayerKill(EntityDeathEvent event) {
-        if (event.getEntity() instanceof Player victim) {
-            Player attacker = event.getEntity().getKiller();
-            if (attacker != null) {
-                UUID attackerUUID = attacker.getUniqueId();
-                for (ItemStack stolen_items : listOfVictimOres()) {
-                    if (victim.getInventory().contains(stolen_items.getType())) {
-                        attacker.getInventory().addItem(stolen_items);
-                    }
-                }
-                attacker.sendActionBar(ColorUtils.colorize("&6+25 coins!"));
-                ConfigManager.addSomeCoins(attackerUUID, 25);
             }
         }
     }
@@ -194,7 +143,6 @@ public class Listeners implements Listener {
         if (event.getEntity() instanceof Mob) {
             Location loc = event.getEntity().getLocation();
             Player killer = event.getEntity().getKiller();
-            // Tarkista, että tappaja ei ole null
             if (killer == null) return;
 
             ItemStack tool = killer.getInventory().getItemInMainHand();
@@ -239,6 +187,49 @@ public class Listeners implements Listener {
             tnt.setFuseTicks(60);
         }
     }
+
+    public static Material[] hasAnyOres() {
+        return new Material[] {
+                new ItemStack(Material.DIAMOND).getType(),
+                new ItemStack(Material.GOLD_INGOT).getType(),
+                new ItemStack(Material.IRON_INGOT).getType(),
+                new ItemStack(Material.EMERALD).getType()
+        };
+    }
+    public static boolean isOre(Material mat) {
+        for (Material ore : hasAnyOres()) {
+            if (ore == mat) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @EventHandler
+    public void onPlayerKillStoleItems(EntityDeathEvent event) {
+        if (event.getEntity() instanceof Player victim) {
+            Player attacker = event.getEntity().getKiller();
+            if (attacker != null) {
+                for (ItemStack victimOres : victim.getInventory().getContents()) {
+                    if (victimOres != null && isOre(victimOres.getType())) {
+                        int amount = victimOres.getAmount();
+                        ItemStack itemToTransfer = new ItemStack(victimOres.getType(), amount);
+                        attacker.getInventory().addItem(victimOres.clone());
+                        victim.getInventory().removeItem(victimOres);
+                    }
+                }
+
+                // UUID attackerUUID = attacker.getUniqueId();
+                // attacker.sendActionBar(ColorUtils.colorize("&6+25 coins!"));
+                // ConfigManager.addSomeCoins(attackerUUID, 25);
+            }
+        }
+    }
+
+    // public static void addSomeCoins(UUID player_uniqueId, int amount) {
+    //        int currentCoins = some_coins.getOrDefault(player_uniqueId, 0);
+    //        some_coins.put(player_uniqueId, currentCoins + amount);
+    //    }
 
     @EventHandler
     public void onMoveAwayFromValidGround(EntityDamageEvent event) {

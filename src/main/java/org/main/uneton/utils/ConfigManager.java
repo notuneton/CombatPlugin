@@ -14,35 +14,46 @@ import java.util.*;
 
 public class ConfigManager {
 
-    private final Combat plugin;
+    private static Combat plugin;
     private static FileConfiguration config;
     private static File configFile;
-    public static Map<UUID, Integer> playTimes = null;
+
+    // Maps to store player data
+    public static Map<UUID, Integer> playTimes = new HashMap<>();
     public static final Map<UUID, Integer> kills = new HashMap<>();
-    public static final Map<UUID, Integer> some_coins = new HashMap<>();
+    public static final Map<UUID, Integer> someCoins = new HashMap<>();
     public static final Map<UUID, Integer> deaths = new HashMap<>();
 
+    // Constructor initializes the plugin reference
     public ConfigManager(Combat plugin) {
-        this.plugin = plugin;
-        playTimes = new HashMap<>();
+        ConfigManager.plugin = plugin;
     }
+
+    // Sets up the configuration file
     public static void setup(Combat plugin) {
-        configFile = new File(plugin.getDataFolder(), "player_data.yml");
+        configFile = new File(plugin.getDataFolder(), "config.yml");
+
+        // Copy default configuration file if it doesn't exist
         if (!configFile.exists()) {
-            plugin.saveResource("player_data.yml", false); // Copy default file
+            plugin.saveResource("config.yml", false);
         }
-        reload(); //this class method
+        reload(); // Reload the configuration
     }
+
+    // Reloads the configuration from the file
     public static void reload() {
         if (configFile == null) {
-            throw new IllegalArgumentException("File cannot be null");
+            throw new IllegalArgumentException("Configuration file cannot be null");
         }
         config = YamlConfiguration.loadConfiguration(configFile);
     }
+
+    // Returns the current configuration
     public static FileConfiguration get() {
         return config;
     }
 
+    // Saves the configuration to the file
     public static void save() {
         if (config == null || configFile == null) {
             throw new IllegalArgumentException("File or configuration cannot be null. Ensure the configuration is properly initialized.");
@@ -56,36 +67,56 @@ public class ConfigManager {
 
     public static void saveAll() {
         FileConfiguration config = ConfigManager.get();
+
+        // Collect all unique UUIDs from player data
         Set<UUID> uuids = new HashSet<>();
         uuids.addAll(playTimes.keySet());
         uuids.addAll(kills.keySet());
         uuids.addAll(deaths.keySet());
-        uuids.addAll(some_coins.keySet());
+        uuids.addAll(someCoins.keySet());
 
+        // Save player data to configuration
         for (UUID uuid : uuids) {
-            if (playTimes.containsKey(uuid)) {
-                config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
-            }
-            if (kills.containsKey(uuid)) {
-                config.set("player-kills." + uuid.toString(), kills.get(uuid));
-            }
-            if (deaths.containsKey(uuid)) {
-                config.set("player-deaths." + uuid.toString(), deaths.get(uuid));
-            }
-            if (some_coins.containsKey(uuid)) {
-                config.set("coins." + uuid.toString(), some_coins.get(uuid));
-            }
+            savePlayerData(config, uuid);
         }
 
+        // Save additional configurations
+        saveCombatName(config);
+        saveJoinMessage(config);
+        saveSpawnLocation(config);
+
+        // Save the configuration to file
+        ConfigManager.save();
+    }
+
+    private static void savePlayerData(FileConfiguration config, UUID uuid) {
+        if (playTimes.containsKey(uuid)) {
+            config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
+        }
+        if (kills.containsKey(uuid)) {
+            config.set("player-kills." + uuid.toString(), kills.get(uuid));
+        }
+        if (deaths.containsKey(uuid)) {
+            config.set("player-deaths." + uuid.toString(), deaths.get(uuid));
+        }
+        if (someCoins.containsKey(uuid)) {
+            config.set("coins." + uuid.toString(), someCoins.get(uuid));
+        }
+    }
+
+    private static void saveCombatName(FileConfiguration config) {
         String combatColor = config.getString("combat-name");
         if (combatColor != null) {
             config.set("combat-name", combatColor);
         }
+    }
+
+    private static void saveJoinMessage(FileConfiguration config) {
         String joinMessage = config.getString("join-message");
         config.set("join-message", joinMessage);
+    }
 
-
-
+    private static void saveSpawnLocation(FileConfiguration config) {
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null && spawnLocation.getWorld() != null) {
             config.set("spawn-location.world", spawnLocation.getWorld().getName());
@@ -97,7 +128,6 @@ public class ConfigManager {
         } else {
             Bukkit.getLogger().warning("[CombatV3]: Spawn location or world is null. Skipping save.");
         }
-        ConfigManager.save();
     }
 
     public static void loadAll() {
@@ -107,80 +137,65 @@ public class ConfigManager {
             return;
         }
 
-        ConfigurationSection playtimeSection = config.getConfigurationSection("players-playtime");
-        if (playtimeSection != null) {
-            for (String key : playtimeSection.getKeys(false)) {
+        loadPlayerData(config, "players-playtime", playTimes);
+        loadPlayerData(config, "player-kills", kills);
+        loadPlayerData(config, "player-deaths", deaths);
+        loadPlayerData(config, "coins", someCoins);
+    }
+
+    private static void loadPlayerData(FileConfiguration config, String sectionName, Map<UUID, Integer> dataMap) {
+        ConfigurationSection section = config.getConfigurationSection(sectionName);
+        if (section != null) {
+            for (String key : section.getKeys(false)) {
                 UUID uuid = UUID.fromString(key);
-                int playtime = playtimeSection.getInt(key);
-                playTimes.put(uuid, playtime);
-            }
-        }
-        ConfigurationSection killsSection = config.getConfigurationSection("player-kills");
-        if (killsSection != null) {
-            for (String key : killsSection.getKeys(false)) {
-                UUID uuid = UUID.fromString(key);
-                int killsCount = killsSection.getInt(key);
-                kills.put(uuid, killsCount);
-            }
-        }
-        ConfigurationSection deathsSection = config.getConfigurationSection("player-deaths");
-        if (deathsSection != null) {
-            for (String key : deathsSection.getKeys(false)) {
-                UUID uuid = UUID.fromString(key);
-                int deathsCount = deathsSection.getInt(key);
-                deaths.put(uuid, deathsCount);
-            }
-        }
-        ConfigurationSection coinsSection = config.getConfigurationSection("coins");
-        if (coinsSection != null) {
-            for (String key : coinsSection.getKeys(false)) {
-                UUID uuid = UUID.fromString(key);
-                int coinsCount = coinsSection.getInt(key);
-                some_coins.put(uuid, coinsCount);
+                int value = section.getInt(key);
+                dataMap.put(uuid, value);
             }
         }
     }
 
     public static Location getSpawnLocation() {
         FileConfiguration config = ConfigManager.get();
+
         if (config == null) {
             Bukkit.getLogger().warning("[CombatV3]: Configuration is null.");
             return null;
         }
+
         String worldName = config.getString("spawn-location.world");
         if (worldName == null) {
             Bukkit.getLogger().warning("[CombatV3]: World name is null.");
             return null;
         }
+
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
             Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
             return null;
         }
 
+        // Retrieve spawn coordinates
         double x = config.getDouble("spawn-location.x");
         double y = config.getDouble("spawn-location.y");
         double z = config.getDouble("spawn-location.z");
         float yaw = (float) config.getDouble("spawn-location.yaw");
         float pitch = (float) config.getDouble("spawn-location.pitch");
+
         return new Location(world, x, y, z, yaw, pitch);
     }
 
     public static String formatPlaytime(int hours, int minutes, int seconds) {
+        // Normalize time values
         if (seconds >= 60) {
-            hours += minutes / 60;
+            minutes += seconds / 60;
             seconds %= 60;
         }
         if (minutes >= 60) {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("&7Playtime: &e%dh %dm %ds", hours, minutes, seconds);
-    }
 
-    public static void addSomeCoins(UUID player_uniqueId, int amount) {
-        int currentCoins = some_coins.getOrDefault(player_uniqueId, 0);
-        some_coins.put(player_uniqueId, currentCoins + amount);
+        return String.format("&7Playtime: &e%dh %dm %ds", hours, minutes, seconds);
     }
 
     public static void addKill(UUID player_uuid) {
