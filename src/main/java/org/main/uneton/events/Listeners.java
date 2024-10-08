@@ -192,19 +192,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerConsume(PlayerItemConsumeEvent event) {
-        ItemStack item = event.getItem();
-        Player p = event.getPlayer();
-        if (item.getType() == Material.POTION || item.getType() == Material.SPLASH_POTION || item.getType() == Material.LINGERING_POTION) {
-            BukkitScheduler scheduler = Bukkit.getScheduler();
-            Runnable runnable = () -> {
-                p.getInventory().removeItemAnySlot(new ItemStack(Material.GLASS_BOTTLE));
-            };
-            scheduler.runTaskTimer(plugin, runnable, 0L, 1L);
-        }
-    }
-
-    @EventHandler
     public void onZombieDeathReward(EntityDeathEvent event) {
         if (event.getEntity() instanceof Mob) {
             Location loc = event.getEntity().getLocation();
@@ -226,6 +213,19 @@ public class Listeners implements Listener {
                 ItemStack rareReward = new ItemStack(Material.DIAMOND, 1);
                 loc.getWorld().dropItemNaturally(loc, rareReward);
             }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerConsume(PlayerItemConsumeEvent event) {
+        ItemStack item = event.getItem();
+        Player p = event.getPlayer();
+        if (item.getType() == Material.POTION || item.getType() == Material.SPLASH_POTION || item.getType() == Material.LINGERING_POTION) {
+            BukkitScheduler scheduler = Bukkit.getScheduler();
+            Runnable runnable = () -> {
+                p.getInventory().removeItemAnySlot(new ItemStack(Material.GLASS_BOTTLE));
+            };
+            scheduler.runTaskTimer(plugin, runnable, 0L, 1L);
         }
     }
 
@@ -347,7 +347,7 @@ public class Listeners implements Listener {
                     }
                 }
             }.runTask(JavaPlugin.getPlugin(Combat.class));
-        } else if (e.getMessage().equals("~rem e")) {
+        } else if (e.getMessage().equals("~rem entities")) {
             e.setCancelled(true);
             int amount = 50;
             new BukkitRunnable() {
