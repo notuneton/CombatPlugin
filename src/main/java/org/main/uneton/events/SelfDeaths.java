@@ -171,8 +171,6 @@ public class SelfDeaths implements Listener {
         }
     }
 
-
-
     @EventHandler
     @Deprecated
     public void onPlayerContact(PlayerDeathEvent event) {

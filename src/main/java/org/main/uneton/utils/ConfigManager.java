@@ -27,9 +27,9 @@ public class ConfigManager {
         playTimes = new HashMap<>();
     }
     public static void setup(Combat plugin) {
-        configFile = new File(plugin.getDataFolder(), "config.yml");
+        configFile = new File(plugin.getDataFolder(), "player_data.yml");
         if (!configFile.exists()) {
-            plugin.saveResource("config.yml", false); // Copy default file
+            plugin.saveResource("player_data.yml", false); // Copy default file
         }
         reload(); //this class method
     }
@@ -83,6 +83,8 @@ public class ConfigManager {
         }
         String joinMessage = config.getString("join-message");
         config.set("join-message", joinMessage);
+
+
 
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null && spawnLocation.getWorld() != null) {

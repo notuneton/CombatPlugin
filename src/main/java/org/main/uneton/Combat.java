@@ -27,6 +27,8 @@ public class Combat extends JavaPlugin implements Listener {
         return instance;
     }
 
+
+
     @Override
     public void onEnable() {
         instance = this;
