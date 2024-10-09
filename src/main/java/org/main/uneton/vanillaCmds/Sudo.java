@@ -6,7 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.main.uneton.Combat;
 import org.main.uneton.utils.ColorUtils;
 
 import java.util.Arrays;
@@ -26,7 +25,7 @@ public class Sudo implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         if (!allowed.contains(player.getName())) {
-            player.sendMessage(ColorUtils.colorize("&cIllegalAccessError: &7This command can only be executed as a specific person! Here is the list of players that can execute this command "+ allowed));
+            player.sendMessage(ColorUtils.colorize("&9IllegalAccessError: &fThis command can only be executed as a specific person! Here is the list of players that can execute this command "+ allowed));
             playCancerSound(player);
             return true;
         }

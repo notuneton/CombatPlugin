@@ -17,14 +17,11 @@ public class ConfigManager {
     private static Combat plugin;
     private static FileConfiguration config;
     private static File configFile;
-
-    // Maps to store player data
     public static Map<UUID, Integer> playTimes = new HashMap<>();
     public static final Map<UUID, Integer> kills = new HashMap<>();
     public static final Map<UUID, Integer> someCoins = new HashMap<>();
     public static final Map<UUID, Integer> deaths = new HashMap<>();
 
-    // Constructor initializes the plugin reference
     public ConfigManager(Combat plugin) {
         ConfigManager.plugin = plugin;
     }
@@ -32,28 +29,21 @@ public class ConfigManager {
     // Sets up the configuration file
     public static void setup(Combat plugin) {
         configFile = new File(plugin.getDataFolder(), "config.yml");
-
-        // Copy default configuration file if it doesn't exist
         if (!configFile.exists()) {
             plugin.saveResource("config.yml", false);
         }
-        reload(); // Reload the configuration
+        reload();
     }
 
-    // Reloads the configuration from the file
     public static void reload() {
         if (configFile == null) {
             throw new IllegalArgumentException("Configuration file cannot be null");
         }
         config = YamlConfiguration.loadConfiguration(configFile);
     }
-
-    // Returns the current configuration
     public static FileConfiguration get() {
         return config;
     }
-
-    // Saves the configuration to the file
     public static void save() {
         if (config == null || configFile == null) {
             throw new IllegalArgumentException("File or configuration cannot be null. Ensure the configuration is properly initialized.");
@@ -79,13 +69,9 @@ public class ConfigManager {
         for (UUID uuid : uuids) {
             savePlayerData(config, uuid);
         }
-
-        // Save additional configurations
         saveCombatName(config);
         saveJoinMessage(config);
         saveSpawnLocation(config);
-
-        // Save the configuration to file
         ConfigManager.save();
     }
 
@@ -156,36 +142,30 @@ public class ConfigManager {
 
     public static Location getSpawnLocation() {
         FileConfiguration config = ConfigManager.get();
-
         if (config == null) {
             Bukkit.getLogger().warning("[CombatV3]: Configuration is null.");
             return null;
         }
-
         String worldName = config.getString("spawn-location.world");
         if (worldName == null) {
             Bukkit.getLogger().warning("[CombatV3]: World name is null.");
             return null;
         }
-
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
             Bukkit.getLogger().warning("[CombatV3]: World not found: " + worldName);
             return null;
         }
 
-        // Retrieve spawn coordinates
         double x = config.getDouble("spawn-location.x");
         double y = config.getDouble("spawn-location.y");
         double z = config.getDouble("spawn-location.z");
         float yaw = (float) config.getDouble("spawn-location.yaw");
         float pitch = (float) config.getDouble("spawn-location.pitch");
-
         return new Location(world, x, y, z, yaw, pitch);
     }
 
     public static String formatPlaytime(int hours, int minutes, int seconds) {
-        // Normalize time values
         if (seconds >= 60) {
             minutes += seconds / 60;
             seconds %= 60;

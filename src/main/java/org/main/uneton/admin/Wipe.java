@@ -13,7 +13,7 @@ import org.main.uneton.utils.ConfigManager;
 
 import java.util.UUID;
 
-import static org.main.uneton.Combat.wipePlayTime;
+import static org.main.uneton.Combat.playTimeTaskId;
 import static org.main.uneton.utils.ConfigManager.*;
 import static org.main.uneton.utils.MessageHolder.perm;
 import static org.main.uneton.utils.MessageHolder.unknown;
@@ -49,15 +49,14 @@ public class Wipe implements CommandExecutor {
         UUID uuid = target.getUniqueId();
         stopTrackingPlayTime(target);
 
+        wipePlayTime(target);
         kills.remove(uuid);
         deaths.remove(uuid);
         someCoins.remove(uuid);
-        wipePlayTime(target);
         ConfigManager.get().set("player-kills." + uuid, 0);
         ConfigManager.get().set("player-deaths." + uuid, 0);
         ConfigManager.get().set("coins." + uuid, 0);
         target.getActivePotionEffects().clear();
-
         for (ItemStack item : target.getInventory().getContents()) {
             if (item != null) {
                 target.getInventory().removeItem(item);
@@ -65,9 +64,8 @@ public class Wipe implements CommandExecutor {
         }
 
         target.sendMessage(ColorUtils.colorize("&f[IMPORTANT] &cYour UUID has been wiped by &e" + player.getName() + "&c."));
-        target.kickPlayer(ColorUtils.colorize("\n\n &4&lConnection Terminated: \n\n &cYou have been wiped! \n\n"));
-
         player.sendMessage(ColorUtils.colorize("&eSuccessfully wiped uuid of player &c" + target.getName() + "&e."));
+
         player.sendMessage(ColorUtils.colorize("&aProfile successfully wiped!"));
         ConfigManager.save();
         return true;
@@ -77,6 +75,17 @@ public class Wipe implements CommandExecutor {
         UUID uuid = player.getUniqueId();
         playTimes.remove(uuid);
         ConfigManager.get().set("players-playtime." + uuid, 0);
-        ConfigManager.save(); // Save the config changes
+        ConfigManager.save();
+    }
+
+    public static void cancelPlayTimeRunnable() {
+        Bukkit.getScheduler().cancelTask(playTimeTaskId);
+    }
+
+    public static void wipePlayTime(Player player) {
+        UUID uuid = player.getUniqueId();
+        playTimes.remove(uuid);
+        ConfigManager.get().set("players-playtime." + uuid, null);
+        ConfigManager.save();
     }
 }
