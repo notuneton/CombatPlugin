@@ -42,10 +42,10 @@ public class Launch implements CommandExecutor {
             return true;
         }
 
-        Vector velocity = player.getVelocity();
+        Vector velocity = target.getVelocity();
         velocity.setY(6);
-        player.setVelocity(velocity);
-        Location playerLoc = player.getLocation();
+        target.setVelocity(velocity);
+        Location playerLoc = target.getLocation();
         launchPlayersUpwards(playerLoc);
 
         target.sendMessage(ColorUtils.colorize("&aYou've launched by &e"+player.getName() + "&a!"));

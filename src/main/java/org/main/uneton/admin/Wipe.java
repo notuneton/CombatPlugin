@@ -13,7 +13,7 @@ import org.main.uneton.utils.ConfigManager;
 
 import java.util.UUID;
 
-import static org.main.uneton.Combat.playTimeTaskId;
+import static org.main.uneton.Combat.wipePlayTime;
 import static org.main.uneton.utils.ConfigManager.*;
 import static org.main.uneton.utils.MessageHolder.perm;
 import static org.main.uneton.utils.MessageHolder.unknown;
@@ -75,17 +75,6 @@ public class Wipe implements CommandExecutor {
         UUID uuid = player.getUniqueId();
         playTimes.remove(uuid);
         ConfigManager.get().set("players-playtime." + uuid, 0);
-        ConfigManager.save();
-    }
-
-    public static void cancelPlayTimeRunnable() {
-        Bukkit.getScheduler().cancelTask(playTimeTaskId);
-    }
-
-    public static void wipePlayTime(Player player) {
-        UUID uuid = player.getUniqueId();
-        playTimes.remove(uuid);
-        ConfigManager.get().set("players-playtime." + uuid, null);
         ConfigManager.save();
     }
 }

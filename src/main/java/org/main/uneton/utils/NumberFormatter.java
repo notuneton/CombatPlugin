@@ -37,7 +37,7 @@ public class NumberFormatter {
             BigDecimal threshold = BigDecimal.TEN.pow(power);
             if (number.compareTo(threshold) >= 0) {
                 BigDecimal scaledNumber = number.divide(threshold, RoundingMode.DOWN);
-                return scaledNumber.doubleValue(); // Palauta double-arvo
+                return scaledNumber.doubleValue();
             }
         }
         return n;

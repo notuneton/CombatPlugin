@@ -8,8 +8,6 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.utils.*;
 
 import java.util.*;
-
-import static org.main.uneton.admin.Wipe.cancelPlayTimeRunnable;
 import static org.main.uneton.utils.RegistersUtils.*;
 
 public class Combat extends JavaPlugin implements Listener {
@@ -57,7 +55,18 @@ public class Combat extends JavaPlugin implements Listener {
             }
             ConfigManager.save();
         };
-        playTimeTaskId = scheduler.runTaskTimer(this, runnable, 0L, delay).getTaskId();
+        scheduler.runTaskTimer(this, runnable, 0L, delay);
+    }
+
+    public static void cancelPlayTimeRunnable() {
+        Bukkit.getScheduler().cancelTask(playTimeTaskId);
+    }
+
+    public static void wipePlayTime(Player player) {
+        UUID uuid = player.getUniqueId();
+        playTimes.remove(uuid);
+        ConfigManager.get().set("players-playtime." + uuid, null);
+        ConfigManager.save();
     }
 
     @Override

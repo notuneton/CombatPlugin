@@ -2,7 +2,7 @@ package org.main.uneton.utils;
 
 public class MessageHolder {
 
-    public static final String perm = ColorUtils.colorize("&c&lCAN'T! &cMmh.. Seems like you do not have permission to run /");
+    public static final String perm = ColorUtils.colorize("&c&lCAN'T! &7Mmh.. Seems like you do not have permission to run /");
     public static final String unknown = ColorUtils.colorize("&c&lWHO?! &7Couldn't find player such username!");
     public static final String unknown_syntax = ColorUtils.colorize("&x&2&C&0&9&1&6&l>&x&5&C&1&2&2&F&l>&x&C&7&5&3&4&7&l> &7The syntax of the command not found to be executable.");
     public static final String args_not_found = ColorUtils.colorize("&c&lNOT FOUND! &7You did not specify an argument for this command!");
