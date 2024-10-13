@@ -1,7 +1,9 @@
 package org.main.uneton.combatlogger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,21 +31,20 @@ public class SetSpawn implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1 && "-here".equals(args[0])) {
-            Location location = player.getLocation();
-            ConfigManager.get().set("spawn-location.world", location.getWorld().getName());
-            ConfigManager.get().set("spawn-location.x", location.getX());
-            ConfigManager.get().set("spawn-location.y", location.getY());
-            ConfigManager.get().set("spawn-location.z", location.getZ());
-            ConfigManager.get().set("spawn-location.yaw", location.getYaw());
-            ConfigManager.get().set("spawn-location.pitch", location.getPitch());
-            ConfigManager.save();
-            player.sendMessage(ColorUtils.colorize("&7Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()+ "!"));
-
-        } else if (args.length == 0) {
-            player.sendMessage(args_not_found);
-            return true;
+        Location location = player.getLocation();
+        World world = location.getWorld();
+        ConfigManager.get().set("spawn-location.world", location.getWorld().getName());
+        ConfigManager.get().set("spawn-location.x", location.getX());
+        ConfigManager.get().set("spawn-location.y", location.getY());
+        ConfigManager.get().set("spawn-location.z", location.getZ());
+        ConfigManager.get().set("spawn-location.yaw", location.getYaw());
+        ConfigManager.get().set("spawn-location.pitch", location.getPitch());
+        if (world != null) {
+            world.setSpawnLocation(location.getBlockX(), location.getBlockY(), location.getBlockZ());
         }
+
+        ConfigManager.save();
+        player.sendMessage(ColorUtils.colorize("&7Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()+ "!"));
         return true;
     }
 }
