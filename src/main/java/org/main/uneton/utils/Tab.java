@@ -8,8 +8,8 @@ public class Tab {
     public static void updateTab() {
         int online = Bukkit.getOnlinePlayers().size();
 
-        String headerColor = "\n  \n";
-        String footerColor = "\n  \n";
+        String headerColor = "\n";
+        String footerColor = "\n";
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             String header = headerColor.replace("&D", "&d").replace("&A", "&a").replace("&B", "&b")

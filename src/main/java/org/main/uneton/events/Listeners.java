@@ -55,7 +55,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        e.setQuitMessage(ColorUtils.colorize("&8" + " [" + "&c" + "-" + "&8" + "] " + "&7" + player.getName()));
+        e.setQuitMessage(ColorUtils.colorize(" &8[" + "&c-" + "&8] &7" + player.getName()));
         ConfigManager.reload();
 
         UUID uuid = player.getUniqueId();
@@ -71,7 +71,7 @@ public class Listeners implements Listener {
 
         Tab.updateTab();
         updateScoreboard(player, getInstance());
-        e.setJoinMessage(ColorUtils.colorize("&8" + " [" + "&a" + "+" + "&8" + "] " + "&7" + player.getName()));
+        e.setJoinMessage(ColorUtils.colorize(" &8[" + "&a+" + "&8] &7" + player.getName()));
 
         String joinMessage = plugin.getConfig().getString("join-message");
         if (joinMessage != null) {

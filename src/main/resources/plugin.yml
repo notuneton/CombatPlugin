@@ -91,4 +91,5 @@ commands:
     usage: /trash
   msg:
     description: Send a whisper to the player.
+    aliases: /s <player> <message>
     usage: /msg <player> <message>

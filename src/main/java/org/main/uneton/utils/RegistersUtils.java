@@ -72,8 +72,8 @@ public class RegistersUtils {
     public void registerEventListeners() {
         Bukkit.getPluginManager().registerEvents(new AntiSpam(), plugin);
         Bukkit.getPluginManager().registerEvents(new CombatLog(plugin), plugin);
-        Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), plugin);
-        Bukkit.getPluginManager().registerEvents(new SelfDeaths(), plugin);
+        // Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), plugin);
+        // Bukkit.getPluginManager().registerEvents(new SelfDeaths(), plugin);
         Bukkit.getPluginManager().registerEvents(new BlockListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), plugin);
         Bukkit.getPluginManager().registerEvents(new GmListener(), plugin);
