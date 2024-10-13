@@ -16,5 +16,8 @@ public class MessageHolder {
 
     public static final String success_bold = ColorUtils.colorize("&a&lSUCCESS! &a ...");
 
+    // DEBUG LINES : Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime);
+    // DEBUG LINES : Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime);
+
     public static final String debug_msg = ColorUtils.colorize("&aSuccess!");
 }

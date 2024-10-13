@@ -29,7 +29,7 @@ public class SetSpawn implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 1 && "set".equals(args[0])) {
+        if (args.length == 1 && "-here".equals(args[0])) {
             Location location = player.getLocation();
             ConfigManager.get().set("spawn-location.world", location.getWorld().getName());
             ConfigManager.get().set("spawn-location.x", location.getX());

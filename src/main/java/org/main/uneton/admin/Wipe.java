@@ -13,7 +13,7 @@ import org.main.uneton.utils.ConfigManager;
 
 import java.util.UUID;
 
-import static org.main.uneton.Combat.wipePlayTime;
+import static org.main.uneton.Combat.wipePlaytime;
 import static org.main.uneton.utils.ConfigManager.*;
 import static org.main.uneton.utils.MessageHolder.perm;
 import static org.main.uneton.utils.MessageHolder.unknown;
@@ -49,7 +49,7 @@ public class Wipe implements CommandExecutor {
         UUID uuid = target.getUniqueId();
         stopTrackingPlayTime(target);
 
-        wipePlayTime(target);
+        wipePlaytime(target);
         kills.remove(uuid);
         deaths.remove(uuid);
         someCoins.remove(uuid);
@@ -74,7 +74,7 @@ public class Wipe implements CommandExecutor {
     private void stopTrackingPlayTime(Player player) {
         UUID uuid = player.getUniqueId();
         playTimes.remove(uuid);
-        ConfigManager.get().set("players-playtime." + uuid, 0);
+        ConfigManager.get().set("player-playtime." + uuid, 0);
         ConfigManager.save();
     }
 }

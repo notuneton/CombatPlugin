@@ -13,12 +13,12 @@ import org.main.uneton.vanillaCmds.*;
 
 public class RegistersUtils {
 
-    private static Combat plugin;
+    private final Combat plugin;
     public RegistersUtils(Combat plugin) {
-        RegistersUtils.plugin = plugin;
+        this.plugin = plugin;
     }
 
-    public static void registerCommands() {
+    public void registerCommands() {
         // Admin commands
         plugin.getCommand("cage").setExecutor(new Cage());
         plugin.getCommand("crash").setExecutor(new Crash());
@@ -54,7 +54,7 @@ public class RegistersUtils {
         plugin.getCommand("tp").setExecutor(new Tp());
     }
 
-    public static void registerTabCompletes() {
+    public void registerTabCompletes() {
         plugin.getCommand("clear").setTabCompleter(new ClearTabs());
         plugin.getCommand("daily").setTabCompleter(new DailyTabs());
         plugin.getCommand("guide").setTabCompleter(new GuideTabs());
@@ -69,7 +69,7 @@ public class RegistersUtils {
         plugin.getCommand("vanish").setTabCompleter(new VanishTabs());
     }
 
-    public static void registerEventListeners() {
+    public void registerEventListeners() {
         Bukkit.getPluginManager().registerEvents(new AntiSpam(), plugin);
         Bukkit.getPluginManager().registerEvents(new CombatLog(plugin), plugin);
         Bukkit.getPluginManager().registerEvents(new PlayerDeaths(), plugin);

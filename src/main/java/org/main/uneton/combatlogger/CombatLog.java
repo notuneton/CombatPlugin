@@ -36,10 +36,10 @@ public class CombatLog implements Listener {
                     player.sendMessage(ColorUtils.colorize("&x&9&1&C&B&F&BY&x&8&F&C&6&F&Bo&x&8&D&C&2&F&Bu &x&8&B&B&D&F&Ca&x&8&9&B&9&F&Cr&x&8&7&B&4&F&Ce &x&8&5&A&F&F&Cn&x&8&3&A&B&F&Co &x&8&1&A&6&F&Dl&x&7&F&A&1&F&Do&x&7&D&9&D&F&Dn&x&7&C&9&8&F&Dg&x&7&A&9&4&F&De&x&7&8&8&F&F&Dr &x&7&6&8&A&F&Ei&x&7&4&8&6&F&En &x&7&2&8&1&F&Ec&x&7&0&7&C&F&Eo&x&6&E&7&8&F&Em&x&6&C&7&3&F&Fb&x&6&A&6&F&F&Fa&x&6&8&6&A&F&Ft"));
                 }
                 if (combat_tagged.containsKey(player)) {
-                    String combatColor = plugin.getConfig().getString("combat-name");
-                    if (combatColor != null) {
+                    String combat = plugin.getConfig().getString("combat-name");
+                    if (combat != null) {
                         long remainingTime = (endTime - currentTime) / 1000;
-                        player.sendActionBar(ColorUtils.colorize(combatColor + remainingTime));
+                        player.sendActionBar(ColorUtils.colorize(combat + remainingTime));
                     }
                     plugin.saveConfig();
                 }

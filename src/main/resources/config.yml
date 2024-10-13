@@ -1,7 +1,8 @@
-players-playtime:
+player-playtime:
 player-kills:
 player-deaths:
 join-message: '        &fWelcome to the server &9%player%&f!'
 spawn-location:
 combat-name: '&fCombat: &4'
 coins:
+enable-mob-drops: false

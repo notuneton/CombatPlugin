@@ -39,26 +39,26 @@ public class ScoreboardUtils {
 
         UUID uuid = player.getUniqueId();
         int playerDeaths = deaths.getOrDefault(uuid, 0);
-        setScore(objective, "&7Deaths: &a" + formatLargeNumberIntoChar(playerDeaths), 9);
+        setScore(objective, "&fDeaths: &a" + formatLargeNumberIntoChar(playerDeaths), 9);
         int playerKills = kills.getOrDefault(uuid, 0);
-        setScore(objective, "&7Kills: &a" + formatLargeNumberIntoChar(playerKills), 8);
+        setScore(objective, "&fKills: &a" + formatLargeNumberIntoChar(playerKills), 8);
 
         int playtimeSeconds = playTimes.getOrDefault(uuid, 0);
         int hours = playtimeSeconds / 3600;
         int minutes = (playtimeSeconds % 3600) / 60;
         int seconds = playtimeSeconds % 60;
-        String playtimeString = formatPlaytime(hours, minutes, seconds);
+        String playtimeString = formatPlaytime(hours, minutes, seconds); // Format string to show hours and minutes
         setScore(objective, playtimeString, 6);
 
         int ping = player.getPing();
-        setScore(objective, "&7Ping: &b" + String.format(ping + "ms"), 5);
+        setScore(objective, "&fPing: &b" + String.format(ping + "ms"), 5);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
-        String online = ColorUtils.colorize("&7Players: &a" + totalPlayers);
+        String online = ColorUtils.colorize("&fOnline: &a" + totalPlayers);
         setScore(objective, online, 4);
 
         int playerCoins = someCoins.getOrDefault(uuid, 0);
-        setScore(objective, "&7Coins: &6" + formatLargeNumberIntoChar(playerCoins), 1);
+        setScore(objective, "&fCoins: &6" + formatWithComma(playerCoins), 1);
 
         setScore(objective, "&4 ", 10);
         setScore(objective, "&3 ", 7);

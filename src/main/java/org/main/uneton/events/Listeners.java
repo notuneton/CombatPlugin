@@ -29,11 +29,13 @@ import static org.main.uneton.utils.ScoreboardUtils.*;
 
 public class Listeners implements Listener {
 
-    private static Combat plugin;
-    public Listeners(Combat plugin) {
-        this.plugin = plugin;
-    }
     private ConfigManager configManager;
+    private boolean enableMob100PercentDrops;
+    private final JavaPlugin plugin;
+    public Listeners(JavaPlugin plugin) {
+        this.plugin = plugin;
+        this.enableMob100PercentDrops = plugin.getConfig().getBoolean("enable-mob-drops");
+    }
 
     @EventHandler
     public void onPingGoesCrazy(PlayerMoveEvent event) {
@@ -59,7 +61,7 @@ public class Listeners implements Listener {
         UUID uuid = player.getUniqueId();
         int playtime = playTimes.getOrDefault(uuid, 0);
         playTimes.put(uuid, playtime);
-        ConfigManager.get().set("players-playtime." + uuid.toString(), playtime);
+        ConfigManager.get().set("player-playtime." + uuid.toString(), playtime);
         ConfigManager.save();
     }
 
@@ -84,7 +86,7 @@ public class Listeners implements Listener {
         }
 
         UUID uuid = player.getUniqueId();
-        int playtime = ConfigManager.get().getInt("players-playtime." + uuid.toString(), 0);
+        int playtime = ConfigManager.get().getInt("player-playtime." + uuid.toString(), 0);
         playTimes.put(uuid, playtime);
     }
 
@@ -102,22 +104,8 @@ public class Listeners implements Listener {
                 ConfigManager.addDeath(victimUUID);
                 ScoreboardUtils.createScoreboard(attacker);
                 ScoreboardUtils.createScoreboard(victim);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onBlockBreakEvent(BlockBreakEvent e) {
-        Block block = e.getBlock();
-        if (!block.getDrops().isEmpty()) {
-            for (ItemStack drop : block.getDrops()) {
-                if (e.getPlayer().getGameMode() == GameMode.CREATIVE) {
-                    return;
-                }
-                e.setDropItems(false);
-                Material item = drop.getType();
-                Player player = e.getPlayer();
-                player.getInventory().addItem(drop);
+                victim.sendMessage(ColorUtils.colorize("&6+1 &fDeaths"));
+                attacker.sendMessage(ColorUtils.colorize("&6+1 &fKills"));
             }
         }
     }
@@ -138,30 +126,6 @@ public class Listeners implements Listener {
     }
 
     @EventHandler
-    public void onZombieDeathReward(EntityDeathEvent event) {
-        if (event.getEntity() instanceof Mob) {
-            Location loc = event.getEntity().getLocation();
-            Player killer = event.getEntity().getKiller();
-            if (killer == null) return;
-
-            ItemStack tool = killer.getInventory().getItemInMainHand();
-            if (tool.getType() == Material.STICK) {
-                double tenPercentChance = 0.1;
-                if (Math.random() < tenPercentChance) {
-                    ItemStack lowChanceReward = new ItemStack(Material.DIAMOND, 1);
-                    loc.getWorld().dropItemNaturally(loc, lowChanceReward);
-                }
-            }
-
-            double onePercentChance = 0.01;
-            if (Math.random() < onePercentChance) {
-                ItemStack rareReward = new ItemStack(Material.DIAMOND, 1);
-                loc.getWorld().dropItemNaturally(loc, rareReward);
-            }
-        }
-    }
-
-    @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent event) {
         ItemStack item = event.getItem();
         Player p = event.getPlayer();
@@ -171,6 +135,45 @@ public class Listeners implements Listener {
                 p.getInventory().removeItemAnySlot(new ItemStack(Material.GLASS_BOTTLE));
             };
             scheduler.runTaskTimer(plugin, runnable, 0L, 1L);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDeathReward(EntityDeathEvent event) {
+        if (event.getEntity() instanceof Mob) {
+            Location loc = event.getEntity().getLocation();
+            Player killer = event.getEntity().getKiller();
+            if (killer == null) return;
+
+            double onePercentChance = 0.02;
+            if (Math.random() < onePercentChance) {
+                loc.getWorld().dropItemNaturally(loc, rareReward());
+            }
+        }
+    }
+
+    private ItemStack rareReward() {
+        ItemStack rareReward = new ItemStack(Material.EMERALD, 1);
+        ItemMeta rareItemMeta = rareReward.getItemMeta();
+        rareItemMeta.setDisplayName(ColorUtils.colorize("&2Emerald."));
+        List<String> loreList = new ArrayList<>();
+        loreList.add(ColorUtils.colorize("&5Ummmmm... Is this normal??!"));
+        loreList.add(" ");
+        loreList.add(ColorUtils.colorize("&8(Probability of getting: 2%)."));
+        rareReward.setLore(loreList);
+        rareReward.setItemMeta(rareItemMeta);
+        return rareReward;
+    }
+
+    @EventHandler
+    public void onSkeletonDeath(EntityDeathEvent event) {
+        if (event.getEntity() instanceof Skeleton) {
+            Player player = event.getEntity().getKiller();
+
+            if (enableMob100PercentDrops) {
+                event.getDrops().clear();
+                event.getDrops().add(new ItemStack(Material.ARROW, 128));
+            }
         }
     }
 

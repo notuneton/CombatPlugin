@@ -1,8 +1,12 @@
 package org.main.uneton;
 
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Rabbit;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.main.uneton.utils.*;
@@ -37,36 +41,25 @@ public class Combat extends JavaPlugin implements Listener {
         RecipeManager.createEnchantedAppleRecipe();
         RecipeManager.createChainableArmorRecipe();
 
-        new RegistersUtils(this);
-        registerCommands();
-        registerTabCompletes();
-        registerEventListeners();
+        RegistersUtils registersUtils = new RegistersUtils(this);
+        registersUtils.registerCommands();
+        registersUtils.registerTabCompletes();
+        registersUtils.registerEventListeners();
     }
 
     public void playTimeRunnable() {
         long delay = 20L;
         BukkitScheduler scheduler = Bukkit.getScheduler();
         Runnable runnable = () -> {
-            for (Player loopedPlayer : Bukkit.getOnlinePlayers()) {
-                UUID uuid = loopedPlayer.getUniqueId();
+            for (Player loop_player : Bukkit.getOnlinePlayers()) {
+                UUID uuid = loop_player.getUniqueId();
                 int currentPlaytime = playTimes.getOrDefault(uuid, 0);
                 playTimes.put(uuid, currentPlaytime + 1);
-                ConfigManager.get().set("players-playtime." + uuid, playTimes.get(uuid));
+                ConfigManager.get().set("player-playtime." + uuid, playTimes.get(uuid));
             }
             ConfigManager.save();
         };
         scheduler.runTaskTimer(this, runnable, 0L, delay);
-    }
-
-    public static void cancelPlayTimeRunnable() {
-        Bukkit.getScheduler().cancelTask(playTimeTaskId);
-    }
-
-    public static void wipePlayTime(Player player) {
-        UUID uuid = player.getUniqueId();
-        playTimes.remove(uuid);
-        ConfigManager.get().set("players-playtime." + uuid, null);
-        ConfigManager.save();
     }
 
     @Override
@@ -74,5 +67,16 @@ public class Combat extends JavaPlugin implements Listener {
         configManager = new ConfigManager(this);
         cancelPlayTimeRunnable();
         ConfigManager.saveAll();
+    }
+
+    public static void cancelPlayTimeRunnable() {
+        Bukkit.getScheduler().cancelTask(playTimeTaskId);
+    }
+
+    public static void wipePlaytime(Player player) {
+        UUID uuid = player.getUniqueId();
+        playTimes.remove(uuid);
+        ConfigManager.get().set("player-playtime." + uuid, null);
+        ConfigManager.save();
     }
 }

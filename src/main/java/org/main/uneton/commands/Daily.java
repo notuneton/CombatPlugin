@@ -35,7 +35,9 @@ public class Daily implements CommandExecutor {
         if (isOnCooldown(playerUUID)) {
             long timeLeft = getTimeLeft(playerUUID);
             String formattedTimeLeft = formatTime(timeLeft);
-            player.sendMessage(ColorUtils.colorize("&d&lWOAH THERE! &7You must wait " + formattedTimeLeft + "&7 before using this command again."));
+
+            player.sendMessage(ColorUtils.colorize("&d&lWOAH THERE! &7You must wait for the cooldown to pass! Please try again in &4&n" + formattedTimeLeft + "&7 before using it again."));
+
         } else {
             updateCooldown(playerUUID);
             ItemStack raffledItem = rewardItem();

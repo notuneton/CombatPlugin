@@ -71,13 +71,14 @@ public class ConfigManager {
         }
         saveCombatName(config);
         saveJoinMessage(config);
+        saveMobDrop(config);
         saveSpawnLocation(config);
         ConfigManager.save();
     }
 
     private static void savePlayerData(FileConfiguration config, UUID uuid) {
         if (playTimes.containsKey(uuid)) {
-            config.set("players-playtime." + uuid.toString(), playTimes.get(uuid));
+            config.set("player-playtime." + uuid.toString(), playTimes.get(uuid));
         }
         if (kills.containsKey(uuid)) {
             config.set("player-kills." + uuid.toString(), kills.get(uuid));
@@ -102,6 +103,11 @@ public class ConfigManager {
         config.set("join-message", joinMessage);
     }
 
+    private static void saveMobDrop(FileConfiguration config) {
+        boolean enable = plugin.getConfig().getBoolean("enable-mob-drops");
+        config.set("enable-mob-drops", enable);
+    }
+
     private static void saveSpawnLocation(FileConfiguration config) {
         Location spawnLocation = ConfigManager.getSpawnLocation();
         if (spawnLocation != null && spawnLocation.getWorld() != null) {
@@ -123,7 +129,7 @@ public class ConfigManager {
             return;
         }
 
-        loadPlayerData(config, "players-playtime", playTimes);
+        loadPlayerData(config, "player-playtime", playTimes);
         loadPlayerData(config, "player-kills", kills);
         loadPlayerData(config, "player-deaths", deaths);
         loadPlayerData(config, "coins", someCoins);
@@ -170,12 +176,12 @@ public class ConfigManager {
             minutes += seconds / 60;
             seconds %= 60;
         }
+
         if (minutes >= 60) {
             hours += minutes / 60;
             minutes %= 60;
         }
-
-        return String.format("&7Playtime: &e%dh %dm %ds", hours, minutes, seconds);
+        return String.format("&fTime Played: &e%dh %dm &8%ds", hours, minutes, seconds);
     }
 
     public static void addKill(UUID player_uuid) {
