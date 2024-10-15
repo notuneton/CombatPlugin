@@ -62,14 +62,13 @@ public class ScoreboardUtils {
         setScore(objective, "&1 ", 10);
         setScore(objective, "&7 ", 7);
         setScore(objective, "&3 ", 3);
-        setScore(objective, "&2 ", 2);
         String current = ColorUtils.colorize("&7" + getCurrentTime());
         setScore(objective, current, 0);
         player.setScoreboard(scoreboard);
     }
 
     public static String getCurrentTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //  hh:mm a = clock time
         LocalDateTime now = LocalDateTime.now();
         return now.format(formatter);
     }

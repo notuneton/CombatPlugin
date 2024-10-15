@@ -5,6 +5,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -55,7 +56,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        e.setQuitMessage(ColorUtils.colorize(" &8[" + "&c-" + "&8] &7" + player.getName()));
+        e.setQuitMessage(ColorUtils.colorize(" &8[" + "&c-" + "&8] &7" + player.getName())); // &8[ &4- &8] &7
         ConfigManager.reload();
 
         UUID uuid = player.getUniqueId();
@@ -71,17 +72,17 @@ public class Listeners implements Listener {
 
         Tab.updateTab();
         updateScoreboard(player, getInstance());
-        e.setJoinMessage(ColorUtils.colorize(" &8[" + "&a+" + "&8] &7" + player.getName()));
+        e.setJoinMessage(ColorUtils.colorize(" &8[" + "&a+" + "&8] &7" + player.getName())); // &8[ &2+ &8] &7
 
         String joinMessage = plugin.getConfig().getString("join-message");
-        if (joinMessage != null) {
+        if (joinMessage!=null) {
             joinMessage = joinMessage.replace("%player%", player.getName());
             player.sendMessage("\n");
             player.sendMessage(ColorUtils.colorize(joinMessage));
             player.sendMessage("\n");
         }
         Location spawnLocation = ConfigManager.get().getLocation("spawn-location");
-        if (spawnLocation != null) {
+        if (spawnLocation!=null) {
             player.teleport(spawnLocation);
         }
 
@@ -169,7 +170,6 @@ public class Listeners implements Listener {
     public void onSkeletonDeath(EntityDeathEvent event) {
         if (event.getEntity() instanceof Skeleton) {
             Player player = event.getEntity().getKiller();
-
             if (enableMob100PercentDrops) {
                 event.getDrops().clear();
                 event.getDrops().add(new ItemStack(Material.ARROW, 128));
