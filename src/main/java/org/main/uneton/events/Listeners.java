@@ -190,6 +190,14 @@ public class Listeners implements Listener {
         }
     }
 
+    @EventHandler
+    public void onPlayerInteractSign(PlayerInteractEvent event) {
+        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
+        Block block = event.getClickedBlock();
+        if (block.getType() != Material.OAK_SIGN) return;
+        event.getPlayer().openSign((Sign) block.getState());
+    }
+
     public static Material[] hasAnyOres() {
         return new Material[] {
                 new ItemStack(Material.DIAMOND).getType(),
@@ -246,42 +254,35 @@ public class Listeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void onPlayerInteractSign(PlayerInteractEvent event) {
-        if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
-        Block block = event.getClickedBlock();
-        if (block.getType() != Material.OAK_SIGN) return;
-        event.getPlayer().openSign((Sign) block.getState());
+    private boolean isFlammable(Material mat) {
+        List<Material> leaves = Arrays.asList(
+                Material.SPRUCE_LEAVES,
+                Material.OAK_LEAVES,
+                Material.BIRCH_LEAVES,
+                Material.DARK_OAK_LEAVES,
+                Material.JUNGLE_LEAVES,
+                Material.ACACIA_LEAVES
+        );
+        return leaves.contains(mat);
     }
 
     @EventHandler
-    public void onLootBox(BlockBreakEvent e) {
-        Player player = e.getPlayer();
-        Block block = e.getBlock();
-        Location loc = e.getBlock().getLocation();
+    public void onArrowShot(ProjectileHitEvent event) {
+        if (event.getEntity() instanceof Arrow arrow) {
+            Block block = event.getHitBlock();
 
-        if (e.getBlock().getType() == Material.POLISHED_DIORITE) {
-            Random chance = new Random();
-            if (Math.random() < 0.2) {
-                e.setDropItems(false);
-                int index = chance.nextInt(blocksList.length);
-                ItemStack dropped_item = blocksList[index];
-                block.getWorld().dropItemNaturally(loc, dropped_item);
+            if (arrow.getShooter() instanceof Player player) {
+                ItemStack bow = player.getInventory().getItemInMainHand();
 
-            } else if (Math.random() < 0.8) {
-                e.setDropItems(false);
+                if (bow.getType() == Material.BOW && bow.containsEnchantment(Enchantment.ARROW_FIRE)) {
+                    if (block != null && isFlammable(block.getType())) {
+                        block.setType(Material.FIRE);
+                        arrow.remove();
+                    }
+                }
             }
         }
     }
-
-    private final ItemStack[] blocksList = new ItemStack[]{
-            new ItemStack(Material.EMERALD),
-            new ItemStack(Material.AMETHYST_SHARD),
-            new ItemStack(Material.IRON_NUGGET),
-            new ItemStack(Material.GOLD_NUGGET),
-            new ItemStack(Material.COPPER_INGOT),
-            new ItemStack(Material.STRING)
-    };
 
     public static ItemStack[] createJoinItems() {
         ItemStack[] items = new ItemStack[]{
