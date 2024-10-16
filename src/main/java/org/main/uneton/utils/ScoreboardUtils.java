@@ -53,7 +53,7 @@ public class ScoreboardUtils {
         setScore(objective, playtimeString, 6);
 
         int ping = player.getPing();
-        setScore(objective, "&fLatency &3" + String.format(ping + "ms"), 5);
+        setScore(objective, "&fLatency &d" + String.format(ping + "ms"), 5);
         int onlinePlayers = Bukkit.getOnlinePlayers().size();
         String totalPlayers = String.valueOf(onlinePlayers);
         String online = ColorUtils.colorize("&fOnline players &2" + totalPlayers);
