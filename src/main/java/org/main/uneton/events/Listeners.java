@@ -63,7 +63,10 @@ public class Listeners implements Listener {
         int playtime = playTimes.getOrDefault(uuid, 0);
         playTimes.put(uuid, playtime);
         ConfigManager.get().set("player-playtime." + uuid.toString(), playtime);
+
         ConfigManager.save();
+        Bukkit.getLogger().warning("[CombatV3]: a player left: '" + player.getName() + "' playtime data -> " + playtime);
+        Bukkit.getLogger().info("[CombatV3]: 'player-playtime.' was successfully saved!");
     }
 
     @EventHandler
