@@ -56,7 +56,7 @@ public class Listeners implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
         Tab.updateTab();
-        e.setQuitMessage(ColorUtils.colorize(" &8[" + "&c-" + "&8] &7" + player.getName())); // &8[ &4- &8] &7
+        e.setQuitMessage(ColorUtils.colorize(" &8[ &4- &8] &7" + player.getName()));
         ConfigManager.reload();
 
         UUID uuid = player.getUniqueId();
@@ -72,7 +72,7 @@ public class Listeners implements Listener {
 
         Tab.updateTab();
         updateScoreboard(player, getInstance());
-        e.setJoinMessage(ColorUtils.colorize(" &8[" + "&a+" + "&8] &7" + player.getName())); // &8[ &2+ &8] &7
+        e.setJoinMessage(ColorUtils.colorize(" &8[ &2+ &8] &7" + player.getName()));
 
         String joinMessage = plugin.getConfig().getString("join-message");
         if (joinMessage!=null) {
@@ -105,8 +105,8 @@ public class Listeners implements Listener {
                 ConfigManager.addDeath(victimUUID);
                 ScoreboardUtils.createScoreboard(attacker);
                 ScoreboardUtils.createScoreboard(victim);
-                victim.sendMessage(ColorUtils.colorize("&6+1 &fDeaths"));
-                attacker.sendMessage(ColorUtils.colorize("&6+1 &fKills"));
+                victim.sendMessage(ColorUtils.colorize("&a+1 &fDeaths"));
+                attacker.sendMessage(ColorUtils.colorize("&a+1 &fKills"));
             }
         }
     }
@@ -290,6 +290,7 @@ public class Listeners implements Listener {
                 new ItemStack(Material.STONE_PICKAXE, 1),
                 new ItemStack(Material.STONE_AXE, 1)
         };
+
         String[] names = {
                 ColorUtils.colorize("&7Starter Sword"),
                 ColorUtils.colorize("&7Starter Pickaxe"),
