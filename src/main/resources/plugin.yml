@@ -11,6 +11,9 @@ commands:
   crash:
     description: Spawns a white ball around you.
     usage: /crash <player>
+  createloop:
+    description: Creates a loop endlessly
+    usage: /createloop <...> <delay>
   freeze:
     description: Cancels the player's movement.
     usage: /freeze <player>

@@ -22,6 +22,7 @@ public class RegistersUtils {
         // Admin commands
         plugin.getCommand("cage").setExecutor(new Cage());
         plugin.getCommand("crash").setExecutor(new Crash());
+        plugin.getCommand("createloop").setExecutor(new CreateLoop(plugin));
         plugin.getCommand("freeze").setExecutor(new Freeze());
         plugin.getCommand("gm").setExecutor(new Gm());
         plugin.getCommand("cure").setExecutor(new Cure());
@@ -30,7 +31,7 @@ public class RegistersUtils {
         plugin.getCommand("launch").setExecutor(new Launch());
         plugin.getCommand("magictrick").setExecutor(new Magictrick());
         plugin.getCommand("vanish").setExecutor(new Vanish(plugin));
-        plugin.getCommand("wipeprofile").setExecutor(new Wipe());
+        plugin.getCommand("wipeprofile").setExecutor(new WipeData());
 
         // Combat logger
         plugin.getCommand("setspawn").setExecutor(new SetSpawn());

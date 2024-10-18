@@ -8,16 +8,15 @@ public class MessageHolder {
     public static final String args_not_found = ColorUtils.colorize("&c&lNOT FOUND! &7You did not specify an argument for this command!");
     public static final String hey_repair_1 = ColorUtils.colorize("&c&lHEY! &7You are not holding an item to repair!");
     public static final String repair_already_maxed = ColorUtils.colorize("&c&lCAN'T! &7This item is already maxed!");
+    public static final String success_bold = ColorUtils.colorize("&a&lSUCCESS! &7");
+    public static final String getSuccess = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &7");
     public static final String repaired = ColorUtils.colorize("&2>&a> &x&8&8&8&3&A&4- &7Your item has been repaired.");
     public static final String block_not_found = ColorUtils.colorize("&c&lNOT FOUND! &7You don't have any blocked players.");
     public static final String blocked = ColorUtils.colorize("&c&lBLOCKED! &7You blocked a player!");
     public static final String unblocked = ColorUtils.colorize("&a&lUNBLOCKED! &7You unblocked a player!");
-    public static final String getSuccess = ColorUtils.colorize("&3>&b> &x&8&8&8&3&A&4- &7");
 
-    public static final String success_bold = ColorUtils.colorize("&a&lSUCCESS! &a ...");
 
-    // DEBUG LINES : Bukkit.getLogger().info("[CombatV3]: Quit: " + player.getName() + " - PlayTime: " + playtime);
+
+    // DEBUG LINES :
     // DEBUG LINES : Bukkit.getLogger().info("[CombatV3]: Joined: " + player.getName() + " - PlayTime: " + playtime);
-
-    public static final String debug_msg = ColorUtils.colorize("&aSuccess!");
 }

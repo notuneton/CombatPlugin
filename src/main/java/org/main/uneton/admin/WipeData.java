@@ -19,7 +19,7 @@ import static org.main.uneton.utils.MessageHolder.perm;
 import static org.main.uneton.utils.MessageHolder.unknown;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
-public class Wipe implements CommandExecutor {
+public class WipeData implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
