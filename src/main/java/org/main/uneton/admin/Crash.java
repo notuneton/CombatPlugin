@@ -18,11 +18,7 @@ public class Crash implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(ChatColor.RED + "Only players can execute this command!");
-            return true;
-        }
-
+        Player player = (Player) sender;
         if (!player.hasPermission("combat.crash.sv")) {
             player.sendMessage(ColorUtils.colorize(perm + command.getName()));
             playCancerSound(player);
