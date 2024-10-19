@@ -181,7 +181,7 @@ public class ConfigManager {
             hours += minutes / 60;
             minutes %= 60;
         }
-        return String.format("&fTotal Played &e%dh %dm &8%ds", hours, minutes, seconds);
+        return String.format("&fTotal-Played &e%dh %dm &8%ds", hours, minutes, seconds);
     }
 
     public static void addKill(UUID player_uuid) {

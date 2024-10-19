@@ -1,6 +1,5 @@
 package org.main.uneton.combatlogger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -12,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.main.uneton.utils.ColorUtils;
 import org.main.uneton.utils.ConfigManager;
 
-import static org.main.uneton.utils.MessageHolder.args_not_found;
 import static org.main.uneton.utils.MessageHolder.perm;
+import static org.main.uneton.utils.MessageHolder.success_bold;
 import static org.main.uneton.utils.SoundsUtils.playCancerSound;
 
 public class SetSpawn implements CommandExecutor {
@@ -31,6 +30,19 @@ public class SetSpawn implements CommandExecutor {
             return true;
         }
 
+        if (args.length == 1 && "remove".equals(args[0])) {
+            ConfigManager.get().set("spawn-location.world", null);
+            ConfigManager.get().set("spawn-location.world", null);
+            ConfigManager.get().set("spawn-location.x", null);
+            ConfigManager.get().set("spawn-location.y", null);
+            ConfigManager.get().set("spawn-location.z", null);
+            ConfigManager.get().set("spawn-location.yaw", null);
+            ConfigManager.get().set("spawn-location.pitch", null);
+            player.sendMessage(ColorUtils.colorize(success_bold + "Successfully erased spawn location!"));
+            ConfigManager.save();
+            return true;
+        }
+
         Location location = player.getLocation();
         World world = location.getWorld();
         ConfigManager.get().set("spawn-location.world", location.getWorld().getName());
@@ -44,7 +56,7 @@ public class SetSpawn implements CommandExecutor {
         }
 
         ConfigManager.save();
-        player.sendMessage(ColorUtils.colorize("&7Successfully set the &aspawn&7 to: XYZ: " + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()+ "!"));
+        player.sendMessage(ColorUtils.colorize(success_bold + " Successfully set the &aspawn&7 to: XYZ: &e" + location.getBlockX() + ", " + location.getBlockY() + ", " + location.getBlockZ()+ "!"));
         return true;
     }
 }

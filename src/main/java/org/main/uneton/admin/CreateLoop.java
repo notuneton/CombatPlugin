@@ -46,7 +46,7 @@ public class CreateLoop implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        String message = args[0];
+        String loopedMessage = args[0];
         int delay;
 
         try {
@@ -65,7 +65,7 @@ public class CreateLoop implements CommandExecutor, TabCompleter {
         BukkitRunnable loopTask = new BukkitRunnable() {
             @Override
             public void run() {
-                player.sendMessage(ColorUtils.colorize("&a" + message));
+                player.sendMessage(loopedMessage);
             }
         };
 

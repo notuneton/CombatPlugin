@@ -113,7 +113,7 @@ public class Guide implements CommandExecutor {
 
     private void sendUsage(Player player) {
         player.sendMessage(ColorUtils.colorize("&6l----------------------------------------------------"));
-        String usage = ColorUtils.colorize("&3>&b> &7usage: &f/guide <commands, perms, adminCommands>");
+        String usage = ColorUtils.colorize("&3>&b> &f/guide <commands, perms, adminCommands>");
         player.sendMessage(usage);
         player.sendMessage(ColorUtils.colorize("&6l----------------------------------------------------"));
     }
